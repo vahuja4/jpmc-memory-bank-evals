@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPMorgan Chase - Gemini Enterprise Memory Bank Synthesizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <div class="brand-logo">
+                <span class="bank-icon">⚡</span>
+                <span class="brand-title">JPMorgan Chase <span>Enterprise Agent Engine</span></span>
+            </div>
+            <div class="badge-tag">A2UI • Gemini Memory Bank</div>
+        </div>
+        <div class="system-telemetry-bar">
+            <div class="telemetry-pill">
+                <span class="status-dot green pulse"></span>
+                <span>Vertex AI: <strong>Connected</strong></span>
+            </div>
+            <div class="telemetry-pill">
+                <span class="status-dot blue pulse"></span>
+                <span>Memory Bank: <strong id="top-memory-status">Synchronized</strong></span>
+            </div>
+            <div class="telemetry-pill">
+                <span class="status-dot purple"></span>
+                <span>Customer: <strong>Alex Morgan (*4821)</strong></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="app-layout">
+        
+        <!-- Column 1: Decoupled Bank Subsystems (Producers) -->
+        <section class="panel left-panel">
+            <div class="panel-header">
+                <div class="panel-title-wrap">
+                    <span class="section-icon">🏛️</span>
+                    <div>
+                        <h2>Decoupled Banking Systems</h2>
+                        <p class="section-sub">3 independent systems deposit notes into Memory Bank over 2 days</p>
+                    </div>
+                </div>
+                <div class="header-action-group">
+                    <button id="play-sim-btn" class="btn-primary btn-sm" title="Animate cross-system ingestion">▶️ Play Simulation</button>
+                    <button id="reseed-btn" class="btn-secondary btn-sm" title="Re-seed scenario">🔄 Reset</button>
+                </div>
+            </div>
+
+            <div class="subsystems-feed">
+                <!-- System 1: Fraud Engine -->
+                <div class="system-event-card border-red" id="card-fraud">
+                    <div class="event-card-header">
+                        <span class="system-tag red">Fraud Velocity Engine</span>
+                        <span class="event-time">Day 1 • 09:15 UTC</span>
+                    </div>
+                    <h3 class="event-title">Dual-City Login Anomaly</h3>
+                    <p class="event-desc">Logins detected simultaneously in New York & Chicago. Automated containment rule placed <strong>SECURITY_LOCKED</strong> on card *4821.</p>
+                    <div class="event-meta">
+                        <span class="meta-chip">Action: Card Locked</span>
+                        <span class="meta-chip">Risk: 92/100</span>
+                        <button class="mini-send-btn" data-system="fraud" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                    </div>
+                </div>
+
+                <!-- System 2: Telephony IVR -->
+                <div class="system-event-card border-amber" id="card-ivr">
+                    <div class="event-card-header">
+                        <span class="system-tag amber">Voice Telephony / IVR</span>
+                        <span class="event-time">Day 1 • 14:32 UTC</span>
+                    </div>
+                    <h3 class="event-title">Target $142.50 Decline & Dropped Call</h3>
+                    <p class="event-desc">Customer called regarding POS decline. IVR prompted for SMS 2FA passcode, but call disconnected before completion. Lock remained active.</p>
+                    <div class="event-meta">
+                        <span class="meta-chip">Status: Auth Incomplete</span>
+                        <span class="meta-chip">Target Store #1142</span>
+                        <button class="mini-send-btn" data-system="ivr" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                    </div>
+                </div>
+
+                <!-- System 3: Mobile App -->
+                <div class="system-event-card border-blue" id="card-mobile">
+                    <div class="event-card-header">
+                        <span class="system-tag blue">Mobile Banking iOS</span>
+                        <span class="event-time">Day 2 • 11:20 UTC</span>
+                    </div>
+                    <h3 class="event-title">Apple Pay Setup Rejected</h3>
+                    <p class="event-desc">Customer attempted to provision digital wallet for card *4821. Rejected by card network with error <code>CARD_STATUS_LOCKED_RESTRICTED</code>.</p>
+                    <div class="event-meta">
+                        <span class="meta-chip">Error: Card Restricted</span>
+                        <span class="meta-chip">iOS v14.8.2</span>
+                        <button class="mini-send-btn" data-system="mobile" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Account State Widget -->
+            <div class="customer-card-status" id="account-status-card">
+                <div class="card-status-header">
+                    <span>Card Product: <strong>Chase Sapphire Preferred</strong></span>
+                    <span class="badge-status danger" id="card-badge">RESTRICTED</span>
+                </div>
+                <div class="card-chip-preview" id="visual-card-preview">
+                    <div class="card-chip-row">
+                        <div class="card-chip"></div>
+                        <span class="contactless-icon">📶</span>
+                    </div>
+                    <div class="card-num">•••• •••• •••• 4821</div>
+                    <div class="card-footer-row">
+                        <span class="card-holder">ALEX MORGAN</span>
+                        <span class="card-brand-logo">VISA</span>
+                    </div>
+                </div>
+                <div class="apple-pay-status-row">
+                    <span class="apple-pay-icon">Pay</span>
+                    <span id="apple-pay-status-text" class="apple-pay-badge-restricted">Provisioning Blocked (Card Locked)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Column 2: Gemini Enterprise Memory Bank (Shared Epistemic Layer) -->
+        <section class="panel center-panel">
+            <div class="panel-header">
+                <div class="panel-title-wrap">
+                    <span class="section-icon">🧠</span>
+                    <div>
+                        <h2>Shared Memory Bank</h2>
+                        <p class="section-sub">Epistemic Vault (Google Cloud Agent Engine)</p>
+                    </div>
+                </div>
+                <div class="view-toggle-group">
+                    <button class="toggle-btn active" id="view-notes-btn">Notes</button>
+                    <button class="toggle-btn" id="view-json-btn">JSON</button>
+                </div>
+            </div>
+
+            <div class="memory-bank-terminal" id="memory-bank-terminal">
+                <div class="terminal-header">
+                    <span class="term-dot red"></span>
+                    <span class="term-dot yellow"></span>
+                    <span class="term-dot green"></span>
+                    <span class="term-title">epistemic_memory_vault://cust_jpmc_88329</span>
+                    <span class="badge-pill term-badge" id="memory-count-badge">3 Notes Loaded</span>
+                </div>
+                <div class="terminal-body" id="memory-terminal-body">
+                    <!-- Dynamic memory fragments rendered via JS -->
+                </div>
+            </div>
+
+            <!-- Live Agent Trace Telemetry Panel -->
+            <div class="agent-trace-box">
+                <div class="trace-header">
+                    <span class="live-beacon"></span>
+                    <h3>Real-Time Agentic Reasoner Telemetry</h3>
+                    <span class="trace-sub-pill">JSON-RPC 2.0</span>
+                </div>
+                <div class="trace-logs" id="agent-trace-logs">
+                    <div class="trace-item thought">
+                        <span class="trace-badge">READY</span>
+                        <span class="trace-msg">Consumer Credit Synthesizer Agent ready. Awaiting customer prompt.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Column 3: Synthesizer Chat & A2UI Dynamic Presentation -->
+        <section class="panel right-panel">
+            <div class="panel-header">
+                <div class="panel-title-wrap">
+                    <span class="section-icon">💬</span>
+                    <div>
+                        <h2>Customer Support Chat</h2>
+                        <p class="section-sub">Single Synthesizer Agent • Zero Questions Asked</p>
+                    </div>
+                </div>
+                <span class="badge-pill live-pill">Live Stream</span>
+            </div>
+
+            <!-- Pre-canned Quick Scenario Triggers -->
+            <div class="quick-scenario-bar">
+                <span class="scenario-label">Quick Prompts:</span>
+                <div class="chip-container">
+                    <button class="quick-chip-btn active-chip" data-prompt="why is nothing working?">
+                        "why is nothing working?"
+                    </button>
+                    <button class="quick-chip-btn" data-prompt="what happened with my Apple Pay?">
+                        "what happened with my Apple Pay?"
+                    </button>
+                    <button class="quick-chip-btn" data-prompt="why was my card declined at Target?">
+                        "why was my card declined at Target?"
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Message Viewport -->
+            <div class="chat-viewport" id="chat-viewport">
+                <!-- Welcome greeting -->
+                <div class="chat-message system">
+                    <div class="msg-bubble">
+                        👋 <strong>Hello Alex</strong>, welcome to JPMorgan Chase Priority Client Support. How can we help you today?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic A2UI Schema Anchor Container -->
+            <div id="a2ui-presentation-container" class="a2ui-container"></div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-area">
+                <form id="chat-form" class="chat-input-form">
+                    <input type="text" id="chat-input" placeholder="Type a message or click a quick prompt above..." autocomplete="off" value="why is nothing working?">
+                    <button type="submit" id="send-btn" class="btn-primary">
+                        <span>Send</span>
+                        <span class="send-arrow">➔</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
