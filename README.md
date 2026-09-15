@@ -214,3 +214,15 @@ PYTHONPATH=. .venv/bin/pytest -v
 PYTHONPATH=. .venv/bin/python backend/app.py
 ```
 Open **`http://localhost:5055`** in your browser to interact with the A2UI glassmorphic workspace.
+
+---
+
+## 🚀 9. Live Agent Platform Deployment
+
+The multi-agent system is deployed to **Google Cloud Agent Platform (Vertex AI Agent Engine)**:
+
+- **Resource Name**: `projects/376877710448/locations/us-central1/reasoningEngines/2456675663579447296`
+- **Project ID**: `arsanjani-genai` (`376877710448`)
+- **Region**: `us-central1`
+- **Agent Engine Console Playground**: [Vertex AI Agent Engine Console](https://console.cloud.google.com/vertex-ai/agents/agent-engines/locations/us-central1/agent-engines/2456675663579447296/playground?project=376877710448)
+- **Gemini Enterprise Registration Guide**: [Register & Manage ADK Agent in Gemini Enterprise](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-adk-agent)
