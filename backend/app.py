@@ -49,12 +49,16 @@ try:
 except ImportError:
     pass
 
+template_dir = str(Path(__file__).resolve().parent.parent / "frontend" / "templates")
+static_dir = str(Path(__file__).resolve().parent.parent / "frontend" / "static")
+
 app = Flask(
     __name__,
-    template_folder="../frontend/templates",
-    static_folder="../frontend/static",
+    template_folder=template_dir,
+    static_folder=static_dir,
 )
 CORS(app)
+
 
 # Default customer ID for the scenario
 DEFAULT_CUSTOMER_ID = "cust_jpmc_88329"

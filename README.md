@@ -226,3 +226,15 @@ The multi-agent system is deployed to **Google Cloud Agent Platform (Vertex AI A
 - **Region**: `us-central1`
 - **Agent Engine Console Playground**: [Vertex AI Agent Engine Console](https://console.cloud.google.com/vertex-ai/agents/agent-engines/locations/us-central1/agent-engines/2456675663579447296/playground?project=376877710448)
 - **Gemini Enterprise Registration Guide**: [Register & Manage ADK Agent in Gemini Enterprise](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-adk-agent)
+
+---
+
+### 🌐 Live Cloud Run A2UI Dashboard URL
+👉 **[https://jpmc-consumer-credit-a2ui-376877710448.us-central1.run.app](https://jpmc-consumer-credit-a2ui-376877710448.us-central1.run.app)**
+
+Serves the full glassmorphic A2UI presentation layer featuring:
+- **Agent Mesh Topology Panel (8 Agents)**
+- **Scale Memory Bank Epistemic Vault**
+- **Pre-Write Claim Veracity Validation Live Gatekeeper**
+- **Consolidated Audit Sweep Engine**
+- **Zero-Question Customer Chat with 1-Click Biometric Remediation**
