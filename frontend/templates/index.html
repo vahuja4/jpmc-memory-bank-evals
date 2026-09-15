@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPMorgan Chase - Gemini Enterprise Memory Bank Synthesizer</title>
+    <title>JPMorgan Chase - Gemini Enterprise Agent Platform & Scale Memory Bank</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,11 +15,19 @@
         <div class="nav-brand">
             <div class="brand-logo">
                 <span class="bank-icon">⚡</span>
-                <span class="brand-title">JPMorgan Chase <span>Enterprise Agent Engine</span></span>
+                <span class="brand-title">JPMorgan Chase <span>Gemini Enterprise Agent Platform</span></span>
             </div>
-            <div class="badge-tag">A2UI • Gemini Memory Bank</div>
+            <div class="badge-tag">Scale Memory Bank • ADK Multi-Agent Mesh</div>
         </div>
         <div class="system-telemetry-bar">
+            <button id="view-agents-btn" class="telemetry-pill-btn" title="View all 8 agents in system">
+                <span class="status-dot purple pulse"></span>
+                <span>Agents Mesh: <strong>8 Active Agents</strong></span>
+            </button>
+            <button id="run-audit-sweep-btn" class="telemetry-pill-btn" title="Run consolidated sweep across memory banks">
+                <span class="status-dot red pulse"></span>
+                <span>Audit Sweep: <strong id="top-audit-status">Run Sweep</strong></span>
+            </button>
             <div class="telemetry-pill">
                 <span class="status-dot green pulse"></span>
                 <span>Vertex AI: <strong>Connected</strong></span>
@@ -29,7 +37,7 @@
                 <span>Memory Bank: <strong id="top-memory-status">Synchronized</strong></span>
             </div>
             <div class="telemetry-pill">
-                <span class="status-dot purple"></span>
+                <span class="status-dot gold"></span>
                 <span>Customer: <strong>Alex Morgan (*4821)</strong></span>
             </div>
         </div>
@@ -38,14 +46,14 @@
     <!-- Main Application Container -->
     <main class="app-layout">
         
-        <!-- Column 1: Decoupled Bank Subsystems (Producers) -->
+        <!-- Column 1: Multi-Channel Producers & Pre-Write Veracity Layer -->
         <section class="panel left-panel">
             <div class="panel-header">
                 <div class="panel-title-wrap">
                     <span class="section-icon">🏛️</span>
                     <div>
-                        <h2>Decoupled Banking Systems</h2>
-                        <p class="section-sub">3 independent systems deposit notes into Memory Bank over 2 days</p>
+                        <h2>Multi-Channel Mesh & Sessions</h2>
+                        <p class="section-sub">Channel agents open sessions & write to Memory Bank</p>
                     </div>
                 </div>
                 <div class="header-action-group">
@@ -54,11 +62,12 @@
                 </div>
             </div>
 
+            <!-- Subsystems / Channel Cards -->
             <div class="subsystems-feed">
                 <!-- System 1: Fraud Engine -->
                 <div class="system-event-card border-red" id="card-fraud">
                     <div class="event-card-header">
-                        <span class="system-tag red">Fraud Velocity Engine</span>
+                        <span class="system-tag red">Fraud Monitoring Agent</span>
                         <span class="event-time">Day 1 • 09:15 UTC</span>
                     </div>
                     <h3 class="event-title">Dual-City Login Anomaly</h3>
@@ -66,14 +75,14 @@
                     <div class="event-meta">
                         <span class="meta-chip">Action: Card Locked</span>
                         <span class="meta-chip">Risk: 92/100</span>
-                        <button class="mini-send-btn" data-system="fraud" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                        <span class="veracity-badge true">✓ Verified</span>
                     </div>
                 </div>
 
                 <!-- System 2: Telephony IVR -->
                 <div class="system-event-card border-amber" id="card-ivr">
                     <div class="event-card-header">
-                        <span class="system-tag amber">Voice Telephony / IVR</span>
+                        <span class="system-tag amber">Telephony IVR Agent</span>
                         <span class="event-time">Day 1 • 14:32 UTC</span>
                     </div>
                     <h3 class="event-title">Target $142.50 Decline & Dropped Call</h3>
@@ -81,14 +90,14 @@
                     <div class="event-meta">
                         <span class="meta-chip">Status: Auth Incomplete</span>
                         <span class="meta-chip">Target Store #1142</span>
-                        <button class="mini-send-btn" data-system="ivr" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                        <span class="veracity-badge true">✓ Verified</span>
                     </div>
                 </div>
 
                 <!-- System 3: Mobile App -->
                 <div class="system-event-card border-blue" id="card-mobile">
                     <div class="event-card-header">
-                        <span class="system-tag blue">Mobile Banking iOS</span>
+                        <span class="system-tag blue">Mobile Banking Agent</span>
                         <span class="event-time">Day 2 • 11:20 UTC</span>
                     </div>
                     <h3 class="event-title">Apple Pay Setup Rejected</h3>
@@ -96,8 +105,41 @@
                     <div class="event-meta">
                         <span class="meta-chip">Error: Card Restricted</span>
                         <span class="meta-chip">iOS v14.8.2</span>
-                        <button class="mini-send-btn" data-system="mobile" title="Emit note into Memory Bank">Deposit Note ➔</button>
+                        <span class="veracity-badge true">✓ Verified</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Pre-Write Claim Veracity Validation Live Tester -->
+            <div class="veracity-validator-panel">
+                <div class="validator-header">
+                    <span class="validator-icon">🛡️</span>
+                    <div>
+                        <h4>Pre-Write Claim Veracity Validator Layer</h4>
+                        <p class="validator-sub">Validates customer claims against ground-truth before Memory Bank write</p>
+                    </div>
+                </div>
+                <div class="validator-body">
+                    <div class="form-row">
+                        <label>Channel Session:</label>
+                        <select id="validator-channel-select" class="validator-select">
+                            <option value="MOBILE_APP">Mobile App Channel (iPhone 16 Pro)</option>
+                            <option value="TELEPHONY_IVR">Telephony IVR Channel (Voice Call)</option>
+                            <option value="FRAUD_DETECTION">Fraud Channel (RiskOps)</option>
+                            <option value="WEB_PORTAL">Web Portal Channel (Browser)</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Customer Claim to Test:</label>
+                        <div class="claim-quick-chips">
+                            <button class="claim-chip" data-claim="I was never in Chicago and never logged in from Chicago.">"Never in Chicago" (False Claim)</button>
+                            <button class="claim-chip" data-claim="My phone call disconnected before I could enter the SMS OTP passcode.">"Phone Disconnected" (True Claim)</button>
+                            <button class="claim-chip" data-claim="Apple Pay setup rejected my card with locked error.">"Apple Pay Failed" (True Claim)</button>
+                        </div>
+                        <input type="text" id="validator-claim-input" class="validator-input" placeholder="Type customer claim or click a sample..." value="I was never in Chicago and never logged in from Chicago.">
+                    </div>
+                    <button id="validate-write-btn" class="btn-primary btn-sm btn-block">⚡ Validate Claim & Write to Memory Bank</button>
+                    <div id="validator-result" class="validator-result-box" style="display: none;"></div>
                 </div>
             </div>
 
@@ -125,18 +167,19 @@
             </div>
         </section>
 
-        <!-- Column 2: Gemini Enterprise Memory Bank (Shared Epistemic Layer) -->
+        <!-- Column 2: Gemini Enterprise Memory Bank & Consolidated Sweep -->
         <section class="panel center-panel">
             <div class="panel-header">
                 <div class="panel-title-wrap">
                     <span class="section-icon">🧠</span>
                     <div>
-                        <h2>Shared Memory Bank</h2>
+                        <h2>Scale Memory Bank</h2>
                         <p class="section-sub">Epistemic Vault (Google Cloud Agent Engine)</p>
                     </div>
                 </div>
                 <div class="view-toggle-group">
                     <button class="toggle-btn active" id="view-notes-btn">Notes</button>
+                    <button class="toggle-btn" id="view-audit-btn">Audit Sweep</button>
                     <button class="toggle-btn" id="view-json-btn">JSON</button>
                 </div>
             </div>
@@ -225,6 +268,25 @@
         </section>
 
     </main>
+
+    <!-- Modal: All Agents Roster & Architecture Specification -->
+    <div id="agents-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-icon">🤖</span>
+                    <div>
+                        <h3>Multi-Agent System Roster (8 Agents)</h3>
+                        <p class="modal-sub">Google Cloud Agent Development Kit (ADK) • Gemini Enterprise Memory Bank</p>
+                    </div>
+                </div>
+                <button id="close-modal-btn" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="agents-roster-container">
+                <!-- Dynamic agent cards rendered via JS -->
+            </div>
+        </div>
+    </div>
 
     <script src="/static/js/app.js"></script>
 </body>

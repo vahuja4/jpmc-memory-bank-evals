@@ -232,4 +232,4 @@ class MemoryBankSynthesizerAgent:
 
     def _encode_rpc_frame(self, method: str, params: Dict[str, Any]) -> str:
         """Format payload as JSON-RPC 2.0 block."""
-        return json.dumps({"jsonrpc": "2.0", "method": method, "params": params})
+        return json.dumps({"jsonrpc": "2.0", "method": method, "params": params}, default=str)

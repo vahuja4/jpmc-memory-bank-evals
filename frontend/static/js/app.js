@@ -1,6 +1,12 @@
 /**
  * SYSTEM PATTERN: DYNAMIC CLIENT COMPONENT FACTORY & SSE PARSER ENGINE
- * Handles real-time JSON-RPC 2.0 streaming, Memory Bank visualization, and A2UI component rendering.
+ * Handles:
+ * - Scale Memory Bank visualization with Veracity Evaluations
+ * - Pre-Write Claim Veracity Validation Layer
+ * - Consolidated Memory Bank Audit Sweeps & Anomaly Detection
+ * - Real-Time JSON-RPC 2.0 streaming & A2UI component rendering
+ * - Multi-Agent System Roster Modal (8 Agents)
+ * Reference: https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank
  */
 
 class MemoryBankUiEngine {
@@ -9,20 +15,28 @@ class MemoryBankUiEngine {
         this.memoryApiUrl = '/api/memory/get';
         this.seedApiUrl = '/api/memory/seed';
         this.unlockApiUrl = '/api/card/unlock';
+        this.agentsApiUrl = '/api/agents/list';
+        this.validateClaimApiUrl = '/api/claims/validate-and-write';
+        this.auditSweepApiUrl = '/api/audit/sweep';
+
         this.customerId = 'cust_jpmc_88329';
         this.sessionId = 'sess-live-trace-4821';
-        this.currentViewMode = 'notes'; // 'notes' or 'json'
+        this.currentViewMode = 'notes'; // 'notes', 'audit', or 'json'
         this.cachedFragments = [];
+        this.cachedAuditReport = null;
+        this.cachedAgents = [];
 
         this.initDOMElements();
         this.bindEvents();
         this.loadMemoryBank();
+        this.loadAgentsRoster();
     }
 
     initDOMElements() {
         this.memoryTerminal = document.getElementById('memory-terminal-body');
         this.memoryBadge = document.getElementById('memory-count-badge');
         this.topMemoryStatus = document.getElementById('top-memory-status');
+        this.topAuditStatus = document.getElementById('top-audit-status');
         this.traceLogs = document.getElementById('agent-trace-logs');
         this.chatViewport = document.getElementById('chat-viewport');
         this.a2uiContainer = document.getElementById('a2ui-presentation-container');
@@ -33,10 +47,27 @@ class MemoryBankUiEngine {
         this.cardBadge = document.getElementById('card-badge');
         this.visualCard = document.getElementById('visual-card-preview');
         this.applePayStatus = document.getElementById('apple-pay-status-text');
+
+        // View tabs
         this.viewNotesBtn = document.getElementById('view-notes-btn');
+        this.viewAuditBtn = document.getElementById('view-audit-btn');
         this.viewJsonBtn = document.getElementById('view-json-btn');
+
+        // Agents modal
+        this.viewAgentsBtn = document.getElementById('view-agents-btn');
+        this.runAuditSweepBtn = document.getElementById('run-audit-sweep-btn');
+        this.agentsModal = document.getElementById('agents-modal');
+        this.closeModalBtn = document.getElementById('close-modal-btn');
+        this.agentsRosterContainer = document.getElementById('agents-roster-container');
+
+        // Pre-write veracity validator
+        this.validatorChannelSelect = document.getElementById('validator-channel-select');
+        this.validatorClaimInput = document.getElementById('validator-claim-input');
+        this.validateWriteBtn = document.getElementById('validate-write-btn');
+        this.validatorResult = document.getElementById('validator-result');
+        this.claimChips = document.querySelectorAll('.claim-chip');
+
         this.promptChips = document.querySelectorAll('.quick-chip-btn');
-        this.miniSendBtns = document.querySelectorAll('.mini-send-btn');
     }
 
     bindEvents() {
@@ -74,31 +105,106 @@ class MemoryBankUiEngine {
             });
         }
 
-        // View toggle
-        if (this.viewNotesBtn && this.viewJsonBtn) {
+        // Agents modal
+        if (this.viewAgentsBtn && this.agentsModal) {
+            this.viewAgentsBtn.addEventListener('click', () => {
+                this.agentsModal.style.display = 'flex';
+            });
+        }
+        if (this.closeModalBtn && this.agentsModal) {
+            this.closeModalBtn.addEventListener('click', () => {
+                this.agentsModal.style.display = 'none';
+            });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === this.agentsModal) {
+                this.agentsModal.style.display = 'none';
+            }
+        });
+
+        // Audit Sweep top button
+        if (this.runAuditSweepBtn) {
+            this.runAuditSweepBtn.addEventListener('click', () => {
+                this.executeAuditSweep();
+            });
+        }
+
+        // Pre-write claim chips
+        this.claimChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                this.validatorClaimInput.value = chip.dataset.claim;
+            });
+        });
+
+        // Pre-write claim validator execution
+        if (this.validateWriteBtn) {
+            this.validateWriteBtn.addEventListener('click', () => {
+                this.executePreWriteValidation();
+            });
+        }
+
+        // View toggle buttons
+        if (this.viewNotesBtn && this.viewJsonBtn && this.viewAuditBtn) {
             this.viewNotesBtn.addEventListener('click', () => {
                 this.currentViewMode = 'notes';
-                this.viewNotesBtn.classList.add('active');
-                this.viewJsonBtn.classList.remove('active');
+                this.setActiveToggle(this.viewNotesBtn);
                 this.renderMemoryBankFragments(this.cachedFragments);
+            });
+
+            this.viewAuditBtn.addEventListener('click', () => {
+                this.currentViewMode = 'audit';
+                this.setActiveToggle(this.viewAuditBtn);
+                this.renderAuditReportView();
             });
 
             this.viewJsonBtn.addEventListener('click', () => {
                 this.currentViewMode = 'json';
-                this.viewJsonBtn.classList.add('active');
-                this.viewNotesBtn.classList.remove('active');
+                this.setActiveToggle(this.viewJsonBtn);
                 this.renderMemoryBankFragments(this.cachedFragments);
             });
         }
+    }
 
-        // Mini deposit buttons on subsystem cards
-        this.miniSendBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const system = btn.dataset.system;
-                this.highlightSystemCard(system);
-                this.appendTrace('EVENT_DEPOSITED', `System [${system.toUpperCase()}] deposited note to Memory Bank.`, 'memory');
-            });
+    setActiveToggle(activeBtn) {
+        [this.viewNotesBtn, this.viewAuditBtn, this.viewJsonBtn].forEach(btn => {
+            if (btn) btn.classList.remove('active');
         });
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    async loadAgentsRoster() {
+        try {
+            const res = await fetch(this.agentsApiUrl);
+            const data = await res.json();
+            this.cachedAgents = data.agents || [];
+            this.renderAgentsRoster(this.cachedAgents);
+        } catch (err) {
+            console.error('Failed to load agents list:', err);
+        }
+    }
+
+    renderAgentsRoster(agents) {
+        if (!this.agentsRosterContainer) return;
+        this.agentsRosterContainer.innerHTML = agents.map(agent => {
+            let badgeClass = 'producer';
+            if (agent.agent_type === 'PRE_WRITE_VALIDATOR') badgeClass = 'validator';
+            if (agent.agent_type === 'CONSOLIDATED_AUDITOR') badgeClass = 'auditor';
+            if (agent.agent_type === 'LEAD_SYNTHESIZER') badgeClass = 'synthesizer';
+
+            return `
+                <div class="agent-card">
+                    <div class="agent-card-header">
+                        <span class="agent-card-title">${agent.role}</span>
+                        <span class="agent-type-badge ${badgeClass}">${agent.agent_type}</span>
+                    </div>
+                    <div style="font-size:0.72rem; color:#38bdf8; font-family:monospace;">${agent.name}</div>
+                    <p class="agent-desc">${agent.description}</p>
+                    <div class="agent-tools-box">
+                        <strong>Tools:</strong> ${agent.tools.join(', ')}
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     async loadMemoryBank() {
@@ -130,11 +236,118 @@ class MemoryBankUiEngine {
             this.applePayStatus.className = 'apple-pay-badge-restricted';
             this.applePayStatus.innerText = 'Provisioning Blocked (Card Locked)';
             this.topMemoryStatus.innerText = 'Synchronized';
+            this.validatorResult.style.display = 'none';
 
             this.appendTrace('MEMORY_RESET', 'Memory Bank re-seeded with 3 baseline cross-system events.', 'memory');
         } catch (err) {
             console.error('Failed to reseed Memory Bank:', err);
         }
+    }
+
+    async executePreWriteValidation() {
+        const channel = this.validatorChannelSelect.value;
+        const claimText = this.validatorClaimInput.value.trim();
+        if (!claimText) return;
+
+        this.appendTrace('PRE_WRITE_VALIDATION', `ClaimVeracityValidatorAgent evaluating claim in [${channel}]: "${claimText}"...`, 'thought');
+
+        try {
+            const res = await fetch(this.validateClaimApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customer_id: this.customerId,
+                    channel: channel,
+                    claim_text: claimText,
+                    summary: `Customer Session Claim: ${claimText}`,
+                    day_label: 'Live Session - Just Now',
+                    severity: 'MEDIUM',
+                }),
+            });
+            const data = await res.json();
+            const evalObj = data.veracity_evaluation;
+
+            this.validatorResult.style.display = 'block';
+            if (evalObj.veracity_status === 'VERIFIED_TRUE') {
+                this.validatorResult.className = 'validator-result-box verified';
+                this.validatorResult.innerHTML = `
+                    <strong>✅ Claim Verified (Confidence: ${Math.round(evalObj.confidence_score * 100)}%)</strong><br>
+                    <span>${evalObj.corroborating_telemetry.join('; ')}</span><br>
+                    <em style="color:#a7f3d0; font-size:0.68rem;">Committed to Memory Bank as verified observation note.</em>
+                `;
+                this.appendTrace('VERACITY_TRUE', `Pre-write validation passed: ${evalObj.corroborating_telemetry[0] || 'Corroborated'}`, 'synthesis');
+            } else {
+                this.validatorResult.className = 'validator-result-box contradicted';
+                this.validatorResult.innerHTML = `
+                    <strong>⚠️ Claim Contradicted by Telemetry (${evalObj.veracity_status})</strong><br>
+                    <span>${evalObj.discrepancy_details || 'Contradicted by authoritative ground-truth records.'}</span><br>
+                    <em style="color:#fca5a5; font-size:0.68rem;">Written to Memory Bank with ANOMALY / CONTRADICTION flag for Audit Agent.</em>
+                `;
+                this.appendTrace('VERACITY_CONTRADICTED', `Pre-write validation flagged contradiction: ${evalObj.discrepancy_details || 'Mismatch'}`, 'thought');
+            }
+
+            this.loadMemoryBank();
+        } catch (err) {
+            console.error('Pre-write validation failed:', err);
+        }
+    }
+
+    async executeAuditSweep() {
+        this.appendTrace('AUDIT_SWEEP_START', 'MemoryBankAuditAgent executing consolidated sweep across customer Memory Banks...', 'thought');
+        this.topAuditStatus.innerText = 'Sweeping...';
+
+        try {
+            const res = await fetch(this.auditSweepApiUrl, { method: 'POST' });
+            const data = await res.json();
+            this.cachedAuditReport = data.report;
+
+            this.topAuditStatus.innerText = `${this.cachedAuditReport.anomalies_detected.length} Anomalies`;
+            this.appendTrace('AUDIT_SWEEP_COMPLETE', `Scanned ${this.cachedAuditReport.total_fragments_scanned} memory fragments. Found ${this.cachedAuditReport.anomalies_detected.length} anomalies.`, 'synthesis');
+
+            // Switch to audit tab
+            this.currentViewMode = 'audit';
+            this.setActiveToggle(this.viewAuditBtn);
+            this.renderAuditReportView();
+        } catch (err) {
+            console.error('Audit sweep failed:', err);
+        }
+    }
+
+    renderAuditReportView() {
+        if (!this.cachedAuditReport) {
+            this.memoryTerminal.innerHTML = `
+                <div style="padding:1rem; color:#94a3b8; text-align:center;">
+                    <p>No audit sweep executed yet.</p>
+                    <button id="run-audit-inline-btn" class="btn-primary btn-sm" style="margin:0.75rem auto 0 auto;">⚡ Run Consolidated Memory Bank Sweep</button>
+                </div>
+            `;
+            const inlineBtn = document.getElementById('run-audit-inline-btn');
+            if (inlineBtn) inlineBtn.addEventListener('click', () => this.executeAuditSweep());
+            return;
+        }
+
+        const rep = this.cachedAuditReport;
+        this.memoryBadge.innerText = `${rep.anomalies_detected.length} Anomalies`;
+
+        const anomaliesHtml = rep.anomalies_detected.map((a, i) => `
+            <div class="audit-anomaly-card">
+                <div class="audit-anomaly-header">
+                    <span>⚠️ #${i+1} [${a.anomaly_type}]</span>
+                    <span class="badge-status danger">${a.severity}</span>
+                </div>
+                <div class="audit-anomaly-desc">${a.description}</div>
+                <div class="audit-anomaly-action"><strong>Recommended Action:</strong> ${a.recommended_action}</div>
+                <div style="font-size:0.65rem; color:#64748b;">Customer: ${a.customer_id} | Channels: ${a.affected_channels.join(', ')}</div>
+            </div>
+        `).join('');
+
+        this.memoryTerminal.innerHTML = `
+            <div style="margin-bottom:0.75rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div style="color:#f87171; font-weight:700; font-size:0.82rem;">🔍 Consolidated Audit Sweep Report</div>
+                <div style="font-size:0.72rem; color:#cbd5e1; margin-top:0.2rem;">${rep.summary}</div>
+            </div>
+            ${anomaliesHtml || '<div style="color:#34d399;">No active anomalies detected across audited Memory Banks.</div>'}
+        `;
     }
 
     renderMemoryBankFragments(fragments) {
@@ -151,18 +364,32 @@ class MemoryBankUiEngine {
             return;
         }
 
-        this.memoryTerminal.innerHTML = fragments.map((f, i) => `
-            <div class="memory-note-item" id="mem-item-${i}">
-                <div class="note-header">
-                    <span>#${i+1} [${f.channel}]</span>
-                    <span>${f.day_label}</span>
+        this.memoryTerminal.innerHTML = fragments.map((f, i) => {
+            let veracityBadge = '';
+            if (f.veracity_evaluation) {
+                const status = f.veracity_evaluation.veracity_status;
+                const score = Math.round(f.veracity_evaluation.confidence_score * 100);
+                if (status === 'VERIFIED_TRUE') {
+                    veracityBadge = `<span class="veracity-badge true">✓ Verified (${score}%)</span>`;
+                } else {
+                    veracityBadge = `<span class="veracity-badge contradicted">⚠️ ${status} (${score}%)</span>`;
+                }
+            }
+
+            return `
+                <div class="memory-note-item" id="mem-item-${i}">
+                    <div class="note-header">
+                        <span>#${i+1} [${f.channel}]</span>
+                        <span>${f.day_label}</span>
+                    </div>
+                    <div class="note-summary">${f.summary}</div>
+                    <div class="note-meta" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span><strong>Severity:</strong> <span style="color:${f.severity === 'HIGH' ? '#f87171' : '#fbbf24'}">${f.severity}</span> | <strong>ID:</strong> ${f.fragment_id}</span>
+                        ${veracityBadge}
+                    </div>
                 </div>
-                <div class="note-summary">${f.summary}</div>
-                <div class="note-meta">
-                    <strong>Severity:</strong> <span style="color:${f.severity === 'HIGH' ? '#f87171' : '#fbbf24'}">${f.severity}</span> | <strong>ID:</strong> ${f.fragment_id}
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     highlightSystemCard(systemKey) {
@@ -183,20 +410,20 @@ class MemoryBankUiEngine {
 
         // Step 1: Fraud Event
         this.highlightSystemCard('fraud');
-        this.appendTrace('INGESTION_D1_0915', 'Fraud Velocity Engine deposited note: Dual-City Logins -> Card *4821 Locked.', 'memory');
+        this.appendTrace('INGESTION_D1_0915', 'Fraud Monitoring Agent deposited note: Dual-City Logins -> Card *4821 Locked (Veracity: Verified).', 'memory');
         await new Promise(r => setTimeout(r, 900));
 
         // Step 2: Telephony IVR Event
         this.highlightSystemCard('ivr');
-        this.appendTrace('INGESTION_D1_1432', 'Contact Center IVR deposited note: Target $142.50 Decline -> Call Dropped Before 2FA.', 'memory');
+        this.appendTrace('INGESTION_D1_1432', 'Telephony IVR Agent deposited note: Target $142.50 Decline -> Call Dropped Before 2FA (Veracity: Verified).', 'memory');
         await new Promise(r => setTimeout(r, 900));
 
         // Step 3: Mobile Banking Event
         this.highlightSystemCard('mobile');
-        this.appendTrace('INGESTION_D2_1120', 'Mobile App deposited note: Apple Pay Setup Failed (CARD_STATUS_LOCKED_RESTRICTED).', 'memory');
+        this.appendTrace('INGESTION_D2_1120', 'Mobile Banking Agent deposited note: Apple Pay Setup Failed (CARD_STATUS_LOCKED_RESTRICTED).', 'memory');
         await new Promise(r => setTimeout(r, 600));
 
-        this.appendTrace('SIMULATION_READY', 'All 3 notes anchored in Memory Bank. Ready for zero-question synthesis.', 'synthesis');
+        this.appendTrace('SIMULATION_READY', 'All notes anchored in Scale Memory Bank. Ready for zero-question synthesis.', 'synthesis');
     }
 
     appendTrace(badge, message, type = 'thought') {
