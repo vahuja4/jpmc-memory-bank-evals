@@ -1,9 +1,9 @@
 {
   "display_name": "JPMC Consumer Credit Memory Bank Synthesizer",
-  "description": "Enterprise multi-agent system synthesizing cross-system observations via Gemini Memory Bank",
-  "project": "arsanjani-genai",
+  "description": "Enterprise multi-agent system synthesizing cross-system observations via Gemini Memory Bank and Knowledge Catalog",
+  "project": "your-gcp-project-id",
   "location": "us-central1",
-  "adk_version": "2.8.0",
+  "adk_version": "2.9.1",
   "memory_service_uri": "memory://",
   "session_service_uri": "memory://"
 }

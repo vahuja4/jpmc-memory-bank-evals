@@ -48,7 +48,7 @@ Required Local Env Setup:
 
 Bash
 export GOOGLE_GENAI_USE_VERTEXAI=true
-export GOOGLE_CLOUD_PROJECT="arsanjani-genai"
+export GOOGLE_CLOUD_PROJECT="your-gcp-project-id"
 export GOOGLE_CLOUD_LOCATION="us-central1"
 
 

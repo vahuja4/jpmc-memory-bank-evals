@@ -1,5 +1,5 @@
 """
-Data models for Gemini Enterprise Memory Bank & Cross-System Causal Synthesis.
+Data models for Gemini Enterprise Memory Bank, Knowledge Catalog, & Multi-Avenue Claim Veracity Audit.
 """
 
 from enum import Enum
@@ -29,18 +29,47 @@ class VeracityStatus(str, Enum):
     CONTRADICTED_BY_TELEMETRY = "CONTRADICTED_BY_TELEMETRY"
     UNVERIFIED_PENDING_INVESTIGATION = "UNVERIFIED_PENDING_INVESTIGATION"
     SUSPICIOUS_FALSE_CLAIM = "SUSPICIOUS_FALSE_CLAIM"
+    PARTIALLY_VERIFIED_CONSENT_DISPUTE = "PARTIALLY_VERIFIED_CONSENT_DISPUTE"
+
+
+class RelevantAvenueCheck(BaseModel):
+    """A single ground-truth avenue dynamically selected and evaluated as relevant to a specific customer claim."""
+    avenue_id: str = Field(
+        ...,
+        description="Unique identifier of the avenue (e.g., AVENUE_1_STATEMENT, AVENUE_2_GEO_TRAVEL, AVENUE_3_BEHAVIORAL, AVENUE_4_SMS_CONSENT_IVR, AVENUE_5_POLICY)",
+    )
+    avenue_title: str = Field(
+        ...,
+        description="Human-readable name of the ground-truth avenue (e.g., 'Geo & Travel Notice Registry', 'Account Statement & POS Authorization Log', 'Telephony IVR & SMS OTP Log', 'Multi-Step SMS Y/N Consent & eSIM Audit', 'Governing Knowledge Catalog Policy')",
+    )
+    why_relevant: str = Field(
+        ...,
+        description="Why this specific ground-truth avenue is relevant to evaluating this customer's claim",
+    )
+    finding_summary: str = Field(
+        ...,
+        description="Specific factual finding from ground-truth telemetry strictly relevant to this claim (never include unrelated transactions from other cities/merchants)",
+    )
+    corroborates_claim: bool = Field(
+        ...,
+        description="True if telemetry corroborates the claim, False if it contradicts or shows an anomaly",
+    )
 
 
 class ClaimVeracityEvaluation(BaseModel):
-    """Result of pre-write veracity validation before depositing into Memory Bank."""
+    """Result of multi-avenue pre-write veracity validation against ground-truth banking data and Memory Bank."""
     claim_id: str
     claim_text: str
     veracity_status: VeracityStatus
     confidence_score: float = Field(ge=0.0, le=1.0)
     corroborating_telemetry: List[str] = Field(default_factory=list)
     discrepancy_details: Optional[str] = None
+    relevant_avenues_checked: List[RelevantAvenueCheck] = Field(default_factory=list)
+    multi_avenue_audit: Dict[str, Any] = Field(default_factory=dict)
+    recommended_remediation: str = ""
     validation_timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     validator_agent: str = "ClaimVeracityValidatorAgent"
+
 
 
 class MemoryFragment(BaseModel):
@@ -55,6 +84,7 @@ class MemoryFragment(BaseModel):
     severity: SeverityLevel = SeverityLevel.MEDIUM
     session_id: Optional[str] = None
     veracity_evaluation: Optional[ClaimVeracityEvaluation] = None
+    is_compacted_summary: bool = False
 
     def to_display_dict(self) -> Dict[str, Any]:
         return {
@@ -67,7 +97,12 @@ class MemoryFragment(BaseModel):
             "metadata": self.metadata,
             "severity": self.severity.value,
             "session_id": self.session_id,
-            "veracity_evaluation": self.veracity_evaluation.model_dump(mode="json") if self.veracity_evaluation else None,
+            "is_compacted_summary": self.is_compacted_summary,
+            "veracity_evaluation": (
+                self.veracity_evaluation.model_dump(mode="json")
+                if self.veracity_evaluation
+                else None
+            ),
         }
 
 
@@ -77,7 +112,7 @@ class ChannelSession(BaseModel):
     customer_id: str
     channel: BankChannel
     opened_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    status: str = "OPEN"  # OPEN, CLOSED, ESCALATED
+    status: str = "OPEN"
     agent_name: str
     session_metadata: Dict[str, Any] = Field(default_factory=dict)
     claims_recorded: List[Dict[str, Any]] = Field(default_factory=list)
@@ -88,7 +123,7 @@ class AuditAnomaly(BaseModel):
     anomaly_id: str
     customer_id: str
     severity: SeverityLevel
-    anomaly_type: str  # CONTRADICTORY_CLAIMS, VELOCITY_DISCREPANCY, FALSE_CLAIM_PATTERN
+    anomaly_type: str
     description: str
     affected_channels: List[BankChannel]
     evidence_fragments: List[str]
@@ -107,12 +142,55 @@ class AuditReport(BaseModel):
     risk_score_distribution: Dict[str, int] = Field(default_factory=dict)
 
 
+class PolicyRule(BaseModel):
+    """Enduring institutional policy stored in the Knowledge Catalog."""
+    policy_id: str
+    title: str
+    category: str
+    regulatory_framework: str
+    description: str
+    decision_criteria: List[str]
+    automated_action: str
+
+
+class EntityNode(BaseModel):
+    """Entity node in the Knowledge Catalog Semantic Graph."""
+    node_id: str
+    entity_type: str
+    label: str
+    attributes: Dict[str, Any] = Field(default_factory=dict)
+
+
+class EntityEdge(BaseModel):
+    """Relationship edge in the Knowledge Catalog Semantic Graph."""
+    source_id: str
+    target_id: str
+    relationship: str
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class CompactionReport(BaseModel):
+    """Metrics and distilled insights produced by Asynchronous Memory Compaction (Dreaming Service)."""
+    compaction_id: str
+    customer_id: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    raw_fragments_processed: int
+    compacted_memory_nodes_created: int
+    superseded_fragments_archived: int
+    raw_token_count: int
+    compacted_token_count: int
+    token_reduction_pct: float
+    estimated_cost_savings_per_1m_queries_usd: float
+    distilled_customer_insights: List[str]
+    compacted_summary_narrative: str
+
+
 class AgentDescriptor(BaseModel):
     """Metadata describing an agent in the multi-agent system."""
     name: str
     role: str
     channel: Optional[BankChannel] = None
-    agent_type: str  # CHANNEL_PRODUCER, PRE_WRITE_VALIDATOR, CONSOLIDATED_AUDITOR, LEAD_SYNTHESIZER
+    agent_type: str
     description: str
     instruction: str
     tools: List[str]
@@ -146,3 +224,31 @@ class SynthesisResult(BaseModel):
     resolution_action: Dict[str, Any]
     a2ui_payload: Dict[str, Any]
     confidence_score: float = 0.99
+
+
+class VerificationCheckItem(BaseModel):
+    """A single verification check item recorded during customer support chat verification."""
+    check_name: str
+    status: str  # "PASSED" | "FAILED" | "WARNING"
+    detail: str
+
+
+class AdminCardReviewCase(BaseModel):
+    """Represents a flagged transaction / blocked card case awaiting or resolved by Dashboard Admin review."""
+    case_id: str
+    customer_id: str
+    customer_name: str = "Alex Morgan"
+    card_last4: str = "4821"
+    card_status: str = "RESTRICTED"  # "RESTRICTED" | "ACTIVE"
+    flagged_transaction_summary: str
+    system_flag_reason: str
+    confidence_score: float = Field(ge=0.0, le=1.0)
+    customer_chat_verification_transcript: str
+    verification_status: str  # "VERIFIED_PASSED" | "VERIFICATION_FAILED" | "PENDING_CHAT_VERIFICATION"
+    verification_checks: List[VerificationCheckItem] = Field(default_factory=list)
+    recommended_admin_action: str  # "APPROVE_ENABLE_CARD" | "REJECT_KEEP_RESTRICTED"
+    admin_decision: Optional[str] = None  # "APPROVED_YES" | "REJECTED_NO" | None
+    admin_decision_reason: Optional[str] = None
+    admin_decision_timestamp: Optional[datetime] = None
+    customer_notification_message: Optional[str] = None
+

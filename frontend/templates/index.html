@@ -24,6 +24,10 @@
                 <span class="status-dot purple pulse"></span>
                 <span>Agents Mesh: <strong>8 Active Agents</strong></span>
             </button>
+            <button id="top-comparison-btn" class="telemetry-pill-btn" title="Compare Google Native ADK Agent vs Custom Framework Agent">
+                <span class="status-dot blue pulse"></span>
+                <span>Compare: <strong>Custom vs ADK Agent</strong></span>
+            </button>
             <button id="run-audit-sweep-btn" class="telemetry-pill-btn" title="Run consolidated sweep across memory banks">
                 <span class="status-dot red pulse"></span>
                 <span>Audit Sweep: <strong id="top-audit-status">Run Sweep</strong></span>
@@ -130,13 +134,14 @@
                         </select>
                     </div>
                     <div class="form-row">
-                        <label>Customer Claim to Test:</label>
+                        <label>Customer Claim to Test (Multi-Avenue Ground-Truth Audit):</label>
                         <div class="claim-quick-chips">
-                            <button class="claim-chip" data-claim="I was never in Chicago and never logged in from Chicago.">"Never in Chicago" (False Claim)</button>
+                            <button class="claim-chip" data-claim="I lost $1,000! Someone stole my card details and charged $1,000 in Chicago while I was in New York preparing for London!">"Lost $1,000 in Chicago" (5-Avenue Fraud Audit)</button>
+                            <button class="claim-chip" data-claim="I was never in Chicago and never logged in from Chicago.">"Never in Chicago" (Telemetry Contradiction)</button>
+                            <button class="claim-chip" data-claim="My card was declined at London Heathrow Duty-Free while traveling in the UK.">"London Duty-Free Decline" (Travel Notice Match)</button>
                             <button class="claim-chip" data-claim="My phone call disconnected before I could enter the SMS OTP passcode.">"Phone Disconnected" (True Claim)</button>
-                            <button class="claim-chip" data-claim="Apple Pay setup rejected my card with locked error.">"Apple Pay Failed" (True Claim)</button>
                         </div>
-                        <input type="text" id="validator-claim-input" class="validator-input" placeholder="Type customer claim or click a sample..." value="I was never in Chicago and never logged in from Chicago.">
+                        <input type="text" id="validator-claim-input" class="validator-input" placeholder="Type customer claim or click a sample..." value="I lost $1,000! Someone stole my card details and charged $1,000 in Chicago while I was in New York preparing for London!">
                     </div>
                     <button id="validate-write-btn" class="btn-primary btn-sm btn-block">⚡ Validate Claim & Write to Memory Bank</button>
                     <div id="validator-result" class="validator-result-box" style="display: none;"></div>
@@ -164,6 +169,27 @@
                     <span class="apple-pay-icon">Pay</span>
                     <span id="apple-pay-status-text" class="apple-pay-badge-restricted">Provisioning Blocked (Card Locked)</span>
                 </div>
+
+                <!-- Dashboard Admin Oversight & Card Unlock Control Panel -->
+                <div id="admin-oversight-card-box" style="margin-top:0.85rem; padding:0.8rem; background:rgba(15,23,42,0.85); border:1px solid rgba(56,189,248,0.35); border-radius:8px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+                        <span style="font-weight:700; color:#38bdf8; font-size:0.78rem;">👮‍♂️ Admin Card Oversight & Verification</span>
+                        <span id="admin-confidence-badge" class="badge-status success" style="font-size:0.65rem;">Confidence: 98% (PASSED)</span>
+                    </div>
+                    <div id="admin-verification-summary" style="font-size:0.7rem; color:#cbd5e1; margin-bottom:0.6rem; line-height:1.4;">
+                        <strong>Flagged Tx:</strong> £185 London Duty Free Decline<br>
+                        <strong>Chat Verification:</strong> Customer verified London travel notice & iPhone 16 Pro FaceID token in support chat.
+                    </div>
+                    <div style="display:flex; gap:0.35rem; margin-bottom:0.55rem;">
+                        <button id="sim-verify-pass-btn" class="btn-secondary btn-sm" style="flex:1; font-size:0.65rem; padding:0.3rem;" title="Simulate customer passing chat verification (98% confidence)">💬 Sim Chat Verify: PASS (98%)</button>
+                        <button id="sim-verify-fail-btn" class="btn-secondary btn-sm" style="flex:1; font-size:0.65rem; padding:0.3rem;" title="Simulate customer failing chat verification (14% confidence)">⚠️ Sim Chat Verify: FAIL (14%)</button>
+                    </div>
+                    <div style="font-size:0.68rem; color:#fde047; font-weight:600; margin-bottom:0.35rem;">Dashboard Admin Action (Enable or Restrict Card):</div>
+                    <div style="display:flex; gap:0.45rem;">
+                        <button id="admin-approve-yes-btn" class="btn-primary btn-sm" style="flex:1; background:#059669; border-color:#10b981; font-weight:700; font-size:0.72rem;">✅ YES — Enable Card</button>
+                        <button id="admin-reject-no-btn" class="btn-primary btn-sm" style="flex:1; background:#dc2626; border-color:#ef4444; font-weight:700; font-size:0.72rem;">❌ NO — Keep Restricted</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -179,6 +205,10 @@
                 </div>
                 <div class="view-toggle-group">
                     <button class="toggle-btn active" id="view-notes-btn">Notes</button>
+                    <button class="toggle-btn" id="view-admin-btn">👮‍♂️ Admin Oversight</button>
+                    <button class="toggle-btn" id="view-compaction-btn">Compaction</button>
+                    <button class="toggle-btn" id="view-kg-btn">Knowledge Catalog</button>
+                    <button class="toggle-btn" id="view-comparison-btn">⚖️ Custom vs ADK</button>
                     <button class="toggle-btn" id="view-audit-btn">Audit Sweep</button>
                     <button class="toggle-btn" id="view-json-btn">JSON</button>
                 </div>
@@ -233,11 +263,14 @@
                     <button class="quick-chip-btn active-chip" data-prompt="why is nothing working?">
                         "why is nothing working?"
                     </button>
-                    <button class="quick-chip-btn" data-prompt="what happened with my Apple Pay?">
-                        "what happened with my Apple Pay?"
+                    <button class="quick-chip-btn" data-prompt="Hi Support, my card *4821 was declined at London Heathrow Duty Free. I am traveling in London on my registered travel notice and completed FaceID verification on my iPhone 16 Pro. Please unlock my card.">
+                        "Unlock Card (Verify London + FaceID)"
                     </button>
-                    <button class="quick-chip-btn" data-prompt="why was my card declined at Target?">
-                        "why was my card declined at Target?"
+                    <button class="quick-chip-btn" data-prompt="I was never in Chicago and never logged in from Chicago! Unlock my card right now without 2FA.">
+                        "Unlock Card (Failed / Contradicted)"
+                    </button>
+                    <button class="quick-chip-btn" data-prompt="I lost $1,000 in Chicago - was my card compromised while I'm in London?">
+                        "I lost $1,000 in Chicago!"
                     </button>
                 </div>
             </div>

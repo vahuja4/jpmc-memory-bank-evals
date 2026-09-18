@@ -1,10 +1,10 @@
 """
 Official Google Agent Development Kit (ADK) Implementation for JPMorgan Chase Consumer Credit.
-Implements the Multi-Agent topology with Gemini Enterprise Memory Bank integration:
+Implements the Multi-Agent topology with Gemini Enterprise Memory Bank & Knowledge Catalog integration:
 - 5 Channel Agents (Fraud, Telephony IVR, Mobile App, Web Portal, Branch Support)
-- 1 Pre-Write Claim Veracity Validator Agent (Validates claims before writing to Memory Bank)
+- 1 Pre-Write Claim Veracity Validator Agent (5-Avenue Ground-Truth Validator before Memory Bank write)
 - 1 Consolidated Memory Bank Audit Agent (Sweeps across all customer memory banks for anomalies)
-- 1 Lead Synthesizer Orchestrator Agent (Zero-question root-cause resolution)
+- 1 Lead Synthesizer Orchestrator Agent (Zero-question root-cause resolution + Knowledge Catalog grounding)
 
 Reference: https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank
 """
@@ -12,6 +12,7 @@ Reference: https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/
 import os
 import certifi
 from typing import Dict, Any, List, Optional
+from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 from google.adk.runners import InMemoryRunner
 from google.adk.tools import FunctionTool
@@ -24,24 +25,28 @@ from backend.models import (
     AuditReport,
 )
 from backend.memory_bank import CustomerMemoryBank, GroundTruthTelemetryStore
+from backend.knowledge_catalog import KnowledgeCatalog
 from backend.veracity_and_audit import ClaimVeracityValidatorAgent, MemoryBankAuditAgent
 
-# Configure SSL certificates for macOS Python & Vertex AI
+load_dotenv()
+
 os.environ["SSL_CERT_FILE"] = certifi.where()
 os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
 
 
 # ==============================================================================
-# SUBAGENT TOOLS: Decoupled Subsystem Observability & Memory Ingestion
+# SUBAGENT TOOLS: Decoupled Subsystem Observability & Ground-Truth APIs
 # ==============================================================================
 
 def query_fraud_velocity_alerts(customer_id: str) -> Dict[str, Any]:
-    """Inspect fraud detection system logs for velocity anomalies or multi-city login alerts."""
+    """Inspect fraud detection system logs for velocity anomalies, multi-city login alerts, and step-up consent logs."""
+    consent_logs = GroundTruthTelemetryStore.fetch_step_up_consent_audit(customer_id)
     return {
         "system": "Fraud Velocity Engine",
         "customer_id": customer_id,
         "event_time": "Day 1 - 09:15 UTC",
-        "anomaly": "Geo-velocity mismatch (concurrent logins in New York, NY and Chicago, IL)",
+        "anomaly": "Geo-velocity mismatch (NY MacBook vs Chicago Windows/POS) + $1,000 Chicago Electronics Step-Up Audit",
+        "step_up_consent_audit": consent_logs,
         "action_taken": "LOCK_CARD",
         "affected_card": "Chase Sapphire Preferred (*4821)",
         "risk_score": 92,
@@ -62,7 +67,8 @@ def query_ivr_call_records(customer_id: str) -> Dict[str, Any]:
 
 
 def query_mobile_wallet_events(customer_id: str) -> Dict[str, Any]:
-    """Inspect mobile iOS banking client logs for digital wallet and Apple Pay provisioning attempts."""
+    """Inspect mobile iOS banking client logs for digital wallet, Apple Pay provisioning, and Travel Notices."""
+    geo_info = GroundTruthTelemetryStore.fetch_travel_and_geo_verification(customer_id)
     return {
         "system": "Mobile iOS Banking Client",
         "customer_id": customer_id,
@@ -71,6 +77,7 @@ def query_mobile_wallet_events(customer_id: str) -> Dict[str, Any]:
         "status": "FAILED",
         "error_code": "CARD_STATUS_LOCKED_RESTRICTED",
         "device": "iPhone 16 Pro",
+        "verified_travel_notices": geo_info.get("registered_travel_notices", []),
     }
 
 
@@ -79,8 +86,8 @@ def query_web_portal_activity(customer_id: str) -> Dict[str, Any]:
     return {
         "system": "Web Online Banking Portal",
         "customer_id": customer_id,
-        "last_login": "Day 1 - 09:05 UTC (New York, NY)",
-        "session_state": "TERMINATED_AFTER_LOCK",
+        "last_login": "Day 1 - 09:05 UTC (New York, NY - MacBookPro M3)",
+        "session_state": "ACTIVE_CONCURRENT_WITH_CHICAGO_ALERT",
         "dispute_filed": False,
     }
 
@@ -92,6 +99,21 @@ def query_branch_teller_interactions(customer_id: str) -> Dict[str, Any]:
         "customer_id": customer_id,
         "last_branch_visit": "None in last 30 days",
         "in_person_identity_status": "VERIFIED_AT_ONBOARDING",
+    }
+
+
+def fetch_live_account_statement_tool(customer_id: str) -> Dict[str, Any]:
+    """Fetch live account balances, credit limits, and posted/declined statement ledger transactions."""
+    return GroundTruthTelemetryStore.fetch_live_account_statement(customer_id)
+
+
+def query_knowledge_catalog_tool(customer_id: str, policy_query: str = "Reg E step-up consent") -> Dict[str, Any]:
+    """Query the Enterprise Knowledge Catalog for policies, customer risk baselines, and semantic entity graph."""
+    policies = KnowledgeCatalog.query_policies(policy_query)
+    return {
+        "customer_risk_profile": KnowledgeCatalog.get_customer_risk_profile(customer_id),
+        "matching_policies": [p.model_dump() for p in policies],
+        "entity_graph": KnowledgeCatalog.get_entity_subgraph(customer_id),
     }
 
 
@@ -108,7 +130,7 @@ def validate_and_record_customer_claim(
     severity: str = "MEDIUM",
 ) -> Dict[str, Any]:
     """
-    Execute pre-write veracity validation on a customer claim and write it to Memory Bank.
+    Execute 5-Avenue Pre-Write Veracity Validation on a customer claim and write it to Memory Bank.
     """
     bank_channel = BankChannel(channel)
     sev = SeverityLevel(severity)
@@ -133,6 +155,15 @@ def run_consolidated_memory_audit_sweep() -> Dict[str, Any]:
     return report.model_dump()
 
 
+def compact_customer_memory_bank_tool(customer_id: str) -> Dict[str, Any]:
+    """
+    Execute Asynchronous Memory Compaction ('Dreaming Service') to consolidate multi-year history and extract insights.
+    """
+    mb = CustomerMemoryBank(customer_id=customer_id)
+    report = mb.compact_memories()
+    return report.model_dump()
+
+
 # ==============================================================================
 # ORCHESTRATOR TOOLS: Memory Bank Retrieval & 1-Click Remediation
 # ==============================================================================
@@ -149,13 +180,16 @@ def execute_one_click_card_unlock(customer_id: str) -> Dict[str, Any]:
     mb.ingest_event(
         channel=BankChannel.MOBILE_APP,
         day_label="Day 2 - 11:25 UTC",
-        summary="Customer completed 1-click biometric authentication. Card *4821 security lock removed. Apple Pay provisioning approved.",
-        metadata={"action": "UNLOCK_CARD", "verification_method": "BIOMETRIC_FACE_ID"},
+        summary=(
+            "Customer completed 1-click biometric FaceID authentication in London. Card *4821 security lock removed, "
+            "$1,000.00 Chicago SIM-swap charge flagged for Reg E provisional credit, and Apple Pay VCN token provisioned."
+        ),
+        metadata={"action": "UNLOCK_CARD_AND_ISSUE_VCN", "verification_method": "BIOMETRIC_FACE_ID"},
         severity=SeverityLevel.LOW,
     )
     return {
         "status": "RESOLVED",
-        "message": "Card *4821 successfully unlocked. Apple Pay provisioning complete.",
+        "message": "Card *4821 successfully unlocked. Apple Pay VCN provisioning complete & $1,000 Chicago charge credited.",
         "account_status": "ACTIVE_UNRESTRICTED",
     }
 
@@ -168,14 +202,14 @@ def create_fraud_monitoring_agent(model: str = "gemini-2.5-flash") -> LlmAgent:
     """Creates the ADK Fraud Velocity Specialist Agent."""
     return LlmAgent(
         name="fraud_monitoring_agent",
-        description="Specialist agent that monitors login velocity anomalies and card containment actions.",
+        description="Specialist agent that monitors login velocity anomalies, step-up consent logs, and card containment actions.",
         instruction=(
             "You are the Fraud Velocity Specialist Agent for JPMorgan Chase.\n"
-            "Your objective is to inspect login events, evaluate geo-velocity risk scores, and record "
-            "protective containment actions (such as card security locks) into the shared customer Memory Bank."
+            "Your objective is to inspect login events, evaluate geo-velocity risk scores, audit step-up Y/N consent logs, "
+            "and record protective containment actions into the shared customer Memory Bank."
         ),
         model=model,
-        tools=[FunctionTool(query_fraud_velocity_alerts)],
+        tools=[FunctionTool(query_fraud_velocity_alerts), FunctionTool(fetch_live_account_statement_tool)],
         disallow_transfer_to_parent=True,
         disallow_transfer_to_peers=True,
     )
@@ -202,10 +236,10 @@ def create_mobile_app_agent(model: str = "gemini-2.5-flash") -> LlmAgent:
     """Creates the ADK Mobile Banking & Digital Wallet Specialist Agent."""
     return LlmAgent(
         name="mobile_app_agent",
-        description="Specialist agent that manages mobile banking application events and Apple Pay wallet provisioning.",
+        description="Specialist agent that manages mobile banking application events, Travel Notices, and Apple Pay wallet provisioning.",
         instruction=(
             "You are the Mobile Banking Specialist Agent for JPMorgan Chase.\n"
-            "Your objective is to inspect digital wallet provisioning logs and diagnose card tokenization errors."
+            "Your objective is to inspect digital wallet provisioning logs, travel notices, and diagnose card tokenization errors."
         ),
         model=model,
         tools=[FunctionTool(query_mobile_wallet_events)],
@@ -250,16 +284,23 @@ def create_claim_veracity_validator_agent(model: str = "gemini-2.5-flash") -> Ll
     """Creates the Pre-Write Claim Veracity Validator Agent."""
     return LlmAgent(
         name="claim_veracity_validator_agent",
-        description="Pre-write validation agent that intercepts claims and validates their veracity against ground-truth telemetry before Memory Bank insertion.",
+        description=(
+            "Pre-write validation agent that intercepts customer claims and validates their veracity across 5 ground-truth "
+            "avenues (Live Account Statement, Geo/Travel Notice Registry, Behavioral Baseline, Multi-Step SMS Y/N Consent Audit, "
+            "and Knowledge Catalog Policies) before Memory Bank insertion."
+        ),
         instruction=(
             "You are the Pre-Write Claim Veracity Validator Agent for JPMorgan Chase.\n"
             "Your objective is to evaluate claims submitted by customers across any channel session before "
-            "they are persisted to the Memory Bank. Cross-reference claims against authoritative network, "
-            "telephony, and transaction logs, assigning a veracity status (VERIFIED_TRUE, CONTRADICTED_BY_TELEMETRY, "
-            "UNVERIFIED_PENDING_INVESTIGATION, SUSPICIOUS_FALSE_CLAIM)."
+            "they are persisted to the Memory Bank. Cross-reference claims against authoritative live account statements, "
+            "travel notices, behavioral baselines, step-up Y/N consent logs, and Knowledge Catalog policies."
         ),
         model=model,
-        tools=[FunctionTool(validate_and_record_customer_claim)],
+        tools=[
+            FunctionTool(validate_and_record_customer_claim),
+            FunctionTool(fetch_live_account_statement_tool),
+            FunctionTool(query_knowledge_catalog_tool),
+        ],
         disallow_transfer_to_parent=True,
         disallow_transfer_to_peers=True,
     )
@@ -273,11 +314,10 @@ def create_memory_bank_audit_agent(model: str = "gemini-2.5-flash") -> LlmAgent:
         instruction=(
             "You are the Consolidated Memory Bank Audit Agent for JPMorgan Chase.\n"
             "Your objective is to execute cross-customer sweeps over the Memory Bank repository. Identify "
-            "cross-channel discrepancies, contradictory statements between phone and web sessions, velocity "
-            "anomalies, and potential fraud patterns."
+            "cross-channel discrepancies, SIM-swap step-up consent anomalies, velocity conflicts, and false claims."
         ),
         model=model,
-        tools=[FunctionTool(run_consolidated_memory_audit_sweep)],
+        tools=[FunctionTool(run_consolidated_memory_audit_sweep), FunctionTool(compact_customer_memory_bank_tool)],
         disallow_transfer_to_parent=True,
         disallow_transfer_to_peers=True,
     )
@@ -298,22 +338,25 @@ def create_consumer_credit_synthesizer_agent(
 
     return LlmAgent(
         name="consumer_credit_synthesizer_agent",
-        description="Lead Synthesizer Orchestrator Agent that reads the shared Memory Bank and explains customer issues without asking questions.",
+        description="Lead Synthesizer Orchestrator Agent that reads the shared Memory Bank & Knowledge Catalog and explains customer issues without asking questions.",
         instruction=(
             "You are the Lead Consumer Credit Synthesizer Agent for JPMorgan Chase.\n"
             "You coordinate with specialist domain subagents across all channels (Fraud, IVR, Mobile, Web, Branch), "
-            "governed by the Pre-Write Veracity Validation Layer and Consolidated Audit Agent, with direct access to the shared Memory Bank.\n\n"
+            "governed by the Pre-Write Veracity Validation Layer, Knowledge Catalog, and Consolidated Audit Agent.\n\n"
             "CRITICAL MANDATORY RULES:\n"
-            "1. ZERO QUESTIONS: When the customer asks 'why is nothing working?', DO NOT ask clarifying questions.\n"
-            "2. DIRECT CAUSAL SYNTHESIS: Read the Memory Bank notes via `read_customer_memory_bank` and explain the full story:\n"
-            "   - Step 1 (Trigger - Day 1, 09:15 UTC): Concurrent logins in NY and Chicago triggered an automated security lock on card *4821.\n"
+            "1. ZERO QUESTIONS: When the customer asks 'why is nothing working?' or asks about a disputed transaction, DO NOT ask clarifying questions.\n"
+            "2. DIRECT CAUSAL SYNTHESIS: Read the Memory Bank notes via `read_customer_memory_bank` and Knowledge Catalog via `query_knowledge_catalog_tool`:\n"
+            "   - Step 1 (Trigger - Day 1, 09:15 UTC): Concurrent logins in NY (MacBook) and Chicago accompanied by a $1,000.00 Chicago Luxury Electronics charge "
+            "(approved via SIM-swap SMS 'Y' interception) triggered an automated SECURITY_LOCKED restriction on card *4821.\n"
             "   - Step 2 (Intermediary - Day 1, 14:32 UTC): Phone call regarding a $142.50 Target decline dropped before SMS 2FA completed, keeping the card locked.\n"
-            "   - Step 3 (Ripple Effect - Day 2, 11:20 UTC): Apple Pay setup failed with CARD_STATUS_LOCKED_RESTRICTED as a direct consequence of the root lock.\n"
-            "3. PROACTIVE RESOLUTION: Inform the customer that they can unlock card *4821 with 1-click biometric verification right now to restore Apple Pay."
+            "   - Step 3 (Ripple Effect - Day 2, 11:20 UTC): While traveling in London, UK (verified Travel Notice trv-lon-2026), Heathrow Duty Free ($310) and Apple Pay setup failed with CARD_STATUS_LOCKED_RESTRICTED.\n"
+            "3. PROACTIVE RESOLUTION: Inform the customer that they can unlock card *4821 with 1-click biometric FaceID right now to restore Apple Pay, issue an instant Virtual Card Number (VCN), and receive a $1,000.00 Reg E provisional credit."
         ),
         model=model,
         tools=[
             FunctionTool(read_customer_memory_bank),
+            FunctionTool(query_knowledge_catalog_tool),
+            FunctionTool(fetch_live_account_statement_tool),
             FunctionTool(execute_one_click_card_unlock),
         ],
         sub_agents=[
@@ -335,12 +378,12 @@ def list_all_agents() -> List[AgentDescriptor]:
     return [
         AgentDescriptor(
             name="fraud_monitoring_agent",
-            role="Fraud Velocity Specialist",
+            role="Fraud Velocity & Step-Up Specialist",
             channel=BankChannel.FRAUD_DETECTION,
             agent_type="CHANNEL_PRODUCER",
-            description="Inspects real-time login velocity, flags geo-anomalies across cities, and triggers automated card locks.",
-            instruction="Inspect login events, evaluate geo-velocity risk scores, and record containment actions.",
-            tools=["query_fraud_velocity_alerts"],
+            description="Inspects real-time login velocity, audits step-up SMS Y/N consent logs, and triggers automated card locks.",
+            instruction="Inspect login events, evaluate geo-velocity risk scores, and audit step-up consent logs.",
+            tools=["query_fraud_velocity_alerts", "fetch_live_account_statement_tool"],
         ),
         AgentDescriptor(
             name="telephony_ivr_agent",
@@ -356,8 +399,8 @@ def list_all_agents() -> List[AgentDescriptor]:
             role="Mobile Banking & Wallet Specialist",
             channel=BankChannel.MOBILE_APP,
             agent_type="CHANNEL_PRODUCER",
-            description="Monitors mobile iOS/Android app sessions, Apple Pay tokenization failures, and in-app biometric authentication.",
-            instruction="Diagnose mobile digital wallet provisioning errors and tokenization restrictions.",
+            description="Monitors mobile iOS/Android app sessions, Travel Notices, Apple Pay tokenization failures, and FaceID auth.",
+            instruction="Diagnose mobile digital wallet provisioning errors, travel notices, and tokenization restrictions.",
             tools=["query_mobile_wallet_events"],
         ),
         AgentDescriptor(
@@ -380,30 +423,38 @@ def list_all_agents() -> List[AgentDescriptor]:
         ),
         AgentDescriptor(
             name="claim_veracity_validator_agent",
-            role="Pre-Write Claim Veracity Validator",
+            role="5-Avenue Pre-Write Claim Veracity Validator",
             channel=None,
             agent_type="PRE_WRITE_VALIDATOR",
-            description="Pre-write validation gatekeeper: Intercepts customer claims and validates veracity against ground-truth telemetry before persisting to Memory Bank.",
-            instruction="Validate customer claim veracity against authoritative logs; assign VERIFIED_TRUE or CONTRADICTED status.",
-            tools=["validate_and_record_customer_claim"],
+            description=(
+                "Pre-write validation gatekeeper: Audits customer claims across 5 ground-truth avenues "
+                "(Account Statement, Geo/Travel Notice Registry, Behavioral Baseline, Multi-Step Y/N Consent, and Knowledge Catalog Policies)."
+            ),
+            instruction="Validate customer claim veracity against live ground-truth APIs; assign veracity status and remediation.",
+            tools=["validate_and_record_customer_claim", "fetch_live_account_statement_tool", "query_knowledge_catalog_tool"],
         ),
         AgentDescriptor(
             name="memory_bank_audit_agent",
-            role="Consolidated Sweep Auditor",
+            role="Consolidated Sweep & Dreaming Auditor",
             channel=None,
             agent_type="CONSOLIDATED_AUDITOR",
-            description="Executes enterprise-wide consolidated sweeps across all customer Memory Banks to discover multi-channel contradictions, velocity anomalies, and false claims.",
-            instruction="Perform consolidated sweeps across Memory Banks; output structured AuditReports and anomaly alerts.",
-            tools=["run_consolidated_memory_audit_sweep"],
+            description="Executes enterprise-wide consolidated sweeps and asynchronous memory compaction (Dreaming Service).",
+            instruction="Perform consolidated sweeps across Memory Banks and run asynchronous memory compaction.",
+            tools=["run_consolidated_memory_audit_sweep", "compact_customer_memory_bank_tool"],
         ),
         AgentDescriptor(
             name="consumer_credit_synthesizer_agent",
             role="Lead Synthesizer Orchestrator",
             channel=None,
             agent_type="LEAD_SYNTHESIZER",
-            description="Primary conversational agent that reads the consolidated Memory Bank and synthesizes the end-to-end causal chain with zero questions.",
+            description="Primary conversational agent that reads the consolidated Memory Bank & Knowledge Catalog and synthesizes root causes with zero questions.",
             instruction="Reconstruct cross-channel timelines and deliver immediate 1-click resolution actions.",
-            tools=["read_customer_memory_bank", "execute_one_click_card_unlock"],
+            tools=[
+                "read_customer_memory_bank",
+                "query_knowledge_catalog_tool",
+                "fetch_live_account_statement_tool",
+                "execute_one_click_card_unlock",
+            ],
         ),
     ]
 

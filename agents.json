@@ -1,0 +1,22 @@
+{
+  "agents": [
+    {
+      "name": "consumer_credit_synthesizer_agent",
+      "path": "backend/adk_agents.py",
+      "maturity_level": 3,
+      "description": "Lead Consumer Credit Synthesizer Orchestrator Agent using Memory Bank and Knowledge Catalog"
+    },
+    {
+      "name": "claim_veracity_validator_agent",
+      "path": "backend/veracity_and_audit.py",
+      "maturity_level": 3,
+      "description": "Multi-Avenue Ground-Truth Pre-Write Claim Veracity Validator Agent"
+    },
+    {
+      "name": "memory_bank_audit_agent",
+      "path": "backend/veracity_and_audit.py",
+      "maturity_level": 3,
+      "description": "Consolidated Enterprise Sweep & Anomaly Detection Audit Agent"
+    }
+  ]
+}

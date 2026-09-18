@@ -5,8 +5,9 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1 \
     PORT=8080 \
     GOOGLE_GENAI_USE_VERTEXAI=true \
-    GOOGLE_CLOUD_PROJECT=arsanjani-genai \
-    GOOGLE_CLOUD_LOCATION=us-central1
+    GOOGLE_CLOUD_PROJECT=your-gcp-project-id \
+    GOOGLE_CLOUD_LOCATION=us-central1 \
+    VERTEX_AGENT_ENGINE_ID=915213137995628544
 
 # Install dependencies
 COPY requirements.txt .
