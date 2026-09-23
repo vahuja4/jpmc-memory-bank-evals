@@ -1,0 +1,908 @@
+{
+  "run_id": "248c2f",
+  "run_at": "2026-09-23T04:08:30+00:00",
+  "engine": "projects/jpmc-ccb-context-mgmt/locations/us-central1/reasoningEngines/2525027903431770112",
+  "retrieval": {
+    "scope": "eval-retrieval-248c2f",
+    "rows": [
+      {
+        "id": "Q01",
+        "query": "Why was my Sapphire card locked?",
+        "relevant": [
+          "F01",
+          "F02"
+        ],
+        "cloud_ranked": [
+          "F01",
+          "F04",
+          "F14",
+          "F15",
+          "F16"
+        ],
+        "cloud_distances": [
+          0.757,
+          0.872,
+          0.879,
+          0.956,
+          0.959
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F01",
+          "F14",
+          "F04",
+          "F16",
+          "F13"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q02",
+        "query": "Why did Apple Pay fail while I was in London?",
+        "relevant": [
+          "F04",
+          "F01",
+          "F05"
+        ],
+        "cloud_ranked": [
+          "F04",
+          "F07",
+          "F05",
+          "F01",
+          "F02"
+        ],
+        "cloud_distances": [
+          0.727,
+          0.926,
+          0.949,
+          0.96,
+          0.979
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 0.667,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "hits": 3
+        },
+        "local_ranked": [
+          "F04",
+          "F19",
+          "F05",
+          "F20",
+          "F18"
+        ],
+        "local@3": {
+          "precision": 0.667,
+          "recall": 0.667,
+          "hits": 2
+        },
+        "local@5": {
+          "precision": 0.4,
+          "recall": 0.667,
+          "hits": 2
+        }
+      },
+      {
+        "id": "Q03",
+        "query": "Did the customer ever complete identity verification?",
+        "relevant": [
+          "F03",
+          "F19"
+        ],
+        "cloud_ranked": [
+          "F19",
+          "F03",
+          "F10",
+          "F08",
+          "F02"
+        ],
+        "cloud_distances": [
+          0.826,
+          0.888,
+          0.893,
+          0.916,
+          0.925
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local_ranked": [
+          "F19",
+          "F20",
+          "F16",
+          "F17",
+          "F15"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q04",
+        "query": "What travel notices are on file or requested?",
+        "relevant": [
+          "F05",
+          "F12"
+        ],
+        "cloud_ranked": [
+          "F05",
+          "F12",
+          "F16",
+          "F14",
+          "F10"
+        ],
+        "cloud_distances": [
+          0.826,
+          0.856,
+          0.989,
+          1.012,
+          1.017
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local_ranked": [
+          "F12",
+          "F05",
+          "F19",
+          "F16",
+          "F18"
+        ],
+        "local@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        }
+      },
+      {
+        "id": "Q05",
+        "query": "Which cards does this customer hold and who is on them?",
+        "relevant": [
+          "F14",
+          "F15"
+        ],
+        "cloud_ranked": [
+          "F14",
+          "F15",
+          "F11",
+          "F13",
+          "F01"
+        ],
+        "cloud_distances": [
+          0.783,
+          0.839,
+          0.879,
+          0.895,
+          0.91
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local_ranked": [
+          "F15",
+          "F14",
+          "F16",
+          "F19",
+          "F13"
+        ],
+        "local@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        }
+      },
+      {
+        "id": "Q06",
+        "query": "Are there any open transaction disputes?",
+        "relevant": [
+          "F08"
+        ],
+        "cloud_ranked": [
+          "F08",
+          "F02",
+          "F13",
+          "F03",
+          "F17"
+        ],
+        "cloud_distances": [
+          0.895,
+          0.972,
+          0.976,
+          0.979,
+          0.986
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F20",
+          "F08",
+          "F18",
+          "F13",
+          "F19"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q07",
+        "query": "What is the customer's current mailing address?",
+        "relevant": [
+          "F10"
+        ],
+        "cloud_ranked": [
+          "F10",
+          "F17",
+          "F16",
+          "F14",
+          "F06"
+        ],
+        "cloud_distances": [
+          0.763,
+          0.866,
+          0.915,
+          0.932,
+          0.941
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F10",
+          "F16",
+          "F17",
+          "F19",
+          "F20"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q08",
+        "query": "How does the customer want to be contacted about fraud?",
+        "relevant": [
+          "F06"
+        ],
+        "cloud_ranked": [
+          "F06",
+          "F17",
+          "F16",
+          "F19",
+          "F03"
+        ],
+        "cloud_distances": [
+          0.759,
+          0.901,
+          0.932,
+          0.936,
+          0.948
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F19",
+          "F06",
+          "F20",
+          "F16",
+          "F17"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q09",
+        "query": "What is the status of the credit limit increase request?",
+        "relevant": [
+          "F13"
+        ],
+        "cloud_ranked": [
+          "F13",
+          "F02",
+          "F14",
+          "F11",
+          "F01"
+        ],
+        "cloud_distances": [
+          0.742,
+          0.938,
+          0.953,
+          0.969,
+          0.97
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F13",
+          "F20",
+          "F18",
+          "F15",
+          "F19"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q10",
+        "query": "What happened with the Freedom card?",
+        "relevant": [
+          "F14",
+          "F15",
+          "F16"
+        ],
+        "cloud_ranked": [
+          "F16",
+          "F15",
+          "F04",
+          "F14",
+          "F01"
+        ],
+        "cloud_distances": [
+          0.811,
+          0.894,
+          0.922,
+          0.945,
+          0.967
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 0.667,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "hits": 3
+        },
+        "local_ranked": [
+          "F16",
+          "F15",
+          "F14",
+          "F19",
+          "F18"
+        ],
+        "local@3": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "hits": 3
+        },
+        "local@5": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "hits": 3
+        }
+      },
+      {
+        "id": "Q11",
+        "query": "Was the $1,000 Chicago electronics charge authorized by the customer?",
+        "relevant": [
+          "F02",
+          "F01"
+        ],
+        "cloud_ranked": [
+          "F02",
+          "F08",
+          "F15",
+          "F11",
+          "F03"
+        ],
+        "cloud_distances": [
+          0.764,
+          0.888,
+          0.954,
+          0.961,
+          0.967
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F02",
+          "F15",
+          "F08",
+          "F20",
+          "F19"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q12",
+        "query": "Has the customer shown any interest in a mortgage or lending?",
+        "relevant": [
+          "F09"
+        ],
+        "cloud_ranked": [
+          "F09",
+          "F17",
+          "F06",
+          "F19",
+          "F14"
+        ],
+        "cloud_distances": [
+          0.839,
+          0.901,
+          0.916,
+          0.934,
+          0.951
+        ],
+        "cloud@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "cloud@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local_ranked": [
+          "F09",
+          "F19",
+          "F17",
+          "F18",
+          "F20"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 1.0,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 1.0,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q13",
+        "query": "Why is nothing working with my card?",
+        "relevant": [
+          "F01",
+          "F03",
+          "F04"
+        ],
+        "cloud_ranked": [
+          "F04",
+          "F01",
+          "F11",
+          "F15",
+          "F14"
+        ],
+        "cloud_distances": [
+          0.89,
+          0.961,
+          0.991,
+          0.998,
+          1.003
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 0.667,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.4,
+          "recall": 0.667,
+          "hits": 2
+        },
+        "local_ranked": [
+          "F04",
+          "F15",
+          "F16",
+          "F18",
+          "F13"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 0.333,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.2,
+          "recall": 0.333,
+          "hits": 1
+        }
+      },
+      {
+        "id": "Q14",
+        "query": "How does the customer receive statements and pay the bill?",
+        "relevant": [
+          "F11",
+          "F17"
+        ],
+        "cloud_ranked": [
+          "F17",
+          "F11",
+          "F10",
+          "F06",
+          "F15"
+        ],
+        "cloud_distances": [
+          0.784,
+          0.915,
+          0.933,
+          0.944,
+          0.973
+        ],
+        "cloud@3": {
+          "precision": 0.667,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "cloud@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        },
+        "local_ranked": [
+          "F17",
+          "F19",
+          "F20",
+          "F16",
+          "F11"
+        ],
+        "local@3": {
+          "precision": 0.333,
+          "recall": 0.5,
+          "hits": 1
+        },
+        "local@5": {
+          "precision": 0.4,
+          "recall": 1.0,
+          "hits": 2
+        }
+      }
+    ],
+    "summary": {
+      "cloud@3": {
+        "precision": 0.5,
+        "recall": 0.857
+      },
+      "cloud@5": {
+        "precision": 0.329,
+        "recall": 0.905
+      },
+      "local@3": {
+        "precision": 0.452,
+        "recall": 0.786
+      },
+      "local@5": {
+        "precision": 0.286,
+        "recall": 0.821
+      }
+    }
+  },
+  "write": {
+    "rows": [
+      {
+        "id": "S1_ivr_call",
+        "channel": "TELEPHONY_IVR",
+        "scope": "eval-write-S1_ivr_call-248c2f",
+        "stored_memories": [
+          "I was in New York for a week.",
+          "I have a Chase Sapphire Preferred credit card."
+        ],
+        "generated_actions": [
+          "CREATED",
+          "CREATED"
+        ],
+        "must_capture_total": 4,
+        "captured": 0,
+        "write_recall": 0.0,
+        "stored_total": 2,
+        "stored_good": 2,
+        "write_precision": 1.0,
+        "missed": [
+          {
+            "fact": "The customer's Sapphire Preferred card ending 4821 was declined for a $142.50 purchase at Target.",
+            "missing_detail": "The card was declined for $142.50 at Target, and its ending number is 4821."
+          },
+          {
+            "fact": "The card was locked automatically because of logins from New York and Chicago nine minutes apart.",
+            "missing_detail": "The card was locked automatically due to logins from New York and Chicago nine minutes apart."
+          },
+          {
+            "fact": "The customer states they were in New York all week and never logged in from Chicago.",
+            "missing_detail": "The customer never logged in from Chicago."
+          },
+          {
+            "fact": "The verification call disconnected before the SMS one-time passcode was entered, so the card stayed locked.",
+            "missing_detail": "The verification call disconnected before the SMS one-time passcode was entered, resulting in the card remaining locked."
+          }
+        ],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      },
+      {
+        "id": "S2_mobile_chat_london",
+        "channel": "MOBILE_APP",
+        "scope": "eval-write-S2_mobile_chat_london-248c2f",
+        "stored_memories": [
+          "I am traveling in London and have set up a travel notice with reference trv-lon-2026.",
+          "I own an iPhone 16 Pro.",
+          "I have a Sapphire credit card."
+        ],
+        "generated_actions": [
+          "CREATED",
+          "CREATED",
+          "CREATED"
+        ],
+        "must_capture_total": 5,
+        "captured": 2,
+        "write_recall": 0.4,
+        "stored_total": 3,
+        "stored_good": 3,
+        "write_precision": 1.0,
+        "missed": [
+          {
+            "fact": "Adding the Sapphire card to Apple Pay failed with CARD_STATUS_LOCKED_RESTRICTED.",
+            "missing_detail": "The Apple Pay failure with CARD_STATUS_LOCKED_RESTRICTED."
+          },
+          {
+            "fact": "Travel notice trv-lon-2026 is active for London.",
+            "missing_detail": "The travel notice trv-lon-2026 is active."
+          },
+          {
+            "fact": "The unlock request was forwarded to a risk administrator for approval.",
+            "missing_detail": "The unlock request was forwarded to a risk administrator for approval."
+          }
+        ],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      },
+      {
+        "id": "S3_web_dispute",
+        "channel": "WEB_PORTAL",
+        "scope": "eval-write-S3_web_dispute-248c2f",
+        "stored_memories": [
+          "I opened dispute case DSP-4471 to dispute an $89.99 charge from Equinox on the 3rd of the month, which I cancelled in August."
+        ],
+        "generated_actions": [
+          "CREATED"
+        ],
+        "must_capture_total": 2,
+        "captured": 1,
+        "write_recall": 0.5,
+        "stored_total": 1,
+        "stored_good": 1,
+        "write_precision": 1.0,
+        "missed": [
+          {
+            "fact": "Dispute case DSP-4471 was opened and the customer uploaded a cancellation email.",
+            "missing_detail": "the customer uploaded a cancellation email"
+          }
+        ],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      },
+      {
+        "id": "S4_branch_mortgage",
+        "channel": "BRANCH_SUPPORT",
+        "scope": "eval-write-S4_branch_mortgage-248c2f",
+        "stored_memories": [
+          "A home lending advisor is scheduled to call me this week regarding a mortgage pre-approval.",
+          "My annual salary is approximately $185,000.",
+          "I am looking to buy an apartment and prefer a 30-year fixed mortgage."
+        ],
+        "generated_actions": [
+          "CREATED",
+          "CREATED",
+          "CREATED"
+        ],
+        "must_capture_total": 4,
+        "captured": 3,
+        "write_recall": 0.75,
+        "stored_total": 3,
+        "stored_good": 3,
+        "write_precision": 1.0,
+        "missed": [
+          {
+            "fact": "The banker verified the customer's identity in person with a passport.",
+            "missing_detail": "The detail about the banker verifying identity with a passport is missing."
+          }
+        ],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      },
+      {
+        "id": "S5_noise_only",
+        "channel": "WEB_PORTAL",
+        "scope": "eval-write-S5_noise_only-248c2f",
+        "stored_memories": [],
+        "generated_actions": [],
+        "must_capture_total": 0,
+        "captured": 0,
+        "write_recall": null,
+        "stored_total": 0,
+        "stored_good": 0,
+        "write_precision": null,
+        "missed": [],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      },
+      {
+        "id": "S6_contact_update",
+        "channel": "TELEPHONY_IVR",
+        "scope": "eval-write-S6_contact_update-248c2f",
+        "stored_memories": [
+          "Forget the travel notice for my Tokyo trip which was scheduled for October 10 to October 20 as the trip is cancelled.",
+          "I changed my mobile number for receiving verification codes and discontinued my previous number."
+        ],
+        "generated_actions": [
+          "CREATED",
+          "CREATED"
+        ],
+        "must_capture_total": 3,
+        "captured": 1,
+        "write_recall": 0.333,
+        "stored_total": 2,
+        "stored_good": 2,
+        "write_precision": 1.0,
+        "missed": [
+          {
+            "fact": "The customer's mobile number changed to the one ending 0142 and the old number ending 0198 is disconnected.",
+            "missing_detail": "The specific new number (0142) and old number (0198) are missing."
+          },
+          {
+            "fact": "SMS passcodes should go to the new number ending 0142.",
+            "missing_detail": "The specific new number (0142) and the explicit mention of SMS passcodes are missing."
+          }
+        ],
+        "leaks": [],
+        "hallucinated": [],
+        "not_useful": []
+      }
+    ],
+    "summary": {
+      "write_recall_mean": 0.397,
+      "write_recall_micro": 0.389,
+      "write_precision_mean": 1.0,
+      "write_precision_micro": 1.0,
+      "total_leaks": 0,
+      "total_hallucinated": 0,
+      "noise_case_stored": 0
+    }
+  }
+}
