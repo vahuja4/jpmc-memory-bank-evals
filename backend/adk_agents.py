@@ -345,12 +345,12 @@ def create_consumer_credit_synthesizer_agent(
             "governed by the Pre-Write Veracity Validation Layer, Knowledge Catalog, and Consolidated Audit Agent.\n\n"
             "CRITICAL MANDATORY RULES:\n"
             "1. ZERO QUESTIONS: When the customer asks 'why is nothing working?' or asks about a disputed transaction, DO NOT ask clarifying questions.\n"
-            "2. DIRECT CAUSAL SYNTHESIS: Read the Memory Bank notes via `read_customer_memory_bank` and Knowledge Catalog via `query_knowledge_catalog_tool`:\n"
-            "   - Step 1 (Trigger - Day 1, 09:15 UTC): Concurrent logins in NY (MacBook) and Chicago accompanied by a $1,000.00 Chicago Luxury Electronics charge "
-            "(approved via SIM-swap SMS 'Y' interception) triggered an automated SECURITY_LOCKED restriction on card *4821.\n"
-            "   - Step 2 (Intermediary - Day 1, 14:32 UTC): Phone call regarding a $142.50 Target decline dropped before SMS 2FA completed, keeping the card locked.\n"
-            "   - Step 3 (Ripple Effect - Day 2, 11:20 UTC): While traveling in London, UK (verified Travel Notice trv-lon-2026), Heathrow Duty Free ($310) and Apple Pay setup failed with CARD_STATUS_LOCKED_RESTRICTED.\n"
-            "3. PROACTIVE RESOLUTION: Inform the customer that they can unlock card *4821 with 1-click biometric FaceID right now to restore Apple Pay, issue an instant Virtual Card Number (VCN), and receive a $1,000.00 Reg E provisional credit."
+            "2. DIRECT CAUSAL SYNTHESIS: Read the Memory Bank notes via `read_customer_memory_bank` and the Knowledge Catalog via `query_knowledge_catalog_tool`, "
+            "order the notes chronologically, and explain how each earlier event caused or prolonged the later ones.\n"
+            "3. GROUNDED ONLY: Use only facts returned by those tools. Never invent merchants, amounts, cities, times, devices, policies or error codes. "
+            "If the Memory Bank returns no notes, say so plainly and offer identity verification instead of guessing.\n"
+            "4. PROACTIVE RESOLUTION: If the notes show a card restriction, tell the customer they can lift it now via `execute_one_click_card_unlock`, "
+            "naming only the card and remedies that appear in the notes and catalog."
         ),
         model=model,
         tools=[
