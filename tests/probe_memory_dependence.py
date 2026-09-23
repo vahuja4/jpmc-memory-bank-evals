@@ -111,6 +111,32 @@ def main():
     show("CHECK 3 result", result3.narrative)
     print("\n  Interpretation: if 'chicago' is FOUND here, the story came from the prompt, not from memory.")
 
+    # ---------- CHECK 4: live Gemini with memory EMPTY ----------
+    print("\n=== CHECK 4: LIVE Gemini with memory bank EMPTY ===")
+    mb4 = CustomerMemoryBank(customer_id=CUSTOMER)
+    mb4.clear()
+    result4 = MemoryBankSynthesizerAgent().synthesize_customer_issue(CUSTOMER, "why is nothing working?", mb4)
+    show("CHECK 4 result", result4.narrative, note=f"  memory fragments in bank: {len(mb4.get_fragments())}")
+    print(f"  causal steps: {len(result4.causal_steps)} | timeline entries: {len(result4.a2ui_payload['timeline'])} | confidence: {result4.confidence_score}")
+    print("  Interpretation: every marker should be ABSENT and the agent should say it has no records.")
+
+    # ---------- CHECK 5: live Gemini with Chicago renamed to Denver ----------
+    print("\n=== CHECK 5: LIVE Gemini with 'Chicago' rewritten to 'Denver' in memory ===")
+    mb5 = CustomerMemoryBank(customer_id=CUSTOMER)
+    mb5.clear()
+    mb5.seed_default_scenario()
+    for f in mb5._fragments:
+        f.summary = f.summary.replace("Chicago", "Denver")
+        f.metadata = {k: (v.replace("Chicago", "Denver") if isinstance(v, str) else
+                          [x.replace("Chicago", "Denver") for x in v] if isinstance(v, list) else v)
+                      for k, v in f.metadata.items()}
+    result5 = MemoryBankSynthesizerAgent().synthesize_customer_issue(CUSTOMER, "why is nothing working?", mb5)
+    t5 = result5.narrative.lower()
+    print(f"  {'FOUND  ' if 'denver' in t5 else 'absent '} denver")
+    print(f"  {'FOUND  ' if 'chicago' in t5 else 'absent '} chicago")
+    print("  timeline titles:", [e["title"] for e in result5.a2ui_payload["timeline"]])
+    print("  Interpretation: Denver should be FOUND and Chicago ABSENT if the narrative follows memory.")
+
 
 if __name__ == "__main__":
     sys.exit(main())
