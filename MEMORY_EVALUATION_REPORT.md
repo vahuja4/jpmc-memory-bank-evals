@@ -225,6 +225,171 @@ The first run's full output is at `evals/results/memory_bank_eval_20260923T04165
 
 ---
 
+## How to run everything yourself
+
+All commands are run from the project folder:
+
+```
+cd /Users/vishal/google_poc/jpmc-consumer-credit
+```
+
+### 1. One-time setup
+
+**Google Cloud command-line tool.** Installed through Homebrew. It is not on the default PATH,
+so either export it each time or add the export line to your shell profile.
+
+```
+brew install --cask google-cloud-sdk
+export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
+```
+
+**Log in.** This opens a browser page. Sign in as gmemjp2026@gmail.com and approve. If no browser
+opens, add `--no-launch-browser`, open the printed link yourself, and paste the code back.
+
+```
+gcloud config set project jpmc-ccb-context-mgmt
+gcloud config set account gmemjp2026@gmail.com
+gcloud auth application-default login
+```
+
+**Python environment.** The project's virtual environment is in `.venv`. pytest was not in it, so
+install it once.
+
+```
+.venv/bin/python -m pip install pytest
+```
+
+**Environment file.** `.env` is git-ignored and already exists with these values. If it is ever
+lost, recreate it:
+
+```
+GOOGLE_GENAI_USE_VERTEXAI=true
+GOOGLE_CLOUD_PROJECT=jpmc-ccb-context-mgmt
+GOOGLE_CLOUD_LOCATION=us-central1
+VERTEX_AGENT_ENGINE_ID=2525027903431770112
+```
+
+Load it into your shell before any command that talks to Google Cloud:
+
+```
+set -a; . ./.env; set +a
+```
+
+### 2. Branches
+
+```
+git branch -a                                  # see all branches
+git checkout fix/memory-grounded-synthesis     # the fix plus the probe
+git checkout eval/memory-bank-quality          # the Memory Bank evaluation and this report
+git checkout test/memory-dependence-probe      # the probe on the unchanged code (shows the "before" behaviour)
+git checkout main                              # the original code
+```
+
+### 3. Unit tests (offline, about 2 minutes)
+
+```
+PYTHONPATH=. .venv/bin/python -m pytest -q
+```
+
+Expected: 39 passed, 1 failed. The failure in `test_veracity_and_audit.py` is pre-existing and
+unrelated to the memory work.
+
+### 4. Part 1: the memory-dependence probe
+
+Run it on `test/memory-dependence-probe` to see the "before" behaviour, and on
+`fix/memory-grounded-synthesis` to see the "after" behaviour.
+
+```
+git checkout fix/memory-grounded-synthesis
+set -a; . ./.env; set +a
+PYTHONPATH=. .venv/bin/python tests/probe_memory_dependence.py
+```
+
+Checks 1 and 2 run offline. Checks 3, 4 and 5 call the real Gemini model and need the login
+from step 1. Each check prints FOUND or absent for each of the six story markers.
+
+To try a single quick experiment by hand, for example an empty memory against real Gemini:
+
+```
+PYTHONPATH=. .venv/bin/python - <<'EOF'
+from backend.agent import MemoryBankSynthesizerAgent
+from backend.memory_bank import CustomerMemoryBank
+mb = CustomerMemoryBank(customer_id="cust_jpmc_88329")
+mb.clear()                      # remove all notes; use mb.seed_default_scenario() to restore the 3 demo notes
+r = MemoryBankSynthesizerAgent().synthesize_customer_issue("cust_jpmc_88329", "why is nothing working?", mb)
+print(r.narrative)
+EOF
+```
+
+### 5. Part 2: the Memory Bank evaluation (about 4 minutes, needs login)
+
+```
+git checkout eval/memory-bank-quality
+set -a; . ./.env; set +a
+PYTHONPATH=. .venv/bin/python evals/eval_memory_bank.py
+```
+
+Options:
+
+```
+--keep         leave the test memories in the Memory Bank so you can inspect them
+--skip-local   skip the comparison against the app's own local retrieval (faster)
+```
+
+Output goes to the terminal and to two dated files in `evals/results/` (a `.md` report and a
+`.json` with every query, ranking, distance and judge verdict).
+
+To change what is tested, edit `evals/memory_bank_eval_cases.json`. It has three lists: the
+retrieval facts, the retrieval questions with their right answers, and the conversations with
+their must-capture and must-not-capture labels. Add or edit entries and rerun.
+
+### 6. Looking inside the Memory Bank
+
+List every memory in the bank:
+
+```
+set -a; . ./.env; set +a
+.venv/bin/python - <<'EOF'
+import os, requests, google.auth, google.auth.transport.requests
+creds, _ = google.auth.default(); creds.refresh(google.auth.transport.requests.Request())
+eng = f"projects/{os.environ['GOOGLE_CLOUD_PROJECT']}/locations/us-central1/reasoningEngines/{os.environ['VERTEX_AGENT_ENGINE_ID']}"
+r = requests.get(f"https://us-central1-aiplatform.googleapis.com/v1beta1/{eng}/memories",
+                 headers={"Authorization": f"Bearer {creds.token}"}, params={"pageSize": 100})
+for m in r.json().get("memories", []):
+    print(m["scope"].get("user_id"), "|", m.get("fact"))
+EOF
+```
+
+Search the bank the way the app does (similarity search for one customer):
+
+```
+.venv/bin/python - <<'EOF'
+import os, requests, google.auth, google.auth.transport.requests
+creds, _ = google.auth.default(); creds.refresh(google.auth.transport.requests.Request())
+eng = f"projects/{os.environ['GOOGLE_CLOUD_PROJECT']}/locations/us-central1/reasoningEngines/{os.environ['VERTEX_AGENT_ENGINE_ID']}"
+r = requests.post(f"https://us-central1-aiplatform.googleapis.com/v1beta1/{eng}/memories:retrieve",
+                  headers={"Authorization": f"Bearer {creds.token}"},
+                  json={"scope": {"app_name": "jpmc_consumer_credit", "user_id": "cust_jpmc_88329"},
+                        "similaritySearchParams": {"searchQuery": "why was my card locked?", "topK": 3}})
+for m in r.json().get("retrievedMemories", []):
+    print(round(m.get("distance", 0), 3), "|", m["memory"]["fact"][:120])
+EOF
+```
+
+The bank can also be browsed in the Google Cloud console under Vertex AI, Agent Engine, in
+project jpmc-ccb-context-mgmt.
+
+### 7. Running the demo app itself
+
+```
+set -a; . ./.env; set +a
+PYTHONPATH=. .venv/bin/python backend/app.py
+```
+
+Then open http://localhost:5055 in a browser.
+
+---
+
 ## Where everything lives
 
 | Item | Location |
