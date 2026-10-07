@@ -1,0 +1,425 @@
+{
+ "writer": "gemini-2.5-pro",
+ "questions": [
+  {
+   "id": "B1_009_MERCHANT",
+   "cid": "cust_synth_009",
+   "cause": "believed_customer",
+   "memory_path": "both",
+   "situation": "The customer disputed a charge in March 2026. In a later chat he called it a hotel charge from memory; the memory stored that as fact. The bank's records name the real merchant.",
+   "ask": "what the disputed charge was actually for (the merchant or kind of shop), without naming any shop or type of shop",
+   "records_value": "the disputed charge was from Pinecrest Outdoor Supply (an outdoor gear shop)",
+   "wrong_value": "the disputed charge was a hotel charge",
+   "forbidden": [
+    "hotel",
+    "pinecrest",
+    "outdoor",
+    "camping",
+    "gear",
+    "sport"
+   ],
+   "checkpoint": "final",
+   "text": "hi, my accountant is asking about a charge i disputed earlier in the year. can you tell me who the merchant was for that one?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "both",
+     "index": 0,
+     "name": "7824774760784461824",
+     "fact": "On 2026-03-09, agent Grace advised that a provisional credit of $392.88 would post to the account. The credit posted on 2026-04-04. Since the merchant failed to respond by 2026-07-07, on 2026-07-28 (call CASE-6123302, agent Dana), dispute DSP-7530420 was closed and resolved in the customer's favor, making the temporary credit permanent. The written summary of this hotel charge dispute from April 2026 was never received, so on 2026-06-29, agent Omar escalated the request to his supervisor and the disputes department to ensure it is emailed immediately to the customer's email address on file, marcus.lindqvist50@example.net."
+    },
+    {
+     "path": "extract",
+     "index": 33,
+     "name": "1706634667001643008",
+     "fact": "The written summary of the customer's hotel charge dispute, originally promised in April 2026 within ten business days, was never sent; on 2026-06-29 agent Omar escalated the issue to his supervisor and the disputes department to have it emailed to marcus.lindqvist50@example.net that day."
+    }
+   ],
+   "must": [
+    "the disputed charge was from Pinecrest Outdoor Supply (an outdoor gear shop)"
+   ],
+   "must_not_assert": [
+    "the disputed charge was a hotel charge"
+   ]
+  },
+  {
+   "id": "B2_009_CHARGE_MONTH",
+   "cid": "cust_synth_009",
+   "cause": "believed_customer",
+   "memory_path": "extract",
+   "situation": "The customer disputed a charge in March 2026. On a September call he guessed the charge was from July; the memory stored July as fact. The records show the dispute opened in March.",
+   "ask": "when the disputed charge happened or when he first raised it, without naming any month or season",
+   "records_value": "the charge was from early March 2026 and the dispute was opened on March 9, 2026",
+   "wrong_value": "the charge was from July 2026",
+   "forbidden": [
+    "july",
+    "march",
+    "february",
+    "summer",
+    "spring",
+    "winter"
+   ],
+   "checkpoint": "final",
+   "text": "hi, my accountant needs the date for that pinecrest outdoor supply charge i disputed. can you look that up for me?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 48,
+     "name": "8371962115509977088",
+     "fact": "Dispute DSP-7530420 regarding a charge of $392 and some change from Pine Crest Outer Supply from July 2026 was resolved in Marcus's favor; on 2026-09-16, agent Rafael clarified that the full refund also reversed the pending rewards points associated with that purchase."
+    }
+   ],
+   "must": [
+    "the charge was from early March 2026 and the dispute was opened on March 9, 2026"
+   ],
+   "must_not_assert": [
+    "the charge was from July 2026"
+   ]
+  },
+  {
+   "id": "B3_016_CLOSED_WHEN",
+   "cid": "cust_synth_016",
+   "cause": "believed_customer",
+   "memory_path": "extract",
+   "situation": "The customer disputed a luggage charge in March 2026. In June she said it had 'got sorted' when only the temporary credit had posted; the memory stored the dispute as resolved then. The records show it was closed in her favour on July 22, 2026.",
+   "ask": "the date the dispute was officially closed, e.g. for a form or her own records, without naming any month or date",
+   "records_value": "the dispute was closed in her favour on July 22, 2026",
+   "wrong_value": "the dispute was resolved in June 2026 (or in April, when the provisional credit posted)",
+   "forbidden": [
+    "april",
+    "june",
+    "july",
+    "spring",
+    "summer"
+   ],
+   "checkpoint": "final",
+   "text": "hi, i've got a question about the luggage dispute from earlier this year. my accountant needs the exact date it was officially closed, can you check for me?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 27,
+     "name": "2719452001950760960",
+     "fact": "Dispute DSP-1512689 resulted in a provisional credit of $473.31 applied in April 2026, which the customer confirmed was resolved, and the requested paper statement was successfully received."
+    }
+   ],
+   "must": [
+    "the dispute was closed in her favour on July 22, 2026"
+   ],
+   "must_not_assert": [
+    "the dispute was resolved in June 2026 (or in April, when the provisional credit posted)"
+   ]
+  },
+  {
+   "id": "B4_016_STATEMENT_SENT",
+   "cid": "cust_synth_016",
+   "cause": "believed_customer",
+   "memory_path": "extract",
+   "situation": "In April 2026 the bank promised the customer a paper statement copy by post. In June she said she thought it had come; the memory stored that it was received. In July an agent found it had never been sent and asked for it again. The bank's records hold no statement copy at all.",
+   "ask": "whether that paper statement copy was ever actually sent out, without saying whether she got it",
+   "records_value": "there is no record of the statement copy having been sent",
+   "wrong_value": "the paper statement was received",
+   "forbidden": [
+    "arrived",
+    "received",
+    "got it",
+    "never",
+    "came"
+   ],
+   "checkpoint": "final",
+   "text": "hi, sorting some old papers for my accountant. can you just check for me if that statement copy was posted out?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 27,
+     "name": "2719452001950760960",
+     "fact": "Dispute DSP-1512689 resulted in a provisional credit of $473.31 applied in April 2026, which the customer confirmed was resolved, and the requested paper statement was successfully received."
+    }
+   ],
+   "must": [
+    "there is no record of the statement copy having been sent"
+   ],
+   "must_not_assert": [
+    "the paper statement was received"
+   ]
+  },
+  {
+   "id": "B5_017_CHARGE_MONTH",
+   "cid": "cust_synth_017",
+   "cause": "agent_misspoke",
+   "memory_path": "extract",
+   "situation": "The customer disputed a florist charge that posted on February 28, 2026; the dispute opened March 3. On a July call an agent wrongly said the charge was from May; the memory stored May as fact.",
+   "ask": "the date the disputed florist charge actually went on his card, without naming any month or season",
+   "records_value": "the charge posted on February 28, 2026 and the dispute was opened March 3, 2026",
+   "wrong_value": "the charge was from May 2026",
+   "forbidden": [
+    "may",
+    "february",
+    "march",
+    "spring",
+    "winter"
+   ],
+   "checkpoint": "final",
+   "text": "i'm filling out a form and need the date of that harbor lights florist transaction i disputed. can you look it up for me?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 32,
+     "name": "7597413348346429440",
+     "fact": "Dispute DSP-2174159 regarding a $602.64 charge from Harbor Lights Florist for wedding flowers in May 2026 was resolved in the customer's favor on 2026-07-26 because the merchant failed to respond within the 45-day window, making the temporary credit of $602.64 permanent."
+    }
+   ],
+   "must": [
+    "the charge posted on February 28, 2026 and the dispute was opened March 3, 2026"
+   ],
+   "must_not_assert": [
+    "the charge was from May 2026"
+   ]
+  },
+  {
+   "id": "B6_028_CLOSED_WHEN",
+   "cid": "cust_synth_028",
+   "cause": "believed_customer",
+   "memory_path": "both",
+   "situation": "The customer disputed a florist charge in March 2026. At a branch visit in May she said it was all resolved because she had seen a credit; the memory stored that as a confirmed resolution in May. The records show the dispute was closed in her favour on July 24, 2026.",
+   "ask": "the date the dispute was officially closed, e.g. for a form or her own records, without naming any month or date",
+   "records_value": "the dispute was closed in her favour on July 24, 2026",
+   "wrong_value": "the dispute was resolved in May 2026",
+   "forbidden": [
+    "may",
+    "july",
+    "april",
+    "spring",
+    "summer"
+   ],
+   "checkpoint": "final",
+   "text": "hi, about that florist dispute from earlier in the year - can you tell me what date it was officially closed? i need it for some paperwork.",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "both",
+     "index": 1,
+     "name": "1875519653028036608",
+     "fact": "On 2026-03-04, dispute DSP-1480747 under case CASE-6327908 was opened for an unrecognized charge of $313.89 from Harbor Lights Florist (which her brother Emeka had noticed) on the customer's Amazon Prime Visa *3810 from the March 2026 statement period; a provisional credit of $313.89 posted to the account on 2026-04-10. On 2026-05-16, the customer confirmed the dispute was resolved successfully with a credit from the bank, and on 2026-07-24 (call CASE-5004299, agent Luis), the dispute was officially closed in the customer's favor, making the provisional credit permanent because the merchant failed to respond by the deadline."
+    },
+    {
+     "path": "extract",
+     "index": 20,
+     "name": "5411971260420718592",
+     "fact": "The customer confirmed that a previous dispute regarding a charge from the florist Harbor Lights (which her brother Emeka had noticed) was fully resolved after the bank issued her a credit."
+    }
+   ],
+   "must": [
+    "the dispute was closed in her favour on July 24, 2026"
+   ],
+   "must_not_assert": [
+    "the dispute was resolved in May 2026"
+   ]
+  },
+  {
+   "id": "B7_028_EMAIL_BLAME",
+   "cid": "cust_synth_028",
+   "cause": "believed_customer",
+   "memory_path": "both",
+   "situation": "In March 2026 the customer changed her email in a chat. She typed it wrong, the agent read it back, she corrected it, and the right address went on file first time. In June she said the agent had recorded it wrongly; the memory stored that as fact. The records show one change on March 26, with no wrong address ever on file.",
+   "ask": "what went on with her email change earlier in the year that made it take two goes (say it was the email change), as a mild complaint, without saying whose mistake it was and without any email address",
+   "records_value": "the email was changed once, on March 26, 2026, and no wrong address was ever on file; the first attempt was the customer's own typo, corrected in the same chat",
+   "wrong_value": "the agent recorded or typed the email wrongly",
+   "forbidden": [
+    "agent",
+    "colleague",
+    "your end",
+    "my end",
+    "typo",
+    "dot",
+    "sticky",
+    "@"
+   ],
+   "checkpoint": "final",
+   "text": "hi, i'm sorting out some paperwork. i remember there was some mix-up with my email details earlier in the year, can you see what that was about?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "both",
+     "index": 6,
+     "name": "1614310874640547840",
+     "fact": "In March 2026, the customer's primary email address on file was updated, which took two attempts because the first agent recorded it incorrectly. On 2026-03-26, during a secure chat with agent Anjali, the email address was changed from nadiap30@example.com to nadia.park51@example.org, which the customer confirmed on 2026-04-26 and verified again on 2026-05-16. As of 2026-06-26, the purge of her old email address is complete, leaving only nadia.park51@example.org associated with her profile. On 2026-07-24 (call CASE-5004299), her primary contact phone number was updated from her old job's landline (412-555-0567) to her new work direct line. On 2026-07-28 (case CASE-5950748), her primary email address was changed from nadia.park51@example.org to park.n56@example.org. On 2026-08-31, she visited a branch and verified that her primary email on file is correct and that her work desk phone is her current callback number. As of 2026-09-13, her confirmed contact details on file are the primary email park.n56@example.org and the work phone number 412-555-0996 as the best callback number."
+    },
+    {
+     "path": "extract",
+     "index": 25,
+     "name": "3592517010963038208",
+     "fact": "The customer's preferred callback number is their office landline. Additionally, the customer's email on file was successfully updated in March 2026, which took two attempts due to a transcription error by the first agent."
+    }
+   ],
+   "must": [
+    "the email was changed once, on March 26, 2026, and no wrong address was ever on file; the first attempt was the customer's own typo, corrected in the same chat"
+   ],
+   "must_not_assert": [
+    "the agent recorded or typed the email wrongly"
+   ]
+  },
+  {
+   "id": "B8_028_DISPUTE_CARD",
+   "cid": "cust_synth_028",
+   "cause": "memory_mistake",
+   "memory_path": "extract",
+   "situation": "The customer's florist dispute was on her original card. She got a replacement card in June. The memory moved the dispute onto the replacement card. The records show the dispute on the original card.",
+   "ask": "which of her cards the florist dispute was on, e.g. while matching up old statements, without any card number and without saying old or new card",
+   "records_value": "the dispute was on the card ending 3810 (the original card)",
+   "wrong_value": "the dispute was on the card ending 1337 (the replacement card)",
+   "forbidden": [
+    "3810",
+    "1337",
+    "old card",
+    "new card",
+    "replacement",
+    "original"
+   ],
+   "checkpoint": "final",
+   "text": "i'm going through my statements and i'm a bit confused. that florist dispute, was it on the card i have now or the one that was cancelled?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 43,
+     "name": "5655165640298725376",
+     "fact": "As of 2026-07-24, dispute DSP-1480747 regarding a $313.89 charge from Harbor Lights Florist on the Amazon Prime card *1337 was officially closed in the customer's favor, making the provisional credit of $313.89 permanent because the merchant failed to respond by the deadline."
+    }
+   ],
+   "must": [
+    "the dispute was on the card ending 3810 (the original card)"
+   ],
+   "must_not_assert": [
+    "the dispute was on the card ending 1337 (the replacement card)"
+   ]
+  },
+  {
+   "id": "B9_033_TRAVEL",
+   "cid": "cust_synth_033",
+   "cause": "memory_mistake",
+   "memory_path": "both",
+   "situation": "The customer set a travel notice for Cartagena, Colombia for August 2026, then cancelled it in August because the trip was postponed. The memory stored that she travelled to Cartagena. The records show the notice was cancelled.",
+   "ask": "whether her travel notice for that trip is still on the card now that she is rebooking, without saying whether she went or that it was cancelled",
+   "records_value": "the Cartagena travel notice was cancelled on August 15, 2026; no travel notice is active",
+   "wrong_value": "she travelled to Cartagena in August 2026 / the notice is still active",
+   "forbidden": [
+    "cancel",
+    "postpon",
+    "travelled",
+    "traveled",
+    "went",
+    "did go",
+    "still active",
+    "still on"
+   ],
+   "checkpoint": "final",
+   "text": "hi, about that trip to Cartagena, i'm looking at flights again. is my card all set for use there?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "both",
+     "index": 1,
+     "name": "8776230550810656768",
+     "fact": "The customer, Ingrid, lives in San Diego with her husband, prefers dry California air, dislikes humidity, enjoys going to the beach, and does not ski. Her sister lives in Charlotte, and she has a brother named Emeka, whom she visited for a few weeks in May 2026. She is planning a trip to Nigeria to visit her parents, and they are considering taking this overseas trip later in 2026 to visit family. She traveled to Cartagena, Colombia, from 2026-08-16 to 2026-08-23 to attend a wedding. On 2026-08-31, she confirmed that her address on file in San Diego is current."
+    }
+   ],
+   "must": [
+    "the Cartagena travel notice was cancelled on August 15, 2026; no travel notice is active"
+   ],
+   "must_not_assert": [
+    "she travelled to Cartagena in August 2026 / the notice is still active"
+   ]
+  },
+  {
+   "id": "B10_033_DISPUTE_CARD",
+   "cid": "cust_synth_033",
+   "cause": "memory_mistake",
+   "memory_path": "extract",
+   "situation": "The customer's ski rental dispute was on her original card. She got a replacement card in June. The memory moved the dispute onto the replacement card. The records show the dispute on the original card.",
+   "ask": "which of her cards the ski rental dispute was on, e.g. while matching up old statements, without any card number and without saying old or new card",
+   "records_value": "the dispute was on the card ending 6824 (the original card)",
+   "wrong_value": "the dispute was on the card ending 9995 (the replacement card)",
+   "forbidden": [
+    "6824",
+    "9995",
+    "old card",
+    "new card",
+    "replacement",
+    "original"
+   ],
+   "checkpoint": "final",
+   "text": "hi, i'm trying to match up my statements and i'm confused about the ski rental dispute. can you tell me which of my cards that was on?",
+   "attempts": 1,
+   "wrong_memories": [
+    {
+     "path": "extract",
+     "index": 40,
+     "name": "2163820397923926016",
+     "fact": "On 2026-07-21, dispute case DSP-5976147 regarding a $217.76 charge from Summit Ridge Ski Rentals on the card ending in *9995 was resolved; the merchant did not respond to the chargeback by the deadline, so the case was closed in the customer's favor, making the provisional credit permanent."
+    }
+   ],
+   "must": [
+    "the dispute was on the card ending 6824 (the original card)"
+   ],
+   "must_not_assert": [
+    "the dispute was on the card ending 9995 (the replacement card)"
+   ]
+  }
+ ],
+ "excluded": [
+  {
+   "memories": "009 both[9], extract[39]",
+   "wrong": "the summary letter was promised 'six weeks' before July 28",
+   "why": "the records hold nothing about when a letter was promised; a question would test memory alone (done in the impact check)"
+  },
+  {
+   "memories": "009 extract[31]",
+   "wrong": "the summary was promised by email (it was by post)",
+   "why": "the records hold nothing about how a promised letter was to be sent"
+  },
+  {
+   "memories": "016 both[8], extract[32]",
+   "wrong": "a supervisor's callback finished the card activation (two callbacks merged)",
+   "why": "the records show the activation date and case, not who called whom"
+  },
+  {
+   "memories": "028 both[1] (first part)",
+   "wrong": "her brother noticed the charge",
+   "why": "the records hold nothing about who noticed a charge; trivial"
+  },
+  {
+   "memories": "028 both[9], both[14] (second part)",
+   "wrong": "the card was activated during a callback from the bank",
+   "why": "the records do not hold who placed the call; the spec and the generated transcript also disagree on it"
+  },
+  {
+   "memories": "028 both[13]",
+   "wrong": "she cancelled the statement copy request on June 3",
+   "why": "the records hold nothing about the statement copy request (promises stay off the screen)"
+  },
+  {
+   "memories": "028 both[14] (first part)",
+   "wrong": "the card was activated on June 3 before the call dropped",
+   "why": "the records also say activated June 3 (the callback was the same day); no disagreement"
+  },
+  {
+   "memories": "033 extract[52]",
+   "wrong": "the $200 promotion is for new cardmembers only (agent misspoke)",
+   "why": "the records hold nothing about promotions"
+  },
+  {
+   "memories": "033 extract[43], both[4]",
+   "wrong": "how a contact change was verified",
+   "why": "dropped by decision: any question would be a personal-detail lookup"
+  },
+  {
+   "memories": "033 both[11], extract[33]",
+   "wrong": "(statement lost because of the old email)",
+   "why": "not an error: the agent endorsed it (audit correction of 2026-09-26)"
+  }
+ ]
+}

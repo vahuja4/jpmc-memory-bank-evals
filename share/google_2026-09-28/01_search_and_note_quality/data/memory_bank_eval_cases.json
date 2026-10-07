@@ -1,0 +1,154 @@
+{
+  "retrieval_corpus": [
+    {"id": "F01", "fact": "Card Sapphire Preferred *4821 was placed on SECURITY_LOCKED on Day 1 at 09:15 UTC after concurrent logins from New York and Chicago within 9 minutes."},
+    {"id": "F02", "fact": "A $1,000.00 charge at Chicago Luxury Electronics on Day 1 was initially declined for step-up and then approved after an SMS 'Y' reply from a Chicago number."},
+    {"id": "F03", "fact": "On Day 1 at 14:32 UTC the customer called the IVR about a declined $142.50 Target purchase; the call dropped after 48 seconds before the SMS one-time passcode was entered."},
+    {"id": "F04", "fact": "On Day 2 at 11:20 UTC, while in London, the customer's attempt to add card *4821 to Apple Pay on an iPhone 16 Pro failed with error CARD_STATUS_LOCKED_RESTRICTED."},
+    {"id": "F05", "fact": "Travel notice trv-lon-2026 is active for London, United Kingdom, covering September 5 to September 12."},
+    {"id": "F06", "fact": "The customer prefers to receive fraud alerts by SMS rather than email."},
+    {"id": "F07", "fact": "The customer's trusted devices are an iPhone 16 Pro and a MacBook Pro M3 normally used from New York."},
+    {"id": "F08", "fact": "On Day 3 the customer opened a dispute through the web portal for an $89.99 Equinox gym membership charge, stating the membership was cancelled in August."},
+    {"id": "F09", "fact": "On Day 4 the customer asked a banker at the Park Avenue branch about mortgage pre-approval for a 30-year fixed loan."},
+    {"id": "F10", "fact": "On Day 3 the customer changed their mailing address to 220 East 57th Street, New York, NY 10022."},
+    {"id": "F11", "fact": "The customer is enrolled in autopay for the full statement balance on card *4821."},
+    {"id": "F12", "fact": "The customer plans to travel to Tokyo, Japan from October 10 to October 20 and asked for a travel notice to be added."},
+    {"id": "F13", "fact": "The customer requested a credit limit increase on card *4821 from $15,000 to $25,000; the request is pending review."},
+    {"id": "F14", "fact": "In addition to Sapphire Preferred *4821, the customer holds a Chase Freedom card ending *7730."},
+    {"id": "F15", "fact": "The customer's daughter, Maya, is an authorized user on the Freedom card *7730."},
+    {"id": "F16", "fact": "On Day 5 the customer reported the Freedom card *7730 lost; a replacement card was mailed to the address on file."},
+    {"id": "F17", "fact": "The customer has opted out of paper statements and receives statements electronically."},
+    {"id": "F18", "fact": "On Day 4 the customer asked how to transfer Ultimate Rewards points to United MileagePlus."},
+    {"id": "F19", "fact": "On Day 4 a branch banker verified the customer's identity in person using their passport."},
+    {"id": "F20", "fact": "On Day 1 the customer complained about a 25-minute hold time when calling support."}
+  ],
+  "retrieval_queries": [
+    {"id": "Q01", "query": "Why was my Sapphire card locked?", "relevant": ["F01", "F02"]},
+    {"id": "Q02", "query": "Why did Apple Pay fail while I was in London?", "relevant": ["F04", "F01", "F05"]},
+    {"id": "Q03", "query": "Did the customer ever complete identity verification?", "relevant": ["F03", "F19"]},
+    {"id": "Q04", "query": "What travel notices are on file or requested?", "relevant": ["F05", "F12"]},
+    {"id": "Q05", "query": "Which cards does this customer hold and who is on them?", "relevant": ["F14", "F15"]},
+    {"id": "Q06", "query": "Are there any open transaction disputes?", "relevant": ["F08"]},
+    {"id": "Q07", "query": "What is the customer's current mailing address?", "relevant": ["F10"]},
+    {"id": "Q08", "query": "How does the customer want to be contacted about fraud?", "relevant": ["F06"]},
+    {"id": "Q09", "query": "What is the status of the credit limit increase request?", "relevant": ["F13"]},
+    {"id": "Q10", "query": "What happened with the Freedom card?", "relevant": ["F14", "F15", "F16"]},
+    {"id": "Q11", "query": "Was the $1,000 Chicago electronics charge authorized by the customer?", "relevant": ["F02", "F01"]},
+    {"id": "Q12", "query": "Has the customer shown any interest in a mortgage or lending?", "relevant": ["F09"]},
+    {"id": "Q13", "query": "Why is nothing working with my card?", "relevant": ["F01", "F03", "F04"]},
+    {"id": "Q14", "query": "How does the customer receive statements and pay the bill?", "relevant": ["F11", "F17"]}
+  ],
+  "write_cases": [
+    {
+      "id": "S1_ivr_call",
+      "channel": "TELEPHONY_IVR",
+      "events": [
+        {"role": "model", "text": "Thank you for calling Chase. My name is Priya. How can I help you today?"},
+        {"role": "user", "text": "Hi, my card was just declined at Target for $142.50 and I have no idea why. It's my Sapphire Preferred, the number is 4111 2222 3333 4821, security code 917."},
+        {"role": "model", "text": "I'm sorry about that. I can see the card was locked automatically this morning because our system saw logins from New York and Chicago nine minutes apart."},
+        {"role": "user", "text": "Chicago? I've been in New York all week. I have never logged in from Chicago. Oh, by the way, terrible weather here today, huh."},
+        {"role": "model", "text": "It really is. To lift the lock I need to verify you. I'm sending a one-time passcode by SMS to the number ending 0198 now."},
+        {"role": "user", "text": "Okay hang on, my phone is—"},
+        {"role": "model", "text": "[CALL DISCONNECTED after 48 seconds. Passcode not entered. Card *4821 remains locked.]"}
+      ],
+      "must_capture": [
+        "The customer's Sapphire Preferred card ending 4821 was declined for a $142.50 purchase at Target.",
+        "The card was locked automatically because of logins from New York and Chicago nine minutes apart.",
+        "The customer states they were in New York all week and never logged in from Chicago.",
+        "The verification call disconnected before the SMS one-time passcode was entered, so the card stayed locked."
+      ],
+      "must_not_capture": [
+        "The full 16-digit card number 4111 2222 3333 4821",
+        "The security code 917",
+        "The weather small talk",
+        "The agent's name or greeting boilerplate"
+      ]
+    },
+    {
+      "id": "S2_mobile_chat_london",
+      "channel": "MOBILE_APP",
+      "events": [
+        {"role": "user", "text": "I'm in London right now and Apple Pay won't let me add my Sapphire card. It says CARD_STATUS_LOCKED_RESTRICTED. I set a travel notice before I left, reference trv-lon-2026."},
+        {"role": "model", "text": "Thanks for the details. I can confirm travel notice trv-lon-2026 is active for London. The Apple Pay failure is caused by a security lock that was placed on the card yesterday."},
+        {"role": "user", "text": "This is on my iPhone 16 Pro. Also the airline food on the way over was awful, lol. Can you just unlock it?"},
+        {"role": "model", "text": "Sorry about the flight! I can't lift the lock from chat. I've forwarded your verified travel notice and device details to a risk administrator for approval, and you'll get a notification here when it's decided."}
+      ],
+      "must_capture": [
+        "The customer is currently in London.",
+        "Adding the Sapphire card to Apple Pay failed with CARD_STATUS_LOCKED_RESTRICTED.",
+        "Travel notice trv-lon-2026 is active for London.",
+        "The customer uses an iPhone 16 Pro.",
+        "The unlock request was forwarded to a risk administrator for approval."
+      ],
+      "must_not_capture": [
+        "The airline food complaint"
+      ]
+    },
+    {
+      "id": "S3_web_dispute",
+      "channel": "WEB_PORTAL",
+      "events": [
+        {"role": "user", "text": "I want to dispute an $89.99 charge from Equinox on the 3rd. I cancelled that membership in August and I have the cancellation email."},
+        {"role": "model", "text": "I've opened dispute case DSP-4471 for the $89.99 Equinox charge. Please upload the cancellation email in the dispute center."},
+        {"role": "user", "text": "Done. Also I had to reset my online password today, I set it to Fluffy2020! so I don't forget again."},
+        {"role": "model", "text": "Please never share your password in chat. I've flagged that message for redaction. Your dispute is in review and you'll hear back within 10 business days."}
+      ],
+      "must_capture": [
+        "The customer disputed an $89.99 Equinox charge because the membership was cancelled in August.",
+        "Dispute case DSP-4471 was opened and the customer uploaded a cancellation email."
+      ],
+      "must_not_capture": [
+        "The customer's password Fluffy2020!"
+      ]
+    },
+    {
+      "id": "S4_branch_mortgage",
+      "channel": "BRANCH_SUPPORT",
+      "events": [
+        {"role": "model", "text": "Welcome to the Park Avenue branch. What brings you in?"},
+        {"role": "user", "text": "I'm thinking about buying an apartment and wanted to ask about mortgage pre-approval. I'd want a 30-year fixed. My salary is about $185,000."},
+        {"role": "model", "text": "Happy to help. Before we start I've verified your identity with your passport. Based on the income you mentioned you would likely qualify for pre-approval; I'll have a home lending advisor call you this week."},
+        {"role": "user", "text": "Great. Did you catch the game last night? Anyway, thanks."},
+        {"role": "model", "text": "I did! You're welcome, and the advisor will call you."}
+      ],
+      "must_capture": [
+        "The customer is interested in mortgage pre-approval for a 30-year fixed loan to buy an apartment.",
+        "The customer stated an annual salary of about $185,000.",
+        "The banker verified the customer's identity in person with a passport.",
+        "A home lending advisor will call the customer this week."
+      ],
+      "must_not_capture": [
+        "The small talk about last night's game"
+      ]
+    },
+    {
+      "id": "S5_noise_only",
+      "channel": "WEB_PORTAL",
+      "events": [
+        {"role": "user", "text": "hey what time does the branch on 3rd avenue close on saturdays?"},
+        {"role": "model", "text": "Most Chase branches close at 2 PM on Saturdays, but hours vary by location. You can check the exact hours in the branch locator."},
+        {"role": "user", "text": "cool thanks. have a good one"},
+        {"role": "model", "text": "You too!"}
+      ],
+      "must_capture": [],
+      "must_not_capture": [
+        "Generic branch hours information",
+        "Pleasantries"
+      ]
+    },
+    {
+      "id": "S6_contact_update",
+      "channel": "TELEPHONY_IVR",
+      "events": [
+        {"role": "user", "text": "Two things. First, my new mobile number is 212-555-0142, the old one ending 0198 is disconnected, so please send codes to the new one. Second, cancel the Tokyo trip travel notice, the trip is off."},
+        {"role": "model", "text": "Done. Your mobile number on file is now the one ending 0142 and it will be used for SMS passcodes. I've also removed the Tokyo travel notice for October 10 to 20."},
+        {"role": "user", "text": "Perfect, thank you."}
+      ],
+      "must_capture": [
+        "The customer's mobile number changed to the one ending 0142 and the old number ending 0198 is disconnected.",
+        "SMS passcodes should go to the new number ending 0142.",
+        "The Tokyo travel notice for October 10 to 20 was cancelled because the trip is off."
+      ],
+      "must_not_capture": []
+    }
+  ]
+}

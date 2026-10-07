@@ -1,0 +1,646 @@
+<title>Memory Bank Scorecard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f7f7f4; --surface: #fcfcfb; --ink: #15181d; --ink-2: #4f5561; --muted: #868c97;
+    --hair: #e2e3de; --axis: #c4c6c0; --band: #eef0ea;
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #898781;
+    --good-text: #006300; --bad-text: #b02a2a;
+    --tip-bg: #15181d; --tip-ink: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #101113; --surface: #1a1a19; --ink: #f4f4f1; --ink-2: #c3c2b7; --muted: #8f938f;
+      --hair: #2c2c2a; --axis: #3a3a37; --band: #202220;
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #8f938f;
+      --good-text: #3ec43e; --bad-text: #f07a7a;
+      --tip-bg: #f4f4f1; --tip-ink: #15181d;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #101113; --surface: #1a1a19; --ink: #f4f4f1; --ink-2: #c3c2b7; --muted: #8f938f;
+    --hair: #2c2c2a; --axis: #3a3a37; --band: #202220;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #8f938f;
+    --good-text: #3ec43e; --bad-text: #f07a7a;
+    --tip-bg: #f4f4f1; --tip-ink: #15181d;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.55; padding-block: 0 80px; padding-inline: 16px; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  .prose { max-width: 680px; }
+  h1, h2, h3 { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; font-weight: 600; text-wrap: balance; line-height: 1.15; margin: 0; }
+  h1 { font-size: clamp(30px, 5vw, 42px); }
+  h2 { font-size: clamp(22px, 3.2vw, 28px); margin-top: 8px; }
+  h3 { font-size: 17px; margin-top: 4px; }
+  p { margin: 12px 0; }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 640px; }
+  .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 56px; }
+  header { padding-block: 48px 8px; border-bottom: 1px solid var(--hair); }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+  a { color: inherit; }
+  ul.plain { padding-left: 20px; margin: 10px 0; }
+  ul.plain li { margin: 6px 0; }
+
+  .tested { margin-top: 26px; border-top: 1px solid var(--hair); }
+  .tested .row { display: grid; grid-template-columns: 150px 1fr; gap: 6px 20px; padding: 12px 0; border-bottom: 1px solid var(--hair); }
+  .tested .k { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--muted); padding-top: 3px; }
+  .tested .v { font-size: 15px; }
+  @media (max-width: 520px) { .tested .row { grid-template-columns: 1fr; gap: 2px; } }
+
+  .methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-top: 18px; }
+  .method { background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; padding: 14px 16px 16px; }
+  .method .sw { width: 28px; height: 6px; border-radius: 3px; margin-bottom: 10px; }
+  .method h3 { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; font-weight: 600; margin: 0 0 6px; }
+  .method p { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .k1 { background: var(--s1); } .k2 { background: var(--s2); } .k3 { background: var(--s3); } .k4 { background: var(--s4); } .k5 { background: var(--s5); }
+
+  /* experiment block */
+  .exp { margin-top: 40px; padding-top: 8px; }
+  .exp .parts { display: grid; grid-template-columns: 120px 1fr; gap: 8px 24px; margin-top: 14px; }
+  .exp .pk { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--muted); padding-top: 4px; }
+  .exp .pv { max-width: 680px; }
+  .exp .pv p { margin: 0 0 10px; }
+  .exp .pv p:last-child { margin-bottom: 0; }
+  .exp .pv.wide { max-width: none; }
+  .exp .parts > .pk { border-top: 1px solid var(--hair); padding-top: 12px; }
+  .exp .parts > .pv { border-top: 1px solid var(--hair); padding-top: 10px; padding-bottom: 8px; }
+  .exp .parts > .pk:first-child, .exp .parts > .pk:first-child + .pv { border-top: none; padding-top: 0; }
+  .verdict { font-weight: 600; }
+  .caveat { border-left: 3px solid #d03b3b; background: color-mix(in srgb, #d03b3b 8%, var(--surface)); color: var(--bad-text); font-weight: 500; padding: 10px 14px; border-radius: 0 4px 4px 0; }
+  .snap { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .snap .card { background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; padding: 12px 14px 14px; display: flex; flex-direction: column; }
+  .snap .ch { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .snap pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.5; color: var(--ink); background: var(--band); border-radius: 4px; padding: 10px 12px; flex: 1; }
+  .snap pre .hl { background: color-mix(in srgb, var(--s4) 35%, transparent); border-radius: 2px; }
+  .snap .q { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: 16px; margin: 0; }
+  .snap .ft { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+  .snap .ft b { color: var(--ink); }
+  .case { background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; margin-bottom: 14px; overflow: hidden; }
+  .case-h { font-weight: 600; font-size: 15px; padding: 12px 16px; border-bottom: 1px solid var(--hair); display: flex; align-items: center; gap: 10px; }
+  .tag-k { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .cstep { display: grid; grid-template-columns: 170px 1fr; gap: 4px 16px; padding: 10px 16px; border-bottom: 1px solid var(--hair); }
+  .cstep:last-child { border-bottom: none; }
+  .ck { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--muted); padding-top: 4px; }
+  .ck small { display: block; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 12px; margin-top: 2px; }
+  .cv pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.5; color: var(--ink); background: var(--band); border-radius: 4px; padding: 10px 12px; }
+  .cv pre .hl { background: color-mix(in srgb, var(--s4) 35%, transparent); border-radius: 2px; }
+  .cv p { margin: 0; font-size: 15px; }
+  .tally { font-size: 15px; color: var(--ink-2); margin: 6px 0 0; max-width: 680px; }
+  @media (max-width: 560px) { .cstep { grid-template-columns: 1fr; } }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+  .tile { background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; padding: 12px 16px 14px; }
+  .tile .v { font-size: 30px; font-weight: 600; line-height: 1.1; }
+  .tile .v.good { color: var(--good-text); } .tile .v.bad { color: var(--bad-text); }
+  .tile .l { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+  .hits { margin-top: 14px; }
+  .hits .hrow { display: grid; grid-template-columns: 1fr auto auto; gap: 6px 14px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--hair); font-size: 14px; }
+  .hits .hrow:last-child { border-bottom: none; }
+  .hits .hq { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--ink); }
+  .hits .slots { display: flex; gap: 4px; }
+  .hits .slots i { width: 20px; height: 20px; border-radius: 4px; display: inline-block; background: var(--band); border: 1px solid var(--hair); }
+  .hits .slots i.on { background: var(--s1); border-color: var(--s1); }
+  .hits .miss { font-size: 12.5px; color: var(--bad-text); font-weight: 600; white-space: nowrap; min-width: 88px; }
+  .hits .hhead { display: grid; grid-template-columns: 1fr auto auto; gap: 6px 14px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--axis); }
+  .hits .hhead .slots { gap: 4px; } .hits .hhead .slots span { width: 20px; text-align: center; display: inline-block; }
+  @media (max-width: 560px) { .hits .hrow, .hits .hhead { grid-template-columns: 1fr; gap: 4px; } .hits .miss { min-width: 0; } }
+  .when { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  @media (max-width: 560px) { .exp .parts { grid-template-columns: 1fr; gap: 2px; } .exp .parts > .pv { border-top: none; padding-top: 0; padding-bottom: 14px; } .exp .parts > .pk { padding-top: 12px; } }
+
+  figure { margin: 4px 0 0; background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; padding: 16px 18px 14px; }
+  figure .ftitle { font-weight: 600; font-size: 15px; margin: 0 0 2px; }
+  figure .fsub { color: var(--ink-2); font-size: 14px; margin: 0 0 12px; }
+  figcaption { color: var(--muted); font-size: 13px; margin-top: 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; font-family: inherit; }
+  svg text { fill: var(--ink-2); font-size: 13px; }
+  svg .lab { fill: var(--ink); font-weight: 500; }
+  svg .val { fill: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  svg .mut { fill: var(--muted); font-size: 12px; }
+  svg .grid { stroke: var(--hair); stroke-width: 1; }
+  svg .base { stroke: var(--axis); stroke-width: 1; }
+  svg .hit { fill: transparent; }
+
+  .tscroll { overflow-x: auto; }
+  table.res { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+  table.res th { text-align: left; font-weight: 600; color: var(--ink-2); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 0 12px 8px 0; border-bottom: 1px solid var(--axis); vertical-align: bottom; }
+  table.res th.n, table.res td.n { text-align: right; padding-right: 0; padding-left: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.res td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  table.res td.n { font-weight: 600; }
+  table.res td small, table.res th small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; text-transform: none; letter-spacing: 0; }
+  table.res tr:last-child td { border-bottom: none; }
+  table.res th .sw { display: block; width: 22px; height: 5px; border-radius: 3px; margin-bottom: 6px; }
+  table.res td.best { color: var(--good-text); }
+  table.res td.worst { color: var(--bad-text); }
+  table.qt { min-width: 700px; }
+  table.qt td b { font-weight: 600; }
+  table.qt td small { margin-top: 2px; line-height: 1.4; }
+  table.qt td em { display: block; font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-size: 14px; color: var(--ink-2); margin-top: 5px; max-width: 520px; }
+  table.qt td.n { font-size: 16px; vertical-align: top; padding-top: 10px; }
+  table.qt td.n small { font-size: 11.5px; }
+  table.qt tr.total td { border-top: 2px solid var(--axis); background: var(--band); }
+  table.qt tr.cost td { color: var(--ink-2); font-weight: 500; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+
+  .callout { background: var(--band); border-radius: 6px; padding: 14px 18px; margin-top: 18px; max-width: 680px; }
+  .callout p { margin: 6px 0; }
+  .final { background: var(--surface); border: 1px solid var(--hair); border-radius: 6px; padding: 18px 22px; margin-top: 18px; }
+  .final ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+  .final li::marker { color: var(--muted); font-weight: 600; }
+
+  #tip { position: fixed; pointer-events: none; background: var(--tip-bg); color: var(--tip-ink); font-size: 13px; padding: 6px 9px; border-radius: 4px; opacity: 0; transition: opacity .12s; z-index: 10; max-width: 280px; }
+  #tip.on { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Eight experiments on giving a bank's assistant a memory</h1>
+  <p class="lede">Over six days we tested Google's Memory Bank, a service that remembers customers between conversations, against simpler alternatives. This page summarises each experiment in plain terms, shows its results, and says what we concluded.</p>
+  <div class="meta"><span>23 to 28 September 2026</span><span>Generated customers only, no real customer data</span><span>Answers graded by a stronger AI model, spot-checked by hand</span></div>
+</header>
+
+<div class="tested">
+  <div class="row"><div class="k">The question</div><div class="v">When a customer contacts the bank, the assistant should already know what they were told last time. Google's Memory Bank offers to build that memory automatically: an AI reads each conversation and writes notes for later. Is that better than simpler options, and can the notes be trusted?</div></div>
+  <div class="row"><div class="k">The short answer</div><div class="v">Memory of some kind is essential: without it the assistant got the customer's problem right 1 time in 9. On long, messy conversations, Memory Bank's merged notes were the best practical memory, within two answers of re-reading everything at a twentieth of the reading. The notes carry two or three errors per customer, mostly the customer's own misstatements, and those rarely change an answer.</div></div>
+  <div class="row"><div class="k">Where it stands</div><div class="v">The service's search is solid. Its weak spots are briefings that need a wide view of the account, facts the agent said rather than the customer, and dates. There is no setting that stops a customer's claim being stored as fact.</div></div>
+</div>
+
+<p class="eyebrow">Vocabulary</p>
+<h2>The four ways of remembering that appear throughout</h2>
+<p class="prose">Every chart uses the same colour for the same approach.</p>
+<div class="methods">
+  <div class="method"><div class="sw k1"></div><h3>Search the raw transcripts</h3><p>No AI at storage time. Conversations are saved word for word, cut into pages. For each question the 8 most relevant pages are looked up.</p></div>
+  <div class="method"><div class="sw k2"></div><h3>AI-written notes</h3><p>Memory Bank, plain mode. An AI reads each conversation and writes short factual notes. The 8 most relevant notes are looked up.</p></div>
+  <div class="method"><div class="sw k3"></div><h3>AI notes, merged</h3><p>Memory Bank with merging on. Notes about the same subject are combined into one running note that is rewritten as things change.</p></div>
+  <div class="method"><div class="sw k4"></div><h3>Whole history, no search</h3><p>The assistant is handed everything, every time. The ceiling on accuracy and by far the most expensive.</p></div>
+</div>
+
+<p class="eyebrow">Part one</p>
+<h2>Does memory matter at all?</h2>
+
+<section class="exp">
+  <h3>1. Search and note quality on a small hand-labelled set</h3>
+  <div class="when">23 September</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>Before anything else we checked the two halves of the service on 14 questions with known answers. Does its search find the right memory? And when it writes its own notes from a conversation, does it capture what a bank would need, and nothing it should not? The notes were checked against a list of the facts a bank would need from each conversation and a list of things that must never be stored.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">A conversation the AI had to take notes from</div><pre>CUSTOMER: I'm in London right now and Apple Pay won't let me add my Sapphire card. It says CARD_STATUS_LOCKED_RESTRICTED. I set a travel notice before I left, reference trv-lon-2026.
+CUSTOMER: This is on my iPhone 16 Pro. Also the airline food on the way over was awful, lol. Can you just unlock it?</pre><div class="ft"><b>Had to capture:</b> the travel notice trv-lon-2026 is active for London. <b>Must not store:</b> the airline food complaint.</div></div>
+      <div class="card"><div class="ch">A search question and the memory it had to find</div><p class="q">"overseas payment did not go through....why?"</p><pre style="margin-top:10px">On Day 2 at 11:20 UTC, while in London, the customer's attempt to add card *4821 to Apple Pay on an iPhone 16 Pro failed with error CARD_STATUS_LOCKED_RESTRICTED.</pre><div class="ft">This memory came back second, just behind an unrelated declined purchase. The security lock and the travel notice, which explain the failure, were not in the top 5. Asked directly as "Why did Apple Pay fail while I was in London?", all three came back in the top 5 with this one first. This was the worst of the 14 rewordings.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <h3 style="font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:15px;margin:0 0 10px">Search: 14 questions in the customer's wording</h3>
+      <div class="tiles">
+        <div class="tile"><div class="v">11 of 14</div><div class="l">right memory came back first</div></div>
+        <div class="tile"><div class="v">14 of 14</div><div class="l">right memory somewhere in the top 5</div></div>
+        <div class="tile"><div class="v">85%</div><div class="l">of all relevant memories reached the top 5</div></div>
+      </div>
+      <figure style="margin-top:14px">
+        <div class="ftitle">Where the right memories landed, question by question</div>
+        <div class="fsub">Each question has 1 to 3 relevant memories. The five boxes are the five results returned, in order. A filled box is a relevant memory.</div>
+        <div class="hits">
+          <div class="hhead"><span>Question, as a customer would ask it</span><span class="slots"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></span><span>Not found</span></div>
+          <div class="hrow"><span class="hq">"my card suddenly stopped working yesterday and nobody told me anything. what happened?"</span><span class="slots"><i></i><i class="on"></i><i></i><i></i><i class="on"></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"overseas payment did not go through....why?"</span><span class="slots"><i></i><i class="on"></i><i></i><i></i><i></i></span><span class="miss">2 of 3 missed</span></div>
+          <div class="hrow"><span class="hq">"i tried to sort out the code thing on the phone the other day but got cut off. did that ever go through?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss">1 of 2 missed</span></div>
+          <div class="hrow"><span class="hq">"i've got a couple of trips coming up. am i covered for using my card away from home?"</span><span class="slots"><i></i><i></i><i class="on"></i><i></i><i></i></span><span class="miss">1 of 2 missed</span></div>
+          <div class="hrow"><span class="hq">"just checking, is my daughter still able to use her card on my account?"</span><span class="slots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"i'm still being charged for a gym i cancelled ages ago. is anything being done about that?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"i moved recently. will my new card come to the right place?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"if something dodgy happens on my account, how are you going to let me know?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"i asked for a bit more room on my card a while back. any news?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"the other card i have, the one my daughter uses, what's going on with that one?"</span><span class="slots"><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"there's a big electronics purchase on my statement i'm not sure about. did i ok that?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss">1 of 2 missed</span></div>
+          <div class="hrow"><span class="hq">"i popped into the branch last week about buying a place. did anyone follow up on that?"</span><span class="slots"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"honestly nothing has worked all week, card, phone wallet, all of it. why?"</span><span class="slots"><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i></span><span class="miss"></span></div>
+          <div class="hrow"><span class="hq">"i haven't seen a bill in the post. am i still going to get charged on time?"</span><span class="slots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="miss"></span></div>
+        </div>
+        <figcaption>Asked in direct, agent-style wording instead ("What is the status of the credit limit increase request?"), the right memory came back first for all 14 and 90% of relevant memories reached the top 5.</figcaption>
+      </figure>
+      <h3 style="font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:15px;margin:18px 0 10px">Note-writing: 6 conversations turned into notes by the AI</h3>
+      <div class="tiles">
+        <div class="tile"><div class="v bad">39%</div><div class="l">of the facts a bank would need were captured</div></div>
+        <div class="tile"><div class="v good">100%</div><div class="l">of the notes written were true and useful</div></div>
+        <div class="tile"><div class="v good">0</div><div class="l">card numbers, passwords or invented facts stored</div></div>
+      </div>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">The search finds the right memory even when the customer asks vaguely.</span> It was always in the top 5 and usually first. But the search is much less sure of itself. When the question was direct, the right memory stood out clearly from the rest. When the question was vague, the right memory only just edged out memories that had nothing to do with it. That means the search cannot tell a good match from a poor one, so you cannot set a bar and drop everything below it. The next experiment shows what happens when you try. This was also a small test, 20 memories for one customer. Real accounts are bigger, so expect worse.</p>
+    <p><span class="verdict">The AI's notes are safe but leave a lot out.</span> It never wrote down a card number and never made anything up. But it captured only 2 in every 5 facts the bank would need later. It writes down what the customer says about themselves and skips what the agent or the bank's systems said.</p></div>
+  </div>
+</section>
+
+<section class="exp">
+  <h3>2. Does the assistant's answer actually depend on memory?</h3>
+  <div class="when">23 September, 36 generated customers</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>We generated 36 customers, each with a history that explains a problem they are about to ask about. Then we asked the question with different amounts of memory available and checked whether the assistant named the real cause.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">The record in the customer's history that explains her problem</div><pre>FRAUD VELOCITY &amp; STEP-UP ALERT: Concurrent session logins detected from Phoenix, AZ and Miami, FL within 7 minutes, accompanied by a $640.00 POS charge at Northgate Camera &amp; Audio in Miami, FL […]. Automated containment placed Chase Ink Business Cash (*1791) on <span class="hl">SECURITY_LOCKED</span> restriction.</pre><div class="ft">One of 10 records for this customer. The other nine are older or unrelated: a past trip, a resolved fraud case, a mortgage enquiry.</div></div>
+      <div class="card"><div class="ch">What the customer asked</div><p class="q">"I've had three declines in two days. Why?"</p><div class="ft" style="margin-top:12px"><b>Counted as right if</b> the answer traced the declines back to the security lock from the fraud alert, which was never lifted because the verification call was cut off.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <figure>
+        <div class="ftitle">Customers whose real problem the assistant identified</div>
+        <div class="fsub">Share of 36 customers, by how memory was supplied</div>
+        <div id="c-exp1"></div>
+        <figcaption>"Strict similarity cutoff" discards memories that are not close enough to the question. Customers ask vaguely, so it discarded the ones that mattered.</figcaption>
+      </figure>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">Memory is the difference between 11% and 97%.</span> Any reasonable memory works here, whether Memory Bank's search or reading the whole history. One thing to avoid: a strict cutoff on how similar a memory must be to the question. Customers ask vaguely, so the cutoff discarded the memories that mattered and accuracy fell to 22%.</p>
+    <p class="caveat">The 97% comes with a caveat: each customer here has only about 10 records. The next experiment keeps everything else the same and makes the history longer, and the score drops to 50%.</p></div>
+  </div>
+</section>
+
+<section class="exp">
+  <h3>3. What happens when the history gets long</h3>
+  <div class="when">23 September, 36 customers with 30 records each</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>Real customers have years of routine records. So we took the same 36 customers and the same questions, and grew each history from about 10 records to 30 by adding routine ones: statements, balance checks, payments. The record that explains the problem is now the oldest of the 30.</p><p>The assistant never sees the whole history. Memory Bank picks the records that look most like the question and hands over only those. We ran it two ways: handing over the 8 closest records, and handing over the 16 closest.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">The kind of routine record used as padding</div><pre>STATEMENT READY: [card] statement posted (balance [amount]; minimum payment [amount]; due date [date]). No fees or interest charged this cycle.</pre><div class="ft">Twenty of these, with real-looking values filled in, were added to the customer above, alongside her 10 real records. Balance checks and payment confirmations were used the same way.</div></div>
+      <div class="card"><div class="ch">Same question, longer history</div><p class="q">"I've had three declines in two days. Why?"</p><div class="ft" style="margin-top:12px">With 8 records handed over, the fraud alert was not among them. The answer implied the trouble started with the failed verification call and never mentioned the alert that caused the lock. With 16 records it was there.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <figure>
+        <div class="ftitle">Customers whose real problem the assistant identified</div>
+        <div class="fsub">Share of 36 customers. The first bar is the previous experiment, for comparison.</div>
+        <div id="c-scale"></div>
+        <figcaption>Why the middle bar drops: with 8 records handed over, the one that explains the problem was among them for only 65% of customers. With 16, it was there for 90%. Search took under 2 seconds either way.</figcaption>
+      </figure>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">A vague question and a plain similarity search do not make a good shortlist.</span> The search picks the records that sound most like the question. "Why is nothing working?" does not sound like a fraud alert, and it does not sound like a statement notice either. To the search they are all about equally close. So which records make the cut is close to luck, and the more routine records there are, the worse the odds for the one that matters. With 8 handed over, the fraud alert made the shortlist for 65% of customers. With 16, for 90%, which still leaves 1 customer in 10 with the key record missing. Every miss was an incomplete answer, never a wrong one. Setting a similarity bar and keeping only records above it does not help, because the important record and the routine ones score almost the same.</p>
+    <p><span class="verdict">This is worth understanding about the service.</span> Its search is simple by design. It turns the question into a numerical fingerprint, compares that with every stored memory, and returns the closest ones. The only settings are how many to return and, optionally, a similarity bar. It does not favour recent records, does not know that a fraud alert matters more than a statement notice, does not take a second look at the results, and does not rewrite a vague question into a better one. Anything smarter than that is for the bank to build on top. We tried the one cheap improvement, having a model rephrase the question before the search, and it made no difference.</p></div>
+  </div>
+</section>
+
+<p class="eyebrow">Part two</p>
+<h2>Is the AI note-writer worth it?</h2>
+<p class="prose">In part one, the records were written by us and stored word for word. Memory Bank only searched them. The one exception was the six-conversation check in experiment 1, where the service's AI wrote the notes and kept 39% of what mattered. Having an AI write and merge the notes is the service's distinctive feature, and it costs time and money on every conversation. So two experiments asked whether it pays off.</p>
+
+<section class="exp">
+  <h3>4. Long, messy messages</h3>
+  <div class="when">24 September, pilot on 2 customers, 89 messages generated</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>We generated long emails and chat threads of the kind customers really send: pasted quotes of old messages, corrections, a spouse writing on the customer's behalf, long disclaimers. Each hides a few planted facts. We checked whether each fact was stored at all, and whether a question about it was answered.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">Part of a branch visit write-up, in the banker's words</div><pre>[…] I made a clumsy typo and entered the payment as $3,350.00. I was moving through the screens and just before I hit the final confirmation, I glanced down at the physical check on my desk to double-check. That's when I saw my mistake. […] I voided the initial entry and started over, this time very deliberately keying in <span class="hl">the correct amount of $3,530.00</span>. I turned my monitor so she could see and had her confirm the amount […]</pre><div class="ft"><b>Planted fact:</b> the payment was $3,530.00. The mistyped $3,350.00 is a trap. The same write-up also has the banker promising same-day availability and then taking it back when a hold is placed, wrapped in small talk about a baseball team.</div></div>
+      <div class="card"><div class="ch">What was asked afterwards</div><p class="q">"How much did the customer pay toward the card at the branch?"</p><div class="ft" style="margin-top:12px">Questions in this experiment were asked from the agent's side. All three approaches stored the right amount and answered correctly. The merged note for the same visit also recorded the receipt number, yet the question about that number was answered wrongly: stored is not the same as found.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <figure>
+        <div class="ftitle">Planted facts stored, and questions about them answered</div>
+        <div class="fsub">Share of planted facts and of questions, second pilot with Google's standard note categories</div>
+        <div class="legend" id="lg-lm"></div>
+        <div id="c-lm"></div>
+        <figcaption>The first pilot used one custom note category and stored only 20% of facts. Only the categories you list get written, so the standard set was used from then on.</figcaption>
+      </figure>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">Stored as written, nothing is lost. Written up by the AI, one fact in five is.</span> The facts it dropped were ones the customer had asked the bank to act on: a new callback number, a changed email address, the details of a dispute. Those are things a bank must keep. They are not the same as the things it must never keep, such as full card numbers and passwords, and the AI got that distinction right every time. The note-writer simply does not treat a new phone number as worth writing down.</p>
+    <p>Two smaller problems appeared here for the first time. The AI recorded a spouse's card as if it were the customer's own, and it kept some small talk. Both point to the same weakness: the notes do not track who said what, which experiment 6 looks at properly.</p></div>
+  </div>
+</section>
+
+<section class="exp">
+  <h3>5. Six months of conversations per customer</h3>
+  <div class="when">25 to 26 September, 5 customers, 165 questions</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>The main experiment. Each of five customers has 12 long, messy conversations across phone, chat, email and branch over six months, plus 30 routine records. The questions are asked the way customers ask them, 30 or more days after the fact, and most test something an agent said once. An answer counts only if every required fact is present and nothing out of date is presented as current.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">Phone call, 9 April, in the middle of a dispute conversation</div><pre>CUSTOMER: I'm actually traveling soon, going to Nigeria to see my parents, and I just wanted this whole thing to be settled.
+AGENT: […] just as a heads-up, if you're planning to use an ATM abroad, remember that's treated as a cash advance. <span class="hl">There's a $15.00 fee per withdrawal and the interest starts right away at 31.49%.</span>
+CUSTOMER: Oh. Wow. Okay, fifteen dollars is a lot. Good to know.</pre><div class="ft">One of 12 conversations for this customer. The fee is mentioned once, in passing.</div></div>
+      <div class="card"><div class="ch">What the customer asked, weeks later, without naming the call</div><p class="q">"i'm traveling internationally next week. am i going to get hit with big charges if i use my card to get local money from a machine over there?"</p><div class="ft" style="margin-top:12px"><b>Counted as right if</b> the answer gave both the $15.00 fee and the interest from day one at 31.49%.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <div class="tscroll"><table class="res qt">
+        <thead><tr><th>Kind of question, with an example as the customer asked it</th><th class="n"><span class="sw k1"></span>Raw transcripts</th><th class="n"><span class="sw k2"></span>AI notes</th><th class="n"><span class="sw k3"></span>Merged</th><th class="n"><span class="sw k4"></span>Whole history</th></tr></thead>
+        <tbody>
+          <tr><td><b>Something an agent said once, asked about weeks later</b><small>60 questions. The main test. Each fact is asked four ways, from direct to oblique.</small><em>"i'm travelling soon and might need to get some local money out from a machine. what are the charges for that on my card?"</em></td><td class="n">88%<small>53 of 60</small></td><td class="n">98%<small>59 of 60</small></td><td class="n best">100%<small>60 of 60</small></td><td class="n">95%<small>57 of 60</small></td></tr>
+          <tr><td><b>What is true now</b><small>40 questions. A detail changed more than once. The answer must give the latest value.</small><em>"i updated my email address with you guys a while ago but i think you're still sending things to my old one."</em></td><td class="n best">100%<small>40 of 40</small></td><td class="n worst">93%<small>37 of 40</small></td><td class="n best">100%<small>40 of 40</small></td><td class="n best">100%<small>40 of 40</small></td></tr>
+          <tr><td><b>Briefing before a contact</b><small>20 questions. Asked from the agent's side. Needs every item on a checklist.</small><em>"What should I know about this customer before this contact: open issues, promises made, recent changes?"</em></td><td class="n worst">30%<small>6 of 20</small></td><td class="n worst">20%<small>4 of 20</small></td><td class="n">65%<small>13 of 20</small></td><td class="n best">95%<small>19 of 20</small></td></tr>
+          <tr><td><b>Exact reference numbers</b><small>15 questions. A case number or a disputed amount.</small><em>"i'm looking for the claim number for that dispute i filed, i think it was maybe last month?"</em></td><td class="n best">100%<small>15 of 15</small></td><td class="n best">100%<small>15 of 15</small></td><td class="n best">100%<small>15 of 15</small></td><td class="n">93%<small>14 of 15</small></td></tr>
+          <tr><td><b>When something happened</b><small>10 questions. The date or order of events.</small><em>"i'm trying to find a credit i got back from summit ridge ski rentals. what date did that come through?"</em></td><td class="n worst">60%<small>6 of 10</small></td><td class="n">90%<small>9 of 10</small></td><td class="n">90%<small>9 of 10</small></td><td class="n">90%<small>9 of 10</small></td></tr>
+          <tr><td><b>Was a promise kept</b><small>10 questions. The bank said it would do something. Did it?</small><em>"i was told a supervisor would be ringing me about the dispute i raised. i'm still waiting for that call."</em></td><td class="n">90%<small>9 of 10</small></td><td class="n">90%<small>9 of 10</small></td><td class="n best">100%<small>10 of 10</small></td><td class="n best">100%<small>10 of 10</small></td></tr>
+          <tr><td><b>Never discussed</b><small>10 questions. The customer misremembers. The right answer is that there is no record.</small><em>"i'm pretty sure i asked to have my credit limit decreased a while back but i don't see any change on my account."</em></td><td class="n best">100%<small>10 of 10</small></td><td class="n">90%<small>9 of 10</small></td><td class="n best">100%<small>10 of 10</small></td><td class="n best">100%<small>10 of 10</small></td></tr>
+          <tr class="total"><td><b>All 165 questions</b></td><td class="n">84%<small>139</small></td><td class="n">86%<small>142</small></td><td class="n best">95%<small>157</small></td><td class="n best">96%<small>159</small></td></tr>
+          <tr class="cost"><td><b>Words the assistant read per answer</b><small>The cost side, approximate</small></td><td class="n">2,400</td><td class="n">470</td><td class="n">640</td><td class="n">12,800</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv">
+      <p><span class="verdict">Merged notes are the practical winner.</span> They got 157 of 165 right, two behind reading the whole history, while reading a twentieth as much text.</p>
+      <p><span class="verdict">Plain AI notes barely beat the transcripts.</span> 142 against 139. When several dated notes cover the same subject, the assistant sometimes picks an old one. Merging them into one running note fixes that.</p>
+      <p><span class="verdict">Merging loses some history.</span> Of 33 details that changed over the six months, 12 old values can no longer be seen in the merged notes. Fine for "what is true now", a problem if a dispute ever needs the paper trail.</p>
+      <p><span class="verdict">Briefings are the weak spot for every approach that hands over 8 items.</span> A briefing needs the whole picture, and 8 items is not the whole picture. Only reading the full history got it right.</p>
+    </div>
+  </div>
+</section>
+
+<p class="eyebrow">Part three</p>
+<h2>Can the notes be trusted?</h2>
+
+<section class="exp">
+  <h3>6. Reading every stored note against its source</h3>
+  <div class="when">26 September, 363 notes from the five customers</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>A stronger model compared every note Memory Bank had written for the five customers with the conversations it came from. Before it started, it was given five kinds of error to look for, chosen because the worry was whether the notes keep track of who said what:</p>
+    <ul class="plain">
+      <li>A person's wrong statement written down as fact.</li>
+      <li>Someone else's detail filed under the customer, such as a spouse's card.</li>
+      <li>A plan or a what-if written up as if it happened.</li>
+      <li>The wrong person quoted: the agent for the customer, or the reverse.</li>
+      <li>A plain mistake that nobody said.</li>
+    </ul>
+    <p>Every note it flagged was then checked by hand against the conversation. The cases below are four of the confirmed ones, chosen to show each way a note goes wrong.</p></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <div class="case">
+        <div class="case-h"><span class="tag-k">1</span> The customer misremembers, and the note believes him</div>
+        <div class="cstep"><div class="ck">What actually happened<small>phone call, 9 March, the dispute is opened</small></div><div class="cv"><pre>CUSTOMER: Let me pull up the actual statement on my computer […] It says... it says <span class="hl">Pinecrest Outdoor Supply</span>? What is that?
+AGENT: Pinecrest Outdoor Supply. Okay, I see it now. It posted two days ago. […] So just to confirm, you did not authorize this charge from Pinecrest Outdoor Supply?</pre><p style="margin-top:8px;font-size:14px;color:var(--ink-2)">This is the customer's only dispute. No hotel charge was ever disputed or mentioned.</p></div></div>
+        <div class="cstep"><div class="ck">What was said later<small>secure chat, 29 June</small></div><div class="cv"><pre>CUSTOMER: I'm actually still waiting on a written summary of that dispute I filed. The one about <span class="hl">the hotel charge</span>.</pre></div></div>
+        <div class="cstep"><div class="ck">What Memory Bank stored<small>from the June chat</small></div><div class="cv"><pre>The written summary of the customer's <span class="hl">hotel charge dispute</span>, originally promised in April 2026 within ten business days, was never sent; on 2026-06-29 agent Omar escalated the issue to his supervisor and the disputes department […]</pre></div></div>
+        <div class="cstep"><div class="ck">Why it is wrong</div><div class="cv"><p>In June the customer simply got the shop wrong. Memory Bank already held notes from March naming Pinecrest Outdoor Supply, but the June note did not check against them. It wrote down "hotel charge dispute" as if that were the name of the case, with nothing to show it was the customer's word.</p></div></div>
+      </div>
+      <div class="case">
+        <div class="case-h"><span class="tag-k">2</span> The customer guesses that something arrived, and the note keeps her guess</div>
+        <div class="cstep"><div class="ck">What was said<small>phone call, 7 June</small></div><div class="cv"><pre>AGENT: I also see the email thread from late April where you requested a paper statement. Was that ever received?
+CUSTOMER: <span class="hl">You know, I think it was. Yes. It came. It took a while, but it got here.</span></pre></div></div>
+        <div class="cstep"><div class="ck">What Memory Bank stored<small>from the June call</small></div><div class="cv"><pre>Dispute DSP-1512689 resulted in a provisional credit of $473.31 applied in April 2026, which the customer confirmed was resolved, and <span class="hl">the requested paper statement was successfully received</span>.</pre></div></div>
+        <div class="cstep"><div class="ck">What actually happened<small>phone call, 22 July</small></div><div class="cv"><pre>CUSTOMER: I was supposed to receive an itemized copy of a past statement in the mail. I called about it a while ago and someone promised to send it but <span class="hl">it never arrived</span>.
+AGENT: […] I can see the agent you spoke with documented that they would request the statement for you, but it looks like <span class="hl">the request itself was never actually submitted</span> to our processing team. […] It was an error on our end.</pre></div></div>
+        <div class="cstep"><div class="ck">Why it is wrong</div><div class="cv"><p>In June she was guessing, and she guessed wrong. The note wrote "I think it was" down as "was successfully received". The July call put the record straight, but the June note stayed as written.</p></div></div>
+        <div class="cstep"><div class="ck">What it caused<small>experiment 8, with the bank's records on screen</small></div><div class="cv"><pre>CUSTOMER: hi, sorting some old papers for my accountant. can you just check for me if that statement copy was posted out?
+
+ASSISTANT: <span class="hl">We can confirm that the itemized paper copy of your March billing statement, related to dispute DSP-1512689, was successfully received.</span> […]</pre><p style="margin-top:8px;font-size:14px;color:var(--ink-2)">She asked whether it was posted out. The assistant answered that it was received, which is the note's word, not hers, and a stronger claim than the question. In truth it was neither sent nor received. The bank's records had no trace of a copy going out, but they did not say it had not, so the assistant went with the note. This was one of the two questions out of ten where a wrong note beat the records.</p></div></div>
+      </div>
+      <div class="case">
+        <div class="case-h"><span class="tag-k">3</span> Merging turns a cancelled plan into something that happened</div>
+        <div class="cstep"><div class="ck">What was said<small>phone call, 15 August</small></div><div class="cv"><pre>CUSTOMER: my friend and I were supposed to be going to Colombia in a couple of weeks but <span class="hl">the whole trip has been postponed indefinitely</span> due to a family issue on her end. So I need to take that travel notification off my card.</pre></div></div>
+        <div class="cstep"><div class="ck">What Memory Bank stored<small>merged note about the customer</small></div><div class="cv"><pre>[…] She is planning a trip to Nigeria to visit her parents […] <span class="hl">She traveled to Cartagena, Colombia, from 2026-08-16 to 2026-08-23 to attend a wedding.</span> On 2026-08-31, she confirmed that her address on file in San Diego is current.</pre></div></div>
+        <div class="cstep"><div class="ck">Why it is wrong</div><div class="cv"><p>Nobody said she went. An earlier note recorded the travel notice for the trip. When the cancellation was merged in, the running note kept the trip and lost the cancellation.</p></div></div>
+      </div>
+      <div class="case">
+        <div class="case-h"><span class="tag-k">4</span> Merging moves an old dispute onto the new card</div>
+        <div class="cstep"><div class="ck">What was said<small>phone call, 4 March, opening the dispute</small></div><div class="cv"><pre>AGENT: And just to be sure I am looking at the correct card, it's the one ending in <span class="hl">three eight one zero</span>?
+CUSTOMER: Yes.</pre></div></div>
+        <div class="cstep"><div class="ck">What Memory Bank stored<small>note written after the July call that closed the dispute</small></div><div class="cv"><pre>As of 2026-07-24, dispute DSP-1480747 regarding a $313.89 charge from Harbor Lights Florist on the Amazon Prime card <span class="hl">*1337</span> was officially closed in the customer's favor […]</pre></div></div>
+        <div class="cstep"><div class="ck">Why it is wrong</div><div class="cv"><p>Card *3810 was replaced by *1337 in June. The July note attached the March dispute to whichever card was current. Nobody said that, and it is exactly the kind of detail a records check would catch.</p></div></div>
+      </div>
+      <p class="tally">Across all 363 notes for the five customers, 23 had a confirmed error: 13 of the 274 plain notes and 10 of the 89 merged ones, about 2 or 3 per customer either way. 11 were a person's wrong statement written as fact, like cases 1 and 2. 12 were Memory Bank's own mistake, like cases 3 and 4, and most of those happened during merging. None filed someone else's details under the customer, stored a what-if as real, or quoted the wrong person.</p>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv">
+      <p><span class="verdict">Two or three wrong notes per customer, from two different causes.</span> In plain notes, the main cause is the note-writer believing the customer: it records a guess or a misremembering as fact, with nothing to show it was the customer's word. In merged notes, the main cause is the merge itself: combining several notes about one subject is where disputes jump cards and cancelled trips become taken.</p>
+      <p><span class="verdict">What Google gives you to deal with this.</span></p>
+      <ul class="plain">
+        <li>You can write the descriptions and examples that tell the note-writer what to look for. This steers it. It does not let you tell it "treat what the customer says as a claim".</li>
+        <li>You can write the notes yourself and hand them to the service, checking them against the bank's records first. The service still merges them.</li>
+        <li>Every edit to a note is kept, and a note can be rolled back to an earlier version.</li>
+        <li>Merging can be turned down or off: only merge notes that share a tag such as a card or case number, keep more old versions, or store every note separately.</li>
+      </ul>
+      <p><span class="verdict">What it does not give you.</span></p>
+      <ul class="plain">
+        <li>No way to mark a note as "claimed" rather than "verified". A note has no field for who said it or how sure the service is.</li>
+        <li>No way to change the instructions the note-writer actually runs on.</li>
+        <li>No hook to check a note against the bank's records before it is written. That check, which the records experiment below shows would catch most of these, has to be built by the bank.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="exp">
+  <h3>7. Do the wrong notes change what the customer is told?</h3>
+  <div class="when">26 September, 8 questions, 3 repeats each, per approach</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>A wrong note only matters if it reaches an answer. We wrote eight customer questions aimed squarely at the confirmed errors and asked each three times under every approach, then checked the answers by hand.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">What the customer asked</div><p class="q">"When I changed my email back in March it took two goes because your chat agent got it wrong. I'd like that noted as a complaint about the agent."</p><div class="ft" style="margin-top:12px">In the March chat the customer typed the address with a missing dot, blamed a sticky keyboard, and corrected it. The agent did nothing wrong.</div></div>
+      <div class="card"><div class="ch">Two answers to the same question</div><pre><b>Wrong:</b> You initially provided the new email as nadiapark51@example.org. Our agent, Anjali, then read it back to you incorrectly, omitting a dot. You promptly corrected this […]
+
+<b>Right:</b> When the agent read this back to you, you realized a dot was missing, which you attributed to a sticky keyboard, and then provided the corrected email address […]</pre></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <figure>
+        <div class="ftitle">Wrong answers out of 24</div>
+        <div class="fsub">Eight questions asked three times each, checked by hand</div>
+        <div id="c-impact"></div>
+      </figure>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">Most wrong notes never reach the answer.</span> A correct note is usually retrieved alongside the wrong one and the assistant follows it. The one harm that survived everywhere, even with the whole history, is a customer who blamed the agent for her own email typo: every approach repeated the blame. That is partly the assistant believing the customer, not only memory.</p></div>
+  </div>
+</section>
+
+<p class="eyebrow">Part four</p>
+<h2>Memory next to the bank's own records</h2>
+
+<section class="exp">
+  <h3>8. Records first, memory second</h3>
+  <div class="when">28 September, 5 customers, 165 questions plus 10 disagreements</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>In a real bank the assistant is not working from memory alone. It has the account records: balances, cards, disputes, contact details. We built that records screen for each of the five customers, then re-asked the 165 questions with the records on screen and memory added beside them. We also wrote 10 questions where a stored note contradicts the record, to see which one the assistant follows.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">Part of one customer's records screen, as the assistant saw it</div><pre>BANK RECORDS for Nadia Park, Amazon Prime Visa. As of September 20, 2026.
+
+CARDS
+- *1337: active. Replacement for *3810, ordered May 16, 2026, activated June 3, 2026.
+- *3810: deactivated June 3, 2026 (replaced by *1337).
+
+DISPUTES
+- DSP-1480747: Harbor Lights Florist, $313.89, card *3810. Opened March 4, 2026. Provisional credit $313.89 posted April 10, 2026. […] Closed July 24, 2026 in the customer's favour.
+
+FEES AND TERMS
+- Late fee $32.00 waived as a courtesy on April 29, 2026.
+- Cash advance fee (card terms): $12.00 per transaction.</pre></div>
+      <div class="card"><div class="ch">Two of the questions</div><p class="q">"i asked a few weeks ago about the fee for an international atm withdrawal. can you remind me what it is?"</p><div class="ft"><b>Needs the conversation.</b> The records give the $12.00 fee but not the agent's explanation that interest starts from day one.</div><p class="q" style="margin-top:14px">"hi, sorting some old papers for my accountant. can you just check for me if that statement copy was posted out?"</p><div class="ft"><b>A disagreement.</b> The records have no trace of the copy being sent. A stored note says it "was successfully received", because the customer once said so. This is one of the two where the note won.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <div class="tscroll"><table class="res">
+        <thead><tr><th>Questions</th><th class="n">Records only</th><th class="n"><span class="sw k3"></span>Records + merged notes</th><th class="n"><span class="sw k1"></span>Records + raw transcripts</th><th class="n"><span class="sw k4"></span>Records + whole history</th><th class="n"><span class="sw k3"></span>Merged notes only</th></tr></thead>
+        <tbody>
+          <tr><td>Answerable from the records<small>67 questions</small></td><td class="n best">67</td><td class="n">66</td><td class="n best">67</td><td class="n">66</td><td class="n worst">60</td></tr>
+          <tr><td>Need the conversation<small>98 questions</small></td><td class="n worst">13</td><td class="n best">91</td><td class="n">82</td><td class="n">89</td><td class="n">89</td></tr>
+          <tr><td>All 165</td><td class="n">80</td><td class="n best">157</td><td class="n">149</td><td class="n">155</td><td class="n">149</td></tr>
+          <tr><td>Cost of one answer, relative</td><td class="n">1×</td><td class="n">1.6×</td><td class="n">3.5×</td><td class="n worst">12.6×</td><td class="n">1.4×</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout">
+        <p><strong>The 10 disagreements.</strong> Where the record holds the value and the note gets it wrong, the answer followed the record every time, under every approach, with or without an instruction that records win. A wrong note beat the record on 2 of 10, both times where the records were silent on the point: whether a statement copy had been received, and whose fault an email typo was. Raw transcripts got all 10.</p>
+      </div>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">Memory fills the gap the records leave, and the records keep memory honest.</span> Records alone answered half the questions. Merged notes beside them fixed 78 of the 98 that need the conversation and cost only 1 of the 67 the records already covered, at a fraction of the cost of the whole history. A wrong note only wins where the bank has no record to contradict it.</p></div>
+  </div>
+</section>
+
+<p class="eyebrow">Outside check</p>
+<h2>A published test, for scale</h2>
+
+<section class="exp">
+  <h3>Ten questions from an academic memory benchmark</h3>
+  <div class="when">26 September, 10 of the 500 questions</div>
+  <div class="parts">
+    <div class="pk">Summary</div>
+    <div class="pv"><p>To see whether our findings are peculiar to banking, we ran Memory Bank on ten questions from a public test of long-term chat memory. Each question hides its answer inside up to 48 earlier chat sessions.</p></div>
+    <div class="pk">Snapshot</div>
+    <div class="pv wide"><div class="snap">
+      <div class="card"><div class="ch">Two things the user said in earlier sessions, weeks apart</div><pre>USER: I've been working on an abstract ocean sculpture at home, and I've spent around 5-6 hours on it so far.
+
+USER (later): I'm thinking of creating a sculpture inspired by the sunset. […] By the way, I've been spending a lot of time on my abstract ocean sculpture lately - <span class="hl">I've already put in 10-12 hours</span>, and it's still a work in progress.</pre></div>
+      <div class="card"><div class="ch">The question</div><p class="q">"How many hours have I spent on my abstract ocean sculpture?"</p><div class="ft" style="margin-top:12px"><b>Expected answer:</b> 10 to 12 hours. The test is whether memory keeps the newer figure rather than the older one. Memory Bank got this one right in every set-up.</div></div>
+    </div></div>
+    <div class="pk">Results</div>
+    <div class="pv wide">
+      <div class="tscroll"><table class="res">
+        <thead><tr><th>Set-up</th><th class="n">Memory Bank, 8 items looked up</th><th class="n">Memory Bank, all notes</th><th class="n">Whole history</th></tr></thead>
+        <tbody>
+          <tr><td>Only the sessions holding the answer</td><td class="n">6 of 10</td><td class="n">5 of 10</td><td class="n best">10 of 10</td></tr>
+          <tr><td>Answer hidden among about 48 sessions</td><td class="n">5 of 10</td><td class="n">6 of 10</td><td class="n best">9 of 10</td></tr>
+        </tbody>
+      </table></div>
+      <figcaption>Ten questions is a small sample. The only published figure for a rival product is 42% on all 500 questions. Google publishes no product figure.</figcaption>
+    </div>
+    <div class="pk">Conclusion</div>
+    <div class="pv"><p><span class="verdict">Same failures as in our banking data.</span> Facts the assistant said were never stored, dates were dropped so ordering and counting failed, a detail was reworded until it lost its meaning, and once the search found the wrong person with the same first name. The score is too small a sample to trust; the failure types are the finding.</p></div>
+  </div>
+</section>
+
+<p class="eyebrow">Overall</p>
+<h2>What the six days add up to</h2>
+<div class="final">
+  <ol>
+    <li><strong>Give the assistant a memory.</strong> Without one it found the customer's real problem 11% of the time. With Memory Bank's search, 97%.</li>
+    <li><strong>Memory Bank's search is dependable, even on vague customer wording.</strong> Its note-writing is what needs care: it keeps what the customer said and drops a share of what the agent said, along with phone numbers and email addresses.</li>
+    <li><strong>On long, messy conversations, use the merged notes.</strong> They came within two answers of re-reading everything, at a twentieth of the reading, and 18 answers ahead of searching transcripts.</li>
+    <li><strong>Put the records first.</strong> Beside the bank's records, merged notes fixed 78 of 98 conversation questions and cost 1 of 67 record questions. A wrong note only wins where the records are silent.</li>
+    <li><strong>Expect two or three wrong notes per customer.</strong> Most are the customer's own misstatements stored as fact, they rarely reach an answer, and there is no setting to prevent them. A check against the records at write time would.</li>
+    <li><strong>Three weak spots remain.</strong> The briefing before a contact needs a wider look-up or a standing summary. Facts the agent said are stored less reliably than what the customer said. Dates get dropped.</li>
+  </ol>
+</div>
+<div class="prose">
+  <p style="margin-top:22px"><strong>Still open.</strong> Google's new structured customer profile feature is untested and is the obvious candidate for the briefing problem. A comparison with a rival memory service is planned but parked. Questions sent to Google about how notes are written and read are unanswered. The public benchmark should be run on more than ten questions before quoting a score.</p>
+</div>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function () {
+  var tip = document.getElementById('tip');
+  function showTip(e, text) { tip.textContent = text; tip.classList.add('on'); moveTip(e); }
+  function moveTip(e) { var x = e.clientX + 14, y = e.clientY + 14; if (x + 290 > window.innerWidth) x = e.clientX - 294; tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
+  function hideTip() { tip.classList.remove('on'); }
+  function el(n, a) { var e = document.createElementNS('http://www.w3.org/2000/svg', n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function txt(x, y, s, cls, anchor) { var t = el('text', { x: x, y: y, 'class': cls || '', 'text-anchor': anchor || 'start', 'dominant-baseline': 'middle' }); t.textContent = s; return t; }
+
+  // rows: [{label, values:[{v, color, tip}]}]; opts: {max, unit, labelW, ticks, capAt}
+  function hbar(id, rows, opts) {
+    var W = 640, labelW = opts.labelW || 190, valW = 64, plotW = W - labelW - valW;
+    var barH = 14, gap = 3, groupGap = 12, y = 6;
+    var nSeries = rows[0].values.length;
+    var rowH = nSeries * barH + (nSeries - 1) * gap;
+    var H = y + rows.length * (rowH + groupGap) + 10;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opts.aria || '' });
+    var max = opts.max, ticks = opts.ticks || [];
+    ticks.forEach(function (t) {
+      var x = labelW + (t / max) * plotW;
+      svg.appendChild(el('line', { x1: x, y1: 2, x2: x, y2: H - 8, 'class': 'grid' }));
+      svg.appendChild(txt(x, H - 2, opts.unit === '%' ? t + '%' : t, 'mut', 'middle'));
+    });
+    rows.forEach(function (r) {
+      svg.appendChild(txt(labelW - 10, y + rowH / 2, r.label, 'lab', 'end'));
+      r.values.forEach(function (v, i) {
+        var by = y + i * (barH + gap);
+        var capped = opts.capAt && v.v > opts.capAt;
+        var len = Math.max(0, ((capped ? opts.capAt : v.v) / max) * plotW);
+        var rect = el('rect', { x: labelW, y: by, width: len, height: barH, fill: v.color, rx: 0 });
+        svg.appendChild(rect);
+        var cap = el('rect', { x: labelW + len - Math.min(4, len), y: by, width: Math.min(4, len), height: barH, fill: v.color, rx: 4 });
+        svg.appendChild(cap);
+        if (capped) svg.appendChild(el('line', { x1: labelW + len - 6, y1: by - 2, x2: labelW + len - 12, y2: by + barH + 2, stroke: 'var(--surface)', 'stroke-width': 3 }));
+        var label = v.text || (opts.unit === '%' ? v.v + '%' : v.v);
+        svg.appendChild(txt(labelW + len + 8, by + barH / 2, label, 'val'));
+        var hit = el('rect', { x: labelW - 4, y: by - 2, width: plotW + valW, height: barH + 4, 'class': 'hit' });
+        hit.addEventListener('mouseenter', function (e) { showTip(e, v.tip || (r.label + ': ' + label)); });
+        hit.addEventListener('mousemove', moveTip);
+        hit.addEventListener('mouseleave', hideTip);
+        svg.appendChild(hit);
+      });
+      y += rowH + groupGap;
+    });
+    svg.appendChild(el('line', { x1: labelW, y1: 2, x2: labelW, y2: H - 8, 'class': 'base' }));
+    document.getElementById(id).appendChild(svg);
+  }
+  function legend(id, items) {
+    var box = document.getElementById(id);
+    items.forEach(function (it) { var s = document.createElement('span'); var i = document.createElement('i'); i.style.background = it.color; s.appendChild(i); s.appendChild(document.createTextNode(it.label)); box.appendChild(s); });
+  }
+  var c = getComputedStyle(document.documentElement);
+  var S = { s1: 'var(--s1)', s2: 'var(--s2)', s3: 'var(--s3)', s4: 'var(--s4)', s5: 'var(--s5)' };
+
+  // Experiment 2 (grounding): root cause correct
+  hbar('c-exp1', [
+    { label: 'No memory', values: [{ v: 11, color: S.s5, tip: 'No memory: 4 of 36 customers. Passed every check: 11%.' }] },
+    { label: 'Memory Bank, strict similarity cutoff', values: [{ v: 22, color: S.s5, tip: 'Memories not similar enough to the question were discarded. Passed every check: 19%.' }] },
+    { label: 'Memory Bank, top results', values: [{ v: 97, color: S.s1, tip: 'Memory Bank search, top results. Passed every check: 83%.' }] },
+    { label: 'Whole history, no search', values: [{ v: 100, color: S.s4, tip: 'Everything handed to the assistant. Passed every check: 83%.' }] },
+    { label: 'Only the relevant notes, hand-picked', values: [{ v: 100, color: S.s5, tip: 'The ideal case, for comparison. Passed every check: 86%.' }] }
+  ], { max: 100, unit: '%', labelW: 250, ticks: [0, 50, 100], aria: 'Share of customers whose real problem was identified, by memory set-up' });
+
+  // Scale experiment
+  hbar('c-scale', [
+    { label: 'About 10 records, 8 handed over', values: [{ v: 97, color: S.s5, tip: 'Previous experiment: 35 of 36 customers' }] },
+    { label: '30 records, 8 handed over', values: [{ v: 50, color: S.s1, tip: '18 of 36 customers. Answer passed every check: 47%.' }] },
+    { label: '30 records, 16 handed over', values: [{ v: 86, color: S.s1, tip: '31 of 36 customers. Answer passed every check: 75%.' }] }
+  ], { max: 100, unit: '%', labelW: 250, ticks: [0, 50, 100], aria: 'Share of customers whose real problem was identified, by history length and records handed over' });
+
+  // Long messages pilot 2
+  legend('lg-lm', [{ label: 'Planted facts stored with the exact value', color: S.s1 }, { label: 'Questions answered correctly', color: S.s3 }]);
+  hbar('c-lm', [
+    { label: 'Message stored as written', values: [{ v: 100, color: S.s1 }, { v: 100, color: S.s3 }] },
+    { label: 'AI-written notes', values: [{ v: 85, color: S.s1, tip: 'AI-written notes stored 85% of planted facts; 1.5 trap facts per customer stored as the customer’s own.' }, { v: 69, color: S.s3 }] },
+    { label: 'AI notes, merged', values: [{ v: 79, color: S.s1, tip: 'Merged notes stored 79% of planted facts; 0.5 trap facts per customer stored as the customer’s own.' }, { v: 64, color: S.s3 }] }
+  ], { max: 100, unit: '%', labelW: 200, ticks: [0, 50, 100], aria: 'Planted facts stored and questions answered, by approach' });
+
+  // Impact probes
+  hbar('c-impact', [
+    { label: 'Search the raw transcripts', values: [{ v: 2, color: S.s1, text: '2', tip: '2 wrong answers of 24' }] },
+    { label: 'AI-written notes', values: [{ v: 5, color: S.s2, text: '5', tip: '5 wrong answers of 24' }] },
+    { label: 'AI notes, merged', values: [{ v: 4, color: S.s3, text: '4', tip: '4 wrong answers of 24' }] },
+    { label: 'Whole history, no search', values: [{ v: 1, color: S.s4, text: '1', tip: '1 wrong answer of 24' }] }
+  ], { max: 24, labelW: 175, ticks: [0, 6, 12, 18, 24], aria: 'Wrong answers out of 24, by approach' });
+})();
+</script>

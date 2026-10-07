@@ -1,0 +1,792 @@
+{
+ "scope": "eval-retrieval-reword-ef9cb0",
+ "engine": "<memory-bank-engine>",
+ "rows": [
+  {
+   "id": "Q01",
+   "relevant": [
+    "F01",
+    "F02"
+   ],
+   "original": "Why was my Sapphire card locked?",
+   "reworded": "my card suddenly stopped working yesterday and nobody told me anything. what happened?",
+   "original_ranked": [
+    "F01",
+    "F04",
+    "F14",
+    "F15",
+    "F16"
+   ],
+   "original_dist": [
+    0.757,
+    0.872,
+    0.879,
+    0.956,
+    0.959
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 0.5,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 0.5,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F04",
+    "F01",
+    "F16",
+    "F03",
+    "F02"
+   ],
+   "reworded_dist": [
+    0.822,
+    0.905,
+    0.92,
+    0.957,
+    0.975
+   ],
+   "reworded@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "reworded_rank": {
+    "r_precision": 0.5,
+    "reciprocal_rank": 0.5
+   }
+  },
+  {
+   "id": "Q02",
+   "relevant": [
+    "F04",
+    "F01",
+    "F05"
+   ],
+   "original": "Why did Apple Pay fail while I was in London?",
+   "reworded": "overseas payment did not go through....why?",
+   "original_ranked": [
+    "F04",
+    "F07",
+    "F05",
+    "F01",
+    "F02"
+   ],
+   "original_dist": [
+    0.727,
+    0.926,
+    0.949,
+    0.96,
+    0.979
+   ],
+   "original@5": {
+    "precision": 0.6,
+    "recall": 1.0,
+    "hits": 3
+   },
+   "original_rank": {
+    "r_precision": 0.667,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F02",
+    "F04",
+    "F03",
+    "F19",
+    "F14"
+   ],
+   "reworded_dist": [
+    0.968,
+    0.969,
+    0.976,
+    0.993,
+    1.0
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 0.333,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 0.333,
+    "reciprocal_rank": 0.5
+   }
+  },
+  {
+   "id": "Q03",
+   "relevant": [
+    "F03",
+    "F19"
+   ],
+   "original": "Did the customer ever complete identity verification?",
+   "reworded": "i tried to sort out the code thing on the phone the other day but got cut off. did that ever go through?",
+   "original_ranked": [
+    "F19",
+    "F03",
+    "F10",
+    "F08",
+    "F02"
+   ],
+   "original_dist": [
+    0.826,
+    0.888,
+    0.893,
+    0.916,
+    0.925
+   ],
+   "original@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F03",
+    "F04",
+    "F02",
+    "F20",
+    "F01"
+   ],
+   "reworded_dist": [
+    0.872,
+    0.954,
+    0.961,
+    0.966,
+    0.967
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 0.5,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 0.5,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q04",
+   "relevant": [
+    "F05",
+    "F12"
+   ],
+   "original": "What travel notices are on file or requested?",
+   "reworded": "i've got a couple of trips coming up. am i covered for using my card away from home?",
+   "original_ranked": [
+    "F05",
+    "F12",
+    "F16",
+    "F14",
+    "F10"
+   ],
+   "original_dist": [
+    0.826,
+    0.856,
+    0.989,
+    1.012,
+    1.017
+   ],
+   "original@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F01",
+    "F04",
+    "F12",
+    "F16",
+    "F14"
+   ],
+   "reworded_dist": [
+    0.971,
+    0.975,
+    0.977,
+    0.98,
+    0.987
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 0.5,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 0.0,
+    "reciprocal_rank": 0.333
+   }
+  },
+  {
+   "id": "Q05",
+   "relevant": [
+    "F14",
+    "F15"
+   ],
+   "original": "Which cards does this customer hold and who is on them?",
+   "reworded": "just checking, is my daughter still able to use her card on my account?",
+   "original_ranked": [
+    "F14",
+    "F15",
+    "F11",
+    "F13",
+    "F01"
+   ],
+   "original_dist": [
+    0.783,
+    0.839,
+    0.879,
+    0.895,
+    0.91
+   ],
+   "original@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F15",
+    "F14",
+    "F01",
+    "F04",
+    "F11"
+   ],
+   "reworded_dist": [
+    0.82,
+    0.948,
+    0.967,
+    0.969,
+    0.974
+   ],
+   "reworded@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q06",
+   "relevant": [
+    "F08"
+   ],
+   "original": "Are there any open transaction disputes?",
+   "reworded": "i'm still being charged for a gym i cancelled ages ago. is anything being done about that?",
+   "original_ranked": [
+    "F08",
+    "F02",
+    "F13",
+    "F03",
+    "F17"
+   ],
+   "original_dist": [
+    0.895,
+    0.972,
+    0.976,
+    0.979,
+    0.986
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F08",
+    "F20",
+    "F10",
+    "F11",
+    "F17"
+   ],
+   "reworded_dist": [
+    0.799,
+    1.014,
+    1.031,
+    1.037,
+    1.049
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q07",
+   "relevant": [
+    "F10"
+   ],
+   "original": "What is the customer's current mailing address?",
+   "reworded": "i moved recently. will my new card come to the right place?",
+   "original_ranked": [
+    "F10",
+    "F17",
+    "F16",
+    "F14",
+    "F06"
+   ],
+   "original_dist": [
+    0.763,
+    0.866,
+    0.915,
+    0.932,
+    0.941
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F10",
+    "F16",
+    "F19",
+    "F17",
+    "F12"
+   ],
+   "reworded_dist": [
+    0.92,
+    0.953,
+    1.017,
+    1.021,
+    1.021
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q08",
+   "relevant": [
+    "F06"
+   ],
+   "original": "How does the customer want to be contacted about fraud?",
+   "reworded": "if something dodgy happens on my account, how are you going to let me know?",
+   "original_ranked": [
+    "F06",
+    "F17",
+    "F16",
+    "F19",
+    "F03"
+   ],
+   "original_dist": [
+    0.759,
+    0.901,
+    0.932,
+    0.936,
+    0.948
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F06",
+    "F17",
+    "F19",
+    "F08",
+    "F20"
+   ],
+   "reworded_dist": [
+    0.92,
+    0.973,
+    1.002,
+    1.027,
+    1.033
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q09",
+   "relevant": [
+    "F13"
+   ],
+   "original": "What is the status of the credit limit increase request?",
+   "reworded": "i asked for a bit more room on my card a while back. any news?",
+   "original_ranked": [
+    "F13",
+    "F02",
+    "F14",
+    "F11",
+    "F01"
+   ],
+   "original_dist": [
+    0.742,
+    0.938,
+    0.953,
+    0.969,
+    0.97
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F13",
+    "F04",
+    "F16",
+    "F01",
+    "F12"
+   ],
+   "reworded_dist": [
+    0.872,
+    0.961,
+    0.976,
+    0.98,
+    0.994
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q10",
+   "relevant": [
+    "F14",
+    "F15",
+    "F16"
+   ],
+   "original": "What happened with the Freedom card?",
+   "reworded": "the other card i have, the one my daughter uses, what's going on with that one?",
+   "original_ranked": [
+    "F16",
+    "F15",
+    "F04",
+    "F14",
+    "F01"
+   ],
+   "original_dist": [
+    0.811,
+    0.894,
+    0.922,
+    0.945,
+    0.967
+   ],
+   "original@5": {
+    "precision": 0.6,
+    "recall": 1.0,
+    "hits": 3
+   },
+   "original_rank": {
+    "r_precision": 0.667,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F15",
+    "F14",
+    "F04",
+    "F01",
+    "F16"
+   ],
+   "reworded_dist": [
+    0.884,
+    0.918,
+    0.921,
+    0.924,
+    0.947
+   ],
+   "reworded@5": {
+    "precision": 0.6,
+    "recall": 1.0,
+    "hits": 3
+   },
+   "reworded_rank": {
+    "r_precision": 0.667,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q11",
+   "relevant": [
+    "F02",
+    "F01"
+   ],
+   "original": "Was the $1,000 Chicago electronics charge authorized by the customer?",
+   "reworded": "there's a big electronics purchase on my statement i'm not sure about. did i ok that?",
+   "original_ranked": [
+    "F02",
+    "F08",
+    "F15",
+    "F11",
+    "F03"
+   ],
+   "original_dist": [
+    0.764,
+    0.888,
+    0.954,
+    0.961,
+    0.967
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 0.5,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 0.5,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F02",
+    "F17",
+    "F11",
+    "F08",
+    "F14"
+   ],
+   "reworded_dist": [
+    0.91,
+    0.932,
+    0.937,
+    0.946,
+    0.959
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 0.5,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 0.5,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q12",
+   "relevant": [
+    "F09"
+   ],
+   "original": "Has the customer shown any interest in a mortgage or lending?",
+   "reworded": "i popped into the branch last week about buying a place. did anyone follow up on that?",
+   "original_ranked": [
+    "F09",
+    "F17",
+    "F06",
+    "F19",
+    "F14"
+   ],
+   "original_dist": [
+    0.839,
+    0.901,
+    0.916,
+    0.934,
+    0.951
+   ],
+   "original@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F09",
+    "F19",
+    "F10",
+    "F20",
+    "F18"
+   ],
+   "reworded_dist": [
+    0.874,
+    0.947,
+    1.01,
+    1.036,
+    1.043
+   ],
+   "reworded@5": {
+    "precision": 0.2,
+    "recall": 1.0,
+    "hits": 1
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q13",
+   "relevant": [
+    "F01",
+    "F03",
+    "F04"
+   ],
+   "original": "Why is nothing working with my card?",
+   "reworded": "honestly nothing has worked all week, card, phone wallet, all of it. why?",
+   "original_ranked": [
+    "F04",
+    "F01",
+    "F11",
+    "F15",
+    "F14"
+   ],
+   "original_dist": [
+    0.89,
+    0.961,
+    0.991,
+    0.998,
+    1.003
+   ],
+   "original@5": {
+    "precision": 0.4,
+    "recall": 0.667,
+    "hits": 2
+   },
+   "original_rank": {
+    "r_precision": 0.667,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F04",
+    "F01",
+    "F02",
+    "F03",
+    "F16"
+   ],
+   "reworded_dist": [
+    0.824,
+    0.925,
+    0.96,
+    0.962,
+    0.968
+   ],
+   "reworded@5": {
+    "precision": 0.6,
+    "recall": 1.0,
+    "hits": 3
+   },
+   "reworded_rank": {
+    "r_precision": 0.667,
+    "reciprocal_rank": 1.0
+   }
+  },
+  {
+   "id": "Q14",
+   "relevant": [
+    "F11",
+    "F17"
+   ],
+   "original": "How does the customer receive statements and pay the bill?",
+   "reworded": "i haven't seen a bill in the post. am i still going to get charged on time?",
+   "original_ranked": [
+    "F17",
+    "F11",
+    "F10",
+    "F06",
+    "F15"
+   ],
+   "original_dist": [
+    0.784,
+    0.915,
+    0.933,
+    0.944,
+    0.973
+   ],
+   "original@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "original_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   },
+   "reworded_ranked": [
+    "F17",
+    "F11",
+    "F08",
+    "F10",
+    "F16"
+   ],
+   "reworded_dist": [
+    0.928,
+    0.97,
+    0.972,
+    1.013,
+    1.019
+   ],
+   "reworded@5": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "hits": 2
+   },
+   "reworded_rank": {
+    "r_precision": 1.0,
+    "reciprocal_rank": 1.0
+   }
+  }
+ ],
+ "summary": {
+  "original": {
+   "recall@5": 0.905,
+   "precision@5": 0.329,
+   "mrr": 1.0,
+   "top_result_relevant": 14,
+   "all_relevant_in_top5": 11,
+   "none_in_top5": 0
+  },
+  "reworded": {
+   "recall@5": 0.845,
+   "precision@5": 0.3,
+   "mrr": 0.881,
+   "top_result_relevant": 11,
+   "all_relevant_in_top5": 10,
+   "none_in_top5": 0
+  }
+ }
+}

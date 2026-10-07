@@ -37,6 +37,11 @@ design. `MEMORY_EVALUATION_REPORT.md` describes the testing done in this session
 5. **Wrote it all up** in `MEMORY_EVALUATION_REPORT.md`, including every command needed to
    reproduce the results.
 
+6. **Built a synthetic-customer benchmark** on branch `eval/synthetic-customer-benchmark` (later
+   the same day). 36 generated customers across eight failure families plus controls, run through
+   the real synthesizer under six retrieval conditions and graded by a Gemini 2.5 Pro judge with
+   bootstrap confidence intervals. Part 3 of the report has the results.
+
 ## Key findings, in one paragraph each
 
 **The chat answer did not depend on memory.** Before the fix, a customer with no history got the
@@ -48,6 +53,13 @@ Denver in memory puts Denver in the answer.
 result every time, and 90% of all right answers were in the top five. It beat the app's own local
 retrieval on every measure. It returns a distance score that separates relevant from irrelevant
 results well, which the app currently ignores.
+
+**The fix holds up on customers it was never tuned for.** On 36 synthetic customers the fixed
+agent got the root cause right 100% of the time and never mentioned the demo story; the unfixed
+agent got it right 36% of the time and mentioned Chicago or London for 33 of 36 customers. The
+cloud Memory Bank's top-8 search matched the app's local retrieval on quality and was faster.
+The 0.90 distance cutoff suggested by the earlier evaluation is harmful against vague customer
+questions (22% root-cause accuracy) and should not be adopted.
 
 **Memory Bank automatic writing is clean but incomplete.** When left to decide what to store from
 a conversation, it never stored a card number, security code or password, invented nothing, and
@@ -67,16 +79,24 @@ Nothing has been pushed to GitHub. All work is local.
 | `test/memory-dependence-probe` | The probe script on the unchanged code | Shows the "before" behaviour |
 | `fix/memory-grounded-synthesis` | Probe plus the fix to `backend/agent.py` and `backend/adk_agents.py` | Done, tested, not merged |
 | `eval/memory-bank-quality` | Evaluation harness, dataset, first results, report, this note | Done, not merged |
+| `eval/synthetic-customer-benchmark` | `eval/memory-bank-quality` merged with `fix/memory-grounded-synthesis`, plus the synthetic customer generator, benchmark, results, and Part 3 of the report | Done, not merged; benchmark files not yet committed |
 
-The fix and the evaluation branches are independent of each other; both branch from main.
+The fix and the evaluation branches are independent of each other; both branch from main. The
+synthetic benchmark branch contains both, because the benchmark needs the fixed synthesizer.
 
 ## Environment
 
 - **Google Cloud project:** `jpmc-ccb-context-mgmt` (number 410688210853), region us-central1,
   account gmemjp2026@gmail.com.
-- **Memory Bank:** Agent Engine "JPMC Consumer Credit Memory Bank", id `2525027903431770112`.
-  It is a billable resource, though idle cost is minimal. Delete it from the Cloud console under
-  Vertex AI, Agent Engine if it is no longer needed.
+- **Memory Bank:** Agent Engine "jpmc-ccb-eval-scratch", id `1014026247983857664`, created on
+  23 September for the evaluation runs and holding the demo customer's three notes. It is a
+  billable resource, though idle cost is minimal. Delete it from the Cloud console under Vertex AI,
+  Agent Engine when the evaluations are finished.
+  The engine used earlier in the day, "JPMC Consumer Credit Memory Bank" (`2525027903431770112`),
+  was deleted from the Cloud console at 12:48 UTC by abhinayboda@google.com (Cloud audit log),
+  who had created a separate engine "jpmc-ccb-fraud-memory" (`8195578803779534848`) seven minutes
+  earlier for a fraud and disputes demo kit. That engine is not ours: it has its own memory topics
+  and `customer_id` scopes, and nothing from this work should be written into it without asking.
 - **Credentials:** Application Default Credentials are saved on this machine. The gcloud command
   itself is installed at `/opt/homebrew/share/google-cloud-sdk/bin` but is not on the default
   PATH, and the gcloud CLI account is not separately logged in. Only the application credentials
@@ -99,6 +119,10 @@ The fix and the evaluation branches are independent of each other; both branch f
   account.
 - **The dashboard's timeline text changed slightly** with the fix, because titles and badges now
   come from the note text rather than hand-written labels.
+- **When redirecting a benchmark's output to a file, run it with `python -u`.** Otherwise the
+  progress lines are buffered and appear only when the run ends.
+- **The Memory Bank write API rate-limits parallel writers.** The synthetic benchmark uses two
+  writers with retry; six writers hit HTTP 429.
 - **Judge-based scores have some run-to-run variance.** The write-quality numbers come from a
   Gemini judge and from the Memory Bank's own model; expect small differences between runs.
 
@@ -107,22 +131,28 @@ The fix and the evaluation branches are independent of each other; both branch f
 1. Review and merge `fix/memory-grounded-synthesis`, then push.
 2. Have the synthesizer read from the cloud Memory Bank instead of the in-process copy, and seed
    with `sync_to_cloud=True` so the demo survives restarts.
-3. Use the Memory Bank's distance score as a cutoff in retrieval (a cutoff of about 0.90 gave
-   72% precision at 78% recall in the evaluation).
+3. ~~Use the Memory Bank's distance score as a cutoff in retrieval.~~ Withdrawn: the synthetic
+   benchmark showed a 0.90 cutoff drops the relevant notes for most customers when the question
+   is vague. Keep plain top-k. If precision is needed, rewrite the customer message into a
+   specific query before searching, and re-test with the benchmark.
 4. If automatic memory generation is wanted, try the Memory Bank's customization settings (topic
    definitions and examples) and rerun `evals/eval_memory_bank.py` to see whether write recall
    improves from 39%.
 5. Update the README to point at the new project and engine, and remove the scripted-story
    claims that no longer describe the code.
+6. Next benchmark experiments, in priority order: judge reliability (repeat runs, a second judge,
+   hand-label a subset), a scale run with hundreds of notes per customer so retrieval actually
+   has to choose, and memory poisoning through the customer-typed write path.
 
 ## Quick start for the next person
 
 ```
 cd /Users/vishal/google_poc/jpmc-consumer-credit
 set -a; . ./.env; set +a
-git checkout eval/memory-bank-quality
+git checkout eval/synthetic-customer-benchmark
 cat MEMORY_EVALUATION_REPORT.md                        # full write-up and all commands
 PYTHONPATH=. .venv/bin/python evals/eval_memory_bank.py   # rerun the Memory Bank evaluation (~4 min)
+PYTHONPATH=. .venv/bin/python -u evals/eval_synthetic_benchmark.py --tag full   # synthetic benchmark (~35 min)
 git checkout fix/memory-grounded-synthesis
 PYTHONPATH=. .venv/bin/python tests/probe_memory_dependence.py   # rerun the memory-dependence probe
 ```

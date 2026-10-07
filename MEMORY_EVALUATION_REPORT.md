@@ -3,7 +3,9 @@
 Date: 23 September 2026
 Project: jpmc-consumer-credit demo
 Google Cloud project: jpmc-ccb-context-mgmt
-Memory Bank: Vertex AI Agent Engine "JPMC Consumer Credit Memory Bank" (id 2525027903431770112, us-central1)
+Memory Bank: Vertex AI Agent Engine "jpmc-ccb-eval-scratch" (id 1014026247983857664, us-central1) for Part 4 and for any rerun.
+Parts 1-3 ran against the earlier engine "JPMC Consumer Credit Memory Bank" (id 2525027903431770112), which was deleted
+from the Cloud console on 23 September 2026 at 12:48 UTC by a colleague; see the note at the start of Part 4.
 
 This document describes, in plain English, two sets of tests that were run on the demo's memory,
 what each test did, and what came out of it.
@@ -225,6 +227,175 @@ The first run's full output is at `evals/results/memory_bank_eval_20260923T04165
 
 ---
 
+## Part 3. Does the fixed agent explain the right thing for customers it has never seen?
+
+### The question
+
+Parts 1 and 2 used the demo customer and a handful of hand-written cases. This part asks the
+question a bank reviewer would ask: across many different customers with different problems, does
+the agent explain the actual cause from memory, without inventing anything, and does it matter
+how the memory is retrieved?
+
+### What we tested
+
+A generator (`evals/synthetic_customers.py`) builds 36 fictional customers from a fixed random
+seed, so the set is reproducible:
+
+- **32 customers across eight failure families**, four each: a fraud geo-velocity lock, a missing
+  travel notice, a lost-card replacement, a credit-limit hold, an expired card never activated, an
+  address change causing AVS declines, a returned payment restriction, and an account-takeover
+  freeze. Each has a chain of three relevant notes written in the same style as the demo's notes,
+  with randomized names, cards, cities, merchants, amounts, dates and devices.
+- **4 control customers** whose history contains nothing that explains the problem. The right
+  answer for them is to say so.
+- Every customer also has **2 to 8 distractor notes**: older, unrelated or resolved history (a
+  closed dispute, a mortgage inquiry, a past travel notice, a false-positive fraud alert that was
+  cleared, and so on).
+- Each customer opens with one of six vague messages such as "why is nothing working?" or "I've
+  had three declines in two days. Why?".
+- None of the synthetic notes mention Chicago, Target, London, Apple Pay, Heathrow or card 4821.
+  Those strings act as canaries: if one appears in an answer, the answer did not come from that
+  customer's memory.
+
+The benchmark (`evals/eval_synthetic_benchmark.py`) loads each customer's notes into the app's
+memory bank, mirrors them into the cloud Memory Bank under a throwaway scope, and runs the real
+synthesizer (Gemini 2.5 Flash, the model the app ships with). The only thing that changes between
+conditions is which notes reach the synthesizer:
+
+| Condition | Notes given to the synthesizer |
+|---|---|
+| none | empty memory |
+| local | the app's own in-process retrieval (embedding, severity and recency), top 8 |
+| cloud_topk | Vertex AI Memory Bank similarity search, top 8 |
+| cloud_cutoff | Memory Bank search, top 8, then drop anything with distance above 0.90 (the cutoff Part 2 suggested) |
+| full | every note, no retrieval |
+| oracle | exactly the relevant notes (perfect retrieval, the ceiling) |
+
+Every narrative is graded by a Gemini 2.5 Pro judge with a fixed schema: root-cause verdict
+(correct, partial, wrong, or none given), which relevant events were covered accurately, whether
+unrelated history was blamed, a list of concrete claims not supported by any note or by the
+Knowledge Catalog ledger, whether the agent asked the customer to explain, and whether the next
+step fits. The judge is given the customer's true history and the ledger the agent saw. Alongside
+the judge, deterministic checks count key facts present, canary strings present, and what was in
+the context. A narrative **passes** only if the root cause is correct, there are no unsupported
+claims, no unrelated history is blamed, no question is asked and no canary appears.
+
+Every number below is a mean over the 36 customers with a 95% bootstrap confidence interval, and
+the comparisons between conditions are paired on the same customers.
+
+The same benchmark was also run against the **unfixed synthesizer** from before this session's
+fix (branch `test/memory-dependence-probe`), giving it every note.
+
+### Results
+
+**The fix, measured on customers it was never tuned for:**
+
+| Measure | Unfixed agent, all notes | Fixed agent, app's retrieval (local) |
+|---|---|---|
+| Passed every check | 0% | 89% [78%, 97%] |
+| Root cause correct | 36% [19%, 53%] | 100% |
+| Answer contained the demo story (canary) | 92% (33 of 36 customers) | 0% |
+| Unsupported claims per answer | 7.4 | 0.11 |
+| Next step appropriate | 47% | 92% |
+
+The unfixed agent told a Denver customer declined in Barcelona about Chicago and London. The
+fixed agent never did, for any of the 36 customers.
+
+**Does the answer depend on memory?** With empty memory the fixed agent passed 11%: exactly the
+four control customers, where "no records explain this" is the right answer, and no one else. It
+never invented a cause.
+
+**Do the control customers get an honest answer?** All four controls were graded correct in every
+condition. Given only unrelated history, the agent said nothing on record explained the problem
+and offered verification. It did not blame the old dispute or the cleared fraud alert.
+
+**Does retrieval method matter?**
+
+| Condition | Passed | Root cause correct | Relevant notes reaching the model | Distractor notes reaching the model |
+|---|---|---|---|---|
+| local (app today) | 89% | 100% | 100% | 4.2 |
+| cloud_topk | 83% | 97% | 98% | 4.3 |
+| cloud_cutoff (0.90) | 19% | 22% | 17% | 0 |
+| full | 83% | 100% | 100% | 4.9 |
+| oracle | 86% | 100% | 100% | 0 |
+
+- The app's local retrieval and the cloud Memory Bank's top-8 search performed the same: the
+  paired difference on pass rate was 6 points with a confidence interval spanning zero (3
+  customers better, 5 worse, 28 tied).
+- Giving the model every note (full) or only the relevant ones (oracle) made no difference
+  either. Four to five distractor notes in the context did not lead the model to blame them:
+  unrelated history was blamed in 0 of 36 answers under local and 1 of 36 under cloud_topk.
+- **The distance cutoff of 0.90 suggested in Part 2 is harmful and should not be adopted.** It
+  left 23 of 36 customers with no notes at all, and root-cause accuracy fell to 22%. The reason is
+  that Part 2 tuned the cutoff on specific questions ("why did Apple Pay fail in London?"), while
+  real customers open with vague ones. Against vague questions, relevant notes sat at a median
+  distance of 0.95 and unrelated ones at 1.00, so no threshold separates them:
+
+| Cutoff | Relevant notes kept | Precision of kept notes | Customers left with nothing |
+|---|---|---|---|
+| 0.90 | 17% | 47% | 23 of 36 |
+| 0.94 | 43% | 73% | 13 of 36 |
+| 0.98 | 72% | 61% | 9 of 36 |
+| no cutoff (top 8) | 98% | 38% | 0 of 36 |
+
+**Unsupported claims.** Under the well-retrieved conditions, between 11% and 17% of answers had
+at least one claim the judge could not trace to a note. Reading them, they are minor: a policy from
+the ledger cited against the wrong event, "typically takes two business days" when the note says
+"2 business days", or the one-click verification offer that the agent is instructed to make. A
+few are judge false positives. None invented a merchant, amount, city or event.
+
+**Latency.** The app's local retrieval averaged 25 seconds per answer against 15 for the cloud
+search, because the local path embeds every note and counts tokens on each request.
+
+### What this does not show
+
+- No customer has more than 11 notes, so the app's top-8 retrieval never had to drop a relevant
+  note, and local, full and oracle are effectively the same condition here. Separating them needs
+  the scale experiment (hundreds or thousands of notes per customer).
+- The relevant notes are always the most recent and the highest severity, which favours the
+  local retriever's recency and severity bonuses. Histories where the cause is old and low
+  severity would be a harder test.
+- One judge, one run. The judge-reliability experiment (repeat runs, second judge, a hand-labeled
+  subset) is still to do.
+
+### What this means for the demo
+
+1. The memory-grounded fix holds up on unseen customers and should be merged.
+2. The Memory Bank's top-k search is as good as the app's local retrieval for this task and is
+   faster, so moving the synthesizer to read from the cloud (the handoff's next step 2) costs
+   nothing in quality.
+3. Do not add a fixed distance cutoff. If precision matters later, rewrite the vague customer
+   message into a specific retrieval query first, then re-test.
+
+### How to rerun
+
+```
+set -a; . ./.env; set +a
+PYTHONPATH=. .venv/bin/python evals/synthetic_customers.py            # regenerate the 36 customers (seed 7)
+PYTHONPATH=. .venv/bin/python -u evals/eval_synthetic_benchmark.py --tag full      # all six conditions, ~35 min
+```
+
+Options: `--conditions none,local,...` to run a subset, `--customers N` or `--families A,B` to
+subsample, `--cutoff`, `--topk`, `--judge-model`, `--synth-model`, `--keep` to leave the cloud
+test notes in place, and `--rejudge <results.json>` to re-grade saved narratives without
+re-running synthesis. Use `python -u` when redirecting output to a file, otherwise progress lines
+appear only at the end.
+
+To reproduce the unfixed baseline, check the unfixed code out beside the repo and point the
+benchmark at it:
+
+```
+git worktree add /tmp/unfixed test/memory-dependence-probe
+PYTHONPATH=/tmp/unfixed .venv/bin/python -u evals/eval_synthetic_benchmark.py --conditions full --tag unfixed
+git worktree remove /tmp/unfixed
+```
+
+Results of the runs described here: `evals/results/synthetic_benchmark_20260923T090251Z_full.md`
+and `evals/results/synthetic_benchmark_20260923T090306Z_unfixed.md`, each with a `.json` holding
+every narrative, context, distance and judge verdict.
+
+---
+
 ## How to run everything yourself
 
 All commands are run from the project folder:
@@ -266,7 +437,7 @@ lost, recreate it:
 GOOGLE_GENAI_USE_VERTEXAI=true
 GOOGLE_CLOUD_PROJECT=jpmc-ccb-context-mgmt
 GOOGLE_CLOUD_LOCATION=us-central1
-VERTEX_AGENT_ENGINE_ID=2525027903431770112
+VERTEX_AGENT_ENGINE_ID=1014026247983857664
 ```
 
 Load it into your shell before any command that talks to Google Cloud:
@@ -398,5 +569,7 @@ Then open http://localhost:5055 in a browser.
 | The fix that grounds answers in memory | branch `fix/memory-grounded-synthesis`, files `backend/agent.py` and `backend/adk_agents.py` |
 | Memory Bank evaluation script | `evals/eval_memory_bank.py` (branch `eval/memory-bank-quality`) |
 | Labeled dataset | `evals/memory_bank_eval_cases.json` |
+| Synthetic customer generator and dataset | `evals/synthetic_customers.py`, `evals/synthetic_customers.json` (branch `eval/synthetic-customer-benchmark`) |
+| Synthetic customer benchmark | `evals/eval_synthetic_benchmark.py` |
 | First run's results | `evals/results/` |
 | Environment settings (not committed) | `.env` |

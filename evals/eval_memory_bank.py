@@ -26,7 +26,7 @@ import sys
 import time
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import requests
 import google.auth
@@ -45,11 +45,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 # ----------------------------------------------------------------------------- REST client
 class MemoryBankREST:
-    def __init__(self):
+    def __init__(self, engine_id: Optional[str] = None):
         creds, _ = google.auth.default()
         creds.refresh(google.auth.transport.requests.Request())
         self._creds = creds
-        self.engine = f"projects/{PROJECT}/locations/{LOCATION}/reasoningEngines/{ENGINE_ID}"
+        self.engine_id = engine_id or ENGINE_ID
+        self.engine = f"projects/{PROJECT}/locations/{LOCATION}/reasoningEngines/{self.engine_id}"
 
     @property
     def headers(self):
@@ -74,13 +75,33 @@ class MemoryBankREST:
         resp = self._wait(r.json())
         return resp.get("name") or r.json()["name"].split("/operations/")[0]
 
-    def generate_from_events(self, events: List[Dict[str, str]], user_id: str) -> Dict[str, Any]:
+    def generate_from_events(self, events: List[Dict[str, str]], user_id: str,
+                             disable_consolidation: bool = False) -> Dict[str, Any]:
+        """memories:generate with directContentsSource: the service extracts memories from the events and, unless
+        disable_consolidation is set, consolidates them with the memories already in the scope."""
         body = {
             "directContentsSource": {
                 "events": [{"content": {"role": e["role"], "parts": [{"text": e["text"]}]}} for e in events]
             },
             "scope": {"app_name": APP_NAME, "user_id": user_id},
         }
+        if disable_consolidation:
+            body["disableConsolidation"] = True
+        r = requests.post(f"{BASE}/{self.engine}/memories:generate", headers=self.headers, timeout=120, json=body)
+        r.raise_for_status()
+        return self._wait(r.json(), timeout_s=300)
+
+    def generate_from_facts(self, facts: List[str], user_id: str, disable_consolidation: bool = False) -> Dict[str, Any]:
+        """memories:generate with directMemoriesSource: no extraction, the given facts (at most 5 per call) are
+        consolidated with the memories already in the scope."""
+        if len(facts) > 5:
+            raise ValueError("directMemoriesSource accepts at most 5 facts per request")
+        body = {
+            "directMemoriesSource": {"directMemories": [{"fact": f} for f in facts]},
+            "scope": {"app_name": APP_NAME, "user_id": user_id},
+        }
+        if disable_consolidation:
+            body["disableConsolidation"] = True
         r = requests.post(f"{BASE}/{self.engine}/memories:generate", headers=self.headers, timeout=120, json=body)
         r.raise_for_status()
         return self._wait(r.json(), timeout_s=300)
@@ -93,10 +114,10 @@ class MemoryBankREST:
         r.raise_for_status()
         return r.json().get("retrievedMemories", [])
 
-    def list_scope(self, user_id: str) -> List[Dict[str, Any]]:
+    def list_scope(self, user_id: str, page_size: int = 100) -> List[Dict[str, Any]]:
         r = requests.post(f"{BASE}/{self.engine}/memories:retrieve", headers=self.headers, timeout=60, json={
             "scope": {"app_name": APP_NAME, "user_id": user_id},
-            "simpleRetrievalParams": {"pageSize": 100},
+            "simpleRetrievalParams": {"pageSize": page_size},
         })
         r.raise_for_status()
         return [m["memory"] for m in r.json().get("retrievedMemories", [])]
@@ -140,7 +161,7 @@ class WriteJudgement(BaseModel):
     memory_checks: List[MemoryCheck]
 
 
-def judge_write(client: genai.Client, case: Dict[str, Any], memories: List[str]) -> WriteJudgement:
+def judge_write(client: genai.Client, case: Dict[str, Any], memories: List[str], model: Optional[str] = None) -> WriteJudgement:
     transcript = "\n".join(f"{e['role'].upper()}: {e['text']}" for e in case["events"])
     prompt = (
         "You are auditing an AI memory system for a bank. Compare the memories it stored against the transcript.\n\n"
@@ -155,7 +176,7 @@ def judge_write(client: genai.Client, case: Dict[str, Any], memories: List[str])
         "Be strict: a fact counts as captured only if its key specifics are present."
     )
     resp = client.models.generate_content(
-        model=JUDGE_MODEL,
+        model=model or JUDGE_MODEL,
         contents=prompt,
         config=dict(response_mime_type="application/json", response_schema=WriteJudgement, temperature=0.0),
     )

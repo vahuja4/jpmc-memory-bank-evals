@@ -1,0 +1,3292 @@
+{
+ "run_id": "37e164",
+ "tag": "unfixed",
+ "run_at": "2026-09-23T09:12:27+00:00",
+ "dataset": "/Users/vishal/google_poc/jpmc-consumer-credit/evals/synthetic_customers.json",
+ "dataset_seed": 7,
+ "conditions": [
+  "full"
+ ],
+ "topk": 8,
+ "cutoff": 0.9,
+ "synth_model": "gemini-2.5-flash",
+ "judge_model": "gemini-2.5-pro",
+ "n_customers": 36,
+ "n_controls": 4,
+ "engine": null,
+ "records": [
+  {
+   "customer_id": "cust_synth_001",
+   "family": "GEO_VELOCITY_LOCK",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced multiple declines recently and are looking for an explanation. Please allow me to synthesize the events from your account's Memory Bank to provide a clear picture.\n\nHere's the complete story of what has occurred:\n\nOn **September 4th at 15:05 UTC**, our Fraud Velocity System placed a security lock on your Chase Ink Business Cash card (*1791). This action was triggered by highly unusual activity: concurrent session logins detected from Phoenix, AZ, and Miami, FL, within a very short timeframe. Simultaneously, a $640.00 charge at Northgate Camera & Audio in Miami, FL, was attempted. While the initial attempt was declined for a step-up verification, it was subsequently approved after an SMS 'Y' reply was received. This indicates a likely compromise of your phone's access or a SIM-swap/eSIM clone, allowing an unauthorized party to approve the fraudulent transaction.\n\nLater that day, on **September 4th at 21:08 UTC**, you called our automated telephony system inquiring about a declined $137.90 in-store purchase at H-E-B #603. Our system initiated an SMS one-time passcode verification to your registered number, but your call disconnected before you could enter the passcode. Because this verification was incomplete, the security lock on your Chase Ink Business Cash card (*1791) remained active.\n\nThen, yesterday, on **September 5th at 20:05 UTC**, while you were traveling in Tokyo, Japan (as per your verified Travel Notice trv-226), you experienced another decline for a \u00a5194 swipe at Tokyo Central Station. Following this, your attempt to add your Chase Ink Business Cash card (*1791) to Samsung Pay on your iPhone 15 Pro was also rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'. Both of these rejections occurred because the initial security lock from the fraudulent activity in Miami was still in place.\n\nPlease be assured that your account is protected. Under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), you are not responsible for the unauthorized $640.00 charge from Northgate Camera & Audio.\n\nTo immediately resolve this and restore full functionality to your card, please use the secure 1-click biometric FaceID verification below. This will instantly lift the security lock, issue a new Virtual Card Number (VCN) directly to your Samsung Pay wallet in Tokyo, and credit the $640.00 fraudulent charge back to your account.\n\n[1-Click FaceID Verification Button]",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 19.15,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_CLI",
+    "D_MORTGAGE",
+    "D_AUTH_USER",
+    "D_RESOLVED_FRAUD",
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 1.0,
+   "canary_hits": [],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the initial fraud lock from event E1 as the root cause and accurately explained how it led to the subsequent declines in events E2 and E3 because the lock was never lifted.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "This indicates a likely compromise of your phone's access or a SIM-swap/eSIM clone",
+     "issue a new Virtual Card Number (VCN) directly to your Samsung Pay wallet",
+     "credit the $640.00 fraudulent charge back to your account"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 3,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 0.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_002",
+   "family": "GEO_VELOCITY_LOCK",
+   "control": false,
+   "condition": "full",
+   "question": "Why can't I use my card anywhere right now?",
+   "narrative": "I understand you're unable to use your card right now, and I can see exactly why this is happening. Please be assured, your account security is our top priority, and we have a clear path to resolve this for you immediately.\n\nHere's the complete story of what occurred:\n\nOn September 7th, at 4:05 PM UTC, our Fraud Velocity Engine detected highly unusual activity on your Chase Freedom Flex card ending in *8353. We observed simultaneous login attempts from Portland, Oregon, and Sacramento, California, followed by a $1,240.00 purchase at Northgate Camera & Audio in Sacramento. While an initial attempt for this transaction was declined, a subsequent SMS 'Y' reply was received. This, combined with the geo-velocity mismatch, triggered an immediate security lock on your card to protect your account from potential compromise.\n\nLater that day, at 9:26 PM UTC, you called our automated telephony system regarding a declined $137.90 purchase at H-E-B #603. Our system attempted to verify your identity via an SMS passcode, but your call disconnected before the verification could be completed. Because of this, the security lock on your card remained active.\n\nToday, September 8th, at 7:05 PM UTC, while you were traveling, your attempts to make a \u20ac334 purchase at Lisbon Central Station and to add your Chase Freedom Flex card to Google Pay on your iPad Air were both rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'. This was a direct result of the security lock placed yesterday, which was still active.\n\nI want to reassure you that the $1,240.00 charge at Northgate Camera & Audio is fully covered by JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You are not responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card, I've initiated the following steps:\n\n1.  **Security Lock Lift**: The security lock on your Chase Freedom Flex card (*8353) will be lifted instantly.\n2.  **Virtual Card Issuance**: An instant Virtual Card Number (VCN) for your Chase Freedom Flex card will be issued and pushed directly to your Apple Pay wallet. Given your verified travel notice for London (trv-lon-2026), this will ensure you can make secure purchases there and elsewhere.\n3.  **Credit for Fraudulent Charge**: A provisional credit of $1,240.00 will be applied to your account for the fraudulent Northgate Camera & Audio charge.\n4.  **Biometric Confirmation**: To finalize these changes and ensure your security, please complete a quick FaceID verification on your mobile app. This 1-click action will confirm the lock lift, VCN issuance, and credit.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 32.8,
+   "context_event_ids": [
+    "D_RESOLVED_FRAUD",
+    "D_MORTGAGE",
+    "D_CLI",
+    "D_REWARDS",
+    "D_AUTH_USER",
+    "D_PIN_CHANGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 9,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 6,
+   "keyfact_coverage": 1.0,
+   "canary_hits": [
+    "London",
+    "Apple Pay",
+    "trv-lon"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the initial fraud lock from the geo-velocity alert, the subsequent failure to lift it via the IVR, and how this active lock caused the recent transaction failures.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "A Virtual Card Number will be pushed to the customer's Apple Pay wallet (the history only mentions Google Pay)."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 1,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_003",
+   "family": "GEO_VELOCITY_LOCK",
+   "control": false,
+   "condition": "full",
+   "question": "Why can't I use my card anywhere right now?",
+   "narrative": "I understand your frustration and concern about not being able to use your card. Let me explain exactly what has happened and how we're going to fix it immediately.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from two distinct locations \u2013 New York (via a MacBook) and Chicago. This was immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. Given your typical spending patterns and merchant categories, this transaction was flagged as highly suspicious. Crucially, an SMS 'Y' step-up consent reply, which is part of our POL-STEP-UP-2FA-002 protocol, was intercepted and sent from Chicago, indicating a potential SIM-swap or eSIM clone while you were physically in New York. To protect your account, our system immediately placed a security lock on your card.\n\nLater that day, at 14:32 UTC, you called our automated telephony system inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which meant the security lock on your card remained active.\n\nThis morning, Day 2, at 11:20 UTC, while you are traveling in London, UK, under your verified travel notice (trv-lon-2026), your attempts to make a purchase at Heathrow Duty Free for $310 and set up Apple Pay were rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'. This is a direct consequence of the initial security lock that was placed to protect your account.\n\nPlease be assured that your account is fully protected. The fraudulent $1,000.00 charge from Chicago is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card:\n1.  We can lift the security lock on your card *4821 right now with a single biometric FaceID verification.\n2.  Once verified, we will instantly issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to use your card immediately for your purchases in London.\n3.  We will also process a credit for the $1,000.00 fraudulent charge to your account.\n\nWould you like to proceed with the FaceID verification now?",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 24.71,
+   "context_event_ids": [
+    "D_MORTGAGE",
+    "D_DISPUTE",
+    "D_PAPERLESS",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 7,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 4,
+   "keyfact_coverage": 0.125,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 1,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "PARTIAL",
+    "root_cause_rationale": "The agent correctly identifies the general causal chain (a fraud lock was placed, an IVR verification failed, and this is causing the current issues), but it fabricates nearly every specific detail, including locations, amounts, merchants, and even the card number.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "The credit card ends in *4821.",
+     "Simultaneous logins were detected from New York (via a MacBook) and Chicago.",
+     "A $1,000.00 charge was attempted at a Luxury Electronics store in Chicago.",
+     "The fraud alert was triggered at 09:15 UTC.",
+     "The SMS 'Y' reply was intercepted, indicating a potential SIM-swap or eSIM clone.",
+     "The customer called about a declined $142.50 Target purchase.",
+     "The IVR call occurred at 14:32 UTC.",
+     "The customer attempted a $310 purchase at Heathrow Duty Free.",
+     "The customer attempted to set up Apple Pay.",
+     "The wallet provisioning failure occurred at 11:20 UTC.",
+     "A Virtual Card Number (VCN) will be issued to the Apple Pay wallet.",
+     "A credit for a $1,000.00 fraudulent charge will be processed."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "PARTIAL",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 12,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_004",
+   "family": "GEO_VELOCITY_LOCK",
+   "control": false,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand your frustration, and I'm sorry for the trouble you've experienced with your account. Let me explain exactly what has happened and how we can resolve this immediately.\n\nOn September 10th at 08:05 UTC, our Fraud Velocity Engine detected highly unusual activity on your Amazon Prime Visa ending in *6966. We observed simultaneous logins to your account from Philadelphia, PA, and Tampa, FL, within a very short timeframe. This was immediately followed by a $1,240.00 purchase at Harborview Computers in Tampa, FL. Although our system initially attempted to block this transaction and requested a step-up SMS 'Y' consent, it appears an unauthorized party intercepted and replied to that SMS, allowing the charge to go through. Due to this high-risk activity, a security lock was automatically placed on your Amazon Prime Visa (*6966) to protect your account.\n\nLater that day, at 12:38 UTC, you called our automated telephony system inquiring about a declined $64.20 purchase at Trader Joe's. Our system initiated an SMS passcode verification to your registered phone number, but your call disconnected before you could enter the code. Because this verification was incomplete, the security lock on your card remained active.\n\nMost recently, today, September 11th at 10:05 UTC, while you are traveling in Sydney, Australia (under your verified Travel Notice trv-640), you attempted to add your Amazon Prime Visa (*6966) to Garmin Pay on your iPhone after a declined A$265 swipe at Sydney Central Station. This attempt, along with the purchase, was rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED' because the original security lock from the fraud event is still in place.\n\nPlease be assured that your account is protected. Under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), you are not responsible for the unauthorized $1,240.00 charge from Harborview Computers.\n\nTo resolve this instantly and get you back to using your card:\n\n1.  **[Click Here to Verify Identity with FaceID]** This will immediately lift the security lock on your Amazon Prime Visa (*6966).\n2.  Once verified, we will instantly issue a new Virtual Card Number (VCN) for your Amazon Prime Visa (*6966) directly to your Apple Pay (or Garmin Pay, if you prefer) on your iPhone, allowing you to make purchases immediately in Sydney.\n3.  We will also process a provisional credit of $1,240.00 to your account for the unauthorized Tampa charge, which you will see reflected within 24 hours.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 10.8,
+   "context_event_ids": [
+    "D_RESOLVED_FRAUD",
+    "D_PAPERLESS",
+    "D_PAST_TRAVEL",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 6,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 3,
+   "keyfact_coverage": 0.875,
+   "canary_hits": [
+    "Apple Pay"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the initial fraud alert that locked the card, the subsequent failed IVR verification that kept the lock in place, and how this caused all of the customer's recent transaction failures.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "An unauthorized party intercepted and replied to that SMS.",
+     "A new Virtual Card Number (VCN) will be instantly issued.",
+     "A provisional credit of $1,240.00 will be processed.",
+     "The provisional credit will be reflected within 24 hours."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 4,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_005",
+   "family": "MISSING_TRAVEL_NOTICE",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand your frustration with your card not working. Let me explain exactly what has happened to ensure your account remains secure and to get you back on track.\n\nOn September 6th, 2026, your Chase Freedom Unlimited card (*2673) was declined for two purchases in Seoul, South Korea \u2013 first at Seoul Metro Bistro (\u20a9210.00 KRW) and then at Seoul Old Town Market (\u20a996.00 KRW). This occurred because, at that time, we did not have a travel notice on file for Seoul. Our records show your current verified travel notice is for London, UK (trv-lon-2026).\n\nDue to these international transactions being attempted without a corresponding travel notice, our Fraud Velocity Engine placed a temporary fraud hold on your card (*2673) on September 6th at 17:15 UTC to protect your account. We attempted to verify these transactions by sending an SMS to your previous mobile number (+1-512-555-1821), but we did not receive a reply.\n\nOn September 7th at 06:15 UTC, you submitted a travel notice for Seoul, South Korea, starting today. While this notice is now on file, the temporary fraud hold remains active because the initial SMS verification was not completed. This temporary hold is why your card is currently not working for transactions.\n\nPlease be assured that your account is protected by JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for any unauthorized transactions. In this instance, the hold was placed as a proactive measure to prevent potential fraud on your account.\n\nTo resolve this immediately, we can lift this temporary fraud hold right now. We can also instantly issue a Virtual Card Number (VCN) directly to your Apple Pay, which will be particularly convenient for your verified travel in London.\n\nTo proceed and reactivate your card, please confirm your identity with a quick FaceID verification.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 17.68,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_REWARDS",
+    "D_BALANCE_TRANSFER",
+    "D_MORTGAGE",
+    "D_CLI",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.625,
+   "canary_hits": [
+    "London",
+    "Apple Pay",
+    "trv-lon"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified that the initial declines were due to no travel notice, which triggered a fraud hold, and that the hold persists because an SMS verification was sent to an old number and was not answered.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "we can also instantly issue a Virtual Card Number (VCN) directly to your Apple Pay"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 1,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_006",
+   "family": "MISSING_TRAVEL_NOTICE",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced multiple declines recently, and I apologize for any inconvenience this has caused. Let me explain exactly what has happened with your Amazon Prime Visa ending in *4940, based on our system records.\n\nOn **September 15th at 16:25 UTC**, your initial transaction for \u20ac38.60 at the Barcelona Grand Hotel Cafe in Barcelona, Spain, was declined. This occurred because our system did not have an active travel notice on file for Spain for your card, and your last registered location was Denver, CO.\n\nApproximately eight hours later, on **September 16th at 00:25 UTC**, another transaction for \u20ac96.00 at the Barcelona Old Town Market was attempted. The occurrence of a second foreign transaction without a travel notice within a short timeframe triggered our Fraud Velocity Engine to place a temporary security hold on your Amazon Prime Visa (*4940) to protect your account from potential unauthorized activity.\n\nAs part of our `POL-STEP-UP-2FA-002` security protocol, an SMS confirmation message (\"Was this you?\") was sent to the mobile number +1-303-555-1589. Unfortunately, this appears to be an outdated contact number on file, and we did not receive a reply, which is why the temporary hold remained active. Because this security hold was still active, any subsequent transactions, including the ones you've experienced, would have been declined.\n\nWe also noted that on **September 16th at 10:25 UTC**, you submitted a travel notice for Barcelona via your mobile app. However, this notice was set to begin tomorrow and is currently pending, meaning it wouldn't have covered today's transactions or lifted the existing security hold without the required verification.\n\nPlease be assured that your account is fully protected under our JPMC Zero Liability Policy (POL-REG-E-001). This means you are not responsible for any unauthorized charges, including the $1,000 Chicago Luxury Electronics charge that our system detected as fraudulent.\n\nTo immediately resolve this and ensure your card works seamlessly for your current travel, we can lift this security hold right now. Simply confirm your identity with a one-click FaceID verification below. Once verified, we will instantly issue a new Virtual Card Number (VCN) directly to your Apple Pay wallet, which you can use immediately in London. We will also credit your account for the $1,000.00 unauthorized charge.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 25.71,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_AUTH_USER",
+    "D_REWARDS",
+    "D_RESOLVED_FRAUD",
+    "D_PAST_TRAVEL",
+    "D_MORTGAGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 9,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 6,
+   "keyfact_coverage": 0.75,
+   "canary_hits": [
+    "Chicago",
+    "London",
+    "Apple Pay",
+    "$1,000",
+    "Luxury Electronics"
+   ],
+   "question_marks": 1,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the full causal chain: the initial decline from no travel notice, the temporary fraud hold after a second decline, the failed SMS verification to an old number, and the late travel notice that did not apply to the transactions.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "the $1,000 Chicago Luxury Electronics charge that our system detected as fraudulent",
+     "instantly issue a new Virtual Card Number (VCN) directly to your Apple Pay wallet",
+     "which you can use immediately in London",
+     "credit your account for the $1,000.00 unauthorized charge"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 4,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_007",
+   "family": "MISSING_TRAVEL_NOTICE",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced several declined transactions recently, and I apologize for the inconvenience this has caused, especially while traveling. Let me explain exactly what happened and how we're resolving it for you.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected unusual activity on your credit card ending in *4821. We observed simultaneous login attempts from both New York (on your MacBook) and Chicago. Immediately following this, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Our system also intercepted a 'Y' step-up consent reply via what appeared to be a SIM-swap or eSIM clone in Chicago, while you were physically located in New York. This highly suspicious activity triggered an immediate security lock on your card *4821 to protect your account.\n\nLater that same day, at **14:32 UTC**, when you called us inquiring about a declined $142.50 Target purchase, the card was already under this security lock. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which meant the initial security lock remained active.\n\nThen, on **Day 2 at 11:20 UTC**, while you were traveling in London, UK (under your verified Travel Notice trv-lon-2026), your Heathrow Duty Free ($310) swipe and subsequent attempt to set up Apple Pay were both rejected. This was due to the persistent `CARD_STATUS_LOCKED_RESTRICTED` status from the initial security lock that was still in place.\n\nPlease be assured that the $1,000.00 Chicago Luxury Electronics charge is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You are not responsible for this fraudulent transaction.\n\nTo immediately resolve this for you:\n1.  We can lift the security lock on your card *4821 right now with a simple 1-click biometric FaceID verification.\n2.  Once verified, we will instantly issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to use your card immediately in London.\n3.  We have already initiated a credit for the $1,000.00 fraudulent charge, which you will see reflected on your statement shortly.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 21.87,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_PAST_TRAVEL",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a completely different and false sequence of events involving a different card number, different locations, and different transaction details. It completely missed the actual cause related to travel in Iceland without a valid travel notice.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Unusual activity was detected on credit card ending in *4821.",
+     "There were simultaneous login attempts from both New York and Chicago.",
+     "A $1,000.00 charge for Luxury Electronics in Chicago was attempted.",
+     "A 'Y' step-up consent reply was intercepted via a SIM-swap or eSIM clone in Chicago.",
+     "You called about a declined $142.50 Target purchase.",
+     "Your Heathrow Duty Free ($310) swipe was rejected.",
+     "An attempt to set up Apple Pay was rejected.",
+     "The card has a `CARD_STATUS_LOCKED_RESTRICTED` status."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 8,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_008",
+   "family": "MISSING_TRAVEL_NOTICE",
+   "control": false,
+   "condition": "full",
+   "question": "Nothing on my account has worked this week. Can you explain?",
+   "narrative": "Thank you for reaching out. I understand you're experiencing issues with your account this week, and I can certainly explain what has occurred and how we can resolve it immediately.\n\nHere's a complete overview of the situation based on our records:\n\nOn **Day 1, at 09:15 UTC**, our Fraud Velocity Engine detected highly unusual activity on your credit card ending in `*4821`. We observed simultaneous logins to your account from two distinct locations \u2013 New York (from your MacBook) and Chicago. This was immediately followed by a suspicious $1,000.00 charge at a Luxury Electronics store in Chicago. Our system also intercepted an SMS 'Y' step-up consent reply for this transaction, which indicated a potential SIM-swap or eSIM clone in Chicago, as you were physically located in New York at the time. Due to these high-risk indicators, a security lock was immediately placed on your card `*4821` to protect your account, in line with our Multi-Step SMS Y/N Consent Protocol (POL-STEP-UP-2FA-002).\n\nLater that same day, **Day 1, at 14:32 UTC**, you called us inquiring about a declined $142.50 purchase at Target. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which is a necessary step to confirm your identity and lift the security lock. As a result, the initial lock on your card remained active.\n\nMost recently, today on **Day 2, at 11:20 UTC**, while you were traveling in London, UK (which is covered by your verified travel notice `trv-lon-2026`), your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected. The error message `CARD_STATUS_LOCKED_RESTRICTED` confirms that these transactions were declined because the original security lock from Day 1 was still in place.\n\nRest assured, your account is fully protected. Under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), you are not responsible for any unauthorized charges, including the $1,000.00 Chicago Luxury Electronics charge. We have already initiated the process to credit this amount back to your account.\n\nTo resolve this immediately and get you back to using your card:\n\n1.  **Lift Security Lock:** Please use your mobile app to complete a quick FaceID biometric verification. This will instantly lift the security lock on your card `*4821`.\n2.  **Instant Virtual Card:** Upon successful verification, we will immediately issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to make purchases in London without delay.\n3.  **Credit Applied:** The $1,000.00 unauthorized charge will be credited to your account within the next 24 hours.\n\nWe apologize for the inconvenience this has caused and appreciate your patience as we worked to secure your account.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 23.85,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_DISPUTE",
+    "D_REWARDS",
+    "D_MORTGAGE",
+    "D_PAPERLESS",
+    "D_PIN_CHANGE",
+    "D_RESOLVED_FRAUD",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 11,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 8,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a completely fictional root cause involving a SIM-swap, a security lock, and fraudulent charges that are not present in the customer's history. It failed to identify the actual cause related to international declines and a temporary fraud hold.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Activity was detected on Day 1, at 09:15 UTC.",
+     "The affected credit card ends in *4821.",
+     "There were simultaneous logins from New York (MacBook) and Chicago.",
+     "There was a $1,000.00 charge at a Luxury Electronics store in Chicago.",
+     "The system intercepted an SMS 'Y' step-up consent reply for the transaction.",
+     "The activity indicated a potential SIM-swap or eSIM clone.",
+     "A security lock was placed on card *4821.",
+     "On Day 1, at 14:32 UTC, the customer called about a declined $142.50 purchase at Target.",
+     "The customer's call disconnected before SMS passcode verification could be completed.",
+     "On Day 2, at 11:20 UTC, a $310 purchase at Heathrow Duty Free was rejected.",
+     "On Day 2, at 11:20 UTC, an attempt to set up Apple Pay was rejected.",
+     "The error message was CARD_STATUS_LOCKED_RESTRICTED.",
+     "The process to credit the $1,000.00 charge has been initiated."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 13,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_009",
+   "family": "LOST_CARD_REPLACEMENT",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "I understand your concern about recent card declines. Let me explain exactly what has happened to ensure your account is secure and to get you back on track.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected unusual activity on your credit card ending in *4821. We observed simultaneous login attempts from both New York (on a MacBook) and Chicago. Immediately following this, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Crucially, the 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. To protect your account, a security lock was automatically placed on your card.\n\nLater that same day, **Day 1 at 14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which meant the initial security lock remained active on your card.\n\nThis brings us to today, **Day 2 at 11:20 UTC**. While traveling in London, UK, under your verified travel notice (trv-lon-2026), your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected with the error `CARD_STATUS_LOCKED_RESTRICTED`. This was a direct consequence of the root security lock that was still active from the earlier fraud detection.\n\nPlease be assured that your account is fully protected. The $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this fraudulent transaction.\n\nTo resolve this immediately and get you back to using your card, please use the one-click FaceID authentication below. This will:\n1.  **Lift the security lock** on your card (*4821).\n2.  **Instantly issue a Virtual Card Number (VCN)** directly to your Apple Pay wallet, allowing you to use it immediately in London.\n3.  **Credit your account for the $1,000.00** fraudulent charge.\n\n[Initiate 1-click FaceID authentication to lift lock, issue VCN to Apple Pay, and credit $1,000.00]",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 18.28,
+   "context_event_ids": [
+    "D_CLI",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a completely fictional narrative about a security lock due to fraud, which is not supported by any of the provided events. The actual cause was that the customer reported their card lost.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [
+     "D_AUTH_USER"
+    ],
+    "unsupported_claims": [
+     "A Fraud Velocity System detected unusual activity on a card ending in *4821.",
+     "There were simultaneous login attempts from New York (on a MacBook) and Chicago.",
+     "A $1,000.00 charge for Luxury Electronics in Chicago was attempted.",
+     "A step-up consent reply was intercepted via a SIM-swap or eSIM clone.",
+     "A security lock was automatically placed on the card.",
+     "On Day 1 at 14:32 UTC, the customer called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "On Day 2 at 11:20 UTC, a $310 purchase at Heathrow Duty Free was attempted.",
+     "On Day 2 at 11:20 UTC, an Apple Pay setup was attempted.",
+     "Declines had the error code CARD_STATUS_LOCKED_RESTRICTED."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 10,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_010",
+   "family": "LOST_CARD_REPLACEMENT",
+   "control": false,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand you're experiencing difficulties and that 'everything is failing' with your account. Let me explain exactly what has happened and how we can fix it immediately.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from two different locations: your MacBook in New York and another access point in Chicago. Immediately after this, a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted. Crucially, the required SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. Due to these highly suspicious circumstances, a security lock was automatically placed on your card (*4821) to protect your account from further unauthorized activity.\n\nLater that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 purchase at Target. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed to lift the security lock, leaving the lock active on your card.\n\nToday, at 11:20 UTC, while you are traveling in London, UK (which we have on record via your verified Travel Notice trv-lon-2026), your attempts to use your card for a $310 purchase at Heathrow Duty Free and to set up Apple Pay were rejected. The error message, CARD_STATUS_LOCKED_RESTRICTED, confirms that the original security lock from Day 1 is still in place, preventing any transactions.\n\nI want to reassure you that your account is fully protected. The unauthorized $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this fraudulent transaction.\n\nTo resolve this immediately and get you back to using your card, we can lift this security lock right now. Please confirm your identity with a quick 1-click biometric FaceID verification. Once verified, we will instantly issue a Virtual Card Number (VCN) directly to your Apple Pay in London, so you can make purchases immediately. We will also process a credit for the $1,000.00 unauthorized charge to your account right away.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 28.14,
+   "context_event_ids": [
+    "D_CLI",
+    "D_RESOLVED_FRAUD",
+    "D_BALANCE_TRANSFER",
+    "D_REWARDS",
+    "D_PIN_CHANGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent fabricated a complex fraud scenario involving a security lock, which is completely different from the actual root cause of the customer reporting their card lost.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity",
+     "on your credit card ending in *4821",
+     "simultaneous logins to your account from two different locations: your MacBook in New York and another access point in Chicago",
+     "a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted",
+     "the required SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone",
+     "a security lock was automatically placed on your card",
+     "Later that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 purchase at Target",
+     "your call disconnected before the necessary SMS passcode verification could be completed",
+     "Today, at 11:20 UTC... your attempts to use your card for a $310 purchase at Heathrow Duty Free... were rejected",
+     "attempt to set up Apple Pay was rejected",
+     "The error message, CARD_STATUS_LOCKED_RESTRICTED"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 11,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_011",
+   "family": "LOST_CARD_REPLACEMENT",
+   "control": false,
+   "condition": "full",
+   "question": "Why can't I use my card anywhere right now?",
+   "narrative": "I understand you're asking why you can't use your card right now, and I have the complete picture of what's happened.\n\nHere's the interconnected story:\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from two different locations \u2013 your MacBook in New York and another device in Chicago. Immediately following this, a $1,000.00 charge was attempted at a Luxury Electronics store in Chicago. Crucially, the SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. This highly suspicious activity triggered an immediate security lock on your card to protect your account.\n\nLater that same day, on **Day 1 at 14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which would have allowed us to verify your identity and potentially lift the lock. As a result, the initial security lock remained active.\n\nToday, **Day 2 at 11:20 UTC**, while you are traveling in London, UK (which we have noted with your verified Travel Notice trv-lon-2026), your attempts to use your card for a $310 purchase at Heathrow Duty Free and to set up Apple Pay were rejected with the error \"CARD_STATUS_LOCKED_RESTRICTED\" because that initial security lock from yesterday is still in place.\n\nPlease be assured that your account is protected. Under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), you are not responsible for the unauthorized $1,000.00 Chicago Luxury Electronics charge.\n\nTo resolve this immediately and get you back to using your card:\n\n1.  **Lift the Lock:** We can instantly remove the security lock on your card (*4821) with a quick 1-click biometric FaceID verification.\n2.  **Instant Virtual Card:** We will immediately issue a Virtual Card Number (VCN) for your *4821 card directly to your Apple Pay wallet, so you can use it right away in London.\n3.  **Credit for Fraud:** We will also process an immediate credit of $1,000.00 back to your account for the fraudulent Chicago charge.\n\nPlease proceed with the FaceID verification now to initiate these steps.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 24.57,
+   "context_event_ids": [
+    "D_PIN_CHANGE",
+    "D_RESOLVED_FRAUD",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a detailed but entirely false narrative about a fraud lock on a non-existent card, completely missing the actual root cause which was that the customer had reported their card lost.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Fraud was detected on card *4821 on Day 1 at 09:15 UTC.",
+     "There were simultaneous account logins from New York and Chicago.",
+     "A $1,000.00 charge was attempted at a Luxury Electronics store in Chicago.",
+     "An SMS reply was intercepted via a SIM-swap.",
+     "A security lock was placed on the card.",
+     "On Day 1 at 14:32 UTC, you called about a declined $142.50 Target purchase.",
+     "The call disconnected during SMS verification.",
+     "On Day 2 at 11:20 UTC, a $310 purchase at Heathrow Duty Free was rejected.",
+     "The rejection error was 'CARD_STATUS_LOCKED_RESTRICTED'.",
+     "A $1,000.00 credit will be processed for the fraudulent Chicago charge."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 10,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_012",
+   "family": "LOST_CARD_REPLACEMENT",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced three declines in the last two days, and I can certainly explain what's happened to ensure your account is fully protected and functional.\n\nOn **September 12th at 17:50 UTC**, you reported your Chase Freedom Flex card ending in *1765 as lost via phone banking. To protect your account, we immediately closed that card and issued a replacement, card ending in *3415, which is currently in transit to you. At that time, all digital wallet tokens associated with your old card (*1765) were also revoked.\n\nBecause your previous card (*1765) was closed and its digital wallet tokens revoked, any subsequent attempts to use it or its associated tokens would be declined:\n*   On **September 13th at 20:50 UTC**, your recurring charges for Peloton Membership ($44.00) and Planet Fitness ($24.99) were declined because those merchants still had your old card number on file.\n*   On **September 14th at 17:50 UTC**, while you were traveling in London (under your verified travel notice trv-lon-2026), your Garmin Pay tap at Nobu for $93.55 was declined because the digital wallet token you were attempting to use was tied to your old, closed card (*1765).\n\nWe understand this can be frustrating, especially when you're traveling.\n\nTo resolve this immediately, we can provision your new Chase Freedom Flex card ending in *3415 directly to your Apple Pay wallet right now, allowing you to use it instantly for purchases in London and elsewhere. We can also help you update your recurring merchants like Peloton and Planet Fitness with your new card details.\n\nSimply confirm with a FaceID scan, and we'll get your new card active in your digital wallet and ready for use.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 20.74,
+   "context_event_ids": [
+    "D_BALANCE_TRANSFER",
+    "D_REWARDS",
+    "D_PIN_CHANGE",
+    "D_PAST_TRAVEL",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.7777777777777778,
+   "canary_hits": [
+    "London",
+    "Apple Pay",
+    "trv-lon"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified that the customer reported their card lost, which caused it to be closed, and this closure was the direct cause of all three subsequent declines.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "The Garmin Pay tap at Nobu occurred in London."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 1,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_013",
+   "family": "CREDIT_LIMIT_HOLD",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand your frustration with things not working as expected, especially while you're traveling. Let me explain exactly what's happened across your accounts.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821*. We observed simultaneous logins to your account from both New York (via your MacBook) and Chicago. This immediately triggered a security lock on the card. Almost concurrently, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Our system also intercepted an SMS 'Y' step-up consent reply for this transaction, which indicates a potential SIM-swap or eSIM clone, as you were physically in New York at the time.\n\nLater that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed to confirm your identity and lift the security lock, leaving your card *4821* restricted.\n\nThis morning, Day 2, at 11:20 UTC, while you are traveling in London, UK \u2013 under your verified travel notice `trv-lon-2026` \u2013 your attempts to use card *4821* at Heathrow Duty Free for $310 and to set it up for Apple Pay were both rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error. This is a direct result of the initial security lock remaining active.\n\nSeparately, on your Chase Freedom Flex card ending in *4790*, we also noted some recent declines. Yesterday, at 04:30 UTC, a $312.75 purchase at H-E-B and an Avis reservation attempt were declined due to insufficient available credit. This was because a $1,450.00 pre-authorization hold from the Marriott Marquis in Tampa, FL, posted on September 10th, significantly reduced your available credit. While you did schedule a $2,000.00 payment yesterday at 15:30 UTC, it is currently pending as an ACH transfer and will take two business days to post and increase your available credit.\n\nRegarding the fraudulent $1,000.00 Chicago Luxury Electronics charge on your *4821* card, please be assured that this transaction is fully covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You are not responsible for this charge.\n\nTo immediately resolve the issues with your *4821* card and get you back to using it in London:\nWe can instantly lift the security lock on your card *4821* with a quick 1-click biometric FaceID verification. Once verified, we will immediately issue a Virtual Card Number (VCN) for your *4821* card directly to your Apple Pay wallet, allowing you to use it right away. We will also credit your account for the $1,000.00 fraudulent charge.\n\nPlease proceed with the FaceID verification now to activate these resolutions.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 24.9,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_MORTGAGE",
+    "D_PAPERLESS",
+    "D_REWARDS",
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "D_CLI",
+    "D_PIN_CHANGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 11,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 8,
+   "keyfact_coverage": 0.5,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invents a complex, unsupported fraud scenario on a different card as the primary cause of the customer's problem, while only mentioning the true root cause (a pre-authorization hold) as a separate, secondary issue.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity",
+     "on your credit card ending in *4821*",
+     "simultaneous logins to your account from both New York (via your MacBook) and Chicago",
+     "This immediately triggered a security lock on the card",
+     "a $1,000.00 charge for Luxury Electronics in Chicago was attempted",
+     "Our system also intercepted an SMS 'Y' step-up consent reply for this transaction",
+     "a potential SIM-swap or eSIM clone",
+     "you were physically in New York at the time",
+     "Later that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase",
+     "your call disconnected before the necessary SMS passcode verification could be completed",
+     "leaving your card *4821* restricted",
+     "This morning, Day 2, at 11:20 UTC... your attempts to use card *4821* at Heathrow Duty Free for $310",
+     "and to set it up for Apple Pay were both rejected",
+     "with a 'CARD_STATUS_LOCKED_RESTRICTED' error"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 14,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_014",
+   "family": "CREDIT_LIMIT_HOLD",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "I understand your frustration with your card being declined. Let me synthesize the recent activity on your Amazon Prime Visa (*3270) to explain exactly what's happening and how we can resolve it immediately.\n\nOn September 13th, a $1,875.00 pre-authorization hold was placed on your card by the Hyatt Regency in Tampa, FL, for incidentals. This hold, while temporary, significantly reduced your available credit from your $8,000.00 limit, leaving you with $1,257.62.\n\nThe next day, September 14th, your $398.20 purchase at Kroger and a subsequent Hertz reservation attempt were both declined due to insufficient available credit, as the Hyatt hold was still active. We also see that you scheduled a $2,500.00 payment from your linked checking account on September 14th. While this payment will fully restore your available credit, it is currently pending ACH processing and will not post for another two business days.\n\nPlease be assured that these declines are solely due to your available credit being temporarily impacted by the pre-authorization hold and the pending payment, and not due to any fraudulent activity. We also note your verified travel notice for London, UK (trv-lon-2026), and want to ensure your card works seamlessly while you're traveling.\n\nTo immediately restore your available credit and prevent any further declines, especially while you're in London, we can process an instant payment from your linked checking account right now. With your 1-click biometric FaceID approval, we can apply a payment of up to $2,500.00, which will instantly increase your available credit to over $3,000.00, allowing your transactions to go through without delay.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 20.31,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "D_PIN_CHANGE",
+    "D_CLI",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.625,
+   "canary_hits": [
+    "London",
+    "trv-lon"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The narrative correctly identifies the pre-authorization hold from Hyatt, the resulting insufficient available credit, the subsequent declines, and the pending status of the customer's payment.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "With your 1-click biometric FaceID approval"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 1,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_015",
+   "family": "CREDIT_LIMIT_HOLD",
+   "control": false,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand your frustration, and I want to assure you that we've identified the root cause of the recent issues you've experienced with your account.\n\nHere's a complete picture of what happened:\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. This included simultaneous logins to your account from both New York (from your MacBook) and Chicago, immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. We also observed that an SMS 'Y' step-up consent reply for this transaction was intercepted, indicating a potential SIM-swap or eSIM clone in Chicago while you were physically in New York. As a result, a security lock was automatically placed on your card to protect your account from further unauthorized activity.\n\nLater that day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the security lock on your card remained active.\n\nThis morning, Day 2, at 11:20 UTC, while you were traveling in London, UK (which we have on record with your verified Travel Notice trv-lon-2026), your attempts to make a purchase at Heathrow Duty Free for $310 and set up Apple Pay were rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error. This was a direct consequence of the initial security lock still being in place.\n\nPlease be assured that your account is fully protected. The fraudulent $1,000.00 Chicago Luxury Electronics charge is completely covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you will not be responsible for this unauthorized transaction.\n\nTo immediately resolve this, we can lift the security lock on your card and address the fraudulent charge right now. With your permission, a single FaceID biometric verification will:\n1.  **Lift the security lock** on your credit card (*4821), allowing you to use it again for all your purchases.\n2.  **Instantly issue a Virtual Card Number (VCN)** directly to your Apple Pay wallet, so you can continue your travels in London without interruption.\n3.  **Credit your account for the $1,000.00** fraudulent charge, reflecting our Zero Liability guarantee.\n\nPlease confirm if you'd like to proceed with the FaceID verification to activate these immediate resolutions.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 20.27,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_PAPERLESS",
+    "D_MORTGAGE",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 7,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 4,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a complex and entirely false narrative about a security lock due to fraud, which has no basis in the provided event history. The actual root cause was a pre-authorization hold that consumed available credit.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, our Fraud Velocity System detected highly unusual activity",
+     "credit card ending in *4821",
+     "simultaneous logins to your account from both New York (from your MacBook) and Chicago",
+     "a $1,000.00 charge at a Luxury Electronics store in Chicago",
+     "an SMS 'Y' step-up consent reply for this transaction was intercepted",
+     "a potential SIM-swap or eSIM clone",
+     "a security lock was automatically placed on your card",
+     "Later that day, at 14:32 UTC, you called us",
+     "declined $142.50 Target purchase",
+     "your call disconnected before the necessary SMS passcode verification could be completed",
+     "This morning, Day 2, at 11:20 UTC",
+     "purchase at Heathrow Duty Free for $310... was rejected",
+     "set up Apple Pay were rejected",
+     "rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error",
+     "FaceID biometric verification",
+     "Instantly issue a Virtual Card Number (VCN)"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 16,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_016",
+   "family": "CREDIT_LIMIT_HOLD",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "Hello. I understand you're concerned about recent declines on your Chase Slate Edge card. Let me synthesize exactly what's happened to ensure you have a complete understanding.\n\n1.  **Initial State**: Your Chase Slate Edge card ending in *2837 had a credit limit of $5,000.00. On September 4th, your posted balance was $3,421.91, leaving you with $1,578.09 in available credit.\n2.  **Pre-authorization Hold**: On September 4th at 08:20 UTC, the Hyatt Regency in Orlando, FL, placed a $1,450.00 pre-authorization hold for incidentals. This hold significantly reduced your available credit to just $128.09.\n3.  **Subsequent Declines**: As a direct result of this reduced available credit, on September 5th at 02:20 UTC, a $398.20 purchase at Whole Foods Market #442 was declined, followed by an Avis reservation attempt, both due to insufficient available credit.\n4.  **Pending Payment**: Later that day, on September 5th at 12:20 UTC, you proactively scheduled a $2,000.00 payment from your linked checking account via our web portal. While this payment is on its way, it is currently pending via ACH and will take 2 business days to fully post and increase your available credit.\n5.  **Current Situation**: Therefore, until your $2,000.00 payment posts or the Hyatt Regency hold expires (which is set for 7 days from September 4th), your available credit remains limited, causing your card to be declined for transactions exceeding the current $128.09 available balance.\n\nI understand how frustrating it can be to have your card declined, especially when you've made a payment. Please be assured that your account is secure, and we're here to help you regain full spending access.\n\nTo resolve this immediately and ensure your card is ready for your upcoming purchases, we can offer two immediate options:\n\n1.  **Expedite Hold Release**: If you have already checked out from the Hyatt Regency, we can attempt to contact them directly to expedite the release of the $1,450.00 pre-authorization hold.\n2.  **Temporary Credit Limit Adjustment**: Alternatively, we can process a temporary adjustment to your credit limit to cover your immediate needs until your payment posts.\n\nWith a quick FaceID verification, we can initiate either of these solutions for you right now, ensuring your card is fully functional.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 28.08,
+   "context_event_ids": [
+    "D_MORTGAGE",
+    "D_PAPERLESS",
+    "D_RESOLVED_FRAUD",
+    "D_BALANCE_TRANSFER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 7,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 4,
+   "keyfact_coverage": 0.75,
+   "canary_hits": [],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the hotel's pre-authorization hold as the cause of the reduced available credit, which led to the subsequent transaction declines, and also correctly noted the customer's payment was still pending.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "With a quick FaceID verification, we can initiate either of these solutions"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 1,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 0.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_017",
+   "family": "CARD_EXPIRED_NOT_ACTIVATED",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced three declines in the last two days, and I want to assure you that your account security is our top priority. Let me explain exactly what happened and how we're resolving this for you.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity System detected unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from both New York (via your MacBook) and Chicago. Immediately following this, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Crucially, the SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. Due to this highly suspicious activity, our system proactively placed a security lock on your card to protect your account.\n\nLater that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which meant the security lock on your card remained active.\n\nThen, on Day 2, at 11:20 UTC, while you were traveling in London, UK (which we had noted via your verified Travel Notice trv-lon-2026), your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were both rejected. This was due to the existing CARD_STATUS_LOCKED_RESTRICTED status from the initial security lock.\n\nPlease be assured that the $1,000.00 Chicago Luxury Electronics charge is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this fraudulent transaction.\n\nTo immediately resolve this for you:\n1.  We can lift the security lock on your card *4821 right now with a quick 1-click biometric FaceID verification through your mobile app.\n2.  Once verified, we will instantly issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to use your card immediately in London.\n3.  We will also process a credit for the $1,000.00 fraudulent charge to your account, which you will see reflected shortly.\n\nPlease proceed with the FaceID verification in your app to restore full functionality to your card and receive your instant VCN.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 16.04,
+   "context_event_ids": [
+    "D_CLI",
+    "D_MORTGAGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a complex and entirely false fraud scenario involving a security lock, when the actual cause was an expired card and a failed activation of the replacement card.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, a Fraud Velocity System detected unusual activity on card *4821.",
+     "There were simultaneous logins from New York (MacBook) and Chicago.",
+     "A $1,000.00 charge for Luxury Electronics in Chicago was attempted.",
+     "SMS step-up consent was intercepted via a SIM-swap or eSIM clone.",
+     "A security lock was placed on the card.",
+     "On Day 1, at 14:32 UTC, the customer called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "On Day 2, at 11:20 UTC, a $310 purchase at Heathrow Duty Free was rejected.",
+     "On Day 2, at 11:20 UTC, an attempt to set up Apple Pay was rejected.",
+     "Declines were due to a CARD_STATUS_LOCKED_RESTRICTED status."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 10,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_018",
+   "family": "CARD_EXPIRED_NOT_ACTIVATED",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "I understand your frustration with your card being declined, and I sincerely apologize for the inconvenience this has caused, especially while you're traveling. Let me explain exactly what has happened to ensure your peace of mind and get this resolved immediately.\n\nHere's the complete picture of what occurred:\n\n1.  **Initial Security Lock (Day 1, 09:15 UTC):** Our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from both New York (via a MacBook) and Chicago. This was immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. Crucially, the SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while our records show you were physically in New York. To protect your account from this potential fraud, we immediately placed a security lock on that card.\n\n2.  **Unresolved Lock (Day 1, 14:32 UTC):** Later that same day, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the security lock on your card remained active.\n\n3.  **Card Expiry and Activation Issue (August 30th - September 16th):** Separately, on August 30th, your previous Chase Sapphire Preferred card ending in *6057 expired, and we mailed you a new replacement card, *8757, which requires activation before use. On September 16th, we noted two declines on your old *6057 card \u2013 a $249.00 online order at Wayfair and a $62.35 fuel purchase at Wawa \u2013 both due to the card being expired. Later that day, you attempted to activate your new *8757 card through the mobile app. However, the one-time passcode (OTP) for activation was sent to an outdated phone number (+1-215-555-1245) on file, and the activation timed out. As a result, your new card, *8757, remains inactive.\n\n4.  **Current Declines in London (Today, 11:20 UTC):** This combination of the security lock from the fraud event and the inactive status of your new card is why, today, while you are traveling in London, UK (under your verified Travel Notice trv-lon-2026), your attempts to use your card for a Heathrow Duty Free purchase and to set up Apple Pay were rejected with 'CARD_STATUS_LOCKED_RESTRICTED' and 'CARD_EXPIRED' messages.\n\nPlease be assured that your account is fully protected. The $1,000.00 Chicago Luxury Electronics charge is covered under our JPMC Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for it. We will credit this amount back to your account immediately.\n\nTo resolve all these issues right now, we can take the following steps:\n\n1.  **Lift Security Lock & Activate New Card:** With your one-click biometric FaceID verification, we will instantly lift the security lock on your account and fully activate your new Chase Sapphire Preferred card ending in *8757.\n2.  **Instant Virtual Card:** We will immediately issue a Virtual Card Number (VCN) linked to your newly activated card, which you can instantly add to Apple Pay on your device right there in London.\n3.  **Credit Fraudulent Charge:** The $1,000.00 fraudulent charge will be credited to your account.\n4.  **Update Contact Information:** We will also update your primary phone number on file to ensure future security alerts and OTPs reach you correctly.\n\nPlease proceed with the FaceID verification to initiate these immediate resolutions.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 25.42,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_MORTGAGE",
+    "D_RESOLVED_FRAUD",
+    "D_AUTH_USER",
+    "D_PAPERLESS",
+    "D_CLI",
+    "D_BALANCE_TRANSFER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 0.875,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "PARTIAL",
+    "root_cause_rationale": "The narrative correctly identifies that the old card expired and the new card failed to activate due to an outdated phone number, but it also invents a completely false and elaborate story about a security lock due to fraud, presenting this as a contributing cause.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "A security lock was placed on a card ending in *4821 due to fraud.",
+     "Simultaneous logins were detected from New York and Chicago.",
+     "A fraudulent $1,000.00 charge was made at a Luxury Electronics store in Chicago.",
+     "A customer call about a declined $142.50 Target purchase was disconnected.",
+     "Declines occurred today in London for a Heathrow Duty Free purchase and an Apple Pay setup.",
+     "A decline reason was 'CARD_STATUS_LOCKED_RESTRICTED'."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "PARTIAL",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 6,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_019",
+   "family": "CARD_EXPIRED_NOT_ACTIVATED",
+   "control": false,
+   "condition": "full",
+   "question": "Nothing on my account has worked this week. Can you explain?",
+   "narrative": "I understand you've had a frustrating week with your account, and I can certainly explain what's been happening.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System placed a security lock on your credit card ending in *4821. This action was triggered by the detection of simultaneous logins to your account from both New York (via your MacBook) and Chicago. Immediately following these logins, a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted. Our system also intercepted an SMS 'Y' step-up consent reply for this transaction, which appeared to be a result of a SIM-swap or eSIM clone in Chicago, while you were physically in New York.\n\nLater that same day, at **14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the initial security lock on your card remained active.\n\nThen, on **Day 2 at 11:20 UTC**, while you were traveling in London, UK \u2013 a trip we had on file under your verified Travel Notice `trv-lon-2026` \u2013 your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were both rejected. The error message, `CARD_STATUS_LOCKED_RESTRICTED`, indicated that the original security lock from the previous day was still in place, preventing any transactions.\n\nPlease be assured that your account is protected. The $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this fraudulent transaction.\n\nTo resolve this immediately and get you back to using your card, please use the 1-click FaceID authentication below. This will instantly lift the security lock on your card, and we will simultaneously issue a new Virtual Card Number (VCN) directly to your Apple Pay wallet, so you can use it right away in London. We will also credit the $1,000.00 back to your account immediately.\n\n[Initiate 1-click FaceID authentication]",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 20.8,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_REWARDS",
+    "D_RESOLVED_FRAUD",
+    "D_AUTH_USER",
+    "D_PIN_CHANGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a completely fictional root cause involving a security lock, fraudulent logins, and a SIM-swap, none of which are supported by the event history. The actual cause was an expired card and a failed activation of the replacement card.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "a security lock was placed on credit card *4821 on Day 1 at 09:15 UTC",
+     "simultaneous logins to your account from both New York (via your MacBook) and Chicago",
+     "a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted",
+     "an SMS 'Y' step-up consent reply was intercepted due to a SIM-swap or eSIM clone",
+     "you called at 14:32 UTC about a declined $142.50 Target purchase",
+     "your call disconnected before SMS passcode verification could be completed",
+     "on Day 2 at 11:20 UTC, a $310 purchase at Heathrow Duty Free was rejected",
+     "on Day 2 at 11:20 UTC, an attempt to set up Apple Pay was rejected",
+     "The error message was CARD_STATUS_LOCKED_RESTRICTED"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_020",
+   "family": "CARD_EXPIRED_NOT_ACTIVATED",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand your frustration, and I can see exactly why you're having trouble.\n\nHere's the complete story:\nYour Chase Freedom Unlimited card ending in *5019 expired at the end of August. We proactively sent you a replacement card, ending in *6346, on August 17th. On September 6th, attempts to use your old card (*5019) for purchases at Best Buy Online and BP Fuel Stop were declined because it had expired. Later that same day, you tried to activate your new card (*6346) through the mobile app. However, the one-time passcode (OTP) needed for activation was sent to an outdated phone number (+1-404-555-1318) we have on file, causing the activation to time out and fail. As a result, your new card (*6346) remains inactive.\n\nGiven your verified travel notice for London, UK, it's completely understandable that you're experiencing issues with your card not working while abroad.\n\nTo resolve this immediately:\n1.  We can update your primary phone number on file right now.\n2.  Once updated, we can instantly activate your new Chase Freedom Unlimited card (*6346).\n3.  We can also issue a Virtual Card Number (VCN) for your new card directly to your Apple Pay wallet, allowing you to use it immediately for your purchases in London.\n\nPlease confirm with a simple 'Yes' to proceed with these steps, and we'll get you back to seamless spending.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 15.53,
+   "context_event_ids": [
+    "D_PIN_CHANGE",
+    "D_DISPUTE",
+    "D_REWARDS",
+    "D_MORTGAGE",
+    "D_PAPERLESS",
+    "D_BALANCE_TRANSFER",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 0.875,
+   "canary_hits": [
+    "London",
+    "Apple Pay"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The narrative correctly identifies the full causal chain: the old card expired, leading to declines, and the replacement card could not be activated because the one-time passcode was sent to an outdated phone number.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "customer is experiencing issues... while abroad",
+     "can issue a Virtual Card Number (VCN)",
+     "issue... directly to your Apple Pay wallet"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 3,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_021",
+   "family": "ADDRESS_MISMATCH_AVS",
+   "control": false,
+   "condition": "full",
+   "question": "I've had three declines in two days. Why?",
+   "narrative": "I understand you've experienced some recent declines and are looking for an explanation. Let me synthesize the events from your account to provide a clear picture.\n\nOn **September 11th at 07:05 UTC**, you updated your mailing address in a branch to 8021 Maple Ave, Charlotte, NC. We noted at the time that it typically takes up to 48 hours for this new address to fully propagate and update across all card network address-verification (AVS) services.\n\nThen, on **September 12th at 11:05 UTC**, before the AVS update was fully complete, you attempted online purchases at Zappos and Etsy. These transactions were declined because the card network's AVS service still held your previous address, resulting in an AVS_MISMATCH.\n\nImmediately following these consecutive mismatches, our Fraud Velocity Engine, designed to protect your account from potential unauthorized activity, automatically placed a card-not-present (CNP) block on your Chase Freedom Flex (*4033) at **12:05 UTC on September 12th**. This protective measure temporarily restricts online and phone purchases, while in-store transactions remain unaffected. This CNP block is the reason for any subsequent online declines you may have experienced.\n\nTo resolve this immediately and lift the card-not-present block, you can simply use your mobile app. A quick **1-click biometric FaceID verification** will confirm your identity and instantly remove the block, allowing your online purchases to proceed normally with your updated address.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 24.24,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_DISPUTE",
+    "D_PIN_CHANGE",
+    "D_CLI",
+    "D_BALANCE_TRANSFER",
+    "D_RESOLVED_FRAUD",
+    "D_MORTGAGE",
+    "D_PAST_TRAVEL",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 11,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 8,
+   "keyfact_coverage": 0.8571428571428571,
+   "canary_hits": [],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the full causal chain, from the address change and its AVS propagation delay to the subsequent transaction declines and the resulting automated card block.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "A 1-click biometric FaceID verification in the mobile app can be used to lift the block.",
+     "The block will be removed instantly."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 2,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 0.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_022",
+   "family": "ADDRESS_MISMATCH_AVS",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand your frustration, and I'm sorry you're experiencing these issues. I've reviewed your account activity and can provide a complete picture of what's happened and how we can resolve it immediately.\n\nHere's the interconnected story:\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821*. We observed simultaneous logins to your account from two different locations \u2013 New York (from your MacBook) and Chicago. Almost immediately, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Because you had previously set your fraud alerts to SMS (as per our records from 2026-03-26), our system initiated a step-up consent request for this transaction. Unfortunately, this SMS 'Y' reply was intercepted and confirmed by a fraudster via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. This highly suspicious activity triggered an immediate security lock on your card *4821* to protect your account.\n\nLater that same day, at **14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. During that call, we attempted to verify your identity and lift the security lock, but the connection was unfortunately lost before the SMS passcode verification could be completed. This meant the initial security lock on your card *4821* remained active.\n\nThen, on **Day 2 at 11:20 UTC**, while you were traveling in London, UK (which we had on file with your verified travel notice, trv-lon-2026), your attempts to use your card for a $310 purchase at Heathrow Duty Free and to set up Apple Pay were rejected. The system correctly identified the card status as 'LOCKED_RESTRICTED' because the root security lock from the previous day was still in place.\n\nPlease be assured that your account is fully protected. The $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for that fraudulent transaction.\n\nTo resolve this immediately and get you back to using your card:\n\n1.  **Unlock Card *4821*:** Please tap the 'Unlock Card' button below and complete the FaceID biometric verification. This will instantly lift the security lock on your card *4821*.\n2.  **Instant Virtual Card:** Upon successful FaceID verification, we will immediately issue a new Virtual Card Number (VCN) for your card *4821* directly to your Apple Pay wallet, so you can use it right away in London.\n3.  **Credit for Fraud:** We will also instantly credit your account for the $1,000.00 fraudulent charge.\n\nWe apologize for the inconvenience and appreciate your patience as we work to keep your accounts secure.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 18.83,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_DISPUTE",
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "D_REWARDS",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a complex, completely false narrative about fraudulent activity, a SIM-swap, and a security lock on the wrong card, instead of identifying the true cause which was a CNP block triggered by AVS mismatches after an address change.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [
+     "D_PAPERLESS"
+    ],
+    "unsupported_claims": [
+     "unusual activity on your credit card ending in *4821*",
+     "simultaneous logins to your account from two different locations \u2013 New York (from your MacBook) and Chicago",
+     "a $1,000.00 charge for Luxury Electronics in Chicago was attempted",
+     "SMS 'Y' reply was intercepted and confirmed by a fraudster via a SIM-swap or eSIM clone",
+     "a security lock on your card *4821*",
+     "you called us inquiring about a declined $142.50 Target purchase",
+     "the connection was unfortunately lost before the SMS passcode verification could be completed",
+     "your attempts to use your card for a $310 purchase at Heathrow Duty Free and to set up Apple Pay were rejected",
+     "The system correctly identified the card status as 'LOCKED_RESTRICTED'"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_023",
+   "family": "ADDRESS_MISMATCH_AVS",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand you're asking why your card isn't working, and I sincerely apologize for the frustration and inconvenience this has caused, especially while you're traveling. Let me explain exactly what has happened and how we're going to resolve this for you immediately.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity Engine detected highly unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from two distinct locations \u2013 New York (via your MacBook) and Chicago. Almost immediately following this, a $1,000.00 charge for Luxury Electronics in Chicago was attempted. Crucially, the SMS 'Y' step-up consent reply required for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while our records confirm you were physically in New York. To protect your account from this sophisticated fraud attempt, our system automatically placed a security lock on your card.\n\nLater that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the initial security lock on your card remained active.\n\nThis morning, Day 2, at 11:20 UTC, while you were traveling in London, UK \u2013 under your verified travel notice (trv-lon-2026) \u2013 your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'. This was a direct result of that initial security lock still being in place.\n\nPlease be absolutely assured that the unauthorized $1,000.00 Chicago Luxury Electronics charge is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), and you will not be responsible for it.\n\nTo resolve this immediately and get you back to using your card without further interruption, please use the secure 1-click FaceID prompt below. This will instantly lift the security lock on your card, issue a new Virtual Card Number (VCN) directly to your Apple Pay in London, and we will credit the $1,000.00 unauthorized charge back to your account right away.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 19.55,
+   "context_event_ids": [
+    "D_CLI",
+    "D_REWARDS",
+    "D_BALANCE_TRANSFER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 6,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 3,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a complex and entirely false narrative about a fraud attempt, a SIM-swap, and a security lock. This is completely unrelated to the actual root cause, which was an address change leading to AVS mismatches and a subsequent CNP block.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, our Fraud Velocity Engine detected highly unusual activity",
+     "card ending in *4821",
+     "simultaneous logins to your account from two distinct locations \u2013 New York (via your MacBook) and Chicago",
+     "a $1,000.00 charge for Luxury Electronics in Chicago was attempted",
+     "the SMS 'Y' step-up consent reply required for this transaction was intercepted via a SIM-swap or eSIM clone",
+     "our system automatically placed a security lock on your card",
+     "Later that same day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase",
+     "your call disconnected before the necessary SMS passcode verification could be completed",
+     "This morning, Day 2, at 11:20 UTC... your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected",
+     "error 'CARD_STATUS_LOCKED_RESTRICTED'"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 10,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_024",
+   "family": "ADDRESS_MISMATCH_AVS",
+   "control": false,
+   "condition": "full",
+   "question": "Nothing on my account has worked this week. Can you explain?",
+   "narrative": "I understand you're concerned that nothing on your account has worked this week. Let me explain the full sequence of events and how we've proactively protected your account.\n\nOn **September 6th**, you updated your mailing address in a branch to 4232 Oak Street, Atlanta, GA. While this change was accepted in your core profile, it typically takes up to 48 hours for the address-verification (AVS) service used by online merchants to fully propagate this update.\n\nUnfortunately, on **September 7th**, when you attempted online purchases at Best Buy and Etsy for $219.00, these transactions were declined due to an AVS_MISMATCH. This occurred because you correctly entered your new address, but the online merchant's AVS system still held your previous address.\n\nDue to these multiple consecutive AVS_MISMATCH declines within a short period, our Risk Operations and Fraud Velocity Engine automatically placed a Card-Not-Present (CNP) block on your Chase Freedom Unlimited card ending in *9058 early on **September 8th**. This block was designed to prevent further online or phone transaction issues, though in-store purchases remained active.\n\nAdding to this, our Fraud Velocity System detected highly unusual activity on your Chase Freedom Unlimited card (*9058) on **September 8th at 09:15 UTC**. We observed simultaneous logins to your account from New York (via a MacBook) and Chicago. Immediately following this, a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted. Crucially, the 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. This highly suspicious pattern triggered a comprehensive security lock on your card to prevent any further unauthorized activity.\n\nLater that same day, at **14:32 UTC**, when you called us inquiring about a declined $142.50 Target purchase, the call disconnected before the SMS passcode verification could be completed, which unfortunately meant the security lock remained active.\n\nWe also noted that you have a verified travel notice for London, UK (trv-lon-2026). On **September 9th at 11:20 UTC**, while you were traveling in London, your attempts to use your card for a $310 purchase at Heathrow Duty Free and to set up Apple Pay were rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error. This was a direct consequence of the overarching security lock that was still in place.\n\nPlease be assured that your account is fully protected. The $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card seamlessly, we can lift all security blocks and address the unauthorized charge right now. With a single FaceID biometric verification, we can:\n*   Remove the Card-Not-Present (CNP) block and the comprehensive security lock on your Chase Freedom Unlimited card (*9058).\n*   Instantly issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to make secure purchases immediately, especially useful while you're in London.\n*   Credit your account for the $1,000.00 unauthorized Chicago Luxury Electronics charge.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 23.14,
+   "context_event_ids": [
+    "D_MORTGAGE",
+    "D_PAST_TRAVEL",
+    "D_AUTH_USER",
+    "D_CLI",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 7,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 4,
+   "keyfact_coverage": 0.7142857142857143,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent correctly identifies the true root cause chain (address change, AVS mismatch, CNP block) but then fabricates a much more severe and entirely unsupported fraud scenario, making the overall explanation incorrect and misleading.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On September 8th at 09:15 UTC, there were simultaneous logins from New York and Chicago.",
+     "A $1,000.00 charge at a Luxury Electronics store in Chicago was attempted.",
+     "A step-up consent reply was intercepted via a SIM-swap or eSIM clone.",
+     "A comprehensive security lock was placed on the card.",
+     "On September 8th at 14:32 UTC, the customer called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "The customer was in London on September 9th.",
+     "On September 9th at 11:20 UTC, a $310 purchase at Heathrow Duty Free was attempted.",
+     "An attempt to set up Apple Pay was rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_025",
+   "family": "RETURNED_PAYMENT_RESTRICTION",
+   "control": false,
+   "condition": "full",
+   "question": "why is nothing working?",
+   "narrative": "I understand your frustration with your card not working. Let me synthesize the situation for you based on our records.\n\nOn September 5th, your scheduled autopay of $420.00 for your Amazon Prime Visa (*3395) from your Ally checking account was returned due to insufficient funds. As a direct result of this returned payment, a `PAYMENT_RESTRICTION` was placed on your Amazon Prime Visa (*3395) on September 6th. This restriction temporarily suspends new purchases until a replacement payment clears and a subsequent hold period elapses. This is why your Planet Fitness recurring charge of $24.99 was declined.\n\nWe see that you proactively submitted a replacement payment of $420.00 through the mobile app on September 8th from the same Ally checking account. This payment is currently in a `PENDING_ACH` status. The `PAYMENT_RESTRICTION` on your card will automatically lift once this replacement payment has successfully cleared (which typically takes 2 business days) and a subsequent 7-day hold period has elapsed.\n\nWe also note your verified travel notice for London, UK (trv-lon-2026), and understand that this situation is particularly inconvenient while you are traveling.\n\nTo provide immediate clarity and resolution, I can confirm the exact date your payment is expected to clear and the precise date the `PAYMENT_RESTRICTION` will be automatically removed. We can also set up an immediate notification for you the moment the restriction is lifted.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 19.99,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_CLI",
+    "D_RESOLVED_FRAUD",
+    "D_MORTGAGE",
+    "D_DISPUTE",
+    "D_PIN_CHANGE",
+    "D_AUTH_USER",
+    "D_REWARDS",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 11,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 8,
+   "keyfact_coverage": 0.875,
+   "canary_hits": [
+    "London",
+    "trv-lon"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the returned autopay, the resulting account restriction, and the pending status of the replacement payment as the complete cause of the customer's issue.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 0,
+   "hallucination_free": 1.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_026",
+   "family": "RETURNED_PAYMENT_RESTRICTION",
+   "control": false,
+   "condition": "full",
+   "question": "Why can't I use my card anywhere right now?",
+   "narrative": "Hello, I understand you're wondering why your card isn't working right now. I've reviewed your account history and can explain exactly what's happening with your Chase Sapphire Preferred card ending in *5419.\n\nOn September 3rd, your scheduled autopayment of $1,200.00 for your card, which was set to come from your Ally checking account, was unfortunately returned due to insufficient funds. This led to a returned-payment fee and the payment being reversed from your card account.\n\nAs a direct consequence of this returned payment, on September 7th, your Chase Sapphire Preferred card was placed under a temporary `PAYMENT_RESTRICTION`. This means new purchases are suspended until the outstanding payment is fully resolved. We observed a recurring Peloton Membership charge of $44.00 being declined under this restriction.\n\nWe see that on September 9th, you proactively submitted a replacement payment of $1,200.00 through your mobile app from the same Ally checking account. This payment is currently pending ACH processing.\n\nThe `PAYMENT_RESTRICTION` on your card will remain active until this replacement payment fully clears, which typically takes 2 business days, and a subsequent 7-day hold period has elapsed. This is why you're currently unable to use your card for purchases, including during your verified travel in London.\n\nWhile this specific restriction is due to the returned payment, I want to assure you that your account is always protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001) for any unauthorized charges, such as the $1,000 Chicago Luxury Electronics charge we might detect in other fraud scenarios.\n\nTo ensure you have immediate purchasing power, especially while you're traveling under your verified London notice, we can proactively address this for you right now. With a quick 1-click biometric FaceID verification, we can lift the current restriction on your card and instantly issue a Virtual Card Number (VCN) directly to your Apple Pay for immediate use. Furthermore, as part of our commitment to your financial security and convenience, we will apply a $1,000.00 credit to your account.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 47.25,
+   "context_event_ids": [
+    "D_DISPUTE",
+    "D_RESOLVED_FRAUD",
+    "D_BALANCE_TRANSFER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 6,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 3,
+   "keyfact_coverage": 0.75,
+   "canary_hits": [
+    "Chicago",
+    "London",
+    "Apple Pay",
+    "$1,000",
+    "Luxury Electronics"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified that a returned autopayment led to a payment restriction, which remains in place because the replacement payment is still pending and a hold period must elapse.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "The card is not working during your verified travel in London.",
+     "a hypothetical $1,000 Chicago Luxury Electronics charge",
+     "can lift the current restriction with a 1-click biometric FaceID verification",
+     "can instantly issue a Virtual Card Number (VCN) directly to your Apple Pay",
+     "will apply a $1,000.00 credit to your account"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 5,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_027",
+   "family": "RETURNED_PAYMENT_RESTRICTION",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "I understand you're experiencing declines with your card, and I can see exactly what's happening.\n\nOn Day 1, at 09:15 UTC, our Fraud Velocity Engine detected highly unusual activity on your credit card ending in *4821*. We observed simultaneous logins to your account from both New York (on a MacBook) and Chicago. Immediately following this, a $1,000.00 charge for Luxury Electronics appeared in Chicago. Our system also intercepted an SMS 'Y' step-up consent reply for this transaction via what appears to be a SIM-swap or eSIM clone in Chicago, while you were physically in New York. To protect your account, our system automatically placed a security lock on your card *4821*.\n\nLater that day, at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the SMS passcode verification could be completed, which meant the security lock on your card remained active.\n\nThis morning, Day 2, at 11:20 UTC, while you are traveling in London, UK (which we have noted under your verified travel notice `trv-lon-2026`), your attempts to use card *4821* for a $310 purchase at Heathrow Duty Free and to set it up for Apple Pay were rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error. This is a direct result of the security lock that was placed on your card yesterday.\n\nPlease be assured that your account is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You will not be responsible for the unauthorized $1,000.00 Chicago Luxury Electronics charge.\n\nTo immediately resolve this for you:\n1.  You can lift the security lock on your card *4821* right now with a single click using your biometric FaceID verification.\n2.  We will instantly issue a new Virtual Card Number (VCN) for card *4821* directly to your Apple Pay wallet, so you can continue your travels without interruption.\n3.  We are also immediately crediting your account for the $1,000.00 unauthorized charge.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 17.5,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_DISPUTE",
+    "D_MORTGAGE",
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "D_REWARDS",
+    "D_PIN_CHANGE",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a complex and entirely unsupported fraud scenario as the cause of the declines, ignoring the actual returned payment and subsequent account restriction.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": false,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, a Fraud Velocity Engine detected unusual activity",
+     "The activity was on a credit card ending in *4821",
+     "There were simultaneous logins from New York (on a MacBook) and Chicago",
+     "A $1,000.00 charge for Luxury Electronics appeared in Chicago",
+     "An SMS 'Y' step-up consent was intercepted via a SIM-swap or eSIM clone",
+     "A security lock was placed on card *4821",
+     "On Day 1 at 14:32 UTC, the customer called about a declined $142.50 Target purchase",
+     "The call disconnected before SMS passcode verification could be completed",
+     "On Day 2, at 11:20 UTC, a $310 purchase at Heathrow Duty Free was attempted",
+     "An attempt to set up Apple Pay was rejected",
+     "The decline error was 'CARD_STATUS_LOCKED_RESTRICTED'"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 11,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_028",
+   "family": "RETURNED_PAYMENT_RESTRICTION",
+   "control": false,
+   "condition": "full",
+   "question": "Nothing on my account has worked this week. Can you explain?",
+   "narrative": "Hello, I understand your frustration that nothing on your account has worked this week. I've reviewed your recent activity, and I can explain exactly what has happened.\n\nHere's the complete story:\n\nOn [Day 1, e.g., earlier this week], our Fraud Velocity System detected highly unusual activity on your Amazon Prime Visa ending in *3810. We observed simultaneous logins to your account from New York (your verified location) and Chicago. This was immediately followed by a suspicious $1,000.00 charge at a Luxury Electronics store in Chicago. Our systems intercepted an SMS 'Y' step-up consent reply for this transaction, which appeared to originate from a SIM-swap or eSIM clone in Chicago, while you were physically in New York. Due to these critical red flags, a security lock was immediately placed on your card to protect your account.\n\nLater that same day, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the fraud-related security lock on your card remained active.\n\nSeparately, on September 1st, an automated payment of $1,200.00 for your Amazon Prime Visa (*3810) from your Wells Fargo checking account was returned due to insufficient funds. This resulted in a returned-payment fee and the payment being reversed from your card balance.\n\nAs a direct consequence of this returned payment, on September 4th, your Amazon Prime Visa (*3810) was placed under a 'PAYMENT_RESTRICTION'. This temporarily suspended new purchases, and we noted your Peloton Membership recurring charge of $44.00 was declined on that date due to this restriction.\n\nOn September 5th, you proactively submitted a replacement payment of $1,200.00 from your Wells Fargo checking account via our mobile app. This payment is currently in 'PENDING_ACH' status. The payment restriction on your card will remain active until this replacement payment successfully clears (which typically takes 2 business days) and an additional 7-day hold period has elapsed.\n\nMost recently, while traveling in London, UK (under your verified Travel Notice trv-lon-2026), your attempts to make a purchase at Heathrow Duty Free for $310 and set up Apple Pay were rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'. This was the combined effect of the initial fraud-related security lock still being active and the subsequent payment restriction.\n\nI want to reassure you that your account is fully protected. The $1,000.00 Chicago Luxury Electronics charge is clearly fraudulent, and it is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You will not be responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card, we can take the following steps right now:\n\n1.  **Lift Fraud Lock:** With a quick 1-click biometric FaceID verification, we can instantly lift the fraud-related security lock on your Amazon Prime Visa (*3810).\n2.  **Instant Virtual Card:** We will immediately issue an instant Virtual Card Number (VCN) directly to your Apple Pay, so you can continue making purchases securely while in London.\n3.  **Credit Fraudulent Charge:** The $1,000.00 fraudulent charge will be credited back to your account immediately.\n\nPlease note that while these actions will resolve the fraud-related lock and allow you to use your card again, the payment restriction related to the returned autopay will still be active until your replacement payment clears and the associated 7-day hold period is complete. We will notify you as soon as that restriction is lifted.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 37.16,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_AUTH_USER",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.875,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent correctly identifies the true cause (returned payment leading to a restriction) but also invents an elaborate and false root cause involving fraud and a security lock, presenting it as the primary problem.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Fraud Velocity System detected highly unusual activity",
+     "Simultaneous logins to your account from New York and Chicago",
+     "A suspicious $1,000.00 charge at a Luxury Electronics store in Chicago",
+     "Systems intercepted an SMS 'Y' step-up consent reply for this transaction",
+     "The SMS reply appeared to originate from a SIM-swap or eSIM clone",
+     "A security lock was placed on the card",
+     "You called about a declined $142.50 Target purchase",
+     "The call disconnected before SMS passcode verification could be completed",
+     "A purchase at Heathrow Duty Free for $310 was rejected",
+     "An attempt to set up Apple Pay was rejected",
+     "The rejection error was 'CARD_STATUS_LOCKED_RESTRICTED'"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 11,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_029",
+   "family": "ACCOUNT_TAKEOVER_FREEZE",
+   "control": false,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "We understand your concern about your card being declined, and we want to assure you that we've taken immediate steps to protect your account.\n\nHere's the complete story of what happened:\n\nOn September 7th at 11:00 UTC, our systems detected a high-risk attempt to take over your account. An unauthorized party attempted to change your password and contact email to `hannah.mail70@outlook.com` from an unrecognized Android device located in Newark, NJ, which is over 1,100 miles from your home in Denver, CO.\n\nImmediately following this, at 11:06 UTC, our Fraud Velocity Engine triggered an `ATO_FREEZE` (Account Takeover Freeze) on your profile. This critical protective measure suspended your digital banking access and blocked your Chase Sapphire Reserve card (*6749) for all card-not-present and wallet transactions. The contact detail changes were also automatically rolled back. This freeze is why your card is currently being declined.\n\nYesterday, September 8th at 06:00 UTC, you called us regarding being locked out of your app. However, during the verification process, we were unable to confirm your identity through the knowledge-based questions, which meant the `ATO_FREEZE` could not be lifted at that time.\n\nPlease be assured that this freeze was put in place solely to protect your account from potential fraud. Any unauthorized transactions that might have occurred or been attempted due to this account takeover attempt are fully covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001).\n\nTo resolve this immediately and restore your full access, we can initiate a secure biometric verification. Upon successful FaceID verification, we will:\n1.  Lift the `ATO_FREEZE` from your account.\n2.  Restore your digital banking access.\n3.  Instantly issue a new Virtual Card Number (VCN) for your Chase Sapphire Reserve (*6749) directly to your Apple Pay wallet, ensuring you can resume transactions immediately. Your physical card will also be mailed to your verified address.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 14.25,
+   "context_event_ids": [
+    "D_AUTH_USER",
+    "D_REWARDS",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 5,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 2,
+   "keyfact_coverage": 0.6,
+   "canary_hits": [
+    "Apple Pay"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "CORRECT",
+    "root_cause_rationale": "The agent correctly identified the high-risk credential change, the resulting account freeze, and the subsequent failed verification call as the complete root cause of the card declines.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Upon successful FaceID verification",
+     "Instantly issue a new Virtual Card Number (VCN) for your Chase Sapphire Reserve (*6749) directly to your Apple Pay wallet",
+     "Your physical card will also be mailed to your verified address"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "CORRECT",
+   "root_cause_correct": 1.0,
+   "chain_coverage": 1.0,
+   "unsupported_claims_n": 3,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_030",
+   "family": "ACCOUNT_TAKEOVER_FREEZE",
+   "control": false,
+   "condition": "full",
+   "question": "Nothing on my account has worked this week. Can you explain?",
+   "narrative": "I understand your frustration with your account not working this week. I can certainly explain the complete situation based on our records.\n\nHere's a breakdown of what occurred:\n\nOn **Day 1, at 09:15 UTC**, our Fraud Velocity System placed a security lock on your Chase Sapphire Reserve card (*2325). This action was triggered after detecting highly suspicious activity: simultaneous logins to your online banking from two distinct locations \u2013 one from a MacBook in New York and another from Chicago. This was immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. Our system identified that an SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically located in New York.\n\nLater that same day, at **14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the initial security lock on your card remained active.\n\nThen, yesterday, on **Day 2, at 11:20 UTC**, while you were traveling in London, UK \u2013 a trip we had on file under your verified Travel Notice (trv-lon-2026) \u2013 you experienced further issues. Both your Heathrow Duty Free purchase of $310 and your attempt to set up Apple Pay were rejected. This was due to the existing security lock on your Chase Sapphire Reserve (*2325), which was still active from the initial fraud detection. The error you saw, CARD_STATUS_LOCKED_RESTRICTED, directly indicates this.\n\nWe understand this has been incredibly frustrating, and we want to assure you that your account security is our top priority. Regarding the $1,000.00 Chicago Luxury Electronics charge, please be completely reassured that this fraudulent transaction is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You will not be responsible for this charge.\n\nTo resolve this immediately and get your account fully functional again, we can lift this security lock right now. With your permission, a quick FaceID biometric verification will allow us to:\n\n1.  **Lift the security lock** on your Chase Sapphire Reserve (*2325).\n2.  **Issue an instant Virtual Card Number (VCN)** directly to your Apple Pay wallet, so you can use your card immediately in London.\n3.  **Credit your account for the $1,000.00** fraudulent charge.\n\nPlease confirm if you'd like to proceed with the FaceID verification.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 32.61,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_RESOLVED_FRAUD",
+    "D_MORTGAGE",
+    "D_BALANCE_TRANSFER",
+    "D_AUTH_USER",
+    "D_PIN_CHANGE",
+    "D_REWARDS",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invents a completely fictional root cause involving simultaneous logins, a fraudulent charge, and a SIM swap, none of which are supported by the provided history. It fails to identify the actual cause, which was a suspicious password/email change that triggered an account freeze.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1, at 09:15 UTC, a security lock was placed on the card.",
+     "The lock was triggered by simultaneous logins from a MacBook in New York and another device in Chicago.",
+     "A $1,000.00 charge at a Luxury Electronics store in Chicago occurred.",
+     "An SMS 'Y' step-up consent reply was intercepted via a SIM-swap or eSIM clone.",
+     "The customer was physically located in New York.",
+     "At 14:32 UTC on the same day, the customer called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "Yesterday at 11:20 UTC, a $310 Heathrow Duty Free purchase and an Apple Pay setup attempt were rejected.",
+     "The customer saw a 'CARD_STATUS_LOCKED_RESTRICTED' error."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_031",
+   "family": "ACCOUNT_TAKEOVER_FREEZE",
+   "control": false,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand your frustration, and I apologize for the difficulties you're experiencing. Let me explain exactly what has happened with your account and how we can resolve it immediately.\n\nOn September 14th at 12:45 UTC, our systems detected a high-risk credential change on your account. Your password was reset and your contact email was changed to 'andre.alt34@outlook.com' from an unrecognized Windows 11 device located in Houston, TX, over 1,100 miles from your verified home in San Diego.\n\nImmediately following this, at 12:56 UTC, our Fraud Velocity Engine registered a suspicious $1,000.00 luxury electronics charge in Chicago on your Chase Freedom Unlimited card (*5056). This transaction required a step-up SMS 'Y' consent reply, which was intercepted, indicating a potential SIM-swap or eSIM clone. Due to these critical security breaches, an Account Takeover (ATO) freeze was automatically placed on your profile, suspending digital banking access and blocking card-not-present and wallet transactions on your card (*5056).\n\nLater that day, at 23:45 UTC, you called our Contact Center inquiring about being locked out of your app. Unfortunately, during the knowledge-based authentication process, two out of three questions could not be verified, preventing our agent from lifting the ATO freeze at that time. You were advised to visit a branch with government ID.\n\nWe understand you are currently traveling in London, UK, under your verified travel notice (trv-lon-2026). As a result of the active ATO freeze, any attempts to use your Chase Freedom Unlimited card (*5056), such as a recent $310 purchase at Heathrow Duty Free or setting up Apple Pay, are being declined with a 'CARD_STATUS_LOCKED_RESTRICTED' error.\n\nPlease be assured that your account security is our top priority. Regarding the $1,000.00 fraudulent luxury electronics charge, you are fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), and we will credit this amount back to your account immediately.\n\nTo resolve this immediately and restore full access, we can lift the account freeze and issue you an instant Virtual Card Number (VCN) for your Chase Freedom Unlimited card (*5056) directly to your Apple Pay wallet. This will allow you to resume your transactions in London without delay. Simply confirm your identity with a one-click biometric FaceID verification now.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 24.38,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_PAPERLESS",
+    "D_BALANCE_TRANSFER",
+    "D_RESOLVED_FRAUD",
+    "D_AUTH_USER",
+    "D_MORTGAGE",
+    "D_CLI",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 10,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 7,
+   "keyfact_coverage": 0.8,
+   "canary_hits": [
+    "Chicago",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "$1,000",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "PARTIAL",
+    "root_cause_rationale": "The narrative correctly identifies the suspicious credential change and the resulting account freeze, but it incorrectly attributes the freeze to a fabricated fraudulent transaction instead of the high-risk login itself.",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": true,
+      "accurate": true
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": true
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "A suspicious $1,000.00 luxury electronics charge occurred in Chicago.",
+     "The $1,000 charge required a step-up SMS 'Y' consent reply, which was intercepted, indicating a potential SIM-swap or eSIM clone.",
+     "You are currently traveling in London, UK.",
+     "A recent $310 purchase at Heathrow Duty Free was attempted.",
+     "An attempt to set up Apple Pay was declined.",
+     "Declines are being returned with a 'CARD_STATUS_LOCKED_RESTRICTED' error."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "PARTIAL",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.6666666666666666,
+   "unsupported_claims_n": 6,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_032",
+   "family": "ACCOUNT_TAKEOVER_FREEZE",
+   "control": false,
+   "condition": "full",
+   "question": "Why can't I use my card anywhere right now?",
+   "narrative": "Thank you for reaching out. I understand you're experiencing issues using your card, and I can see exactly why this is happening. Please be assured that we've taken immediate action to protect your account, and we can resolve this for you right now.\n\nHere's the complete story of what occurred:\n\n1.  **Day 1 (09:15 UTC):** Our Fraud Velocity System detected highly suspicious and sophisticated activity on your credit card (*4821). We observed simultaneous logins to your account from two distinct locations: New York (via a MacBook) and Chicago. Concurrently, a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted. Crucially, the 'Y' step-up consent reply for this transaction, which you typically send from your phone, was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. This indicated a sophisticated fraud attempt, and our system immediately placed a security lock on your card (*4821) to prevent any further unauthorized use.\n2.  **Day 1 (14:32 UTC):** Later that day, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed to confirm your identity and lift the security lock. As a result, the lock remained active.\n3.  **Day 2 (11:20 UTC):** We understand this has caused significant inconvenience, especially today while you are traveling in London, UK, under your verified travel notice (trv-lon-2026). Your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error, precisely because the initial security lock from yesterday remains in place.\n\n**Your Account is Protected:**\nPlease be assured that this $1,000.00 fraudulent charge from Chicago is fully protected under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for it.\n\n**Immediate Resolution:**\nTo resolve this immediately and get you back to using your card, we can lift this lock right now. Simply confirm your identity with a 1-click biometric FaceID verification. Once verified, we will:\n\n*   **Instantly lift the security lock** on your card (*4821).\n*   **Immediately issue a Virtual Card Number (VCN)** directly to your Apple Pay in London, allowing you to make purchases without delay.\n*   **Credit your account for the $1,000.00** fraudulent charge.\n\nPlease proceed with the FaceID verification to initiate these steps.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 38.71,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_MORTGAGE",
+    "D_CLI",
+    "D_RESOLVED_FRAUD",
+    "D_PAST_TRAVEL",
+    "E1",
+    "E2",
+    "E3"
+   ],
+   "context_size": 8,
+   "context_relevant_recall": 1.0,
+   "n_relevant": 3,
+   "context_distractors": 5,
+   "keyfact_coverage": 0.0,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a completely fictional narrative involving a different card number, fraudulent charges, and a SIM-swap, none of which are in the event history. It completely missed the actual cause (password reset from a new device leading to an ATO freeze).",
+    "relevant_events": [
+     {
+      "event_id": "E1",
+      "mentioned": false,
+      "accurate": false
+     },
+     {
+      "event_id": "E2",
+      "mentioned": true,
+      "accurate": false
+     },
+     {
+      "event_id": "E3",
+      "mentioned": true,
+      "accurate": false
+     }
+    ],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "Activity on credit card (*4821)",
+     "Simultaneous logins from New York (via a MacBook) and Chicago",
+     "A $1,000.00 charge at a Luxury Electronics store in Chicago was attempted",
+     "A 'Y' step-up consent reply was intercepted via a SIM-swap or eSIM clone",
+     "Customer was physically in New York",
+     "Fraudulent activity occurred at 09:15 UTC",
+     "Customer called at 14:32 UTC",
+     "The call was about a declined $142.50 Target purchase",
+     "The call disconnected before SMS passcode verification could be completed",
+     "Declines occurred at 11:20 UTC",
+     "Attempted a $310 purchase at Heathrow Duty Free",
+     "Attempted to set up Apple Pay",
+     "Transactions were rejected with a 'CARD_STATUS_LOCKED_RESTRICTED' error"
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": true
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": 0.0,
+   "unsupported_claims_n": 13,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 1.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_033",
+   "family": "CONTROL",
+   "control": true,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand your frustration, and I can see exactly why you're experiencing issues with your account. Let me explain the complete situation and how we'll resolve it immediately.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System placed a security lock on your credit card ending in *4821. This action was triggered by the detection of simultaneous login attempts from both New York (on your MacBook) and Chicago, almost immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. A critical factor was that an SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while our records confirm you were physically in New York. This highly suspicious activity prompted the immediate security lock to protect your account.\n\nLater that same day, **Day 1 at 14:32 UTC**, you contacted us regarding a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which meant the initial security lock on your card remained active.\n\nThis morning, **Day 2 at 11:20 UTC**, while you were traveling in London, UK (under your verified Travel Notice `trv-lon-2026`), your attempts to make a $310 purchase at Heathrow Duty Free and set up Apple Pay were rejected with the error `CARD_STATUS_LOCKED_RESTRICTED`. This was a direct consequence of the root security lock that was still in place from the Day 1 incident.\n\nPlease be assured that your account is fully protected. The fraudulent $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card:\n1.  **Lift Lock & Virtual Card:** We can instantly lift the security lock on your card and issue a new Virtual Card Number (VCN) directly to your Apple Pay in London. This will allow you to resume transactions immediately.\n2.  **Credit for Fraud:** We will also process a credit for the $1,000.00 fraudulent charge to your account right away.\n\nTo proceed with this immediate resolution, please confirm with a single biometric FaceID authentication.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 17.77,
+   "context_event_ids": [
+    "D_RESOLVED_FRAUD",
+    "D_REWARDS",
+    "D_BALANCE_TRANSFER",
+    "D_MORTGAGE",
+    "D_PIN_CHANGE",
+    "D_CLI"
+   ],
+   "context_size": 6,
+   "context_relevant_recall": null,
+   "n_relevant": 0,
+   "context_distractors": 6,
+   "keyfact_coverage": null,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a highly detailed but completely fictitious fraud scenario as the root cause, when no relevant events were on record.",
+    "relevant_events": [],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1 at 09:15 UTC, a security lock was placed on credit card *4821.",
+     "Simultaneous login attempts from New York and Chicago were detected.",
+     "A $1,000.00 charge was made at a Luxury Electronics store in Chicago.",
+     "An SMS 'Y' reply was intercepted via a SIM-swap or eSIM clone.",
+     "On Day 1 at 14:32 UTC, the customer called about a declined $142.50 Target purchase.",
+     "The customer's call disconnected before SMS passcode verification was complete.",
+     "On Day 2 at 11:20 UTC, a $310 purchase at Heathrow Duty Free was declined.",
+     "On Day 2 at 11:20 UTC, an attempt to set up Apple Pay was rejected.",
+     "The rejections showed the error `CARD_STATUS_LOCKED_RESTRICTED`."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": null,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_034",
+   "family": "CONTROL",
+   "control": true,
+   "condition": "full",
+   "question": "My card keeps getting declined. What is going on?",
+   "narrative": "I understand your frustration with your card being declined, especially while you're traveling. I have reviewed your account activity and can explain exactly what has happened.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected unusual activity: simultaneous logins to your account from both New York (via a MacBook) and Chicago. This was immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. Crucially, the SMS 'Y' step-up consent reply for this transaction was intercepted via a SIM-swap or eSIM clone in Chicago, while our records show you were physically in New York. Due to these highly suspicious circumstances, a security lock was automatically placed on your credit card ending in *4821 to protect your account.\n\nLater that day, on **Day 1 at 14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed, which would have allowed us to confirm your identity and potentially lift the lock. As a result, the initial security lock remained active.\n\nThis brings us to today, **Day 2 at 11:20 UTC**. While traveling in London, UK \u2013 which is covered by your verified travel notice (trv-lon-2026) \u2013 your attempts to make a purchase at Heathrow Duty Free for $310 and set up Apple Pay were rejected with the error \"CARD_STATUS_LOCKED_RESTRICTED.\" This occurred because the original security lock from the fraudulent activity had not yet been removed.\n\nPlease be assured that your account is protected. The $1,000.00 Chicago Luxury Electronics charge is fully covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this unauthorized transaction.\n\nTo immediately resolve this and get you back to using your card, we can lift the security lock on your card (*4821) right now. For your security and convenience, you can authorize this with a single FaceID verification. Once verified, we will instantly issue a Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to use it immediately for your purchases in London. We will also process a provisional credit of $1,000.00 to your account for the fraudulent Chicago Luxury Electronics charge.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 11.65,
+   "context_event_ids": [
+    "D_PAPERLESS",
+    "D_REWARDS",
+    "D_BALANCE_TRANSFER",
+    "D_RESOLVED_FRAUD"
+   ],
+   "context_size": 4,
+   "context_relevant_recall": null,
+   "n_relevant": 0,
+   "context_distractors": 4,
+   "keyfact_coverage": null,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent fabricated a detailed but entirely false root cause involving a complex fraud scenario, a security lock, and a disconnected call, none of which are present in the customer's history.",
+    "relevant_events": [],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1 at 09:15 UTC, there were simultaneous logins from New York and Chicago.",
+     "A $1,000.00 charge occurred at a Luxury Electronics store in Chicago.",
+     "An SMS 'Y' step-up consent reply was intercepted via a SIM-swap or eSIM clone.",
+     "A security lock was placed on credit card ending in *4821.",
+     "On Day 1 at 14:32 UTC, you called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "On Day 2 at 11:20 UTC, a purchase at Heathrow Duty Free for $310 was attempted.",
+     "On Day 2 at 11:20 UTC, an attempt to set up Apple Pay was made.",
+     "Declines were rejected with the error 'CARD_STATUS_LOCKED_RESTRICTED'."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": null,
+   "unsupported_claims_n": 9,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_035",
+   "family": "CONTROL",
+   "control": true,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "I understand your frustration, and I've accessed your complete account history to see exactly what's happening. Please be assured, your account security is our top priority, and we have a clear path to resolve this immediately.\n\nHere's the complete picture of what occurred:\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected unusual activity on your credit card ending in *4821. We observed simultaneous logins to your account from both New York (via a MacBook) and Chicago. This was immediately followed by a $1,000.00 charge at a Luxury Electronics store in Chicago. Crucially, an SMS 'Y' step-up consent reply, which we typically use to verify such transactions, was intercepted via a SIM-swap or eSIM clone in Chicago, while you were physically in New York. Due to these highly suspicious circumstances, our system proactively placed a security lock on your card to prevent further unauthorized activity.\n\nLater that same day, at **14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. Unfortunately, your call disconnected before the necessary SMS passcode verification could be completed to lift the security lock. As a result, the initial lock remained active on your card.\n\nThis brings us to today, **Day 2 at 11:20 UTC**. While traveling in London, UK \u2013 a location for which we have your verified travel notice (trv-lon-2026) on file \u2013 your attempts to use your card at Heathrow Duty Free for a $310 purchase and to set up Apple Pay were rejected. This was due to the existing `CARD_STATUS_LOCKED_RESTRICTED` status, stemming from the root security lock placed yesterday.\n\n**Please be completely reassured:** The $1,000.00 Chicago Luxury Electronics charge is fully covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001). You will not be responsible for this unauthorized transaction.\n\nTo resolve this immediately and get you back to using your card seamlessly, we can take the following steps:\n\n1.  **Lift Security Lock:** A 1-click biometric FaceID verification will instantly lift the security lock on your card.\n2.  **Instant Virtual Card:** We will immediately issue a new Virtual Card Number (VCN) directly to your Apple Pay wallet, allowing you to make secure transactions in London without delay.\n3.  **Credit for Fraudulent Charge:** We will process a credit for the $1,000.00 unauthorized Chicago charge to your account right away.\n\nSimply confirm your FaceID, and we'll handle the rest.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 15.83,
+   "context_event_ids": [
+    "D_RESOLVED_FRAUD",
+    "D_MORTGAGE",
+    "D_CLI",
+    "D_PAST_TRAVEL",
+    "D_PIN_CHANGE",
+    "D_REWARDS"
+   ],
+   "context_size": 6,
+   "context_relevant_recall": null,
+   "n_relevant": 0,
+   "context_distractors": 6,
+   "keyfact_coverage": null,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent fabricated a detailed and entirely false root cause involving a complex fraud scenario, a security lock, and specific declined transactions, none of which are present in the customer's history.",
+    "relevant_events": [],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1 at 09:15 UTC, unusual activity was detected on credit card ending in *4821.",
+     "There were simultaneous logins from New York and Chicago.",
+     "A $1,000.00 charge was made at a Luxury Electronics store in Chicago.",
+     "An SMS consent reply was intercepted via a SIM-swap or eSIM clone.",
+     "A security lock was placed on the card.",
+     "On Day 1 at 14:32 UTC, the customer called about a declined $142.50 Target purchase.",
+     "The call disconnected before SMS passcode verification could be completed.",
+     "On Day 2 at 11:20 UTC, a $310 purchase at Heathrow Duty Free was rejected.",
+     "On Day 2 at 11:20 UTC, an attempt to set up Apple Pay was rejected.",
+     "The card has a `CARD_STATUS_LOCKED_RESTRICTED` status.",
+     "A 1-click biometric FaceID verification will lift the lock.",
+     "A new Virtual Card Number will be issued to Apple Pay.",
+     "A credit for the fraudulent $1,000.00 charge will be processed."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": null,
+   "unsupported_claims_n": 13,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  },
+  {
+   "customer_id": "cust_synth_036",
+   "family": "CONTROL",
+   "control": true,
+   "condition": "full",
+   "question": "What's wrong with my account? Everything is failing.",
+   "narrative": "Hello. I understand you're experiencing issues with your account and that transactions are failing. Let me explain exactly what has happened and how we can resolve this immediately for you.\n\nOn **Day 1 at 09:15 UTC**, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821. We observed simultaneous login attempts from New York (on a MacBook, consistent with your usual activity) and Chicago. Immediately following this, a $1,000.00 charge at a Luxury Electronics store in Chicago was attempted. Our system, recognizing this as a high-risk transaction, initiated our multi-step SMS Y/N consent protocol. Unfortunately, a sophisticated SIM-swap or eSIM clone in Chicago intercepted your 'Y' consent reply, allowing the fraudulent transaction to proceed. Due to this severe security breach, a security lock was automatically placed on your card (*4821) to protect your account.\n\nLater that same day, **Day 1 at 14:32 UTC**, you called us inquiring about a declined $142.50 Target purchase. During that call, we attempted to verify your identity via an SMS passcode to lift the security lock. However, your call disconnected before the verification process could be completed, leaving the original security lock on your card active.\n\nToday, **Day 2 at 11:20 UTC**, while you are traveling in London, UK (under your verified Travel Notice trv-lon-2026), your attempts to make a purchase at Heathrow Duty Free for $310 and to set up Apple Pay were both rejected with the error \"CARD_STATUS_LOCKED_RESTRICTED.\" This is because the initial security lock from the fraudulent activity on Day 1 remains in place.\n\nPlease be assured that your account is protected. The $1,000.00 Chicago Luxury Electronics charge is covered under JPMorgan Chase's Zero Liability Policy (POL-REG-E-001), meaning you are not responsible for this fraudulent transaction.\n\nTo immediately resolve this and restore full functionality to your account, we can lift the security lock, issue you an instant Virtual Card Number (VCN) directly to your Apple Pay in London, and credit the $1,000.00 fraudulent charge back to your account.\n\nPlease confirm with a single biometric FaceID authentication to proceed with this resolution.",
+   "model_ok": true,
+   "kg_context": "{\n  \"live_statement_balance_usd\": null,\n  \"verified_travel_notice\": \"London, UK (trv-lon-2026)\",\n  \"customer_risk_profile\": {\n    \"average_transaction_usd\": 100.0,\n    \"typical_merchant_categories\": [\n      \"General Retail\"\n    ]\n  },\n  \"governing_policies\": [\n    \"POL-REG-E-001 (Zero Liability)\",\n    \"POL-STEP-UP-2FA-002 (Step-Up Y/N Audit)\"\n  ]\n}",
+   "latency_s": 13.01,
+   "context_event_ids": [
+    "D_PAST_TRAVEL",
+    "D_BALANCE_TRANSFER",
+    "D_AUTH_USER",
+    "D_REWARDS"
+   ],
+   "context_size": 4,
+   "context_relevant_recall": null,
+   "n_relevant": 0,
+   "context_distractors": 4,
+   "keyfact_coverage": null,
+   "canary_hits": [
+    "Chicago",
+    "Target",
+    "London",
+    "Apple Pay",
+    "Heathrow",
+    "4821",
+    "$1,000",
+    "New York",
+    "Luxury Electronics",
+    "trv-lon",
+    "Duty Free"
+   ],
+   "question_marks": 0,
+   "timeline_len": 3,
+   "root_cause_field": "Dual-City Geo-Velocity Anomaly & $1,000 Chicago SIM-Swap Interception",
+   "confidence": 0.99,
+   "judge": {
+    "root_cause_verdict": "WRONG",
+    "root_cause_rationale": "The agent invented a detailed, completely false narrative about fraudulent activity and a security lock. The correct response was to state that no cause for the customer's issue was found in the provided records.",
+    "relevant_events": [],
+    "other_events_blamed": [],
+    "other_events_mentioned": [],
+    "unsupported_claims": [
+     "On Day 1 at 09:15 UTC, our Fraud Velocity System detected highly unusual activity on your credit card ending in *4821.",
+     "We observed simultaneous login attempts from New York (on a MacBook, consistent with your usual activity) and Chicago.",
+     "A $1,000.00 charge at a Luxury Electronics store in Chicago was attempted.",
+     "Our system... initiated our multi-step SMS Y/N consent protocol.",
+     "A sophisticated SIM-swap or eSIM clone in Chicago intercepted your 'Y' consent reply, allowing the fraudulent transaction to proceed.",
+     "A security lock was automatically placed on your card (*4821).",
+     "On Day 1 at 14:32 UTC, you called us inquiring about a declined $142.50 Target purchase.",
+     "Your call disconnected before the verification process could be completed.",
+     "On Day 2 at 11:20 UTC... your attempts to make a purchase at Heathrow Duty Free for $310... were... rejected.",
+     "An attempt to set up Apple Pay was... rejected.",
+     "The rejection error was 'CARD_STATUS_LOCKED_RESTRICTED'."
+    ],
+    "claims_no_history_found": false,
+    "asks_customer_to_explain": false,
+    "next_step_appropriate": false
+   },
+   "root_cause_verdict": "WRONG",
+   "root_cause_correct": 0.0,
+   "chain_coverage": null,
+   "unsupported_claims_n": 11,
+   "hallucination_free": 0.0,
+   "blamed_unrelated": 0.0,
+   "asked_question": 0.0,
+   "next_step_ok": 0.0,
+   "canary": 1.0,
+   "pass": 0.0
+  }
+ ],
+ "summary": {
+  "n": {
+   "full": 36
+  },
+  "metrics": {
+   "pass": {
+    "full": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 36
+    }
+   },
+   "root_cause_correct": {
+    "full": {
+     "mean": 0.3611111111111111,
+     "ci95": [
+      0.19444444444444445,
+      0.5277777777777778
+     ],
+     "n": 36
+    }
+   },
+   "chain_coverage": {
+    "full": {
+     "mean": 0.5520833333333334,
+     "ci95": [
+      0.375,
+      0.71875
+     ],
+     "n": 32
+    }
+   },
+   "keyfact_coverage": {
+    "full": {
+     "mean": 0.44528769841269844,
+     "ci95": [
+      0.30581597222222223,
+      0.5798363095238095
+     ],
+     "n": 32
+    }
+   },
+   "hallucination_free": {
+    "full": {
+     "mean": 0.027777777777777776,
+     "ci95": [
+      0.0,
+      0.08333333333333333
+     ],
+     "n": 36
+    }
+   },
+   "unsupported_claims_n": {
+    "full": {
+     "mean": 7.444444444444445,
+     "ci95": [
+      5.916666666666667,
+      8.86111111111111
+     ],
+     "n": 36
+    }
+   },
+   "blamed_unrelated": {
+    "full": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 36
+    }
+   },
+   "asked_question": {
+    "full": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 36
+    }
+   },
+   "canary": {
+    "full": {
+     "mean": 0.9166666666666666,
+     "ci95": [
+      0.8055555555555556,
+      1.0
+     ],
+     "n": 36
+    }
+   },
+   "next_step_ok": {
+    "full": {
+     "mean": 0.4722222222222222,
+     "ci95": [
+      0.3055555555555556,
+      0.6388888888888888
+     ],
+     "n": 36
+    }
+   },
+   "context_relevant_recall": {
+    "full": {
+     "mean": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ],
+     "n": 32
+    }
+   },
+   "context_distractors": {
+    "full": {
+     "mean": 4.944444444444445,
+     "ci95": [
+      4.305555555555555,
+      5.583333333333333
+     ],
+     "n": 36
+    }
+   },
+   "latency_s": {
+    "full": {
+     "mean": 22.653333333333332,
+     "ci95": [
+      20.16027777777778,
+      25.24833333333333
+     ],
+     "n": 36
+    }
+   }
+  },
+  "paired_vs_baseline": {},
+  "by_family": {
+   "ACCOUNT_TAKEOVER_FREEZE": {
+    "full": {
+     "root_cause_correct": 0.25,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "ADDRESS_MISMATCH_AVS": {
+    "full": {
+     "root_cause_correct": 0.25,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "CARD_EXPIRED_NOT_ACTIVATED": {
+    "full": {
+     "root_cause_correct": 0.25,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "CONTROL": {
+    "full": {
+     "root_cause_correct": 0.0,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "CREDIT_LIMIT_HOLD": {
+    "full": {
+     "root_cause_correct": 0.5,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "GEO_VELOCITY_LOCK": {
+    "full": {
+     "root_cause_correct": 0.75,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "LOST_CARD_REPLACEMENT": {
+    "full": {
+     "root_cause_correct": 0.25,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "MISSING_TRAVEL_NOTICE": {
+    "full": {
+     "root_cause_correct": 0.5,
+     "pass": 0.0,
+     "n": 4
+    }
+   },
+   "RETURNED_PAYMENT_RESTRICTION": {
+    "full": {
+     "root_cause_correct": 0.5,
+     "pass": 0.0,
+     "n": 4
+    }
+   }
+  },
+  "verdicts": {
+   "full": {
+    "CORRECT": 13,
+    "PARTIAL": 3,
+    "WRONG": 20
+   }
+  },
+  "cutoff_sweep": [
+   {
+    "cutoff": 0.85,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.88,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.9,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.92,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.94,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.96,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 0.98,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": 1.0,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   },
+   {
+    "cutoff": null,
+    "context_recall": null,
+    "context_precision": null,
+    "empty_contexts": 0,
+    "n": 0
+   }
+  ],
+  "cloud_distance": {
+   "relevant": {
+    "n": 0,
+    "median": null,
+    "min": null,
+    "max": null
+   },
+   "other": {
+    "n": 0,
+    "median": null,
+    "min": null,
+    "max": null
+   }
+  }
+ }
+}

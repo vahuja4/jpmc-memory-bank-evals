@@ -1,0 +1,1913 @@
+{
+ "run_at": "20260929T092508Z",
+ "judge": "gemini-2.5-pro",
+ "runs": [
+  "evals/results/conversations_roles_20260929T053216Z.json"
+ ],
+ "scopes": [
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_028",
+   "path": "roles",
+   "n_memories": 18,
+   "memories": [
+    {
+     "index": 0,
+     "name": "7495855307579457536",
+     "fact": "On 2026-03-04, agent Rafael advised the customer that because they still had physical possession of their Amazon Prime Visa *3810, the card did not need to be replaced. However, the chip on card *3810 eventually malfunctioned, and the customer ordered a replacement ending in *1337 at a branch. On 2026-06-03, a dropped call occurred during the activation of the replacement card *1337, leading to the opening of case CASE-5950748, but the card was successfully activated on a callback. On 2026-08-12, agent Omar referenced CASE-5950748 during a request to cancel a travel notice and update the email address.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "2884169289152069632",
+     "fact": "The customer, Nadia, lives alone in Austin, Texas, and eats out frequently.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "5190012298365763584",
+     "fact": "On 2026-03-04, agent Rafael advised that a provisional credit of $313.89 would post to the customer's account within ten business days, which posted on 2026-04-10. Dispute DSP-1480747 was closed in the customer's favor on 2026-07-24, making the $313.89 provisional credit on the Amazon Prime card *1337 permanent because the merchant failed to contest it by the final deadline.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "on the Amazon Prime card *1337",
+       "said_by": "nobody",
+       "source_quote": "the provisional credit for $313.89 that was applied to your account is now permanent.",
+       "source_ref": "C09",
+       "why": "The source states the credit was applied to the customer's account. The memory incorrectly specifies it was on card *1337. The original charge was on card *3810, and credits are applied to the account, not a specific card number."
+      }
+     ]
+    },
+    {
+     "index": 3,
+     "name": "1731247784545222656",
+     "fact": "On 2026-03-04, agent Rafael explained that the customer's Amazon Prime Visa does not standardly earn 5x points on dining. However, on 2026-09-13 (call CASE-9931971), agent Priya activated a targeted 5x points on dining promotion on card *1337, which requires enrollment, started on 2026-09-13, and was confirmed via email to park.n56@example.org.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "578326279938375680",
+     "fact": "Dispute DSP-1480747 (under case CASE-6327908) was opened on 2026-03-04 for an unrecognized charge of $313.89 from Harbor Lights Florist on the customer's Amazon Prime Visa card *3810, and was closed in her favor on 2026-07-24, making the credit on card *1337 permanent. Previously, as of 2026-04-12, the dispute had remained open, leading to follow-up case CASE-5599947 and complaints about a missing supervisor callback, which agents Dana and Grace addressed in June 2026.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "making the credit on card *1337 permanent",
+       "said_by": "nobody",
+       "source_quote": "the provisional credit for $313.89 that was applied to your account is now permanent.",
+       "source_ref": "C09",
+       "why": "The source states the credit was applied to the customer's account. The memory incorrectly specifies it was on card *1337. The original charge was on card *3810, and credits are applied to the account, not a specific card number."
+      }
+     ]
+    },
+    {
+     "index": 5,
+     "name": "8411211931842510848",
+     "fact": "On 2026-03-26, the customer's primary email was changed to nadia.park51@example.org, and the old email (nadiap30@example.com) was successfully purged by 2026-06-26. Following an update request on 2026-08-12, the customer confirmed on 2026-09-13 (call CASE-9931971) that her primary email address is park.n56@example.org.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "on 2026-08-12",
+       "said_by": "nobody",
+       "source_quote": "On Mon, 27 Jul 2026 11:18:42 -0500, Nadia Park <nadia.park51@example.org> wrote:",
+       "source_ref": "C10",
+       "why": "The memory states the customer requested an email update on August 12, 2026. The source email shows the request was sent on July 27, 2026."
+      }
+     ]
+    },
+    {
+     "index": 6,
+     "name": "4622558745317081088",
+     "fact": "On 2026-04-12, agent Keisha advised Ms. Park that using her Amazon Prime Visa card at an ATM overseas triggers a cash advance with a $12.00 fee per withdrawal and interest accruing from day one at 30.24%, recommending she use it directly for purchases instead.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "2316715736103387136",
+     "fact": "As of April 2026, Ms. Park was planning a trip to visit family abroad.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "10872726889693184",
+     "fact": "Ms. Park's primary contact number was updated on 2026-07-24 by agent Luis (under case CASE-5004299) to 412-555-0996 (her new direct work line), replacing her previous work landline of 412-555-0567. On 2026-09-13 (call CASE-9931971), she confirmed 412-555-0996 as her callback number.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "6928401754530775040",
+     "fact": "Ms. Park has a brother named Emeka.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "1951924166286376960",
+     "fact": "The customer prefers to have paper copies of their statements for their files, even though they have the mobile app. On 2026-04-29, the bank promised to mail a paper copy of the March 2026 statement for the Amazon Prime Visa *3810. Although the mailing was initially not received and the customer declined an offer to resubmit on 2026-06-03, she confirmed on 2026-07-24 that she had finally received the promised itemized paper statement.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "On 2026-04-29",
+       "said_by": "nobody",
+       "source_quote": "On Apr 27, 2026, at 9:30 AM, Card Services <support@bank.example> wrote:",
+       "source_ref": "C04",
+       "why": "The memory states the bank promised to mail a statement on April 29, 2026, but the source email shows the promise was made on April 27, 2026."
+      }
+     ]
+    },
+    {
+     "index": 11,
+     "name": "6563610184713764864",
+     "fact": "On 2026-04-29, agent Marcus waived a $32.00 late fee on the customer's Amazon Prime Visa *3810 as a one-time courtesy and advised that such a waiver is only permitted once every 12 months; however, on 2026-07-24, agent Luis corrected this, clarifying that late fee courtesy waivers are actually only allowed once every 24 months.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "On 2026-04-29",
+       "said_by": "nobody",
+       "source_quote": "On Apr 27, 2026, at 9:30 AM, Card Services <support@bank.example> wrote:",
+       "source_ref": "C04",
+       "why": "The memory states the late fee was waived on April 29, 2026, but the source email from agent Marcus is dated April 27, 2026."
+      }
+     ]
+    },
+    {
+     "index": 12,
+     "name": "939740150034857984",
+     "fact": "On 2026-06-26 (secure chat with agent Tom), a travel notice was placed on the customer's Amazon Prime Visa card *1337 for travel to Dublin, Ireland, from 2026-08-07 to 2026-08-15; the customer noted it is a direct flight from Austin, TX. On 2026-08-12, during a secure message with agent Omar, the customer requested to cancel this travel notice, which was processed after verification because she had to postpone her planned trip to Ireland.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "On 2026-08-12",
+       "said_by": "nobody",
+       "source_quote": "On Mon, 27 Jul 2026 11:18:42 -0500, Nadia Park <nadia.park51@example.org> wrote:",
+       "source_ref": "C10",
+       "why": "The memory states the customer requested to cancel her travel notice on August 12, 2026. The source email shows the request was sent on July 27, 2026."
+      }
+     ]
+    },
+    {
+     "index": 13,
+     "name": "5491753473399586816",
+     "fact": "On 2026-06-26 agent Tom advised the customer that the 0% introductory APR on their balance transfer will end on 2026-12-01, after which any remaining balance will accrue interest at the standard rate of 27.99%.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 14,
+     "name": "6759516768504381440",
+     "fact": "The customer speaks a little Spanish because her grandmother was from Mexico.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 15,
+     "name": "4453673759290687488",
+     "fact": "The customer prefers her Amazon Prime card because she gets enough points with it and declined other credit card offers on 2026-07-24.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 16,
+     "name": "3264723457664876544",
+     "fact": "The customer's billing zip code is 78704.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 17,
+     "name": "6381214399805259776",
+     "fact": "On 2026-09-13 (call CASE-9931971), agent Priya advised that the statement closing date for the customer's Amazon Prime Visa card *1337 is the 2nd of each month, meaning purchases made after that date will appear on the following statement.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_028",
+   "path": "managed",
+   "n_memories": 10,
+   "memories": [
+    {
+     "index": 0,
+     "name": "2278435139270737920",
+     "fact": "I eat out frequently and sometimes shop at Dollar General.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "4584278148484431872",
+     "fact": "On March 4, 2026, I disputed an unrecognized charge of $313.89 from 'Harbor Lights Florist' on my Amazon Prime Visa card ending in 3810. The dispute was filed under reference number DSP-1480747 and case number CASE-6327908. On July 24, 2026, I confirmed that this dispute was officially closed in my favor, making the provisional credit permanent. Previously, on April 12, 2026, I contacted Premier OmniBank regarding this dispute, which led to a follow-up case (CASE-5599947) being opened and a supervisor scheduled to call my direct office line by April 17, 2026. However, because the promised callback was never submitted into the system, I filed a formal complaint (CASE-5950748) with Premier Financial. I also requested a paper copy of my March 2026 statement for the card to be mailed to my Austin, TX address to review the dispute, which was processed to arrive by May 9, 2026, and the bank waived a $32.00 late fee on my account as a one-time courtesy. I have since successfully activated my new Amazon Prime Visa card ending in 1337, which replaces my old card ending in 3810 because its chip had stopped working. I prefer to use my Amazon Prime Visa card ending in 1337 as my primary card for everyday purchases due to the reward points, and on September 13, 2026, I activated a promotion for 5x points on dining on this card, which is effective going forward. I am not interested in other credit card offers.",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "6890121157698125824",
+     "fact": "My first name is Nadia, and I live alone in Austin, Texas, with my billing address on Crestview street. I am considering a potential move to Denver in the future because Austin is becoming too expensive.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "1994708362746396672",
+     "fact": "I updated the primary email address on my account and prefer to use this current email address for all banking communications, wanting my old email address to be fully purged from my contact records. On July 24, 2026, I also updated my account's primary contact number to my new direct work phone number. I prefer to handle account updates and support via email rather than over the phone, due to past negative experiences with dropped calls.",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "6183056016200957952",
+     "fact": "I am planning a trip abroad to visit family.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "1571369997773570048",
+     "fact": "I have a brother named Emeka.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "6691962774093824000",
+     "fact": "I prefer to keep physical paper copies of my financial statements for my records, even though I have the mobile app.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "301354902855090176",
+     "fact": "I set a travel notice on my Amazon Prime Visa card ending in 1337 for a trip to Dublin, Ireland, from August 7, 2026, to August 15, 2026, but subsequently requested to cancel it because the trip was postponed.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "5707926255513370624",
+     "fact": "My grandmother was from Mexico, and I speak a little Spanish.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "157239714779234304",
+     "fact": "My Amazon Prime Visa card statement closing date is the 2nd of each month.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "the 2nd of each month",
+       "said_by": "agent",
+       "source_quote": "STATEMENT CLOSED for Amazon Prime Visa (*3810) with a balance of $2,891.98.",
+       "source_ref": "note 2025-03-03",
+       "why": "The memory states the statement closing date is the 2nd of the month, based on an agent's statement in C12. However, system notes show the statement closing on other dates, such as the 3rd of the month in March 2025 and the 4th of the month in April 2026."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_009",
+   "path": "roles",
+   "n_memories": 15,
+   "memories": [
+    {
+     "index": 0,
+     "name": "9033834580326481920",
+     "fact": "The customer, Marcus, was born in Savannah and currently resides in Atlanta, Georgia. He works in an office, has a partner named Jordan, and has a wife who occasionally uses his card for shopping at Ross Dress for Less. He has family in Finland whom he plans to visit during an upcoming trip that also includes work travel.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "OTHER_PERSON",
+       "wrong_part": "and has a wife who occasionally uses his card for shopping at Ross Dress for Less",
+       "said_by": "customer",
+       "source_quote": "My partner Jordan was laughing at me about it.",
+       "source_ref": "C04",
+       "why": "The customer consistently refers to his partner, Jordan, throughout the history. He only mentions a \"wife\" once, in passing, while guessing about a fraudulent charge. The memory presents the existence of both a partner and a wife as a fact, which is not substantiated and likely creates a non-existent person."
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "242808107699273728",
+     "fact": "On 2026-03-27 (secure chat, agent Priya), the customer's primary email address was updated from marcusl31@example.net to marcus.lindqvist50@example.net (after correcting an initial typo of marcuslindqvist50@example.net), which he verified again on 2026-04-06. On 2026-04-06 (phone call, agents Maria and Wes), he clarified that the phone number ending in 2900 on file is not his and designated his office landline 412-555-0147 as the best callback number, noting it is not the old fax line 412-555-0144. On 2026-04-29, the bank confirmed his email address and callback number 412-555-0147 on file. On 2026-07-28, the customer's primary callback number on file was updated from the old work landline 412-555-0147 to the new work number 412-555-0276, and he confirmed his email address on file is marcus.lindqvist50@example.net. On 2026-08-02 (confirmed complete on 2026-08-16 under case CASE-1447259), the customer's primary email address was updated from marcus.lindqvist50@example.net to lindqvist.m91@example.org, verified via an SMS OTP sent to the phone number on file 412-555-0276. On 2026-09-16, the customer confirmed their phone number on file starts with 412 and ends in 0276, and their current email on file starts with lindqvist.m91.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "confirmed complete on 2026-08-16 under case CASE-1447259",
+       "said_by": "nobody",
+       "source_quote": "Date: 2026-08-02 10:35 AM ... This email serves as confirmation that the changes you requested have been successfully completed.",
+       "source_ref": "C10",
+       "why": "The email change was confirmed complete on August 2, 2026, not August 16. The case number CASE-1447259 is from a previous, unrelated card activation call and was mistakenly included in an internal agent note; it is not the case number for the email change."
+      }
+     ]
+    },
+    {
+     "index": 2,
+     "name": "2116305552685400064",
+     "fact": "On 2026-03-09 (phone agent Grace), dispute DSP-7530420 (associated with case CASE-4234533) was opened for a $392.88 charge from Pinecrest Outdoor Supply on the customer's Chase Freedom Flex card *5997. As of 2026-04-06, the dispute investigation remains active, and the bank is waiting for the merchant's bank to provide documentation in response to a retrieval request. On 2026-04-29 (secure message, agent Luis), the bank promised to mail the customer a written summary of the dispute case within ten business days (by 2026-05-09), and the customer noted they saw the provisional credit post to their statement a few weeks prior. On 2026-07-28 (call CASE-6123302), dispute DSP-7530420 was closed and resolved in the customer's favor, making the temporary credit permanent. On 2026-09-16 (recorded under case CASE-3420358), agent Rafael explained that the pending rewards points for the $392.88 charge from Pinecrest Outdoor Supply were reversed because the customer received a full refund following the successful resolution of dispute DSP-7530420.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "6727991571112787968",
+     "fact": "On 2026-03-09, the Chase Freedom Flex card *5997 was deactivated immediately due to fraudulent activity, and a replacement card was ordered to be sent to the customer's address in Atlanta, Georgia within 3-5 business days. On 2026-06-05, the customer activated their new Chase Freedom Flex card ending in *1073 to replace their previous card ending in *5997, which had a malfunctioning chip; this activation automatically deactivated the old card and was verified via a one-time passcode sent to the email address on file.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "On 2026-03-09, the Chase Freedom Flex card *5997 was deactivated immediately due to fraudulent activity",
+       "said_by": "agent",
+       "source_quote": "[2026-05-17] Primary issue is his card, the Chase Freedom Flex ending in *5997. - Cx states the chip has stopped working consistently for about a week.",
+       "source_ref": "C05",
+       "why": "Agent Grace stated on 2026-03-09 that card *5997 would be deactivated immediately. However, the customer was still using the same card on 2026-05-17, when he visited a branch to report its chip had stopped working. The memory incorrectly states the agent's unfulfilled action as a fact."
+      }
+     ]
+    },
+    {
+     "index": 4,
+     "name": "4422148561899094016",
+     "fact": "On 2026-03-09, the bank promised to issue a provisional credit of $392.88 to the customer's account within ten business days (by 2026-03-23) while dispute DSP-7530420 (under case CASE-1447259) is investigated; this provisional credit posted on 2026-04-04. The bank advised that the merchant has until 2026-07-07 to respond with evidence. The promised written summary of the hotel charge dispute was never received; after agent Tom tracked the mailing on 2026-06-05, agent Omar escalated the issue on 2026-06-29 to his supervisor and the disputes department to have the summary emailed to marcus.lindqvist50@example.net on the same day. On 2026-07-28, agent Dana apologized because a previously promised written summary of the dispute case from six weeks prior was never processed, and submitted a new request to mail a case summary letter to the customer's address in Atlanta, Georgia, within seven to ten business days (by August 6 to August 11, 2026).",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "(under case CASE-1447259)",
+       "said_by": "nobody",
+       "source_quote": "The reference number for your overall inquiry is CASE-4234533.",
+       "source_ref": "C04",
+       "why": "The case number associated with the dispute opened on 2026-03-09 is CASE-4234533. Case CASE-1447259 was for a separate card activation call on 2026-06-05."
+      },
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "hotel charge dispute",
+       "said_by": "customer",
+       "source_quote": "The dispute is for a charge from Pinecrest Outdoor Supply in the amount of $392.88.",
+       "source_ref": "C04",
+       "why": "The customer misremembered the dispute as being for a 'hotel charge' during a chat on 2026-06-29. The memory repeats this error as fact, but the actual dispute was for a charge from 'Pinecrest Outdoor Supply'."
+      }
+     ]
+    },
+    {
+     "index": 5,
+     "name": "7259416327142506496",
+     "fact": "On 2026-03-27, agent Priya waived a $35.00 late payment fee on the customer's Chase Freedom Flex card as a one-time courtesy and advised that this waiver can only be granted once every 12 months.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "8151129053361864704",
+     "fact": "On 2026-04-06, agent Wes advised the customer that the bank has up to two billing cycles to complete a dispute investigation, and reminded him that he must still make the minimum payment by the due date to avoid late fees of up to $41.00 because the provisional credit does not count toward the minimum payment.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "657139273417359360",
+     "fact": "On 2026-04-06, Jordan, an authorized user on the account with card ending in *4676, requested that his personal cell phone number 412-555-0712 be added to the notes for future contact.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "3539443034934476800",
+     "fact": "On 2026-04-06, agent Wes from the Account Protection team created escalation CASE-5436812 and promised that a supervisor would call the customer back on the office landline 412-555-0147 by 2026-04-10 to review the case history of dispute DSP-7530420 and explain the investigation process. On 2026-06-05, the customer confirmed that this supervisor callback had been successfully completed.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "1999211962373767168",
+     "fact": "Case CASE-1447259 was opened on 2026-06-05 by agent Anjali to document the card activation (during which a dropped call was recorded on the new card *1073) and the customer's positive feedback about the completed supervisor callback.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "4674350141031841792",
+     "fact": "On 2026-06-05, agent Tom advised the customer that international ATM withdrawals on the card are treated as cash advances, which incur a fee of $10.00 per withdrawal and accrue interest from day one at a rate of 31.49%. The customer noted they would avoid using ATMs and pay with the card directly.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "9004561182748573696",
+     "fact": "On 2026-06-29 (secure chat, agent Omar), a travel notice was set on the Chase Freedom Flex card *1073 for Vancouver, Canada, from 2026-08-16 to 2026-08-28. However, on 2026-08-02 (confirmed complete on 2026-08-16), this travel notice was cancelled because the trip was postponed indefinitely.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "(confirmed complete on 2026-08-16)",
+       "said_by": "nobody",
+       "source_quote": "Date: 2026-08-02 10:35 AM ... This email serves as confirmation that the changes you requested have been successfully completed. ... 2. The travel notice for Vancouver, Canada ... has been cancelled as requested.",
+       "source_ref": "C10",
+       "why": "The cancellation of the travel notice was requested and confirmed complete on August 2, 2026, not August 16, 2026."
+      }
+     ]
+    },
+    {
+     "index": 12,
+     "name": "4392875164321185792",
+     "fact": "On 2026-06-29, agent Omar advised that the Chase Freedom Flex card has a 3% foreign transaction fee, statement-credit redemptions require a minimum of 5,000 points (at which time the customer had a balance of 14,932 points), and points transferred to partners cannot be moved back.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 13,
+     "name": "7080116766977818624",
+     "fact": "On 2026-09-16, agent Rafael clarified that the 75,000 bonus points promotional offer discussed during the customer's branch visit at the end of August 2026 is a new account acquisition bonus and does not apply to the customer's existing account.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 14,
+     "name": "1315509243943583744",
+     "fact": "On 2026-09-16, agent Rafael advised the customer that their statement closing date is the 25th of the month, and explained that while the date could be changed to a day in the first week of the month, the change would take one to two billing cycles to take effect; the customer decided to keep their current closing date.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_009",
+   "path": "managed",
+   "n_memories": 14,
+   "memories": [
+    {
+     "index": 0,
+     "name": "5539885694417108992",
+     "fact": "On March 9, 2026, I disputed a fraudulent charge of $392.88 from 'Pinecrest Outdoor Supply' on my Chase Freedom Flex card ending in 5997 (Dispute ID: DSP-7530420, Case: CASE-4234533). The dispute has been resolved and closed in my favor, making the provisional credit of $392.88 (originally posted on April 4, 2026) permanent. My old card was deactivated, a new card was shipped to my Atlanta address, and I received a supervisor callback on my office landline regarding the escalation under CASE-5436812. I also requested a written summary letter of the dispute resolution to be mailed to my home.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "8422189455934226432",
+     "fact": "My first name is Marcus.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "3234042685203415040",
+     "fact": "I work in an office and enjoy camping and outdoor activities, but I do not enjoy hot, humid weather or outdoor sports like mountain climbing.",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "do not enjoy... outdoor sports like mountain climbing",
+       "said_by": "nobody",
+       "source_quote": "It's not like I'm a professional mountain climber or anything.",
+       "source_ref": "C01",
+       "why": "The customer stated he is not a professional mountain climber to make a point, but never said he dislikes or does not enjoy the sport. The memory invents this preference."
+      }
+     ]
+    },
+    {
+     "index": 3,
+     "name": "928199675989721088",
+     "fact": "I live in Atlanta, Georgia, but my company has an office in Texas and I am considering a potential move to Austin in the future.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "7845728703630802944",
+     "fact": "My last name is Lindqvist.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "2702617929173696512",
+     "fact": "Chase waived a $35.00 late fee on my Chase Freedom Flex card as a one-time courtesy.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "5008460938387390464",
+     "fact": "I updated my primary email address on my Chase account during a support chat on March 27, 2026.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "8914489190201163776",
+     "fact": "My partner, Jordan, is an authorized user on my credit card account.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "4432000186083966976",
+     "fact": "On June 5, 2026, I activated my new Chase Freedom Flex credit card ending in 1073 and deactivated my old card ending in 5997 because the chip on my old card stopped working.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "7859239502512914432",
+     "fact": "I have family in Finland.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "2094631979478679552",
+     "fact": "I prefer to pay directly with my card rather than making international ATM withdrawals to avoid cash advance fees and interest.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "5742547677648781312",
+     "fact": "I requested and escalated a written summary for a hotel charge dispute that I filed in April 2026.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "a hotel charge dispute",
+       "said_by": "customer",
+       "source_quote": "I'm actually still waiting on a written summary of that dispute I filed. The one about the hotel charge.",
+       "source_ref": "C08",
+       "why": "The customer mistakenly referred to the dispute as being for a 'hotel charge' in a chat, but all records show the merchant was 'Pinecrest Outdoor Supply'."
+      },
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "that I filed in April 2026",
+       "said_by": "nobody",
+       "source_quote": "> On March 9, 2026, at 4:15 PM, Card Services <support@bank.example> wrote: > ... This message confirms that following your call today, we have opened dispute case DSP-7530420",
+       "source_ref": "C04",
+       "why": "The dispute was filed on March 9, 2026. No one in the source states it was filed in April. The memory likely misinterpreted an agent's comment about 'case notes from April' as the filing date."
+      }
+     ]
+    },
+    {
+     "index": 12,
+     "name": "756218465219510272",
+     "fact": "I cancelled a travel notice on my Chase Freedom Flex credit card for a trip to Vancouver, Canada, which was originally scheduled for August 16, 2026, to August 28, 2026, due to the trip being postponed indefinitely.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 13,
+     "name": "5711022480257187840",
+     "fact": "I speak Spanish.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_016",
+   "path": "roles",
+   "n_memories": 14,
+   "memories": [
+    {
+     "index": 0,
+     "name": "5262914317333823488",
+     "fact": "The customer, Sofia, lives in and loves Charlotte, North Carolina, has a dog named Winston, and a wife named Renata, whose family lives in Brazil and with whom she is planning a potential trip there in late summer 2026.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "2957071308120129536",
+     "fact": "On 2026-03-04, the bank promised a provisional credit of $473.31 within ten business days (by 2026-03-18) for dispute DSP-1512689; this credit was eventually posted on 2026-04-09, and on 2026-07-22, the customer was informed that the dispute was resolved in her favor on 2026-07-21, making the temporary credit permanent. On 2026-06-07, Sofia confirmed she had received the paper statement she had requested in late April 2026 via her updated primary email address.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "On 2026-06-07, Sofia confirmed she had received the paper statement she had requested in late April 2026",
+       "said_by": "nobody",
+       "source_quote": "I asked if she had received the paper statement she requested last month. She confirmed she did receive it.",
+       "source_ref": "C05",
+       "why": "The customer confirmed receiving the paper statement during her branch visit on May 20, 2026, not during a phone call on June 7, 2026."
+      }
+     ]
+    },
+    {
+     "index": 2,
+     "name": "651228298906435584",
+     "fact": "On 2026-03-04 (call with agent Grace), dispute DSP-1512689 (case CASE-5728419) was opened for a charge of $473.31 on 2026-02-28 from Golden Gate Luggage Co. for an undelivered suitcase on her Chase Slate Edge card ending in *2837. Her preferred contact email, initially sofiad3@example.net, was updated on 2026-03-24 to sofia.doyle73@example.net, and her primary email address was fully updated in the system as of 2026-06-27, and later updated under case CASE-1453067 on 2026-08-11 to doyle.s99@example.org. On 2026-04-29, she confirmed that her office landline 608-555-0481 was her best daytime contact number, but this primary callback phone number was updated under case CASE-3979463 on 2026-07-22 to a new work line, 608-555-0779. On 2026-09-13, the customer confirmed she had updated her profile contact details, including her primary email address and her callback number to her new work number.",
+     "topics": [
+      "CONTACT_AND_CASES",
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "5743955052532334592",
+     "fact": "On 2026-03-24, agent Marcus advised the customer that her Chase Slate Edge card is valid across the entire U.S. and that if she moves, she only needs to update her billing address on file rather than getting a new card or account.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "1029530667605557248",
+     "fact": "On 2026-04-11, senior account specialist Rafael advised the customer that her request for a credit line increase was declined in March 2026, and she can request it again after 2026-10-10; however, on 2026-07-22, agent Wes advised her that she could actually re-request the credit line increase after 2026-07-11, correcting the outdated system note. Keeping the requested amount under $4,000.00 generally avoids the manual underwriting process.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "5641216686032945152",
+     "fact": "The customer's wife, Renata, is an authorized user on the account with her own card ending in *4393, and her phone number is 608-555-0619.",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "3335373676819251200",
+     "fact": "On 2026-04-11, a new case CASE-1460630 was opened to address the customer's request for a status update on dispute DSP-1512689; senior account specialist Rafael promised that a supervisor from the dispute resolution team would call her back by Friday, April 17, 2026, on her office landline 608-555-0481 (which she corrected from 608-555-0488). This callback was successfully completed when the supervisor called her office landline and left a message with her wife because she was in a meeting.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "8190254075124645888",
+     "fact": "On 2026-04-29 (secure message, agent Luis) the bank promised to mail the customer an itemised paper copy of their March statement covering the disputed Golden Gate Luggage Co. charge to their address in Charlotte, NC within ten business days, by 2026-05-09. Later, on 2026-07-22 under case CASE-3979463, agent Wes submitted a request for an itemized paper copy of the customer's May 2026 statement to be mailed to their address in Charlotte, which should arrive within seven to ten business days (by 2026-08-05), resolving a prior agent's failure to process the request.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "696264295180140544",
+     "fact": "On 2026-04-29 agent Luis waived the customer's $35.00 late fee on their Chase Slate Edge card *2837 as a one-time courtesy and advised that this waiver can only be given once every 24 months.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "3337625476632936448",
+     "fact": "On 2026-06-07 (during a phone call under case CASE-1453067, which was closed as resolved), the customer Sofia's replacement Chase Slate Edge card ending in *6065 was activated, and her old damaged card ending in *2837 (which was physically damaged with a worn strip and a snapped corner) was permanently deactivated. This activation follows her branch visit on 2026-05-20 to request a replacement after the old card snapped. During the activation, an initial call dropped, but a supervisor successfully called Sofia back on her landline to finish the activation as promised, and agent Anjali advised her that her existing PIN automatically transfers to the new card. Case CASE-1453067 also recorded her feedback that old email addresses are still showing in the quoted text of email threads despite her primary email being updated in March.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS",
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "a supervisor successfully called Sofia back on her landline to finish the activation",
+       "said_by": "nobody",
+       "source_quote": "Hi, Ms. Doyle. My name is Anjali. I was just speaking with you a few moments ago from Chase Card Services? I\u2019m so sorry, it seems our call was disconnected.",
+       "source_ref": "C07",
+       "why": "The agent who called the customer back after the initial call dropped was named Anjali; she did not identify herself as a supervisor."
+      }
+     ]
+    },
+    {
+     "index": 10,
+     "name": "932703275617091584",
+     "fact": "On 2026-06-07, agent Anjali advised Sofia that using her Chase Slate Edge credit card for ATM withdrawals abroad is treated as a cash advance, which incurs a $12.00 fee per withdrawal and a 30.24% interest rate starting from day one. On 2026-06-27, agent Beth advised that her card *6065 is subject to a 3% foreign transaction fee on foreign currency purchases, cash advances at ATMs are subject to a cash advance fee and a separate, higher APR starting on the transaction date, and merchants in Iceland mostly use chip-and-PIN terminals.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "6271720633864814592",
+     "fact": "On 2026-06-27 (secure chat, agent Beth), a travel notice was set on the customer's Chase Slate Edge card *6065 for travel to Reykjavik, Iceland, from 2026-08-14 to 2026-08-20, which she had planned to use for the trip; however, the trip was postponed, and the travel notice was cancelled on 2026-08-11 under case CASE-1453067 due to a family matter (Reference ID: TN-781903-C).",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 12,
+     "name": "295443928344166400",
+     "fact": "On 2026-09-13, during a call with agent Tom (reference CASE-2368315), the customer was advised that their statement closing date is the 15th of every month, with the payment due date always falling on the 10th of the following month.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "their statement closing date is the 15th of every month, with the payment due date always falling on the 10th of the following month",
+       "said_by": "agent",
+       "source_quote": "MONTHLY STATEMENT: Statement closed for Chase Slate Edge (*2837) with a balance of $1,486.08. Minimum due $29.72 by 2025-01-28.",
+       "source_ref": "note 2025-01-03",
+       "why": "Agent Tom stated the closing date is the 15th and due date is the 10th, but multiple account statements in the source show different closing and due dates (e.g., statement closed Jan 3, due Jan 28)."
+      }
+     ]
+    },
+    {
+     "index": 13,
+     "name": "4907129946771554304",
+     "fact": "On 2026-09-13, agent Tom confirmed that a $200.00 targeted retention statement credit, accepted by the customer during a branch visit on 2026-08-31, has no spending requirement and will be applied within two statement cycles, likely appearing on the statement closing on 2026-09-15 or at the latest by 2026-10-15 (reference CASE-2368315).",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "has no spending requirement",
+       "said_by": "agent",
+       "source_quote": "I also told her about a targeted promotion we have running right now for a $200.00 statement credit on her Chase Slate Edge card if she hits a certain spend threshold over the next quarter.",
+       "source_ref": "C11",
+       "why": "Agent Tom told the customer the $200 credit had no spending requirement, but the branch agent who made the offer noted that it required hitting a certain spend threshold."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_016",
+   "path": "managed",
+   "n_memories": 17,
+   "memories": [
+    {
+     "index": 0,
+     "name": "1826667801650135040",
+     "fact": "My husband's name is Mark.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "6438353820077522944",
+     "fact": "I prefer to be contacted via email rather than phone calls because I do not like answering calls from unknown numbers, and I prefer using chat support over phone calls for customer service because I find it more straightforward and reliable.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "4132510810863828992",
+     "fact": "On March 4, 2026, I disputed an unauthorized charge of $473.31 from 'Golden Gate Luggage Co.' dated February 28, 2026, on my Chase Slate Edge credit card ending in 2837 (dispute reference number DSP-1512689, case number CASE-5728419). A provisional credit was applied on April 9, 2026, and the dispute was subsequently closed in my favor, making the temporary credit permanent. During a support call on April 11, 2026, I inquired about the status of the provisional credit and opened a new case (CASE-1460630) to request a supervisor callback.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "8744196829291216896",
+     "fact": "I shop at the Harris Teeter grocery store.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "7591275324684369920",
+     "fact": "My first name is Sofia, I am married, and I live in Charlotte, North Carolina, which I love.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "7631807721330704384",
+     "fact": "I successfully updated the primary email address and verified my work phone number on file for my Chase Slate Edge credit card account.",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "2263516965505073152",
+     "fact": "My wife's name is Renata, and she is an authorized user on my credit card account. I dislike extremely hot weather, while she loves it, and we are planning a trip to Brazil in late summer to visit her family.",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "6875202983932461056",
+     "fact": "I have had credit line increase requests declined, with eligibility to re-request after July 11, 2026, and again after October 10, 2026 (where keeping the request under $4,000.00 will avoid manual underwriting).",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "and again after October 10, 2026",
+       "said_by": "nobody",
+       "source_quote": "You can actually re-request that after July 11, 2026, not the October date it says here. Just an FYI.",
+       "source_ref": "C09",
+       "why": "The memory incorrectly combines two dates for re-requesting a credit line increase. An agent in C09 corrected the earlier information from C03, stating the correct date was July 11, not October 10. The memory presents both as valid, separate dates."
+      }
+     ]
+    },
+    {
+     "index": 8,
+     "name": "4420741187015540736",
+     "fact": "I have requested itemized paper copies of my billing statements to be mailed to my home address in Charlotte, North Carolina: the March statement by May 9, 2026, for my dispute records, and the May 2026 statement (processed under CASE-3979463) for an expense report, arriving in 7 to 10 business days.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "9032427205442928640",
+     "fact": "The bank waived a $35.00 late fee on my credit card as a one-time goodwill courtesy.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "3884812831358451712",
+     "fact": "I called Chase Customer Services on June 7, 2026, to activate my new Chase Slate Edge card ending in 6065 and deactivate my old damaged card ending in 2837. The PIN for the new card remains the same as the old one.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "6190655840572145664",
+     "fact": "I have a dog named Winston.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 12,
+     "name": "1268221447856193536",
+     "fact": "I placed travel notices on my Chase Slate Edge credit card ending in 6065 for a trip to Reykjavik, Iceland, in June 2026, but cancelled the scheduled trip from August 14 to August 20, 2026 due to a family matter.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "in June 2026",
+       "said_by": "nobody",
+       "source_quote": "Right. It's August 14th to August 20th. This year, 2026.",
+       "source_ref": "C08",
+       "why": "The memory incorrectly states the trip to Iceland was scheduled for June 2026. The travel notice was placed in June, but the trip itself was scheduled for August 14-20, 2026."
+      }
+     ]
+    },
+    {
+     "index": 13,
+     "name": "3254308883526582272",
+     "fact": "I updated the primary callback number on my account from my old work number to my new work number.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 14,
+     "name": "5560151892740276224",
+     "fact": "I have a coworker named Marco.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 15,
+     "name": "7312052147787399168",
+     "fact": "I inquired about a $200 statement credit promotion from a branch visit on August 31, 2026, which is expected to post to my account by the September 15, 2026 or October 15, 2026 statement, under reference number CASE-2368315.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 16,
+     "name": "2700366129360011264",
+     "fact": "My credit card statement closing date is the 15th of every month, and the payment due date is the 10th of the following month.",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_033",
+   "path": "roles",
+   "n_memories": 13,
+   "memories": [
+    {
+     "index": 0,
+     "name": "2599035137744175104",
+     "fact": "The customer, Ingrid, and her husband live in San Diego, California, have a dog, and prefer going to the beach rather than skiing. Ingrid also has a sister who lives in Charlotte.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "4904878146957869056",
+     "fact": "On 2026-03-06 (secure call with agent Grace), dispute DSP-5976147 (case CASE-1603624) was opened for an unauthorized $217.76 charge posted on 2026-02-20 from Summit Ridge Ski Rentals on the Amazon Prime Visa card *6824.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "1446113633137328128",
+     "fact": "On 2026-03-06, agent Grace advised the customer that her Amazon Prime Visa card *6824 includes travel and emergency assistance and baggage delay insurance, but full trip cancellation or interruption insurance is typically only on premium travel cards.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "WRONG_SPEAKER",
+       "wrong_part": "agent Grace advised the customer",
+       "said_by": "customer",
+       "source_quote": "AGENT: Actually, while I have you, this is totally unrelated, but does this card have any kind of travel insurance? ... CUSTOMER: That's a great question. Let me just pull up the benefits guide for your specific card... yes, it looks like your Amazon Prime Visa does come with some travel and emergency assistance services, and a baggage delay insurance.",
+       "source_ref": "C01",
+       "why": "The memory states that agent Grace advised the customer about travel insurance benefits. However, the transcript shows the agent asked the question and the customer provided the detailed information about the card's benefits."
+      }
+     ]
+    },
+    {
+     "index": 3,
+     "name": "7210721156171563008",
+     "fact": "On 2026-03-06, agent Grace promised that a provisional credit of $217.76 would post to the customer's account within ten business days (by 2026-03-20) for dispute DSP-5976147, and advised that the merchant has until 2026-07-04 to respond. Although a temporary credit had been applied earlier in March 2026 and the dispute was under review as of 2026-03-27, on 2026-04-09 agent Omar clarified that the dispute is still open and under investigation, despite a provisional credit of $217.76 having posted to her account on 2026-04-07. Agent Omar also promised that a supervisor from the disputes team would call her back on her landline by 2026-04-10 (urgent callback logged under case reference CASE-5177007). On 2026-06-07, the customer reported that this callback on her work number never occurred; agent Tom logged the lack of follow-up on her file, and complaint case CASE-9083559 was opened because the promised supervisor callback was never logged or received. On 2026-07-21 (call reference CASE-9854152), dispute DSP-5976147 was resolved; the merchant missed the response deadline, the case was closed in the customer's favor, and the provisional credit was made permanent.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "7203965756730507264",
+     "fact": "On 2026-03-27, the customer's primary email address on her Amazon Prime Visa was changed to ingrid.okafor92@example.net, and was subsequently updated on 2026-08-15 to okafor.i49@example.com on the account ending in *9995 (verified via secure message with agent Rafael with a code sent to her number 912-555-0100). Additionally, her preferred contact number was updated to office landline 912-555-0163 on 2026-04-09 (replacing 912-555-0136), and updated again on 2026-07-21 to a work landline ending in -0100. Her old secondary email address was removed on 2026-06-28.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "2592279738303119360",
+     "fact": "On 2026-03-27, agent Anjali explained that on the Amazon Prime Visa card, redeeming points for a statement credit requires a minimum of 2,500 points (the customer's balance was 19,293 points), whereas redeeming points on Amazon.com has no minimum, and that points transferred to airline partners cannot be moved back. Additionally, on 2026-04-09, agent Omar advised that on her Amazon Prime Visa, foreign ATM withdrawals are treated as cash advances, which incur a $15.00 fee per withdrawal and an immediate interest rate of 31.49%, and that travel bookings made through the rewards portal can be paid with points starting at 1,000 points. On 2026-04-30, agent Keisha advised that the foreign transaction fee for purchases on the Amazon Prime Visa is 3% of the transaction amount in U.S. dollars.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "4591877972855619584",
+     "fact": "The customer's brother, Emeka, has a Prime card ending in *3192 and his phone number is 912-555-0606.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "6897720982069313536",
+     "fact": "The customer is planning a trip to Nigeria to visit her parents.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "7780426509033930752",
+     "fact": "On 2026-04-30, the bank processed a request (Job ID M-9834-260430) to mail a copy of the itemized March 2026 statement for the Amazon Prime Visa *6824 to the customer's address on file in San Diego, CA 92101. Although she did not receive the initial mailing because it was sent to an outdated secondary email address, phone agent Tom expedited a resubmission on 2026-06-07. On 2026-07-21, the customer confirmed that the resubmitted statement copy had successfully arrived in the mail as expected.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "because it was sent to an outdated secondary email address",
+       "said_by": "agent",
+       "source_quote": "Agent (Wes): That is very likely the reason, and I'm sorry for the frustration it caused.",
+       "source_ref": "C08",
+       "why": "The memory states as fact that a mailed statement copy was not received due to a wrong email address. This is illogical for a physical mailing, and the source only contains speculation from an agent that this was the reason, not a confirmed fact."
+      }
+     ]
+    },
+    {
+     "index": 9,
+     "name": "4541212477047701504",
+     "fact": "On 2026-06-07, an initial attempt to activate the customer's new Amazon Prime Visa card ending in *9995 (ordered in May 2026 to replace card *6824 due to a broken chip) was incomplete because the call disconnected. However, the new card was successfully activated later that day, which automatically and permanently deactivated the old card *6824.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "5793213173456699392",
+     "fact": "On 2026-06-07, phone agent Tom waived a $38.00 late payment fee as a one-time courtesy and advised that such a waiver can only be given once every 12 months; he promised the credit would show in the pending balance within 24 hours (by 2026-06-08).",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "6765990692968726528",
+     "fact": "On 2026-06-28, a travel notice was set on the customer's Amazon Prime Visa card ending in *9995 for travel to Cartagena, Colombia, from 2026-08-16 to 2026-08-23 to attend a wedding, but this travel notice was cancelled on 2026-08-15 because the trip was postponed indefinitely.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 12,
+     "name": "8662006136091705344",
+     "fact": "On 2026-09-17, the customer called regarding statement dates and a promotional credit (documented under reference number CASE-1684194), verifying her identity using a code sent to her work landline on file. During this call, agent Luis explained that her Amazon Prime Visa statement closing date is the 22nd of each month, with payments due on the 16th or 17th of the following month, and clarified that the $200.00 statement credit promotion discussed by a banker during her branch visit on 2026-08-31 was an acquisition offer for new cardmembers and could not be applied to her existing account.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS",
+      "ADVICE_AND_COMMITMENTS",
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "clarified that the $200.00 statement credit promotion discussed by a banker during her branch visit on 2026-08-31 was an acquisition offer for new cardmembers and could not be applied to her existing account",
+       "said_by": "agent",
+       "source_quote": "I said something like, 'For example, just as an FYI, we're running a promotion right now where you could get a $200.00 statement credit just for setting up a new qualifying direct deposit.'",
+       "source_ref": "C11",
+       "why": "The memory claims agent Luis clarified the promotion mentioned by the banker. However, the banker mentioned a $200 credit for setting up a direct deposit (C11), while agent Luis described a different promotion for new cardmembers based on spending (C12). The agent misidentified the promotion, and the memory reports this error as a factual clarification."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_033",
+   "path": "managed",
+   "n_memories": 13,
+   "memories": [
+    {
+     "index": 0,
+     "name": "2609168236905758720",
+     "fact": "I initiated a billing dispute (Dispute number: DSP-5976147, Case number: CASE-1603624) on March 6, 2026, for an unrecognized charge of $217.76 from Summit Ridge Ski Rentals on my Amazon Prime Visa ending in 6824. The dispute was successfully resolved and closed in my favor, making the provisional credit of $217.76 (posted on April 7, 2026) permanent. I requested an urgent supervisor callback (CASE-5177007) scheduled to occur on my office landline by April 10, 2026, but later filed a formal complaint (CASE-9083559) concerning a missed callback. I also had an expedited request submitted to mail a physical, paper copy of my March 2026 statement to my San Diego, CA address to assist with record-keeping.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "posted on April 7, 2026",
+       "said_by": "customer",
+       "source_quote": "I can confirm that a temporary credit for the charge was applied to your account earlier this month while we investigate.",
+       "source_ref": "C02",
+       "why": "The customer stated in a call on April 9 that the credit posted on April 7, but an agent on March 27 confirmed the credit had already been applied 'earlier this month' (i.e., in March). The memory repeats the customer's incorrect date as fact."
+      },
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "by April 10, 2026",
+       "said_by": "nobody",
+       "source_quote": "AGENT: I will have a supervisor call you back on that landline by Friday... CUSTOMER: The agent I spoke with promised one would call me back at my office number within forty-eight hours.",
+       "source_ref": "C03, C06",
+       "why": "On a call on Wednesday, April 9, an agent promised a callback 'by Friday' and the customer later recalled this as 'within forty-eight hours'. Both point to Friday, April 11. The date 'April 10' is not mentioned in the source and is an error."
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "4915011246119452672",
+     "fact": "My name is Ingrid. I live in San Diego, California with my husband and my dog, and my sister lives in Charlotte.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "7220854255333146624",
+     "fact": "My husband and I prefer going to the beach and do not ski.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "1100462361736642560",
+     "fact": "I successfully updated the primary contact email associated with my Amazon Prime Visa account from my old school email address to my new personal email address, and had an outdated secondary email address removed from my profile to resolve an issue with missing electronic statements.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "7846854603537645568",
+     "fact": "I prefer to use my debit card to withdraw cash when traveling rather than using a credit card cash advance.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "3235168585110257664",
+     "fact": "I have a brother named Emeka, my parents live in Nigeria, and I am planning a trip to visit them.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "3451341367224041472",
+     "fact": "I have had an Amazon Prime Visa card for several years. I successfully activated my new replacement Amazon Prime Visa card ending in 9995 and deactivated my old card ending in 6824, which had a broken chip.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "5757184376437735424",
+     "fact": "I enjoy online shopping.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "7506832831671173120",
+     "fact": "I had a $38.00 late fee waived on my bank account as a one-time courtesy.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "8472854951742144512",
+     "fact": "I set a travel notice on my Amazon Prime Visa card ending in 9995 for a trip to Cartagena, Colombia, from August 16 to August 23, 2026, to attend a wedding, but later cancelled it because the trip was postponed indefinitely.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "4784406856925708288",
+     "fact": "I updated the primary contact number on my account to my work number.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "2951441808585916416",
+     "fact": "I inquired about a $200 statement credit promotion from a branch visit on August 31, 2026, but was informed it is only available to new cardmembers.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 12,
+     "name": "5257284817799610368",
+     "fact": "My credit card statement closing date is the 22nd of each month, with the payment due on the 16th or 17th of the following month.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_017",
+   "path": "roles",
+   "n_memories": 11,
+   "memories": [
+    {
+     "index": 0,
+     "name": "4048068317850632192",
+     "fact": "On 2026-03-03, dispute DSP-2174159 (case CASE-8894325) was opened for an unauthorized $602.64 charge from Harbor Lights Florist (which the customer initially guessed was Burlington) on 2026-02-28 on the Chase Slate Edge card *4628. As of late April 2026, the dispute remained open with the credit successfully posted to the account. Additionally, on 2026-04-11, agent Grace escalated the dispute under case CASE-5955263 and promised a supervisor callback on the customer's landline 502-555-0923 by 2026-04-17. On 2026-06-04, case CASE-9652526 was opened to process the replacement card activation of Chase Slate Edge card *7093 (which was activated a few weeks prior to 2026-06-29) and to record the customer's positive feedback regarding the successful supervisor callback; a dropped call during this activation was resolved when the bank called the customer back on 502-555-0923.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 1,
+     "name": "1742225308636938240",
+     "fact": "The customer's home city and state on file is Atlanta, Georgia (verified on 2026-08-16 under case reference CASE-9652526), and they have family in France whom they plan to visit during the summer of 2026. After a previous request failed to print, agent Tom promised on 2026-07-26 to mail a paper copy of the March 2026 itemized statement to this address within 7 to 10 business days.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "8659754336278020096",
+     "fact": "The customer's wife is named Elara, and she was the one who primarily dealt with the florist for their wedding.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "The customer's wife is named Elara",
+       "said_by": "customer",
+       "source_quote": "My husband, Gustavo, he\u2019s always telling me to just use my debit card, but I like the points.",
+       "source_ref": "C07",
+       "why": "The memory states the customer has a wife named Elara, based on a single mention in C01. However, the customer repeatedly and clearly refers to his husband, Gustavo, in multiple other sources (C03, C04, C05, C06, C07), making the statement about a wife a misstatement."
+      }
+     ]
+    },
+    {
+     "index": 3,
+     "name": "6353911327064326144",
+     "fact": "On 2026-03-03, agent Marcus promised a provisional credit of $602.64 by 2026-03-17, which was posted on 2026-04-09. On 2026-07-26 (under case CASE-3848717), the bank confirmed that dispute DSP-2174159 was resolved and closed in the customer's favor because the merchant failed to respond, making the temporary credit permanent. This resolution of the Harbor Lights Florist charge was noted on 2026-08-16 and confirmed resolved and permanent prior to 2026-09-13.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "406908019121586176",
+     "fact": "There is conflicting information regarding foreign transaction fees on the Chase Slate Edge card (the old card *4628 was replaced by *7093 on 2026-06-04, which automatically permanently deactivated the previous card; the old card was reported as damaged with a snapped corner and worn stripe during a branch visit on 2026-05-19, although there was also a mention of it breaking when the customer's husband sat on his wallet): agent Beth advised on 2026-03-25 that there are no fees, while agent Grace stated on 2026-04-11 that it carries a 3% fee on international purchases. ATM withdrawals abroad are cash advances subject to a $15.00 fee and 31.49% interest from day one. Additionally, as of 2026-04-11, the customer had a points balance of 18,858, and on 2026-07-26, agent Tom advised that points can be redeemed for a statement credit with a minimum of 4,000 points (revising the previous belief of a 5,000-point minimum); airline partner transfers are irreversible. On 2026-06-04, agent Rafael advised that the 0% introductory APR on their Chase Slate Edge balance transfer from December 2025 will expire on 2026-12-01, after which any remaining balance will accrue interest at 27.99%.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "8765588927521226752",
+     "fact": "The customer's primary email address is haddad.a65@example.net, updated from andre.haddad47@example.net on 2026-08-16 (confirmed successful on 2026-09-13) and previously from andreh21@example.net. Their primary callback number was updated on 2026-07-26 to 502-555-0157 (direct office line), which was verified on 2026-08-16 and confirmed as the preferred callback number on 2026-09-13.",
+     "topics": [
+      "CONTACT_AND_CASES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "5761687976065105920",
+     "fact": "The customer, Andre, resides in Atlanta, Georgia, and is married to Gustavo, who helps with their taxes and financial records and has a separate bank account. As of 2026-04-11, Gustavo was waiting for a replacement card ending in *1675 with phone number 502-555-0860. Their marriage and Atlanta residency were confirmed again on 2026-09-13.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "Their marriage... were confirmed again on 2026-09-13.",
+       "said_by": "nobody",
+       "source_quote": "The transcript of the call on 2026-09-13 contains no mention of the customer's spouse.",
+       "source_ref": "C12",
+       "why": "The memory claims the customer's marriage was confirmed on 2026-09-13, but the source for that date (C12) does not mention the customer's spouse at all. This fact is invented by the memory system."
+      }
+     ]
+    },
+    {
+     "index": 7,
+     "name": "2886139613989044224",
+     "fact": "The customer prefers using credit cards over debit cards to take advantage of rewards and promotional APR offers, despite their husband's advice to use a debit card.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "1825541901743292416",
+     "fact": "On 2026-06-29, a travel notice was set on the Chase Slate Edge card *7093 for Mexico City, Mexico, from 2026-08-10 to 2026-08-17. On 2026-08-16, this travel notice was cancelled because their work conference was postponed, which was confirmed as cancelled prior to 2026-09-13.",
+     "topics": [
+      "ACCOUNT_STATE_EVENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "3480614764801949696",
+     "fact": "On 2026-09-13, agent Anjali activated an offer on the Slate Edge card for 5% back on grocery stores and streaming services for 90 days, with a confirmation email promised within 24 hours under case CASE-3841146.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "5786457774015643648",
+     "fact": "The Slate Edge card statement closing date is the 25th of the month. Purchases made on or before the 25th are billed on the statement due in the following month, while purchases made on or after the 26th fall on the subsequent billing cycle.",
+     "topics": [
+      "ADVICE_AND_COMMITMENTS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  },
+  {
+   "run_file": "conversations_roles_20260929T053216Z.json",
+   "run_id": "242f33",
+   "customer_id": "cust_synth_017",
+   "path": "managed",
+   "n_memories": 13,
+   "memories": [
+    {
+     "index": 0,
+     "name": "3127082194053365760",
+     "fact": "I disputed a charge of $602.64 from Harbor Lights Florist for wedding flowers posted on February 28, 2026, on my Chase Slate Edge card ending in 4628 (dispute number DSP-2174159, case number CASE-8894325). The dispute was resolved in my favor, making my temporary credit permanent, and I requested an itemized paper statement of the charge to be mailed to my Atlanta address for the March 2026 billing cycle.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "STORED_MISSTATEMENT",
+       "wrong_part": "for wedding flowers",
+       "said_by": "customer",
+       "source_quote": "I have never, ever heard of that place. A florist? For six hundred bucks? No way. Absolutely not.",
+       "source_ref": "C01",
+       "why": "The memory states the dispute was over the quality of wedding flowers, based on the customer's statement in C09. However, in the original dispute call (C01), the customer claimed he had never heard of the merchant and did not make the charge at all, making it a fraud claim, not a service dispute."
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "7738768212480753664",
+     "fact": "My name is Andre, I am married, I live in Atlanta, Georgia, and my wife and I spend a lot of money on groceries.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 2,
+     "name": "5432925203267059712",
+     "fact": "My wife's name is Elara.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 3,
+     "name": "75893446509854720",
+     "fact": "I have family in France.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 4,
+     "name": "2381736455723548672",
+     "fact": "I updated the primary email address on my Chase account to replace an old college email address.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 5,
+     "name": "4687579464937242624",
+     "fact": "I have a Chase Slate Edge credit card ending in 7093, which replaced my old card ending in 4628. The statement closes on the 25th of each month, and on September 13, 2026, I activated an offer to receive 5% back on grocery stores and streaming services for 90 days.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 6,
+     "name": "6826789287938228224",
+     "fact": "I travel for work sometimes.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 7,
+     "name": "2215103269510840320",
+     "fact": "My husband is named Gustavo.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 8,
+     "name": "3998528721949556736",
+     "fact": "My husband and I prefer to receive official physical paper statements from the bank for tax purposes and record-keeping, rather than digital or self-printed copies.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 9,
+     "name": "1255836548880924672",
+     "fact": "I shared positive feedback about receiving a promised supervisor callback regarding a charge dispute from April 2026, which was logged under case number CASE-9652526.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 10,
+     "name": "4486606331565834240",
+     "fact": "I prefer using credit cards over debit cards because I like the reward points and introductory APR promotions.",
+     "topics": [
+      "USER_PREFERENCES"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    },
+    {
+     "index": 11,
+     "name": "6547566111041257472",
+     "fact": "My wife and I postponed our planned trip to Mexico City, Mexico, from August 10 to August 17, 2026, because the work conference I was attending was postponed, and I cancelled the travel notice on my Chase Slate Edge card.",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ],
+     "judged": true,
+     "ok": false,
+     "findings": [
+      {
+       "label": "MEMORY_ERROR",
+       "wrong_part": "My wife and I",
+       "said_by": "nobody",
+       "source_quote": "Unfortunately, the work conference I was supposed to attend has been postponed indefinitely, so the trip is off.",
+       "source_ref": "C10",
+       "why": "The source indicates the customer was traveling alone to Mexico City for a work conference. The memory incorrectly states that his wife was also part of the postponed trip, but there is no mention of anyone else accompanying him in the source material."
+      }
+     ]
+    },
+    {
+     "index": 12,
+     "name": "553275007011127296",
+     "fact": "I updated my primary callback number on my account to my new direct work desk phone line.",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ],
+     "judged": true,
+     "ok": true,
+     "findings": []
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,196 @@
+{
+ "note": "The nine hand-written questions of the impact check, extracted from the runner script. 'must' is what a correct answer conveys; 'must_not_assert' is the wrong version from the flagged notes; 'flagged' points at the confirmed wrong notes (experiment 6 audit) each question targets.",
+ "probes": [
+  {
+   "cid": "cust_synth_009",
+   "id": "I1_MERCHANT_MONTH",
+   "text": "hi, my accountant is going through my year and asked about the charge I disputed back in the spring. what was that charge actually for, and roughly when did it hit my card?",
+   "must": [
+    "the disputed charge was from Pinecrest Outdoor Supply (an outdoor gear store)",
+    "it posted in early March 2026"
+   ],
+   "must_not_assert": [
+    "the disputed charge was a hotel charge",
+    "the disputed charge was from July 2026"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 0
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 33
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 48
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_009",
+   "id": "I2_LETTER",
+   "text": "I'm putting in a formal complaint about that dispute summary letter that never showed up. when did you first promise it to me, and how was it supposed to be sent?",
+   "must": [
+    "it was first promised on 2026-04-26, in reply to his email",
+    "it was to be mailed to his postal address"
+   ],
+   "must_not_assert": [
+    "it was originally promised by email",
+    "it was first promised about six weeks before 2026-07-28"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 9
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 31
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 33
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 39
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_028",
+   "id": "I3_EMAIL_BLAME",
+   "text": "When I changed my email back in March it took two goes because your chat agent got it wrong. I'd like that noted as a complaint about the agent.",
+   "must": [
+    "the chat record shows the first address the customer typed was missing a dot and she corrected it herself; the agent did not get it wrong"
+   ],
+   "must_not_assert": [
+    "the agent recorded or read back the email address wrongly"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 6
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 25
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_028",
+   "id": "I4_DISPUTE_CARD",
+   "text": "i'm going through old statements. the florist charge i disputed, which of my cards was that on?",
+   "must": [
+    "the old card ending *3810"
+   ],
+   "must_not_assert": [
+    "*1337"
+   ],
+   "flagged": [
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 43
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_028",
+   "id": "I5_CLOSED_WHEN",
+   "text": "when did that florist dispute actually get closed for good? i thought it was all sorted back in may",
+   "must": [
+    "it was officially closed in her favour on 2026-07-24, when the provisional credit became permanent",
+    "in May only the provisional credit had posted; the investigation was still open"
+   ],
+   "must_not_assert": [
+    "the dispute was resolved or closed in May 2026"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 1
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 20
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_033",
+   "id": "I6_DISPUTE_CARD",
+   "text": "which card was the ski rental dispute on? i'm matching up old statements",
+   "must": [
+    "the old card ending *6824"
+   ],
+   "must_not_assert": [
+    "*9995"
+   ],
+   "flagged": [
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 40
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_033",
+   "id": "I7_TRIP",
+   "text": "we're finally rebooking the colombia trip. is the old travel notice still on my card or do i need a new one?",
+   "must": [
+    "the Cartagena travel notice (2026-08-16 to 2026-08-23) was cancelled when the trip was postponed, so a new notice is needed"
+   ],
+   "must_not_assert": [
+    "the Cartagena travel notice is still active",
+    "she already travelled to Cartagena"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 1
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_033",
+   "id": "I8_STATEMENT_WHY",
+   "text": "that statement copy you promised never came. was it sent to my old email or something?",
+   "must": [
+    "the statement copy was to be sent by post, not by email"
+   ],
+   "must_not_assert": [
+    "it was sent to an old or wrong email address"
+   ],
+   "flagged": [
+    {
+     "condition": "both",
+     "index_in_audit_final_snapshot": 11
+    },
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 33
+    }
+   ]
+  },
+  {
+   "cid": "cust_synth_017",
+   "id": "I9_CHARGE_MONTH",
+   "text": "my accountant is asking when that $602 flower charge i disputed actually hit my card. do you have the date?",
+   "must": [
+    "the charge posted on 2026-02-28"
+   ],
+   "must_not_assert": [
+    "the charge was in May 2026"
+   ],
+   "flagged": [
+    {
+     "condition": "extract",
+     "index_in_audit_final_snapshot": 32
+    }
+   ]
+  }
+ ]
+}

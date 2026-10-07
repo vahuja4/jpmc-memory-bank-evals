@@ -1,0 +1,10 @@
+{
+ "B2_009_CHARGE_MONTH|records|0": "follows_records",
+ "B2_009_CHARGE_MONTH|records+memory:both|0": "follows_records",
+ "B4_016_STATEMENT_SENT|records+history|0": "follows_memory",
+ "B4_016_STATEMENT_SENT|records+memory:extract|0": "follows_memory",
+ "B4_016_STATEMENT_SENT|records+memory:extract|1": "follows_memory",
+ "B5_017_CHARGE_MONTH|records|1": "follows_records",
+ "B7_028_EMAIL_BLAME|records|0": "no_answer",
+ "B7_028_EMAIL_BLAME|records+raw|1": "follows_records"
+}

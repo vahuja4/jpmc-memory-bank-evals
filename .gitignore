@@ -13,3 +13,6 @@ skills/
 Skills/
 _agents/
 .agents/
+
+# LongMemEval-S full dataset (265MB, over GitHub limit); see README for how to fetch it
+evals/data/longmemeval_s.json

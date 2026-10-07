@@ -1,0 +1,145 @@
+{
+ "status": "final",
+ "run_id": "242f33",
+ "audit_file": "attribution_audit_20260929T092508Z.json",
+ "reviewed": "2026-09-29",
+ "paths_audited": [
+  "roles",
+  "managed"
+ ],
+ "totals": {
+  "roles": {
+   "memories": 71,
+   "confirmed": 8,
+   "CUSTOMER": 3,
+   "AGENT": 2,
+   "MB": 3
+  },
+  "managed": {
+   "memories": 67,
+   "confirmed": 1,
+   "CUSTOMER": 1,
+   "AGENT": 0,
+   "MB": 0
+  }
+ },
+ "errors": [
+  {
+   "customer_id": "cust_synth_009",
+   "path": "roles",
+   "index": 4,
+   "name": "4422148561899094016",
+   "fact": "On 2026-03-09, the bank promised to issue a provisional credit of $392.88 to the customer's account within ten business days (by 2026-03-23) while dispute DSP-7530420 (under case CASE-1447259) is investigated; this provisional credit posted on 2026-04-04. The bank advised that the merchant has until 2026-07-07 to respond with evidence. The promised written summary of the hotel charge dispute was never received; after agent Tom tracked the mailing on 2026-06-05, agent Omar escalated the issue on 2026-06-29 to his supervisor and the disputes department to have the summary emailed to marcus.lindqvist50@example.net on the same day. On 2026-07-28, agent Dana apologized because a previously promised written summary of the dispute case from six weeks prior was never processed, and submitted a new request to mail a case summary letter to the customer's address in Atlanta, Georgia, within seven to ten business days (by August 6 to August 11, 2026).",
+   "class": "CUSTOMER",
+   "label": "MEMORY_ERROR + STORED_MISSTATEMENT",
+   "found_by": "judge",
+   "wrong_part": "hotel charge dispute; from six weeks prior",
+   "truth": "The dispute is for Pinecrest Outdoor Supply (C01, C04); the customer said 'hotel charge' in C08 and guessed 'six weeks ago' in C09 for a promise made 2026-04-26. Secondary MB: the dispute is put under CASE-1447259, the June activation case.",
+   "source_ref": "C08"
+  },
+  {
+   "customer_id": "cust_synth_016",
+   "path": "roles",
+   "index": 9,
+   "name": "3337625476632936448",
+   "fact": "On 2026-06-07 (during a phone call under case CASE-1453067, which was closed as resolved), the customer Sofia's replacement Chase Slate Edge card ending in *6065 was activated, and her old damaged card ending in *2837 (which was physically damaged with a worn strip and a snapped corner) was permanently deactivated. This activation follows her branch visit on 2026-05-20 to request a replacement after the old card snapped. During the activation, an initial call dropped, but a supervisor successfully called Sofia back on her landline to finish the activation as promised, and agent Anjali advised her that her existing PIN automatically transfers to the new card. Case CASE-1453067 also recorded her feedback that old email addresses are still showing in the quoted text of email threads despite her primary email being updated in March.",
+   "class": "CUSTOMER",
+   "label": "MEMORY_ERROR",
+   "found_by": "judge",
+   "wrong_part": "a supervisor successfully called Sofia back on her landline to finish the activation as promised",
+   "truth": "Agent Anjali, not a supervisor, called back after the dropped activation call (C07); the supervisor callback was the April dispute follow-up (C06). The customer herself said in C08 that 'the supervisor called me back on my landline like they promised'. Old audit classed this MB.",
+   "source_ref": "C07"
+  },
+  {
+   "customer_id": "cust_synth_016",
+   "path": "roles",
+   "index": 13,
+   "name": "4907129946771554304",
+   "fact": "On 2026-09-13, agent Tom confirmed that a $200.00 targeted retention statement credit, accepted by the customer during a branch visit on 2026-08-31, has no spending requirement and will be applied within two statement cycles, likely appearing on the statement closing on 2026-09-15 or at the latest by 2026-10-15 (reference CASE-2368315).",
+   "class": "AGENT",
+   "label": "STORED_MISSTATEMENT",
+   "found_by": "judge",
+   "wrong_part": "has no spending requirement",
+   "truth": "Branch note C11: the $200 credit requires hitting a spend threshold over the next quarter. Agent Tom (model turn, C12) said 'no spending requirement attached'.",
+   "source_ref": "C11"
+  },
+  {
+   "customer_id": "cust_synth_028",
+   "path": "roles",
+   "index": 0,
+   "name": "7495855307579457536",
+   "fact": "On 2026-03-04, agent Rafael advised the customer that because they still had physical possession of their Amazon Prime Visa *3810, the card did not need to be replaced. However, the chip on card *3810 eventually malfunctioned, and the customer ordered a replacement ending in *1337 at a branch. On 2026-06-03, a dropped call occurred during the activation of the replacement card *1337, leading to the opening of case CASE-5950748, but the card was successfully activated on a callback. On 2026-08-12, agent Omar referenced CASE-5950748 during a request to cancel a travel notice and update the email address.",
+   "class": "CUSTOMER",
+   "label": "STORED_MISSTATEMENT",
+   "found_by": "hand",
+   "wrong_part": "the card was successfully activated on a callback",
+   "truth": "The customer called back in after the drop (C07: agent Grace was still dialing when her call came through); 'someone called me back' is her later version (C08, C10).",
+   "source_ref": "C07"
+  },
+  {
+   "customer_id": "cust_synth_028",
+   "path": "roles",
+   "index": 2,
+   "name": "5190012298365763584",
+   "fact": "On 2026-03-04, agent Rafael advised that a provisional credit of $313.89 would post to the customer's account within ten business days, which posted on 2026-04-10. Dispute DSP-1480747 was closed in the customer's favor on 2026-07-24, making the $313.89 provisional credit on the Amazon Prime card *1337 permanent because the merchant failed to contest it by the final deadline.",
+   "class": "MB",
+   "label": "MEMORY_ERROR",
+   "found_by": "judge",
+   "wrong_part": "the $313.89 provisional credit on the Amazon Prime card *1337",
+   "truth": "The charge and dispute DSP-1480747 were on card *3810 (C01); *1337 is the June replacement. Nobody in C09 puts the credit on *1337.",
+   "source_ref": "C01"
+  },
+  {
+   "customer_id": "cust_synth_028",
+   "path": "roles",
+   "index": 4,
+   "name": "578326279938375680",
+   "fact": "Dispute DSP-1480747 (under case CASE-6327908) was opened on 2026-03-04 for an unrecognized charge of $313.89 from Harbor Lights Florist on the customer's Amazon Prime Visa card *3810, and was closed in her favor on 2026-07-24, making the credit on card *1337 permanent. Previously, as of 2026-04-12, the dispute had remained open, leading to follow-up case CASE-5599947 and complaints about a missing supervisor callback, which agents Dana and Grace addressed in June 2026.",
+   "class": "MB",
+   "label": "MEMORY_ERROR",
+   "found_by": "judge",
+   "wrong_part": "making the credit on card *1337 permanent",
+   "truth": "Same as roles[2]: dispute and credit belong to *3810; *1337 is the replacement card.",
+   "source_ref": "C01"
+  },
+  {
+   "customer_id": "cust_synth_033",
+   "path": "roles",
+   "index": 4,
+   "name": "7203965756730507264",
+   "fact": "On 2026-03-27, the customer's primary email address on her Amazon Prime Visa was changed to ingrid.okafor92@example.net, and was subsequently updated on 2026-08-15 to okafor.i49@example.com on the account ending in *9995 (verified via secure message with agent Rafael with a code sent to her number 912-555-0100). Additionally, her preferred contact number was updated to office landline 912-555-0163 on 2026-04-09 (replacing 912-555-0136), and updated again on 2026-07-21 to a work landline ending in -0100. Her old secondary email address was removed on 2026-06-28.",
+   "class": "MB",
+   "label": "MEMORY_ERROR",
+   "found_by": "hand",
+   "wrong_part": "verified via secure message with agent Rafael with a code sent to her number 912-555-0100",
+   "truth": "Rafael offered an SMS code and the customer agreed (C10), but the confirmation says verified by 'Name, DOB [REDACTED], etc.' and never mentions a code. Offered step recorded as done (borderline, as old #12/#23).",
+   "source_ref": "C10"
+  },
+  {
+   "customer_id": "cust_synth_033",
+   "path": "roles",
+   "index": 12,
+   "name": "8662006136091705344",
+   "fact": "On 2026-09-17, the customer called regarding statement dates and a promotional credit (documented under reference number CASE-1684194), verifying her identity using a code sent to her work landline on file. During this call, agent Luis explained that her Amazon Prime Visa statement closing date is the 22nd of each month, with payments due on the 16th or 17th of the following month, and clarified that the $200.00 statement credit promotion discussed by a banker during her branch visit on 2026-08-31 was an acquisition offer for new cardmembers and could not be applied to her existing account.",
+   "class": "AGENT",
+   "label": "STORED_MISSTATEMENT",
+   "found_by": "judge",
+   "wrong_part": "clarified that the $200.00 statement credit promotion discussed by a banker during her branch visit on 2026-08-31 was an acquisition offer for new cardmembers",
+   "truth": "Branch note C11: the offer was a $200 credit for setting up a new qualifying direct deposit. Agent Luis (model turn, C12) misidentified it as a new-cardmember acquisition offer; the note states his conclusion as a clarification.",
+   "source_ref": "C11"
+  },
+  {
+   "customer_id": "cust_synth_009",
+   "path": "managed",
+   "index": 11,
+   "name": "5742547677648781312",
+   "fact": "I requested and escalated a written summary for a hotel charge dispute that I filed in April 2026.",
+   "class": "CUSTOMER",
+   "label": "STORED_MISSTATEMENT + MEMORY_ERROR",
+   "found_by": "judge",
+   "wrong_part": "hotel charge dispute that I filed in April 2026",
+   "truth": "The dispute is for Pinecrest Outdoor Supply, filed 2026-03-09 (C01, C04); 'hotel charge' is the customer's misstatement in C08; 'filed in April' is a garble (the summary request was April).",
+   "source_ref": "C08"
+  }
+ ]
+}

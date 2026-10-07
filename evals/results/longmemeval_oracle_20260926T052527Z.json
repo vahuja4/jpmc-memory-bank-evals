@@ -1,0 +1,1277 @@
+{
+ "run_id": "929b5e",
+ "variant": "oracle",
+ "engine_id": "8531677518158102528",
+ "synth": "gemini-2.5-flash",
+ "judge": "gemini-2.5-pro",
+ "question_ids": [
+  "gpt4_93f6379c",
+  "4dfccbf8",
+  "88432d0a",
+  "1a8a66a6",
+  "71315a70",
+  "9ea5eabc",
+  "c960da58",
+  "70b3e69b",
+  "505af2f5",
+  "gpt4_93159ced_abs"
+ ],
+ "writes": {
+  "gpt4_93f6379c": {
+   "write_s": 61.9,
+   "calls": 3,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4415110038213885952",
+     "fact": "I am interested in personal branding, optimizing my LinkedIn profile, and creating a content calendar to publish consistent, engaging content on LinkedIn.",
+     "createTime": "2026-09-26T05:21:48.614647Z",
+     "updateTime": "2026-09-26T05:21:48.614647Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6720953047427579904",
+     "fact": "I am a member of a LinkedIn group called \"Marketing Professionals\" where we discuss industry trends and share resources.",
+     "createTime": "2026-09-26T05:21:48.614477Z",
+     "updateTime": "2026-09-26T05:21:48.614477Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2176821023410749440",
+     "fact": "I joined a book club called \"Page Turners\" in May 2023. I have participated in discussions for the novels \"The Nightingale\" and \"The Hate U Give\", and I suggested \"The Seven Husbands of Evelyn Hugo\" by Taylor Jenkins Reid as a next read. One of the members is an author who is publishing her debut novel.",
+     "createTime": "2026-09-26T05:21:34.802235Z",
+     "updateTime": "2026-09-26T05:21:34.802235Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PERSONAL_INFO",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4613268421818187776",
+     "fact": "I am developing a language learning and exchange project featuring content like blog posts, social media, videos, and potentially a podcast, which will highlight diverse language learners and native speakers of lesser-known languages and cultures, such as Welsh, Mongolian, or the Sami people.",
+     "createTime": "2026-09-26T05:21:04.759666Z",
+     "updateTime": "2026-09-26T05:21:04.759666Z",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2307425412604493824",
+     "fact": "I plan to conduct my project's interviews via Zoom or Skype, transcribe them for text content, and edit videos using software like iMovie or DaVinci Resolve.",
+     "createTime": "2026-09-26T05:21:04.753106Z",
+     "updateTime": "2026-09-26T05:21:04.753106Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/9221576740525047808",
+     "fact": "I am deeply passionate about language learning and exchange.",
+     "createTime": "2026-09-26T05:21:04.746017Z",
+     "updateTime": "2026-09-26T05:21:04.746017Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1582403390799872",
+     "fact": "I plan to build a private Facebook group community for my language learning project to host live events, webinars, and Q&A sessions with language experts, native speakers, and learners.",
+     "createTime": "2026-09-26T05:21:04.745267Z",
+     "updateTime": "2026-09-26T05:21:04.745267Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-gpt4_93f6379c",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6720953047427579904",
+     "fact": "I am a member of a LinkedIn group called \"Marketing Professionals\" where we discuss industry trends and share resources.",
+     "createTime": "2026-09-26T05:21:48.614477Z",
+     "updateTime": "2026-09-26T05:21:48.614477Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2176821023410749440",
+     "fact": "I joined a book club called \"Page Turners\" in May 2023. I have participated in discussions for the novels \"The Nightingale\" and \"The Hate U Give\", and I suggested \"The Seven Husbands of Evelyn Hugo\" by Taylor Jenkins Reid as a next read. One of the members is an author who is publishing her debut novel.",
+     "createTime": "2026-09-26T05:21:34.802235Z",
+     "updateTime": "2026-09-26T05:21:34.802235Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PERSONAL_INFO",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4415110038213885952",
+     "fact": "I am interested in personal branding, optimizing my LinkedIn profile, and creating a content calendar to publish consistent, engaging content on LinkedIn.",
+     "createTime": "2026-09-26T05:21:48.614647Z",
+     "updateTime": "2026-09-26T05:21:48.614647Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1582403390799872",
+     "fact": "I plan to build a private Facebook group community for my language learning project to host live events, webinars, and Q&A sessions with language experts, native speakers, and learners.",
+     "createTime": "2026-09-26T05:21:04.745267Z",
+     "updateTime": "2026-09-26T05:21:04.745267Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/9221576740525047808",
+     "fact": "I am deeply passionate about language learning and exchange.",
+     "createTime": "2026-09-26T05:21:04.746017Z",
+     "updateTime": "2026-09-26T05:21:04.746017Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4613268421818187776",
+     "fact": "I am developing a language learning and exchange project featuring content like blog posts, social media, videos, and potentially a podcast, which will highlight diverse language learners and native speakers of lesser-known languages and cultures, such as Welsh, Mongolian, or the Sami people.",
+     "createTime": "2026-09-26T05:21:04.759666Z",
+     "updateTime": "2026-09-26T05:21:04.759666Z",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2307425412604493824",
+     "fact": "I plan to conduct my project's interviews via Zoom or Skype, transcribe them for text content, and edit videos using software like iMovie or DaVinci Resolve.",
+     "createTime": "2026-09-26T05:21:04.753106Z",
+     "updateTime": "2026-09-26T05:21:04.753106Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    }
+   ]
+  },
+  "4dfccbf8": {
+   "write_s": 48.3,
+   "calls": 2,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6085945499968339968",
+     "fact": "I mostly play classical and jazz music.",
+     "createTime": "2026-09-26T05:21:36.275145Z",
+     "updateTime": "2026-09-26T05:21:36.275145Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6040909503694635008",
+     "fact": "I own a Taylor GS Mini acoustic guitar and a Fender Mustang I V2 guitar amp. I had the guitar serviced by a guitar tech named Joe to lower the high action, which is now comfortable to play. I am looking for a new guitar amp suitable for practice and small gigs to use with the guitar, considering the Fender Acoustic 40 and Fishman Loudbox Mini, and I am interested in getting a compressor pedal to even out my dynamics and add sustain.",
+     "createTime": "2026-09-26T05:21:01.761843Z",
+     "updateTime": "2026-09-26T05:21:36.274022Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1429223485267247104",
+     "fact": "I currently own a Yamaha P-125 keyboard and am looking to upgrade to a new keyboard with a budget of around $1,000, specifically planning to try the Korg B1 and Roland FP-10. I prefer weighted keys, a good piano sound, recording capabilities, and USB connectivity, and I mostly play piano and synth sounds.",
+     "createTime": "2026-09-26T05:21:01.759565Z",
+     "updateTime": "2026-09-26T05:21:36.273315Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3735066494480941056",
+     "fact": "I started taking ukulele lessons with my friend Rachel on February 1, 2023.",
+     "createTime": "2026-09-26T05:21:01.755989Z",
+     "updateTime": "2026-09-26T05:21:01.755989Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8346752512908328960",
+     "fact": "I have a music room at home and am considering selling my Hohner Special 20 harmonica on eBay.",
+     "createTime": "2026-09-26T05:21:01.755316Z",
+     "updateTime": "2026-09-26T05:21:01.755316Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-4dfccbf8",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3735066494480941056",
+     "fact": "I started taking ukulele lessons with my friend Rachel on February 1, 2023.",
+     "createTime": "2026-09-26T05:21:01.755989Z",
+     "updateTime": "2026-09-26T05:21:01.755989Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6085945499968339968",
+     "fact": "I mostly play classical and jazz music.",
+     "createTime": "2026-09-26T05:21:36.275145Z",
+     "updateTime": "2026-09-26T05:21:36.275145Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8346752512908328960",
+     "fact": "I have a music room at home and am considering selling my Hohner Special 20 harmonica on eBay.",
+     "createTime": "2026-09-26T05:21:01.755316Z",
+     "updateTime": "2026-09-26T05:21:01.755316Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6040909503694635008",
+     "fact": "I own a Taylor GS Mini acoustic guitar and a Fender Mustang I V2 guitar amp. I had the guitar serviced by a guitar tech named Joe to lower the high action, which is now comfortable to play. I am looking for a new guitar amp suitable for practice and small gigs to use with the guitar, considering the Fender Acoustic 40 and Fishman Loudbox Mini, and I am interested in getting a compressor pedal to even out my dynamics and add sustain.",
+     "createTime": "2026-09-26T05:21:01.761843Z",
+     "updateTime": "2026-09-26T05:21:36.274022Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1429223485267247104",
+     "fact": "I currently own a Yamaha P-125 keyboard and am looking to upgrade to a new keyboard with a budget of around $1,000, specifically planning to try the Korg B1 and Roland FP-10. I prefer weighted keys, a good piano sound, recording capabilities, and USB connectivity, and I mostly play piano and synth sounds.",
+     "createTime": "2026-09-26T05:21:01.759565Z",
+     "updateTime": "2026-09-26T05:21:36.273315Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    }
+   ]
+  },
+  "88432d0a": {
+   "write_s": 75.5,
+   "calls": 4,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8915331965863854080",
+     "fact": "I prefer flavorful breads, especially those with garlic and herbs like focaccia, to pair with savory dishes.",
+     "createTime": "2026-09-26T05:22:36.709720Z",
+     "updateTime": "2026-09-26T05:22:36.709720Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4303645947436466176",
+     "fact": "I prefer using my oven's convection setting for baking because it helps with browning and achieving a crispy crust, which I first used to bake cookies.",
+     "createTime": "2026-09-26T05:22:36.709272Z",
+     "updateTime": "2026-09-26T05:22:54.996827Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8770090877881155584",
+     "fact": "Strawberries are my favorite fruit.",
+     "createTime": "2026-09-26T05:22:11.993411Z",
+     "updateTime": "2026-09-26T05:22:11.993411Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/411409969481515008",
+     "fact": "I decided to make a strawberry tart with a homemade all-purpose flour crust for a dinner party.",
+     "createTime": "2026-09-26T05:22:11.992569Z",
+     "updateTime": "2026-09-26T05:22:11.992569Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3739570094108311552",
+     "fact": "I decided to transition my sourdough starter to a blend of 25% whole wheat flour and 75% all-purpose flour to help make it more active.",
+     "createTime": "2026-09-26T05:21:53.006627Z",
+     "updateTime": "2026-09-26T05:21:53.006627Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7198334607928852480",
+     "fact": "I enjoy baking bread as a hobby, have a stand mixer, and have experience working with sourdough starters and different types of flour, including making a whole wheat baguette.",
+     "createTime": "2026-09-26T05:21:53.006552Z",
+     "updateTime": "2026-09-26T05:22:54.996408Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6045413103322005504",
+     "fact": "I have a sister, and I baked a chocolate cake with espresso powder for her birthday party using a recipe found online.",
+     "createTime": "2026-09-26T05:21:53.005681Z",
+     "updateTime": "2026-09-26T05:22:11.996251Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1433727084894617600",
+     "fact": "I created a sourdough starter around April 2023, which I feed daily with a 1:1:1 ratio of all-purpose flour, water, and starter.",
+     "createTime": "2026-09-26T05:21:53.005216Z",
+     "updateTime": "2026-09-26T05:21:53.005216Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-88432d0a",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1433727084894617600",
+     "fact": "I created a sourdough starter around April 2023, which I feed daily with a 1:1:1 ratio of all-purpose flour, water, and starter.",
+     "createTime": "2026-09-26T05:21:53.005216Z",
+     "updateTime": "2026-09-26T05:21:53.005216Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7198334607928852480",
+     "fact": "I enjoy baking bread as a hobby, have a stand mixer, and have experience working with sourdough starters and different types of flour, including making a whole wheat baguette.",
+     "createTime": "2026-09-26T05:21:53.006552Z",
+     "updateTime": "2026-09-26T05:22:54.996408Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4303645947436466176",
+     "fact": "I prefer using my oven's convection setting for baking because it helps with browning and achieving a crispy crust, which I first used to bake cookies.",
+     "createTime": "2026-09-26T05:22:36.709272Z",
+     "updateTime": "2026-09-26T05:22:54.996827Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6045413103322005504",
+     "fact": "I have a sister, and I baked a chocolate cake with espresso powder for her birthday party using a recipe found online.",
+     "createTime": "2026-09-26T05:21:53.005681Z",
+     "updateTime": "2026-09-26T05:22:11.996251Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/411409969481515008",
+     "fact": "I decided to make a strawberry tart with a homemade all-purpose flour crust for a dinner party.",
+     "createTime": "2026-09-26T05:22:11.992569Z",
+     "updateTime": "2026-09-26T05:22:11.992569Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3739570094108311552",
+     "fact": "I decided to transition my sourdough starter to a blend of 25% whole wheat flour and 75% all-purpose flour to help make it more active.",
+     "createTime": "2026-09-26T05:21:53.006627Z",
+     "updateTime": "2026-09-26T05:21:53.006627Z",
+     "topics": [
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8915331965863854080",
+     "fact": "I prefer flavorful breads, especially those with garlic and herbs like focaccia, to pair with savory dishes.",
+     "createTime": "2026-09-26T05:22:36.709720Z",
+     "updateTime": "2026-09-26T05:22:36.709720Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8770090877881155584",
+     "fact": "Strawberries are my favorite fruit.",
+     "createTime": "2026-09-26T05:22:11.993411Z",
+     "updateTime": "2026-09-26T05:22:11.993411Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    }
+   ]
+  },
+  "1a8a66a6": {
+   "write_s": 70.2,
+   "calls": 4,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4347556043803328512",
+     "fact": "I go to the gym and read National Geographic.",
+     "createTime": "2026-09-26T05:23:03.468440Z",
+     "updateTime": "2026-09-26T05:23:03.468440Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/556651057464213504",
+     "fact": "I am redecorating my living room in a Mid-Century Modern style, subscribe to Architectural Digest for home decor inspiration, and plan to use a wooden trellis to train a Pothos plant in my living room.",
+     "createTime": "2026-09-26T05:22:42.669339Z",
+     "updateTime": "2026-09-26T05:22:42.669339Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/235769584014065664",
+     "fact": "I regularly listen to podcasts, especially 'The Daily' by The New York Times, and have an interest in personal finance and investment advice.",
+     "createTime": "2026-09-26T05:22:22.285501Z",
+     "updateTime": "2026-09-26T05:22:22.285501Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/9026796056641273856",
+     "fact": "I follow The New York Times on Twitter to keep up with current events.",
+     "createTime": "2026-09-26T05:22:22.284295Z",
+     "updateTime": "2026-09-26T05:22:22.284295Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/897798729237528576",
+     "fact": "I am working on reducing my carbon footprint and plastic usage, which includes actively trying to reduce my daily usage of single-use plastics, preferring eco-friendly, non-toxic, and biodegradable products, finding eco-friendly alternatives for food storage, shopping, and on-the-go items, and transitioning to biking or public transit for my commute to work.",
+     "createTime": "2026-09-26T05:22:04.213325Z",
+     "updateTime": "2026-09-26T05:23:03.469006Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3203641738451222528",
+     "fact": "I prefer a 32 oz reusable water bottle with a White matte finish that can keep drinks hot for at least 6 hours, focusing on brands like Hydro Flask and S'well.",
+     "createTime": "2026-09-26T05:22:04.212894Z",
+     "updateTime": "2026-09-26T05:22:04.212894Z",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5509484747664916480",
+     "fact": "I subscribed to The New Yorker in early February 2023 and enjoy reading its weekly issues, particularly for coverage of current events, culture, and the intersection of technology and art, but I canceled my Forbes magazine subscription in early March 2023 because I did not find the articles interesting.",
+     "createTime": "2026-09-26T05:22:04.211350Z",
+     "updateTime": "2026-09-26T05:22:22.285431Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-1a8a66a6",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5509484747664916480",
+     "fact": "I subscribed to The New Yorker in early February 2023 and enjoy reading its weekly issues, particularly for coverage of current events, culture, and the intersection of technology and art, but I canceled my Forbes magazine subscription in early March 2023 because I did not find the articles interesting.",
+     "createTime": "2026-09-26T05:22:04.211350Z",
+     "updateTime": "2026-09-26T05:22:22.285431Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/235769584014065664",
+     "fact": "I regularly listen to podcasts, especially 'The Daily' by The New York Times, and have an interest in personal finance and investment advice.",
+     "createTime": "2026-09-26T05:22:22.285501Z",
+     "updateTime": "2026-09-26T05:22:22.285501Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/9026796056641273856",
+     "fact": "I follow The New York Times on Twitter to keep up with current events.",
+     "createTime": "2026-09-26T05:22:22.284295Z",
+     "updateTime": "2026-09-26T05:22:22.284295Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/897798729237528576",
+     "fact": "I am working on reducing my carbon footprint and plastic usage, which includes actively trying to reduce my daily usage of single-use plastics, preferring eco-friendly, non-toxic, and biodegradable products, finding eco-friendly alternatives for food storage, shopping, and on-the-go items, and transitioning to biking or public transit for my commute to work.",
+     "createTime": "2026-09-26T05:22:04.213325Z",
+     "updateTime": "2026-09-26T05:23:03.469006Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4347556043803328512",
+     "fact": "I go to the gym and read National Geographic.",
+     "createTime": "2026-09-26T05:23:03.468440Z",
+     "updateTime": "2026-09-26T05:23:03.468440Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/556651057464213504",
+     "fact": "I am redecorating my living room in a Mid-Century Modern style, subscribe to Architectural Digest for home decor inspiration, and plan to use a wooden trellis to train a Pothos plant in my living room.",
+     "createTime": "2026-09-26T05:22:42.669339Z",
+     "updateTime": "2026-09-26T05:22:42.669339Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES",
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3203641738451222528",
+     "fact": "I prefer a 32 oz reusable water bottle with a White matte finish that can keep drinks hot for at least 6 hours, focusing on brands like Hydro Flask and S'well.",
+     "createTime": "2026-09-26T05:22:04.212894Z",
+     "updateTime": "2026-09-26T05:22:04.212894Z",
+     "topics": [
+      "USER_PREFERENCES",
+      "KEY_CONVERSATION_DETAILS"
+     ]
+    }
+   ]
+  },
+  "71315a70": {
+   "write_s": 38.5,
+   "calls": 2,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3127080544785924096",
+     "fact": "I am working on an abstract ocean clay sculpture at home, which is currently a work in progress and has taken about 10 to 12 hours so far.",
+     "createTime": "2026-09-26T05:23:08.909168Z",
+     "updateTime": "2026-09-26T05:23:34.042228Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/821237535572230144",
+     "fact": "I enjoy creating sunset-, beach-, and ocean-inspired art, including paintings and sculptures, and I prefer incorporating fabric and natural found materials like seashells, driftwood, sea glass, and beach stones into my clay work.",
+     "createTime": "2026-09-26T05:23:08.908780Z",
+     "updateTime": "2026-09-26T05:23:34.040326Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5432923553999618048",
+     "fact": "I am interested in experimenting with resin, ceramics, and glazing to achieve sandy textures, weathered driftwood-like effects, and translucent, ocean-like finishes in my sculptures.",
+     "createTime": "2026-09-26T05:23:08.908226Z",
+     "updateTime": "2026-09-26T05:23:08.908226Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-71315a70",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3127080544785924096",
+     "fact": "I am working on an abstract ocean clay sculpture at home, which is currently a work in progress and has taken about 10 to 12 hours so far.",
+     "createTime": "2026-09-26T05:23:08.909168Z",
+     "updateTime": "2026-09-26T05:23:34.042228Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5432923553999618048",
+     "fact": "I am interested in experimenting with resin, ceramics, and glazing to achieve sandy textures, weathered driftwood-like effects, and translucent, ocean-like finishes in my sculptures.",
+     "createTime": "2026-09-26T05:23:08.908226Z",
+     "updateTime": "2026-09-26T05:23:08.908226Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/821237535572230144",
+     "fact": "I enjoy creating sunset-, beach-, and ocean-inspired art, including paintings and sculptures, and I prefer incorporating fabric and natural found materials like seashells, driftwood, sea glass, and beach stones into my clay work.",
+     "createTime": "2026-09-26T05:23:08.908780Z",
+     "updateTime": "2026-09-26T05:23:34.040326Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    }
+   ]
+  },
+  "9ea5eabc": {
+   "write_s": 42.2,
+   "calls": 2,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7405500190787895296",
+     "fact": "My budget for accommodation during my solo trip to Tokyo is $30 to $50 per night.",
+     "createTime": "2026-09-26T05:23:45.649272Z",
+     "updateTime": "2026-09-26T05:23:45.649272Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2793814172360507392",
+     "fact": "I went on a family trip to Paris in April 2023.",
+     "createTime": "2026-09-26T05:23:45.648947Z",
+     "updateTime": "2026-09-26T05:23:45.648947Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5099657181574201344",
+     "fact": "I have children.",
+     "createTime": "2026-09-26T05:23:45.648680Z",
+     "updateTime": "2026-09-26T05:23:45.648680Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4311527246784364544",
+     "fact": "When traveling, I prefer to balance family time with solo activities, including staying in social hostels, planning solo excursions, and joining food tours or cooking classes. I also prefer unique and off-the-beaten-path experiences.",
+     "createTime": "2026-09-26T05:23:18.172596Z",
+     "updateTime": "2026-09-26T05:23:45.650260Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6617370255998058496",
+     "fact": "I love trying new flavors and have an interest in experiencing a food tour in Japan.",
+     "createTime": "2026-09-26T05:23:18.172078Z",
+     "updateTime": "2026-09-26T05:23:18.172078Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2005684237570670592",
+     "fact": "I recently went on a family trip to Hawaii where I enjoyed snorkeling, but I disliked being restricted by a packed schedule and wished I had more time to explore Waikiki and shop on my own.",
+     "createTime": "2026-09-26T05:23:18.171598Z",
+     "updateTime": "2026-09-26T05:23:18.171598Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-9ea5eabc",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2793814172360507392",
+     "fact": "I went on a family trip to Paris in April 2023.",
+     "createTime": "2026-09-26T05:23:45.648947Z",
+     "updateTime": "2026-09-26T05:23:45.648947Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/2005684237570670592",
+     "fact": "I recently went on a family trip to Hawaii where I enjoyed snorkeling, but I disliked being restricted by a packed schedule and wished I had more time to explore Waikiki and shop on my own.",
+     "createTime": "2026-09-26T05:23:18.171598Z",
+     "updateTime": "2026-09-26T05:23:18.171598Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/4311527246784364544",
+     "fact": "When traveling, I prefer to balance family time with solo activities, including staying in social hostels, planning solo excursions, and joining food tours or cooking classes. I also prefer unique and off-the-beaten-path experiences.",
+     "createTime": "2026-09-26T05:23:18.172596Z",
+     "updateTime": "2026-09-26T05:23:45.650260Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5099657181574201344",
+     "fact": "I have children.",
+     "createTime": "2026-09-26T05:23:45.648680Z",
+     "updateTime": "2026-09-26T05:23:45.648680Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6617370255998058496",
+     "fact": "I love trying new flavors and have an interest in experiencing a food tour in Japan.",
+     "createTime": "2026-09-26T05:23:18.172078Z",
+     "updateTime": "2026-09-26T05:23:18.172078Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7405500190787895296",
+     "fact": "My budget for accommodation during my solo trip to Tokyo is $30 to $50 per night.",
+     "createTime": "2026-09-26T05:23:45.649272Z",
+     "updateTime": "2026-09-26T05:23:45.649272Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    }
+   ]
+  },
+  "c960da58": {
+   "write_s": 14.5,
+   "calls": 1,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7644190971038531584",
+     "fact": "I have 20 Spotify playlists which I organize by mood, including 'Morning Boost' for upbeat music and 'Focus Flow' for instrumental music to help me concentrate.",
+     "createTime": "2026-09-26T05:23:50.047270Z",
+     "updateTime": "2026-09-26T05:23:50.047270Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3032504952611143680",
+     "fact": "I enjoy listening to Tameca Jones and Lo-Fi hip hop beats.",
+     "createTime": "2026-09-26T05:23:50.047144Z",
+     "updateTime": "2026-09-26T05:23:50.047144Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6491269466431684608",
+     "fact": "I am going to see Tameca Jones live in concert in June 2023.",
+     "createTime": "2026-09-26T05:23:50.046376Z",
+     "updateTime": "2026-09-26T05:23:50.046376Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1879583448004296704",
+     "fact": "I recently started collecting vinyl records and own a turntable, and my first record is a reissue of Fleetwood Mac's 'Rumours' which I love listening to.",
+     "createTime": "2026-09-26T05:23:50.046292Z",
+     "updateTime": "2026-09-26T05:23:50.046292Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-c960da58",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/7644190971038531584",
+     "fact": "I have 20 Spotify playlists which I organize by mood, including 'Morning Boost' for upbeat music and 'Focus Flow' for instrumental music to help me concentrate.",
+     "createTime": "2026-09-26T05:23:50.047270Z",
+     "updateTime": "2026-09-26T05:23:50.047270Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1879583448004296704",
+     "fact": "I recently started collecting vinyl records and own a turntable, and my first record is a reissue of Fleetwood Mac's 'Rumours' which I love listening to.",
+     "createTime": "2026-09-26T05:23:50.046292Z",
+     "updateTime": "2026-09-26T05:23:50.046292Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3032504952611143680",
+     "fact": "I enjoy listening to Tameca Jones and Lo-Fi hip hop beats.",
+     "createTime": "2026-09-26T05:23:50.047144Z",
+     "updateTime": "2026-09-26T05:23:50.047144Z",
+     "topics": [
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6491269466431684608",
+     "fact": "I am going to see Tameca Jones live in concert in June 2023.",
+     "createTime": "2026-09-26T05:23:50.046376Z",
+     "updateTime": "2026-09-26T05:23:50.046376Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ]
+  },
+  "70b3e69b": {
+   "write_s": 7.2,
+   "calls": 1,
+   "memories": [],
+   "uid": "eval-lme-929b5e-70b3e69b",
+   "top8": []
+  },
+  "505af2f5": {
+   "write_s": 13.3,
+   "calls": 1,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8558421695394742272",
+     "fact": "I have been skipping breakfast more frequently.",
+     "createTime": "2026-09-26T05:24:07.469220Z",
+     "updateTime": "2026-09-26T05:24:07.469220Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1064431915450236928",
+     "fact": "I frequently experience cravings for sweet treats in the afternoon, particularly between 3:00 PM and 4:00 PM.",
+     "createTime": "2026-09-26T05:24:07.468979Z",
+     "updateTime": "2026-09-26T05:24:07.468979Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6252578686181048320",
+     "fact": "I am trying to reduce my sugar intake and save money, so I have started making my own flavored coffee creamer using almond milk, vanilla extract, and honey.",
+     "createTime": "2026-09-26T05:24:07.468296Z",
+     "updateTime": "2026-09-26T05:24:07.468296Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3946735676967354368",
+     "fact": "I enjoy making my own granola at home using rolled oats, almonds, and honey.",
+     "createTime": "2026-09-26T05:24:07.468205Z",
+     "updateTime": "2026-09-26T05:24:07.468205Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-505af2f5",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/6252578686181048320",
+     "fact": "I am trying to reduce my sugar intake and save money, so I have started making my own flavored coffee creamer using almond milk, vanilla extract, and honey.",
+     "createTime": "2026-09-26T05:24:07.468296Z",
+     "updateTime": "2026-09-26T05:24:07.468296Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3946735676967354368",
+     "fact": "I enjoy making my own granola at home using rolled oats, almonds, and honey.",
+     "createTime": "2026-09-26T05:24:07.468205Z",
+     "updateTime": "2026-09-26T05:24:07.468205Z",
+     "topics": [
+      "USER_PERSONAL_INFO",
+      "USER_PREFERENCES"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/1064431915450236928",
+     "fact": "I frequently experience cravings for sweet treats in the afternoon, particularly between 3:00 PM and 4:00 PM.",
+     "createTime": "2026-09-26T05:24:07.468979Z",
+     "updateTime": "2026-09-26T05:24:07.468979Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/8558421695394742272",
+     "fact": "I have been skipping breakfast more frequently.",
+     "createTime": "2026-09-26T05:24:07.469220Z",
+     "updateTime": "2026-09-26T05:24:07.469220Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ]
+  },
+  "gpt4_93159ced_abs": {
+   "write_s": 33.3,
+   "calls": 2,
+   "memories": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3370274924663930880",
+     "fact": "I use a physical notebook to manage tasks and a spreadsheet to track freelance projects and income.",
+     "createTime": "2026-09-26T05:24:28.823069Z",
+     "updateTime": "2026-09-26T05:24:28.823069Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5676117933877624832",
+     "fact": "I have a Computer Science degree from the University of California, Berkeley, and have been working professionally for 9 years. I previously worked as a backend software engineer at NovaTech for about 4 years and 3 months as of May 2023, and I work as a freelance web developer with plans to expand my services to include project management and consulting.",
+     "createTime": "2026-09-26T05:24:08.816308Z",
+     "updateTime": "2026-09-26T05:24:28.824282Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ],
+   "uid": "eval-lme-929b5e-gpt4_93159ced_abs",
+   "top8": [
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/5676117933877624832",
+     "fact": "I have a Computer Science degree from the University of California, Berkeley, and have been working professionally for 9 years. I previously worked as a backend software engineer at NovaTech for about 4 years and 3 months as of May 2023, and I work as a freelance web developer with plans to expand my services to include project management and consulting.",
+     "createTime": "2026-09-26T05:24:08.816308Z",
+     "updateTime": "2026-09-26T05:24:28.824282Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    },
+    {
+     "name": "projects/410688210853/locations/us-central1/reasoningEngines/8531677518158102528/memories/3370274924663930880",
+     "fact": "I use a physical notebook to manage tasks and a spreadsheet to track freelance projects and income.",
+     "createTime": "2026-09-26T05:24:28.823069Z",
+     "updateTime": "2026-09-26T05:24:28.823069Z",
+     "topics": [
+      "USER_PERSONAL_INFO"
+     ]
+    }
+   ]
+  }
+ },
+ "rows": [
+  {
+   "question_id": "gpt4_93f6379c",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "Which group did I join first, 'Page Turners' or 'Marketing Professionals'?",
+   "gold": "Page Turners",
+   "answer": "I don't know which group you joined first. You mentioned joining \"Page Turners\" in May 2023, but there is no information about when you joined the \"Marketing Professionals\" LinkedIn group.",
+   "correct": false
+  },
+  {
+   "question_id": "gpt4_93f6379c",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "Which group did I join first, 'Page Turners' or 'Marketing Professionals'?",
+   "gold": "Page Turners",
+   "answer": "I don't have information on when you joined the 'Marketing Professionals' group, only that you are a member. You joined 'Page Turners' in May 2023. Therefore, I cannot definitively say which group you joined first.",
+   "correct": false
+  },
+  {
+   "question_id": "gpt4_93f6379c",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "full",
+   "question": "Which group did I join first, 'Page Turners' or 'Marketing Professionals'?",
+   "gold": "Page Turners",
+   "answer": "You joined \"Page Turners\" first. You mentioned joining \"Page Turners\" last week in the conversation on 2023/05/25 (Thu) 13:14, and you mentioned joining \"Marketing Professionals\" yesterday in the conversation on 2023/05/25 (Thu) 20:31.",
+   "correct": true
+  },
+  {
+   "question_id": "4dfccbf8",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "What did I do with Rachel on the Wednesday two months ago?",
+   "gold": "I started taking ukulele lessons with Rachel.",
+   "answer": "On Wednesday, February 1, 2023, you started taking ukulele lessons with your friend Rachel.",
+   "correct": true
+  },
+  {
+   "question_id": "4dfccbf8",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "What did I do with Rachel on the Wednesday two months ago?",
+   "gold": "I started taking ukulele lessons with Rachel.",
+   "answer": "On Wednesday, February 1, 2023, you started taking ukulele lessons with your friend Rachel.",
+   "correct": true
+  },
+  {
+   "question_id": "4dfccbf8",
+   "type": "temporal-reasoning",
+   "abstention": false,
+   "cond": "full",
+   "question": "What did I do with Rachel on the Wednesday two months ago?",
+   "gold": "I started taking ukulele lessons with Rachel.",
+   "answer": "On Wednesday two months ago (February 1st), you started taking ukulele lessons with your friend Rachel.",
+   "correct": true
+  },
+  {
+   "question_id": "88432d0a",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "How many times did I bake something in the past two weeks?",
+   "gold": 4,
+   "answer": "I don't know how many times you baked something in the past two weeks. The memories mention several baking activities (making a whole wheat baguette, baking cookies, a chocolate cake, and a strawberry tart), but they do not specify the dates these events occurred.",
+   "correct": true
+  },
+  {
+   "question_id": "88432d0a",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "How many times did I bake something in the past two weeks?",
+   "gold": 4,
+   "answer": "I don't know how many times you baked something in the past two weeks. The memories mention your baking hobby, past baking projects, and future plans, but they don't specify any baking activities within the last two weeks.",
+   "correct": false
+  },
+  {
+   "question_id": "88432d0a",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "full",
+   "question": "How many times did I bake something in the past two weeks?",
+   "gold": 4,
+   "answer": "Based on our conversations, you baked something on at least **4** occasions in the past two weeks:\n\n1.  A new bread recipe using sourdough starter on **Tuesday, May 16th**.\n2.  A batch of cookies using your oven's convection setting on **Thursday, May 18th**.\n3.  A chocolate cake for your sister's birthday party **last weekend** (which would be May 20th or 21st).\n4.  A whole wheat baguette **last Saturday** (May 20th).",
+   "correct": true
+  },
+  {
+   "question_id": "1a8a66a6",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "How many magazine subscriptions do I currently have?",
+   "gold": 2,
+   "answer": "You currently have two magazine subscriptions: The New Yorker and Architectural Digest.",
+   "correct": true
+  },
+  {
+   "question_id": "1a8a66a6",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "How many magazine subscriptions do I currently have?",
+   "gold": 2,
+   "answer": "You currently have 3 magazine subscriptions: National Geographic, Architectural Digest, and The New Yorker.",
+   "correct": false
+  },
+  {
+   "question_id": "1a8a66a6",
+   "type": "multi-session",
+   "abstention": false,
+   "cond": "full",
+   "question": "How many magazine subscriptions do I currently have?",
+   "gold": 2,
+   "answer": "You currently have two magazine subscriptions:\n1.  **The New Yorker** (subscribed to in early February)\n2.  **Architectural Digest**",
+   "correct": true
+  },
+  {
+   "question_id": "71315a70",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "How many hours have I spent on my abstract ocean sculpture?",
+   "gold": "10-12 hours",
+   "answer": "You have spent about 10 to 12 hours on your abstract ocean sculpture so far.",
+   "correct": true
+  },
+  {
+   "question_id": "71315a70",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "How many hours have I spent on my abstract ocean sculpture?",
+   "gold": "10-12 hours",
+   "answer": "You have spent about 10 to 12 hours on your abstract ocean sculpture so far.",
+   "correct": true
+  },
+  {
+   "question_id": "71315a70",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "full",
+   "question": "How many hours have I spent on my abstract ocean sculpture?",
+   "gold": "10-12 hours",
+   "answer": "You have spent 10-12 hours on your abstract ocean sculpture.",
+   "correct": true
+  },
+  {
+   "question_id": "9ea5eabc",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "Where did I go on my most recent family trip?",
+   "gold": "Paris",
+   "answer": "You recently went on a family trip to Hawaii.",
+   "correct": false
+  },
+  {
+   "question_id": "9ea5eabc",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "Where did I go on my most recent family trip?",
+   "gold": "Paris",
+   "answer": "You recently went on a family trip to Hawaii.",
+   "correct": false
+  },
+  {
+   "question_id": "9ea5eabc",
+   "type": "knowledge-update",
+   "abstention": false,
+   "cond": "full",
+   "question": "Where did I go on my most recent family trip?",
+   "gold": "Paris",
+   "answer": "Your most recent family trip was to Paris.",
+   "correct": true
+  },
+  {
+   "question_id": "c960da58",
+   "type": "single-session-user",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "How many playlists do I have on Spotify?",
+   "gold": "20",
+   "answer": "You have 20 Spotify playlists.",
+   "correct": true
+  },
+  {
+   "question_id": "c960da58",
+   "type": "single-session-user",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "How many playlists do I have on Spotify?",
+   "gold": "20",
+   "answer": "You have 20 Spotify playlists.",
+   "correct": true
+  },
+  {
+   "question_id": "c960da58",
+   "type": "single-session-user",
+   "abstention": false,
+   "cond": "full",
+   "question": "How many playlists do I have on Spotify?",
+   "gold": "20",
+   "answer": "You have 20 playlists on Spotify.",
+   "correct": true
+  },
+  {
+   "question_id": "70b3e69b",
+   "type": "single-session-assistant",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "I was going through our previous conversation about the impact of the political climate in Catalonia on its literature and music. Can you remind me of the example you gave of a Spanish-Catalan singer-songwriter who supports unity between Catalonia and Spain?",
+   "gold": "Manolo Garc\u00eda",
+   "answer": "I'm sorry, but I don't have a record of that specific example in our past conversations. My memory for this interaction indicates \"(no memories)\". Therefore, I cannot remind you of the Spanish-Catalan singer-songwriter who supports unity between Catalonia and Spain that I might have mentioned previously.",
+   "correct": false
+  },
+  {
+   "question_id": "70b3e69b",
+   "type": "single-session-assistant",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "I was going through our previous conversation about the impact of the political climate in Catalonia on its literature and music. Can you remind me of the example you gave of a Spanish-Catalan singer-songwriter who supports unity between Catalonia and Spain?",
+   "gold": "Manolo Garc\u00eda",
+   "answer": "I'm sorry, but I don't have any memory of our past conversations, including the one you mentioned about the political climate in Catalonia and its impact on literature and music, or any specific examples of singer-songwriters. My memory is reset with each interaction.",
+   "correct": false
+  },
+  {
+   "question_id": "70b3e69b",
+   "type": "single-session-assistant",
+   "abstention": false,
+   "cond": "full",
+   "question": "I was going through our previous conversation about the impact of the political climate in Catalonia on its literature and music. Can you remind me of the example you gave of a Spanish-Catalan singer-songwriter who supports unity between Catalonia and Spain?",
+   "gold": "Manolo Garc\u00eda",
+   "answer": "The Spanish-Catalan singer-songwriter I mentioned who has spoken publicly about his support for unity between Catalonia and Spain is **Manolo Garc\u00eda**.",
+   "correct": true
+  },
+  {
+   "question_id": "505af2f5",
+   "type": "single-session-preference",
+   "abstention": false,
+   "cond": "mb_top8",
+   "question": "I was thinking of trying a new coffee creamer recipe. Any recommendations?",
+   "gold": "The user would prefer responses that suggest variations on their existing almond milk, vanilla extract, and honey creamer recipe or new ideas that align with their goals of reducing sugar intake and saving money. They might not prefer responses that recommend commercial creamer products or recipes that are high in sugar or expensive.",
+   "answer": "You currently make your own flavored coffee creamer using almond milk, vanilla extract, and honey, and you're trying to reduce sugar intake.\n\nTo try a new recipe while sticking to your goals, you could experiment with adding different spices or extracts to your existing almond milk and honey base. For example:\n\n*   **Cinnamon Vanilla:** Add a pinch of ground cinnamon along with your vanilla extract.\n*   **Almond Joy:** Try using almond extract instead of or in addition to vanilla extract.\n*   **Spiced Maple:** If you're open to a different sweetener, a small amount of maple syrup could replace some of the honey, and you could add a dash of nutmeg or allspice.\n*   **Chocolate:** For a chocolate creamer, whisk in a teaspoon of unsweetened cocoa powder.\n\nThese options allow you to vary the flavor without adding extra sugar or processed ingredients.",
+   "correct": true
+  },
+  {
+   "question_id": "505af2f5",
+   "type": "single-session-preference",
+   "abstention": false,
+   "cond": "mb_all",
+   "question": "I was thinking of trying a new coffee creamer recipe. Any recommendations?",
+   "gold": "The user would prefer responses that suggest variations on their existing almond milk, vanilla extract, and honey creamer recipe or new ideas that align with their goals of reducing sugar intake and saving money. They might not prefer responses that recommend commercial creamer products or recipes that are high in sugar or expensive.",
+   "answer": "Since you already make your own coffee creamer with almond milk, vanilla extract, and honey, and you're looking to reduce sugar and save money, here are a couple of ideas to try that build on what you already do:\n\n1.  **Cinnamon Swirl**: Add a pinch of ground cinnamon to your current recipe. Cinnamon pairs wonderfully with coffee and can add a warm, comforting flavor without extra sugar.\n2.  **Almond Bliss**: Since you enjoy almonds in your granola, you could try swapping out some of the vanilla extract for a small amount of almond extract. This would give your creamer a lovely nutty flavor.\n\nBoth of these options are easy additions to your existing base and keep your goals in mind!",
+   "correct": true
+  },
+  {
+   "question_id": "505af2f5",
+   "type": "single-session-preference",
+   "abstention": false,
+   "cond": "full",
+   "question": "I was thinking of trying a new coffee creamer recipe. Any recommendations?",
+   "gold": "The user would prefer responses that suggest variations on their existing almond milk, vanilla extract, and honey creamer recipe or new ideas that align with their goals of reducing sugar intake and saving money. They might not prefer responses that recommend commercial creamer products or recipes that are high in sugar or expensive.",
+   "answer": "That's great you're looking to try a new creamer recipe! Since you've already been making your own with almond milk, vanilla, and honey, let's build on that with some of the tips we discussed earlier to give you a new, delicious, and healthy option.\n\nHow about trying a **Maple Cinnamon Cashew Creamer**? This recipe incorporates a different milk for creaminess, an alternative sweetener, and a warming spice.\n\nHere's a simple recipe you can try:\n\n**Maple Cinnamon Cashew Creamer**\n\n**Ingredients:**\n*   **1 cup Unsweetened Cashew Milk:** (Or unsweetened almond milk if you prefer, but cashew milk often provides a creamier texture, as we discussed!)\n*   **1-2 tablespoons Maple Syrup:** (Adjust to your sweetness preference. This is a great alternative to honey for a different flavor profile, as we talked about healthier sweeteners.)\n*   **1/2 teaspoon Vanilla Extract:** (You're already a fan of this!)\n*   **1/4 teaspoon Ground Cinnamon:** (Adding spices like cinnamon can enhance flavor and reduce the need for more sweetener.)\n*   **Pinch of Sea Salt:** (Just a tiny bit helps balance the flavors, as we mentioned.)\n\n**Instructions:**\n1.  **Combine Ingredients:** In a small saucepan, combine the cashew milk, maple syrup, vanilla extract, cinnamon, and sea salt.\n2.  **Warm Gently:** Heat over medium-low heat, stirring constantly, until the mixture is warm and the maple syrup is fully dissolved. Do not boil.\n3.  **Taste and Adjust:** Taste the creamer and adjust the sweetness or cinnamon to your liking.\n4.  **Cool and Store:** Remove from heat and let it cool completely. Pour into a clean, airtight container (like a reusable glass jar) and store in the refrigerator.\n\nThis creamer should last for about 5-7 days in the fridge. You can also experiment with other spices like nutmeg or cardamom, or even a different extract like almond or hazelnut, as we discussed for customizing flavors! Enjoy your new coffee creamer!",
+   "correct": true
+  },
+  {
+   "question_id": "gpt4_93159ced_abs",
+   "type": "temporal-reasoning",
+   "abstention": true,
+   "cond": "mb_top8",
+   "question": "How long have I been working before I started my current job at Google?",
+   "gold": "The information provided is not enough. From the information provided, You haven't started working at Google yet.",
+   "answer": "I don't have any information in our past conversations about you working at Google. According to our memories, you are currently working as a freelance web developer.",
+   "correct": true
+  },
+  {
+   "question_id": "gpt4_93159ced_abs",
+   "type": "temporal-reasoning",
+   "abstention": true,
+   "cond": "mb_all",
+   "question": "How long have I been working before I started my current job at Google?",
+   "gold": "The information provided is not enough. From the information provided, You haven't started working at Google yet.",
+   "answer": "I don't have any information in my memory about you working at Google. I only know that you previously worked as a backend software engineer at NovaTech for about 4 years and 3 months (as of May 2023) and that you currently work as a freelance web developer.",
+   "correct": true
+  },
+  {
+   "question_id": "gpt4_93159ced_abs",
+   "type": "temporal-reasoning",
+   "abstention": true,
+   "cond": "full",
+   "question": "How long have I been working before I started my current job at Google?",
+   "gold": "The information provided is not enough. From the information provided, You haven't started working at Google yet.",
+   "answer": "Based on our past conversations, you are currently working at NovaTech. There is no mention of you working at Google. Therefore, I don't have information on how long you worked before starting a job at Google.",
+   "correct": true
+  }
+ ]
+}

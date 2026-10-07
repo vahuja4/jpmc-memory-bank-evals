@@ -1,3 +1,20 @@
+> **About this repository.** This is a self-contained snapshot of the Vertex AI Memory Bank
+> evaluation work done on top of the `jpmc-consumer-credit` demo between 23 September and
+> 7 October 2026. It contains the full demo app (needed because the eval scripts import
+> `backend/`), the eval harness and experiments under `evals/`, every result under
+> `evals/results/`, the handoff notes, the Google feedback write-up, and the package shared
+> with Google under `share/`. The demo app itself was forked from
+> `github.com/aarsanjani/jpmc-consumer-credit`.
+>
+> Start with `HANDOFF.md`, `MEMORY_EVALUATION_REPORT.md`, and the `evals/HANDOFF_*.md` notes.
+>
+> **One file is not in git.** `evals/data/longmemeval_s.json` (265 MB) is over GitHub's size
+> limit. To run `evals/eval_longmemeval.py --variant s`, download the `longmemeval_s` split
+> from the Hugging Face dataset `xiaowu0162/longmemeval-cleaned` and save it at that path.
+> The `oracle` split is included.
+>
+> Copy `.env.example` to `.env` and fill in your project and engine ids before running anything.
+
 # JPMorgan Chase Consumer Credit: Gemini Enterprise Scale Memory Bank & Multi-Agent Mesh
 
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Agent%20Engine-4285F4?logo=googlecloud&logoColor=white)](https://cloud.google.com/)
